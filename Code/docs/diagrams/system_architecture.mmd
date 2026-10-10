@@ -1,0 +1,61 @@
+flowchart LR
+  subgraph CLIENT["Presentation (untrusted)"]
+    CH["Customer Hub<br/>web + mobile layout"]
+    CK["Cockpit<br/>portfolio drill-down"]
+    RC["Receipts<br/>eval + governance"]
+    SL["Scenario Lab<br/>+ red-team button"]
+  end
+
+  subgraph EDGE["Edge"]
+    CADDY["Caddy<br/>TLS 1.3 + HSTS + CSP"]
+  end
+
+  subgraph API["FastAPI (trust boundary 1)"]
+    AUTHN["JWT verify<br/>short-lived, role claim"]
+    AUTHZ["RBAC + object-level check<br/>customer can read only self"]
+    VAL["Rate limit + strict Pydantic"]
+    ROUTES["/opportunities /scenario<br/>/claimcheck /portfolio /eval /feedback"]
+  end
+
+  subgraph CORE["Domain engines (pure functions)"]
+    FEAT["features.build<br/>as_of, completeness, conflicts"]
+    ML["models.score<br/>propensity, confidence, reason codes"]
+    RULES["rules.evaluate<br/>ELIGIBLE / NEEDS_VERIF / NOT_ELIGIBLE"]
+    CARB["carbon.estimate<br/>low/central/high + formula"]
+    ORCH["orchestrator<br/>status + Evidence Pack"]
+    SCN["scenarios.run<br/>mutate inputs only"]
+  end
+
+  subgraph GW["LLM gateway (trust boundary 2)"]
+    MIN["minimise<br/>allow-listed LLMInput"]
+    PRE["guard.pre<br/>PII scan, canary, size cap"]
+    EXP["explainer<br/>prompt v1, SHA-256 cache"]
+    POST["guard.post<br/>JSON schema, PII, canary leak"]
+    CC["Claim-Check<br/>NUM FIELD BAN VERDICT METRIC PRODUCT IMPLIED"]
+    TPL["Template fallback<br/>deterministic"]
+  end
+
+  LLM[("LLM provider<br/>HTTPS, server-side key")]
+
+  subgraph DATA["Data at rest (encrypted)"]
+    PQ[("Parquet<br/>raw / features / packs")]
+    DB[("SQLite<br/>users, claim_audit (hash chain),<br/>scenario_runs, feedback")]
+    ART[("Models (text formats)<br/>+ run_manifest.json")]
+  end
+
+  CH & CK & RC & SL --> CADDY --> AUTHN --> AUTHZ --> VAL --> ROUTES
+  ROUTES --> ORCH
+  ROUTES --> SCN --> FEAT
+  ORCH --> FEAT
+  FEAT --> ML & RULES & CARB
+  ML & RULES & CARB --> ORCH
+  ORCH --> MIN --> PRE --> EXP
+  EXP <--> LLM
+  EXP --> POST --> CC
+  CC -- "PASS" --> ROUTES
+  CC -- "FAIL twice" --> TPL --> ROUTES
+  CC --> DB
+  FEAT --- PQ
+  ML --- ART
+  ORCH --- PQ
+  ROUTES --- DB
