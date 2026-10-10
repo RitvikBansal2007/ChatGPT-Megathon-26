@@ -179,6 +179,7 @@ class CustomerOpportunities(Frozen):
 
 # ---------- Scenario Lab ----------
 class ScenarioRequest(Frozen):
+    model_config = ConfigDict(extra="forbid", frozen=True, strict=False)
     customer_id: str = Field(pattern=r"^CUST-\d{4,5}$")
     mutations: list[Mutation] = Field(min_length=1, max_length=7)
 
