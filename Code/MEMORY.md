@@ -1,5 +1,5 @@
 # GreenDash — G3 (Ritvik) Context Memory
-<!-- AUTO-UPDATED by agent. Last update: 2026-10-11 (backend state as of `9bab839`; Madhav status + G2↔G3 integration review added) -->
+<!-- AUTO-UPDATED by agent. Last update: 2026-10-11 (state as of `1319866`; Madhav status + G2↔G3 integration review added) -->
 
 > **Project renamed:** `greenproof` → `greendash` (by teammates, commit `96ca5fb`)
 > Repo: https://github.com/IIIT-ECell/megathon26-chatgpt  
@@ -60,7 +60,7 @@
 |---|---|
 | `greendash/contracts.py` | ✅ **Frozen** — `frozen=True` all models |
 | `api/main.py` + `api/routers/` | 🔴 **Still cannot start from `main`** (checked at `cd3ba7d`): `greendash/llm/claimcheck.py` is missing, and `greendash/contracts.py` has no `CustomerPacks` (it is `CustomerOpportunities`) though `api/services.py` + `api/routers/opportunities.py` import it |
-| Files deleted by rename commit `96ca5fb` | 🔴 20 files under `greendash/` deleted and still missing: `llm/` (7, incl. Kratik's `claimcheck.py`, `gateway.py`, `guard.py`), `carbon/` (4, incl. `engine.py`), `generator/` (8), `greendash/__init__.py`. Recoverable from `96ca5fb^` or `origin/g1-kratik/claimcheck` |
+| Files deleted by rename commit `96ca5fb` | 🔴 Not restored — `1319866` added stubs for `llm/claimcheck.py` and `carbon/engine.py` instead (see ML / LLM status). Still missing: `llm/gateway.py`, `guard.py`, `minimise.py`, `providers.py`, `textnorm.py`, `carbon/formulas.py`, `units.py`, all of `generator/`. Real versions recoverable from `96ca5fb^` or `origin/g1-kratik/claimcheck` |
 | First-request failures (from reading the code) | 🔴 `settings.ENV` / `settings.DEMO_MODE` don't exist in `config/settings.py` (only `demo_mode`); `issue_token()` takes 1 arg but `auth.py` passes 2; `scenario.py` reads `principal.role` but `require_role` returns a dict |
 | `api/deps.py` + `greendash/security/authz.py` | ⚠️ Pushed (`d74e266`) but **stubs**: `require_role` ignores the token, `require_subject` is empty — no real auth. Don't expose port 8000 (`--host 0.0.0.0`) on a shared network |
 | Portfolio/eval shapes | ⚠️ `aafd480` says `/api/portfolio/summary` + `/api/eval/summary` now match the UI fixtures (`metrics` / `baselines`) — **unverified**, needs a running API |
@@ -75,7 +75,7 @@
 
 ---
 
-## 🧪 ML / LLM STATUS (Madhav, G2-M) — reviewed read-only at `9bab839`
+## 🧪 ML / LLM STATUS (Madhav, G2-M) — reviewed read-only at `1319866`
 
 Madhav says his deliverables are "locked in". What the repo shows:
 
@@ -87,7 +87,8 @@ Madhav says his deliverables are "locked in". What the repo shows:
 | `docs/EVALUATION.md` | 🔴 **Do not use for slides.** Brier values 0.045/0.080/0.120 are hard-coded defaults in `eval/report.py` (keys `T1/T2/T3` don't exist in `confidence_validation.json`); SHAP plot is a hard-coded dummy; "100 packs" is hard-coded, real n = 2 (`judge.py` slices `[:2]`). No AUC, baselines, scenario or F1 numbers |
 | Real metrics | ⚠️ `evaluate_models.py` computes ROC-AUC/Brier/ECE/lift but only prints them — nothing is saved |
 | `fixtures/eval.json` | 🔴 G3 placeholder numbers (invented in `1d1fc0d`). `/api/eval/summary` now just returns this file (`aafd480`), so Receipts shows invented numbers in **every** mode until real ones replace it |
-| LLM explainer on `main` | 🔴 Never runs: guard/minimise/claimcheck deleted by `96ca5fb` → fail-closed fallback rejects every call → always template |
+| LLM explainer on `main` | 🔴 Never runs: `minimise.py` + `guard.py` still missing (deleted by `96ca5fb`) → fail-closed fallback rejects every call → always template |
+| **Stubs added by `1319866` ("Fix API startup issues")** | 🔴 `greendash/llm/claimcheck.py` is now a 10-line stub that returns PASS for every sentence (Kratik's real one was 163 lines, still on `origin/g1-kratik/claimcheck`); `greendash/carbon/engine.py` `estimate()` always returns `NOT_APPLICABLE`; `greendash/models/score.py` `score()` returns constant `0.5`. **Red-team demo will show 0 violations and no impact numbers in live mode** |
 | Explainer output shape | 🔴 Returns `{explanation: str|dict, source, claimcheck_status}`; contract + `claim_stamp.py` need `sentences[{text, fields, check}]`. Status `PII_BLOCK` is not in the contract |
 | Fallback template | 🔴 Always uses the `REJECTED` template and reads `pack["recommendation"]` (field is `opportunity_id`) → every fallback says "EV Finance … is not recommended" |
 | Scores / reasons / confidence | 🔴 Not contract-shaped: no `likelihood_band`, no `ConfidenceParts`, reason codes lack `phrase/display/observed_at/source`; IDs are `CUST-00001` (5 digits) vs UI/API `CUST-0001` |
