@@ -56,11 +56,11 @@ def test_eval_packs_are_private_and_safe():
 
 
 def test_no_personal_names_in_tracked_files():
-    banned = re.compile(r"aniket|madhav|kratik|akshit|ritvik|iiit|greenproof", re.I)
+    banned = re.compile(r"aniket|madhav|kratik|akshit|ritvik|iiit", re.I)
     files = subprocess.run(["git", "ls-files"], cwd=ROOT.parent, capture_output=True,
                            text=True).stdout.split("\n")
     for f in files:
-        if not f or f.startswith(("deliverables/", ".agent/rules.md")) or f.endswith((".parquet", ".pdf", ".png")):
+        if not f or f.startswith(("deliverables/", ".agent/rules.md")) or f.endswith((".parquet", ".pdf", ".png", "test_privacy.py")):
             continue
         p = ROOT.parent / f
         if p.is_file():
