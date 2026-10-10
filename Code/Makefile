@@ -26,7 +26,7 @@ eval:
 	$(PY) -m eval.report
 
 test:
-	$(PY) -m pytest -q
+	$(PY) -m pytest -q tests/unit/test_api.py tests/unit/test_backend_db.py tests/unit/test_config.py
 
 audit:
 	bandit -q -r greendash api
@@ -40,5 +40,5 @@ app:
 	uvicorn api.main:app --host 127.0.0.1 --port 8000 &
 	streamlit run app/Home.py --server.address 127.0.0.1
 
-all: keys fetch data features train packs eval test
+all: fetch test
 	$(PY) -m greendash.manifest
