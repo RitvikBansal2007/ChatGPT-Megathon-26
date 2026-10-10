@@ -30,7 +30,7 @@ def create_fallback_priors():
         },
         "monthly_elec_seasonality": {
             "source": "ukpn_smartmeter_fallback",
-            "values": [1.15, 1.10, 1.05, 0.95, 0.90, 0.85, 0.85, 0.90, 0.95, 1.00, 1.10, 1.20]
+            "values": [1.318, 1.362, 1.263, 1.056, 0.841, 0.761, 0.678, 0.654, 0.788, 0.898, 1.123, 1.259]
         },
         "solar_kwh_per_kwp": {
             "source": "jrc_pvgis_fallback",
