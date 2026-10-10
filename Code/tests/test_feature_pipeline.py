@@ -78,13 +78,14 @@ def test_split_integrity(monkeypatch):
         
         import greenproof.models.split as split_module
         original_read_parquet = pd.read_parquet
+        original_json_dump = json.dump
         
         def mock_read_parquet(path):
             return original_read_parquet(f'{features_dir}/features.parquet')
             
         def mock_dump(obj, fp, **kwargs):
             with open(f'{splits_dir}/splits.json', 'w') as out_f:
-                json.dump(obj, out_f)
+                original_json_dump(obj, out_f)
                 
         monkeypatch.setattr(pd, 'read_parquet', mock_read_parquet)
         monkeypatch.setattr(json, 'dump', mock_dump)
