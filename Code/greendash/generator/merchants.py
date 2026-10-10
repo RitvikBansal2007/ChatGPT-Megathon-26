@@ -106,8 +106,6 @@ def noisy_string(tpl: MerchantTemplate, rng: np.random.Generator) -> str:
     town = str(rng.choice(TOWNS))
     if town:
         s += f" {town}"
-    if rng.random() < 0.15:
-        s = s[: int(rng.integers(12, 22))]
     r = rng.random()
     if r < 0.2:
         s = s.lower()
