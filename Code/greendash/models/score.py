@@ -13,6 +13,8 @@ import os
 from greendash.models.utils import load_data, get_features_and_targets
 from greendash.models.evaluate_models import load_calibrator
 
+from greendash.contracts import PropensityVerdict, Band, ConfidenceParts
+
 def score(features_row, pid):
     try:
         target = f'take_up_{pid}'
