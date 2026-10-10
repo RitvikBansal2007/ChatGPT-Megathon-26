@@ -1,4 +1,4 @@
-"""Proof Card — aligned to greenproof/contracts.py (frozen by Akshit, G1-A).
+"""Proof Card — aligned to greenproof/contracts.py (frozen by G1-A).
 
 Opportunity field names (real contract):
   opportunity_id, opportunity_name, status, propensity, likelihood_band

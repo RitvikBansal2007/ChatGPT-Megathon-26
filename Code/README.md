@@ -4,7 +4,7 @@
 > ML predicts. Rules decide eligibility. The carbon engine calculates. The LLM only explains. Claim-Check verifies.
 
 Megathon X · Singularity · Problem Statement 1 (Lloyds)  
-Team: Kratik, Akshit (G1) · Aniket, Madhav (G2) · Ritvik (G3)
+Team: G1-K, G1-A (G1) · G2-An, G2-M (G2) · G3
 
 ---
 
@@ -58,11 +58,11 @@ pytest tests/              # backend unit / security / invariance tests
 
 | Folder | Owner |
 |---|---|
-| `app/`, `mobile/`, `slides/`, `docs/diagrams/`, `README.md` | G3 — Ritvik |
-| `api/`, `greendash/features`, `greendash/rules`, `greendash/orchestrator.py`, `greendash/db/`, `greendash/scenarios/`, `config/`, `Makefile`, `pyproject.toml`, `fixtures/` | G1-A — Akshit |
-| `greendash/security/`, `greendash/llm/minimise.py`, `greendash/llm/guard.py`, `greendash/llm/claimcheck.py`, `infra/`, `SECURITY.md` | G1-K — Kratik |
-| `greendash/generator/`, `greendash/carbon/`, `ingest/`, `data/priors/` | G2-An — Aniket |
-| `greendash/models/`, `greendash/categoriser/`, `greendash/llm/explainer.py`, `greendash/llm/client.py`, `greendash/llm/templates.py`, `eval/`, `docs/EVALUATION.md` | G2-M — Madhav |
+| `app/`, `mobile/`, `slides/`, `docs/diagrams/`, `README.md` | G3 |
+| `api/`, `greendash/features`, `greendash/rules`, `greendash/orchestrator.py`, `greendash/db/`, `greendash/scenarios/`, `config/`, `Makefile`, `pyproject.toml`, `fixtures/` | G1-A |
+| `greendash/security/`, `greendash/llm/minimise.py`, `greendash/llm/guard.py`, `greendash/llm/claimcheck.py`, `infra/`, `SECURITY.md` | G1-K |
+| `greendash/generator/`, `greendash/carbon/`, `ingest/`, `data/priors/` | G2-An |
+| `greendash/models/`, `greendash/categoriser/`, `greendash/llm/explainer.py`, `greendash/llm/client.py`, `greendash/llm/templates.py`, `eval/`, `docs/EVALUATION.md` | G2-M |
 
 Cross-folder changes → 2-line PR + chat ping.
 

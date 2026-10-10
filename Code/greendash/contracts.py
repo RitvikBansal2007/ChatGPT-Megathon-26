@@ -91,7 +91,7 @@ class ConfidenceParts(Frozen):
     in_distribution: float = Field(ge=0, le=1)
 
 
-class PropensityVerdict(Frozen):                 # produced by Madhav's models.score
+class PropensityVerdict(Frozen):                 # produced by G2-M's models.score
     propensity: float = Field(ge=0, le=1)
     likelihood_band: Band
     confidence: ConfidenceParts

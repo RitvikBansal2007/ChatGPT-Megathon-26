@@ -1,12 +1,12 @@
-# GreenDash — G3 (Ritvik) Context Memory
+# GreenDash — G3 Context Memory
 <!-- AUTO-UPDATED by agent. Last update: 2026-10-11 (fifth run at `485ab95`; hard-coded Priya propensity found) -->
 
 > **Project renamed:** `greenproof` → `greendash` (by teammates, commit `96ca5fb`)
-> Repo: https://github.com/IIIT-ECell/megathon26-chatgpt  
+> Repo: https://github.com/<org>/megathon26-chatgpt  
 > Branch: `main` (backend state checked at `485ab95`) · Root: `megathon26-chatgpt/Code/`
-> Ritvik owns: `app/`, `mobile/`, `slides/`, `docs/diagrams/`, `README.md`, `MEMORY.md`  
+> G3 owns: `app/`, `mobile/`, `slides/`, `docs/diagrams/`, `README.md`, `MEMORY.md`  
 > **NEVER TOUCH:** `greendash/`, `api/`, `data/`, `config/`, `eval/`, `tests/`
-> **Backend owner: Aniket** — as of 2026-10-11 Aniket has taken over all of Akshit's (G1-A) work. Send every backend/API ask to Aniket, not Akshit.
+> **Backend owner: G2-An** — as of 2026-10-11 G2-An has taken over all of G1-A's (G1-A) work. Send every backend/API ask to G2-An, not G1-A.
 
 ---
 
@@ -38,7 +38,7 @@
 - `mobile/README.md` — Expo production spec, 8 screens, auth+security
 
 ### Contract alignment (`076bed7`)
-- Adopted Akshit's frozen `greendash/contracts.py` + 7 fixture files from `g1-aniket/feature-pipeline`
+- Adopted G1-A's frozen `greendash/contracts.py` + 7 fixture files from `the G2-An feature-pipeline branch`
 - All field names updated across all 6 component files and `client.py`
 - Key changes: `opportunity_id`, `opportunity_name`, `next_action`, `eligibility.result=ELIGIBLE`,
   `plain_reasons[]`, `impact.low/central/high`, `violations[].rule`, `diff[].from`
@@ -64,9 +64,9 @@
 | `make data` / `make features` | 🔴 `make data` fails (`greendash.generator` has no `__main__`; `python -m greendash.generator.run` works). `make features` fails on missing `data/raw/energy.parquet`. **Warning: the generator overwrites 6 tracked files in `data/raw/` (`transactions.csv`, `vehicles.csv`, …)** — run `git checkout -- data/raw` afterwards or the manifest inputs drift |
 | Building packs | ✅ `python -m greendash.packs` runs clean at `485ab95` (20,000 packs, 0 scoring errors, real propensities). See ML status for what they contain |
 | Files deleted by rename commit `96ca5fb` | ✅ All 20 restored in `cb2173d` (real `claimcheck.py` 177 lines, `carbon/engine.py` 109 lines) |
-| `api/deps.py` + `greendash/security/authz.py` | 🔴 **CRITICAL (flagged by Kratik, confirmed by test at `6285237`): no authorization.** `require_role()` never reads the request and returns the first permitted role; `require_subject()` is empty. Measured: `/api/eval/summary` returns 200 with no token, with a garbage token, and with a CUSTOMER token (evaluator-only route). Tokens are plain strings (`token_CUST-0001`), not signed JWTs. PR #3 doesn't touch this. Do not expose port 8000 |
+| `api/deps.py` + `greendash/security/authz.py` | 🔴 **CRITICAL (flagged by G1-K, confirmed by test at `6285237`): no authorization.** `require_role()` never reads the request and returns the first permitted role; `require_subject()` is empty. Measured: `/api/eval/summary` returns 200 with no token, with a garbage token, and with a CUSTOMER token (evaluator-only route). Tokens are plain strings (`token_CUST-0001`), not signed JWTs. PR #3 doesn't touch this. Do not expose port 8000 |
 | Portfolio/eval shapes | ⚠️ `aafd480` says `/api/portfolio/summary` + `/api/eval/summary` now match the UI fixtures (`metrics` / `baselines`) — **unverified**, needs a running API |
-| `backend/` package | ℹ️ Older sub-package from `9d5f6d5` (`/health`, `/api/v1/transactions`). Akshit confirmed: **ignore it, the demo API is `api/`** |
+| `backend/` package | ℹ️ Older sub-package from `9d5f6d5` (`/health`, `/api/v1/transactions`). G1-A confirmed: **ignore it, the demo API is `api/`** |
 | `api/routers/auth.py` | ✅ `POST /api/auth/demo-token` works (needs `ENV=demo`) |
 | `api/routers/opportunities.py` | 🔴 500 (see CP2 result) |
 | `/healthz` | ✅ Health check endpoint |
@@ -77,14 +77,14 @@
 
 ---
 
-## 🧪 ML / LLM STATUS (Madhav, G2-M) — re-reviewed read-only at `03b5368`
+## 🧪 ML / LLM STATUS (G2-M, G2-M) — re-reviewed read-only at `03b5368`
 
-Madhav says his deliverables are "locked in". What the repo shows:
+G2-M says his deliverables are "locked in". What the repo shows:
 
 | Item | State |
 |---|---|
-| 4 LightGBM models | 🔴 Models load and score, but **never recommend anyone**: highest real propensity in 20,000 packs is 0.417, threshold is 0.5 (`config/thresholds.yaml`); median 0.018. Result: 0 REVIEW and exactly **1 RECOMMEND — Priya GP01, which is hard-coded**: `greendash/models/score.py:32-33` sets `calib_pred = 0.95` when `customer_id == "CUST-0001"` and `pid == "GP01"` (Aniket, `40da7c3`; model's real value ≈ 0.1). Her card also has no reason codes, no explanation, confidence hard-coded 0.8 |
-| `out/run_manifest.json` | 🔴 Madhav's "final": `sha256:7b510d60…3322bc`, 5,024 files, committed in `485ab95`. Problems: recorded `git_sha` `b3a4bb68…` **does not exist in the repo** (amended away); 5,000 of the files are `out/packs/*`, which are gitignored; regenerating packs on a clean install reproduced only 1,004 of 5,000 pack hashes; it bakes in the hard-coded Priya pack. The 24 non-pack files do match. **Not usable as proof yet** |
+| 4 LightGBM models | 🔴 Models load and score, but **never recommend anyone**: highest real propensity in 20,000 packs is 0.417, threshold is 0.5 (`config/thresholds.yaml`); median 0.018. Result: 0 REVIEW and exactly **1 RECOMMEND — Priya GP01, which is hard-coded**: `greendash/models/score.py:32-33` sets `calib_pred = 0.95` when `customer_id == "CUST-0001"` and `pid == "GP01"` (G2-An, `40da7c3`; model's real value ≈ 0.1). Her card also has no reason codes, no explanation, confidence hard-coded 0.8 |
+| `out/run_manifest.json` | 🔴 G2-M's "final": `sha256:7b510d60…3322bc`, 5,024 files, committed in `485ab95`. Problems: recorded `git_sha` `b3a4bb68…` **does not exist in the repo** (amended away); 5,000 of the files are `out/packs/*`, which are gitignored; regenerating packs on a clean install reproduced only 1,004 of 5,000 pack hashes; it bakes in the hard-coded Priya pack. The 24 non-pack files do match. **Not usable as proof yet** |
 | Manifest reproducibility | ✅ Verified locally (non-parquet files re-hashed) |
 | `docs/EVALUATION.md` | 🔴 **Not measured, and won't be.** Team confirmed real eval can't run: `data/splits/splits.json` is 0 bytes. **Agreed fallback: label slide 6 and the Receipts page "illustrative".** Numbers come from `fixtures/eval.json` (G3 placeholders) |
 | Real metrics | ⚠️ `evaluate_models.py` computes ROC-AUC/Brier/ECE/lift but only prints them — nothing is saved |
@@ -93,9 +93,9 @@ Madhav says his deliverables are "locked in". What the repo shows:
 | Explainer output shape | ✅ Both paths contract-shaped; LLM path builds sentences from `explanation` + `metrics_summary`, canary dropped (read, not run — needs an LLM key) |
 | Fallback template | ✅ Keyed on `opportunity_id` + status; bracket placeholders removed |
 | Scores / reasons / confidence | ⚠️ Hard-coded `£100` reason removed (`reason_codes=[]`), so live cards show no evidence chips. Confidence still hard-coded 0.8. Bands hard-coded 0.7/0.4 |
-| `greendash/contracts.py` | ⚠️ No longer frozen in practice: Madhav edited `ScenarioRequest.customer_id` to `\d{4,5}` in `6c41d76` |
+| `greendash/contracts.py` | ⚠️ No longer frozen in practice: G2-M edited `ScenarioRequest.customer_id` to `\d{4,5}` in `6c41d76` |
 
-**Rule for slides/README:** every eval number is illustrative — say so on slide 6 and on Receipts. Do not quote a manifest hash until Kratik's conditions are met (final snapshot, real git_sha, reproducible). **Do not present Priya's live RECOMMEND as a model prediction while the override is in `score.py`** — fixtures mode (openly synthetic) is the honest demo path.
+**Rule for slides/README:** every eval number is illustrative — say so on slide 6 and on Receipts. Do not quote a manifest hash until G1-K's conditions are met (final snapshot, real git_sha, reproducible). **Do not present Priya's live RECOMMEND as a model prediction while the override is in `score.py`** — fixtures mode (openly synthetic) is the honest demo path.
 
 ---
 
@@ -103,7 +103,7 @@ Madhav says his deliverables are "locked in". What the repo shows:
 ## 🔴 REMAINING
 
 ### CP2 — verify live mode against a real API
-Ran twice (see Backend State → CP2 result): client side works — token, role mapping, error cards. Blocked on backend: Aniket — `api/services.py` missing fields, two data files not in repo; Madhav — `data/models/hashes.json` mismatch (no RECOMMEND until fixed). **Demo fallback: `DEMO_MODE=fixtures` is unaffected and is the safe mode to present.** Test locally with `uvicorn api.main:app`; Aniket's `10.166.113.188:8000` was unreachable.
+Ran twice (see Backend State → CP2 result): client side works — token, role mapping, error cards. Blocked on backend: G2-An — `api/services.py` missing fields, two data files not in repo; G2-M — `data/models/hashes.json` mismatch (no RECOMMEND until fixed). **Demo fallback: `DEMO_MODE=fixtures` is unaffected and is the safe mode to present.** Test locally with `uvicorn api.main:app`; G2-An's `10.166.113.188:8000` was unreachable.
 No frontend adapter planned: the API was adapted to the fixture shapes (`aafd480`); confirm on first live run.
 
 ### Known failing test (predates Step 3.5)
@@ -128,7 +128,7 @@ Go to **https://claude.ai** → new chat → paste:
 > "Create an 8-slide hackathon pitch deck for GreenDash (Lloyds green finance brief, Megathon X).
 > Tagline: 'The green recommendation that shows its receipts.'
 > Core rule: 'ML predicts. Rules decide eligibility. The carbon engine calculates. The LLM only explains. Claim-Check verifies.'
-> Slides: 1-Problem, 2-Solution/tagline, 3-System architecture (use the diagram), 4-Customer journey (5 card states), 5-Business Cockpit, 6-Evaluation [TBD — replace after Madhav pushes EVALUATION.md], 7-Governance & Trust, 8-Team + ask.
+> Slides: 1-Problem, 2-Solution/tagline, 3-System architecture (use the diagram), 4-Customer journey (5 card states), 5-Business Cockpit, 6-Evaluation [TBD — replace after G2-M pushes EVALUATION.md], 7-Governance & Trust, 8-Team + ask.
 > Brand: Inter font, Verdant green #19C37D, Abyss dark #06110D."
 
 Save exports to `slides/` and commit.
@@ -177,7 +177,7 @@ app/
 └── static/fonts/                ✅ 3 OFL woff2 files
 
 fixtures/
-├── opps_recommend.json          ✅ Akshit's (CustomerOpportunities shape)
+├── opps_recommend.json          ✅ G1-A's (CustomerOpportunities shape)
 ├── opps_abstain.json            ✅
 ├── opps_review.json             ✅
 ├── opps_ruled_out.json          ✅
@@ -213,6 +213,6 @@ MEMORY.md                        ✅ (this file)
 ## 📨 Pending teammate requests
 | Who | Ask |
 |---|---|
-| **Aniket** (now also covering Akshit's G1-A work) | **Remove or disclose the `CUST-0001` propensity override**; **critical: real token validation in `api/deps.py`**; `api/services.py:19` strict validation; `energy.parquet` naming; `make data` entry point |
-| **Kratik (G1-K)** | Caddy CSP (`font-src 'self'`, `frame-ancestors 'none'`); proxy Streamlit only, not port 8000; keep branch `g1-kratik/claimcheck` until Claim-Check is restored on main |
-| **Madhav (G2-M)** | Models never clear the 0.5 threshold (max 0.417); manifest: git_sha must be a real commit, packs not reproducible; coordinate final hash with Kratik |
+| **G2-An** (now also covering G1-A's G1-A work) | **Remove or disclose the `CUST-0001` propensity override**; **critical: real token validation in `api/deps.py`**; `api/services.py:19` strict validation; `energy.parquet` naming; `make data` entry point |
+| **G1-K** | Caddy CSP (`font-src 'self'`, `frame-ancestors 'none'`); proxy Streamlit only, not port 8000; keep branch `the G1-K claimcheck branch` until Claim-Check is restored on main |
+| **G2-M** | Models never clear the 0.5 threshold (max 0.417); manifest: git_sha must be a real commit, packs not reproducible; coordinate final hash with G1-K |
