@@ -70,7 +70,7 @@ def load_verified_model(target):
     model_path = os.path.join(MODELS_DIR, filename)
     # 15. "Tamper-proof" fix: Don't just trust whatever types the file declares.
     # Instead, we explicitly set trusted=True since we verified the SHA256 hash.
-    return sio.load(model_path, trusted=True)
+    return sio.load(model_path, trusted=sio.get_untrusted_types(file=model_path))
 
 def score_customers(customer_ids):
     # Load full feature dataset
