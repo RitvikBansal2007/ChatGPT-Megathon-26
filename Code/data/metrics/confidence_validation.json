@@ -1,0 +1,22 @@
+{
+  "take_up_GP01": {
+    "brier_high_confidence": 0.05174557933286215,
+    "brier_low_confidence": null,
+    "correlation_with_propensity": -0.35053613121196764
+  },
+  "take_up_GP02": {
+    "brier_high_confidence": 0.04373324547129793,
+    "brier_low_confidence": null,
+    "correlation_with_propensity": -0.1151824326529849
+  },
+  "take_up_GP03": {
+    "brier_high_confidence": 0.03727736372950824,
+    "brier_low_confidence": null,
+    "correlation_with_propensity": 0.056213040236516715
+  },
+  "take_up_GP04": {
+    "brier_high_confidence": 0.10977563432922617,
+    "brier_low_confidence": null,
+    "correlation_with_propensity": -0.0833808719068212
+  }
+}

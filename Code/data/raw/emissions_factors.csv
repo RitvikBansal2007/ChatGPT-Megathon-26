@@ -1,0 +1,6 @@
+activity,unit,kg_co2e_per_unit,source,sheet,row,col,vintage,licence
+car_petrol_average,mile,0.26472,DESNZ GHG conversion factors,Passenger vehicles,13,E,2024,OGL-UK-3.0
+car_diesel_average,mile,0.26782,DESNZ GHG conversion factors,Passenger vehicles,14,E,2024,OGL-UK-3.0
+car_bev_average,mile,0.08272,DESNZ GHG conversion factors,Passenger vehicles,17,E,2024,OGL-UK-3.0
+grid_electricity,kWh,0.20707,DESNZ GHG conversion factors,UK electricity,10,E,2024,OGL-UK-3.0
+natural_gas,kWh,0.18254,DESNZ GHG conversion factors,Fuels,13,E,2024,OGL-UK-3.0

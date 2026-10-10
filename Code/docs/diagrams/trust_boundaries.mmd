@@ -1,0 +1,24 @@
+flowchart LR
+  subgraph Z0["Zone 0: Internet / browser (untrusted)"]
+    B["Browser / phone"]
+  end
+  subgraph Z1["Zone 1: API (authenticate + authorise everything)"]
+    A["FastAPI"]
+  end
+  subgraph Z2["Zone 2: Trusted core (no network egress)"]
+    C["Engines + orchestrator"]
+    D[("Encrypted data + SQLite")]
+  end
+  subgraph Z3["Zone 3: LLM gateway (only path to the outside)"]
+    G["minimise → guard → claimcheck"]
+  end
+  subgraph Z4["Zone 4: Third party"]
+    P["LLM provider"]
+  end
+  B -- "TLS + JWT" --> A
+  A -- "validated, role-scoped calls" --> C
+  C --- D
+  C -- "Evidence Pack" --> G
+  G -- "allow-listed, PII-free JSON over TLS" --> P
+  P -- "untrusted text" --> G
+  G -- "verified sentences or template" --> C

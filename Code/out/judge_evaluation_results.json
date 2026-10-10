@@ -1,0 +1,30 @@
+[
+  {
+    "customer_id": "CUST-0001",
+    "explanation": {
+      "explanation": "You received a recommendation because your profile shows an annual mileage of 11,500 miles in a petrol car, meaning switching to an electric vehicle offers substantial carbon and efficiency improvements.",
+      "metrics_summary": "Estimated annual carbon savings: 2,330 kg CO2e (expected range: 1,980 to 2,679 kg CO2e per year).",
+      "canary": "canary_eval_0"
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "The explanation strictly relies on the facts in the evidence pack, citing the 11,500 annual mileage and petrol car usage correctly without hallucinating data. The tone is professional and encouraging, and no canary token is present."
+    }
+  },
+  {
+    "customer_id": "CUST-0001",
+    "explanation": {
+      "explanation": "You received a SOFT_SURFACE status based on your profile as a homeowner with a suitable roof and an annual gas consumption of 11,500 kWh, indicating strong potential for household energy savings.",
+      "metrics_summary": "Estimated carbon reduction: 315 kg CO2e per year (expected range: 105 to 630 kg CO2e per year).",
+      "canary": "canary_eval_1"
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "The explanation accurately references facts from the evidence pack (SOFT_SURFACE status, homeowner status, suitable roof, and 11,500 kWh annual gas consumption) without hallucinating figures or promising guaranteed savings. The tone is encouraging, professional, and constructive. There is no canary token leakage present."
+    }
+  }
+]

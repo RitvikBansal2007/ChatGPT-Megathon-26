@@ -1,0 +1,725 @@
+{
+  "take_up_GP01": [
+    {
+      "customer_id": "CUST-00001",
+      "positive_drivers": [
+        {
+          "feature": "annual_mileage",
+          "shap": 0.02128590825729386,
+          "value": 6209.077139836779,
+          "code": "LOW_ANNUAL_MILEAGE"
+        },
+        {
+          "feature": "gas_kwh_last_year",
+          "shap": 0.020866684588918116,
+          "value": 3138.5295437981267,
+          "code": "LOW_GAS_KWH_LAST_YEAR"
+        },
+        {
+          "feature": "electricity_kwh_last_year",
+          "shap": 0.01085745649592684,
+          "value": 2827.3252888430575,
+          "code": "LOW_ELECTRICITY_KWH_LAST_YEAR"
+        }
+      ],
+      "negative_drivers": [
+        {
+          "feature": "fuel_spend_last_6m",
+          "shap": -1.292509726279678,
+          "value": 46.92680899768591,
+          "code": "LOW_FUEL_SPEND_LAST_6M"
+        },
+        {
+          "feature": "paper_statements",
+          "shap": -0.0045773458812779205,
+          "value": 1.0,
+          "code": "HIGH_PAPER_STATEMENTS"
+        }
+      ]
+    },
+    {
+      "customer_id": "CUST-00006",
+      "positive_drivers": [
+        {
+          "feature": "paper_statements",
+          "shap": 0.010762751282724794,
+          "value": 0.0,
+          "code": "LOW_PAPER_STATEMENTS"
+        },
+        {
+          "feature": "electricity_kwh_last_year",
+          "shap": 0.010347714907402779,
+          "value": 2992.413516810827,
+          "code": "HIGH_ELECTRICITY_KWH_LAST_YEAR"
+        }
+      ],
+      "negative_drivers": [
+        {
+          "feature": "fuel_spend_last_6m",
+          "shap": -1.191300524436473,
+          "value": 16.959629191460518,
+          "code": "LOW_FUEL_SPEND_LAST_6M"
+        },
+        {
+          "feature": "annual_mileage",
+          "shap": -0.028577103009232534,
+          "value": 9284.558743431728,
+          "code": "HIGH_ANNUAL_MILEAGE"
+        },
+        {
+          "feature": "digital_transactions",
+          "shap": -0.022422912050693775,
+          "value": 14.0,
+          "code": "LOW_DIGITAL_TRANSACTIONS"
+        }
+      ]
+    },
+    {
+      "customer_id": "CUST-00012",
+      "positive_drivers": [
+        {
+          "feature": "fuel_spend_last_6m",
+          "shap": 4.028139070633118,
+          "value": 350.3557475158312,
+          "code": "HIGH_FUEL_SPEND_LAST_6M"
+        },
+        {
+          "feature": "gas_kwh_last_year",
+          "shap": 0.361428019124667,
+          "value": 17488.687788963718,
+          "code": "HIGH_GAS_KWH_LAST_YEAR"
+        },
+        {
+          "feature": "electricity_kwh_last_year",
+          "shap": 0.17008073642451138,
+          "value": 2626.7961902681636,
+          "code": "LOW_ELECTRICITY_KWH_LAST_YEAR"
+        }
+      ],
+      "negative_drivers": [
+        {
+          "feature": "annual_mileage",
+          "shap": -0.1252840191726686,
+          "value": 9711.521625063548,
+          "code": "HIGH_ANNUAL_MILEAGE"
+        },
+        {
+          "feature": "paper_statements",
+          "shap": -0.004209292717351296,
+          "value": 0.0,
+          "code": "LOW_PAPER_STATEMENTS"
+        }
+      ]
+    },
+    {
+      "customer_id": "CUST-00025",
+      "positive_drivers": [
+        {
+          "feature": "electricity_kwh_last_year",
+          "shap": 0.023310051266696347,
+          "value": 2718.3439958057274,
+          "code": "LOW_ELECTRICITY_KWH_LAST_YEAR"
+        },
+        {
+          "feature": "paper_statements",
+          "shap": 0.0019929447215560063,
+          "value": 0.0,
+          "code": "LOW_PAPER_STATEMENTS"
+        }
+      ],
+      "negative_drivers": [
+        {
+          "feature": "fuel_spend_last_6m",
+          "shap": -1.2014349764108103,
+          "value": 60.893468785977504,
+          "code": "LOW_FUEL_SPEND_LAST_6M"
+        },
+        {
+          "feature": "annual_mileage",
+          "shap": -0.04004042493159142,
+          "value": 8933.329973429585,
+          "code": "HIGH_ANNUAL_MILEAGE"
+        },
+        {
+          "feature": "digital_transactions",
+          "shap": -0.014476113604447758,
+          "value": 25.0,
+          "code": "HIGH_DIGITAL_TRANSACTIONS"
+        }
+      ]
+    },
+    {
+      "customer_id": "CUST-00043",
+      "positive_drivers": [
+        {
+          "feature": "electricity_kwh_last_year",
+          "shap": 0.015217235899072423,
+          "value": 2787.3242574779,
+          "code": "LOW_ELECTRICITY_KWH_LAST_YEAR"
+        }
+      ],
+      "negative_drivers": [
+        {
+          "feature": "fuel_spend_last_6m",
+          "shap": -1.2097047585541183,
+          "value": 3.4993721443479084,
+          "code": "LOW_FUEL_SPEND_LAST_6M"
+        },
+        {
+          "feature": "annual_mileage",
+          "shap": -0.029605150667264622,
+          "value": 8728.646039450825,
+          "code": "HIGH_ANNUAL_MILEAGE"
+        },
+        {
+          "feature": "gas_kwh_last_year",
+          "shap": -0.008965842894732312,
+          "value": 13280.951051586298,
+          "code": "HIGH_GAS_KWH_LAST_YEAR"
+        }
+      ]
+    }
+  ],
+  "take_up_GP02": [
+    {
+      "customer_id": "CUST-00001",
+      "positive_drivers": [
+        {
+          "feature": "fuel_spend_last_6m",
+          "shap": 0.018191323982780287,
+          "value": 46.92680899768591,
+          "code": "LOW_FUEL_SPEND_LAST_6M"
+        },
+        {
+          "feature": "paper_statements",
+          "shap": 0.006415938670111793,
+          "value": 1.0,
+          "code": "HIGH_PAPER_STATEMENTS"
+        }
+      ],
+      "negative_drivers": [
+        {
+          "feature": "gas_kwh_last_year",
+          "shap": -0.9170342979799609,
+          "value": 3138.5295437981267,
+          "code": "LOW_GAS_KWH_LAST_YEAR"
+        },
+        {
+          "feature": "digital_transactions",
+          "shap": -0.027658671911566533,
+          "value": 18.0,
+          "code": "LOW_DIGITAL_TRANSACTIONS"
+        },
+        {
+          "feature": "electricity_kwh_last_year",
+          "shap": -0.0150732313390487,
+          "value": 2827.3252888430575,
+          "code": "LOW_ELECTRICITY_KWH_LAST_YEAR"
+        }
+      ]
+    },
+    {
+      "customer_id": "CUST-00006",
+      "positive_drivers": [
+        {
+          "feature": "gas_kwh_last_year",
+          "shap": 0.419362490511204,
+          "value": 14085.498052854768,
+          "code": "HIGH_GAS_KWH_LAST_YEAR"
+        },
+        {
+          "feature": "fuel_spend_last_6m",
+          "shap": 0.06561564986209137,
+          "value": 16.959629191460518,
+          "code": "LOW_FUEL_SPEND_LAST_6M"
+        },
+        {
+          "feature": "annual_mileage",
+          "shap": 0.013291804189930844,
+          "value": 9284.558743431728,
+          "code": "HIGH_ANNUAL_MILEAGE"
+        }
+      ],
+      "negative_drivers": [
+        {
+          "feature": "electricity_kwh_last_year",
+          "shap": -0.0197230715304802,
+          "value": 2992.413516810827,
+          "code": "HIGH_ELECTRICITY_KWH_LAST_YEAR"
+        },
+        {
+          "feature": "digital_transactions",
+          "shap": -0.013354505954778917,
+          "value": 14.0,
+          "code": "LOW_DIGITAL_TRANSACTIONS"
+        },
+        {
+          "feature": "paper_statements",
+          "shap": -0.000909280265800998,
+          "value": 0.0,
+          "code": "LOW_PAPER_STATEMENTS"
+        }
+      ]
+    },
+    {
+      "customer_id": "CUST-00012",
+      "positive_drivers": [
+        {
+          "feature": "gas_kwh_last_year",
+          "shap": 1.374266946701231,
+          "value": 17488.687788963718,
+          "code": "HIGH_GAS_KWH_LAST_YEAR"
+        },
+        {
+          "feature": "electricity_kwh_last_year",
+          "shap": 0.2601127888982062,
+          "value": 2626.7961902681636,
+          "code": "LOW_ELECTRICITY_KWH_LAST_YEAR"
+        },
+        {
+          "feature": "fuel_spend_last_6m",
+          "shap": 0.07478910754453068,
+          "value": 350.3557475158312,
+          "code": "HIGH_FUEL_SPEND_LAST_6M"
+        }
+      ],
+      "negative_drivers": [
+        {
+          "feature": "digital_transactions",
+          "shap": -0.04884955278461955,
+          "value": 19.0,
+          "code": "LOW_DIGITAL_TRANSACTIONS"
+        },
+        {
+          "feature": "paper_statements",
+          "shap": -0.0037372339251972473,
+          "value": 0.0,
+          "code": "LOW_PAPER_STATEMENTS"
+        }
+      ]
+    },
+    {
+      "customer_id": "CUST-00025",
+      "positive_drivers": [
+        {
+          "feature": "gas_kwh_last_year",
+          "shap": 0.4113281726136809,
+          "value": 14987.864784679217,
+          "code": "HIGH_GAS_KWH_LAST_YEAR"
+        },
+        {
+          "feature": "fuel_spend_last_6m",
+          "shap": 0.03546019625488822,
+          "value": 60.893468785977504,
+          "code": "LOW_FUEL_SPEND_LAST_6M"
+        }
+      ],
+      "negative_drivers": [
+        {
+          "feature": "annual_mileage",
+          "shap": -0.07377765961421172,
+          "value": 8933.329973429585,
+          "code": "HIGH_ANNUAL_MILEAGE"
+        },
+        {
+          "feature": "digital_transactions",
+          "shap": -0.05030627625100399,
+          "value": 25.0,
+          "code": "HIGH_DIGITAL_TRANSACTIONS"
+        },
+        {
+          "feature": "electricity_kwh_last_year",
+          "shap": -0.04531859577326184,
+          "value": 2718.3439958057274,
+          "code": "LOW_ELECTRICITY_KWH_LAST_YEAR"
+        }
+      ]
+    },
+    {
+      "customer_id": "CUST-00043",
+      "positive_drivers": [
+        {
+          "feature": "gas_kwh_last_year",
+          "shap": 0.1881922580657514,
+          "value": 13280.951051586298,
+          "code": "HIGH_GAS_KWH_LAST_YEAR"
+        },
+        {
+          "feature": "fuel_spend_last_6m",
+          "shap": 0.025563188651443997,
+          "value": 3.4993721443479084,
+          "code": "LOW_FUEL_SPEND_LAST_6M"
+        }
+      ],
+      "negative_drivers": [
+        {
+          "feature": "digital_transactions",
+          "shap": -0.06099436370060902,
+          "value": 18.0,
+          "code": "LOW_DIGITAL_TRANSACTIONS"
+        },
+        {
+          "feature": "electricity_kwh_last_year",
+          "shap": -0.028370715971566988,
+          "value": 2787.3242574779,
+          "code": "LOW_ELECTRICITY_KWH_LAST_YEAR"
+        },
+        {
+          "feature": "paper_statements",
+          "shap": -0.005548276844965759,
+          "value": 1.0,
+          "code": "HIGH_PAPER_STATEMENTS"
+        }
+      ]
+    }
+  ],
+  "take_up_GP03": [
+    {
+      "customer_id": "CUST-00001",
+      "positive_drivers": [
+        {
+          "feature": "paper_statements",
+          "shap": 0.0007152991802406309,
+          "value": 1.0,
+          "code": "HIGH_PAPER_STATEMENTS"
+        }
+      ],
+      "negative_drivers": [
+        {
+          "feature": "annual_mileage",
+          "shap": -0.04095508286102102,
+          "value": 6209.077139836779,
+          "code": "LOW_ANNUAL_MILEAGE"
+        },
+        {
+          "feature": "gas_kwh_last_year",
+          "shap": -0.011623725601727771,
+          "value": 3138.5295437981267,
+          "code": "LOW_GAS_KWH_LAST_YEAR"
+        },
+        {
+          "feature": "digital_transactions",
+          "shap": -0.006344190572799918,
+          "value": 18.0,
+          "code": "LOW_DIGITAL_TRANSACTIONS"
+        }
+      ]
+    },
+    {
+      "customer_id": "CUST-00006",
+      "positive_drivers": [
+        {
+          "feature": "electricity_kwh_last_year",
+          "shap": 0.004985289352506296,
+          "value": 2992.413516810827,
+          "code": "HIGH_ELECTRICITY_KWH_LAST_YEAR"
+        }
+      ],
+      "negative_drivers": [
+        {
+          "feature": "digital_transactions",
+          "shap": -0.025221778993614382,
+          "value": 14.0,
+          "code": "LOW_DIGITAL_TRANSACTIONS"
+        },
+        {
+          "feature": "gas_kwh_last_year",
+          "shap": -0.02244744256813354,
+          "value": 14085.498052854768,
+          "code": "HIGH_GAS_KWH_LAST_YEAR"
+        },
+        {
+          "feature": "fuel_spend_last_6m",
+          "shap": -0.022424593383250566,
+          "value": 16.959629191460518,
+          "code": "LOW_FUEL_SPEND_LAST_6M"
+        }
+      ]
+    },
+    {
+      "customer_id": "CUST-00012",
+      "positive_drivers": [
+        {
+          "feature": "annual_mileage",
+          "shap": 0.0005784844331749105,
+          "value": 9711.521625063548,
+          "code": "HIGH_ANNUAL_MILEAGE"
+        }
+      ],
+      "negative_drivers": [
+        {
+          "feature": "gas_kwh_last_year",
+          "shap": -0.016427337639741166,
+          "value": 17488.687788963718,
+          "code": "HIGH_GAS_KWH_LAST_YEAR"
+        },
+        {
+          "feature": "fuel_spend_last_6m",
+          "shap": -0.011767773989929155,
+          "value": 350.3557475158312,
+          "code": "HIGH_FUEL_SPEND_LAST_6M"
+        },
+        {
+          "feature": "electricity_kwh_last_year",
+          "shap": -0.0016537217471275486,
+          "value": 2626.7961902681636,
+          "code": "LOW_ELECTRICITY_KWH_LAST_YEAR"
+        }
+      ]
+    },
+    {
+      "customer_id": "CUST-00025",
+      "positive_drivers": [
+        {
+          "feature": "gas_kwh_last_year",
+          "shap": 0.04950463226134198,
+          "value": 14987.864784679217,
+          "code": "HIGH_GAS_KWH_LAST_YEAR"
+        },
+        {
+          "feature": "digital_transactions",
+          "shap": 0.006047918711797165,
+          "value": 25.0,
+          "code": "HIGH_DIGITAL_TRANSACTIONS"
+        },
+        {
+          "feature": "annual_mileage",
+          "shap": 0.0010579761460467782,
+          "value": 8933.329973429585,
+          "code": "HIGH_ANNUAL_MILEAGE"
+        }
+      ],
+      "negative_drivers": [
+        {
+          "feature": "fuel_spend_last_6m",
+          "shap": -0.05612208974809233,
+          "value": 60.893468785977504,
+          "code": "LOW_FUEL_SPEND_LAST_6M"
+        },
+        {
+          "feature": "electricity_kwh_last_year",
+          "shap": -0.009238279697047201,
+          "value": 2718.3439958057274,
+          "code": "LOW_ELECTRICITY_KWH_LAST_YEAR"
+        },
+        {
+          "feature": "paper_statements",
+          "shap": -0.0013240188644619384,
+          "value": 0.0,
+          "code": "LOW_PAPER_STATEMENTS"
+        }
+      ]
+    },
+    {
+      "customer_id": "CUST-00043",
+      "positive_drivers": [
+        {
+          "feature": "paper_statements",
+          "shap": 0.0022823098625480926,
+          "value": 1.0,
+          "code": "HIGH_PAPER_STATEMENTS"
+        },
+        {
+          "feature": "annual_mileage",
+          "shap": 0.0011468034180798683,
+          "value": 8728.646039450825,
+          "code": "HIGH_ANNUAL_MILEAGE"
+        }
+      ],
+      "negative_drivers": [
+        {
+          "feature": "gas_kwh_last_year",
+          "shap": -0.04826371166042861,
+          "value": 13280.951051586298,
+          "code": "HIGH_GAS_KWH_LAST_YEAR"
+        },
+        {
+          "feature": "digital_transactions",
+          "shap": -0.014518587345631634,
+          "value": 18.0,
+          "code": "LOW_DIGITAL_TRANSACTIONS"
+        },
+        {
+          "feature": "electricity_kwh_last_year",
+          "shap": -0.007808217443575342,
+          "value": 2787.3242574779,
+          "code": "LOW_ELECTRICITY_KWH_LAST_YEAR"
+        }
+      ]
+    }
+  ],
+  "take_up_GP04": [
+    {
+      "customer_id": "CUST-00001",
+      "positive_drivers": [
+        {
+          "feature": "paper_statements",
+          "shap": 3.0225414879141406,
+          "value": 1.0,
+          "code": "HIGH_PAPER_STATEMENTS"
+        },
+        {
+          "feature": "fuel_spend_last_6m",
+          "shap": 0.12911423160408336,
+          "value": 46.92680899768591,
+          "code": "LOW_FUEL_SPEND_LAST_6M"
+        },
+        {
+          "feature": "digital_transactions",
+          "shap": 0.07407636533804253,
+          "value": 18.0,
+          "code": "LOW_DIGITAL_TRANSACTIONS"
+        }
+      ],
+      "negative_drivers": [
+        {
+          "feature": "gas_kwh_last_year",
+          "shap": -0.19009521872048651,
+          "value": 3138.5295437981267,
+          "code": "LOW_GAS_KWH_LAST_YEAR"
+        },
+        {
+          "feature": "annual_mileage",
+          "shap": -0.16249197251631103,
+          "value": 6209.077139836779,
+          "code": "LOW_ANNUAL_MILEAGE"
+        }
+      ]
+    },
+    {
+      "customer_id": "CUST-00006",
+      "positive_drivers": [
+        {
+          "feature": "gas_kwh_last_year",
+          "shap": 0.03607093274575816,
+          "value": 14085.498052854768,
+          "code": "HIGH_GAS_KWH_LAST_YEAR"
+        },
+        {
+          "feature": "electricity_kwh_last_year",
+          "shap": 0.0028900142387802918,
+          "value": 2992.413516810827,
+          "code": "HIGH_ELECTRICITY_KWH_LAST_YEAR"
+        }
+      ],
+      "negative_drivers": [
+        {
+          "feature": "paper_statements",
+          "shap": -2.12569980409686,
+          "value": 0.0,
+          "code": "LOW_PAPER_STATEMENTS"
+        },
+        {
+          "feature": "fuel_spend_last_6m",
+          "shap": -0.10642390623245744,
+          "value": 16.959629191460518,
+          "code": "LOW_FUEL_SPEND_LAST_6M"
+        },
+        {
+          "feature": "digital_transactions",
+          "shap": -0.02817621385996931,
+          "value": 14.0,
+          "code": "LOW_DIGITAL_TRANSACTIONS"
+        }
+      ]
+    },
+    {
+      "customer_id": "CUST-00012",
+      "positive_drivers": [
+        {
+          "feature": "electricity_kwh_last_year",
+          "shap": 0.08169307554479051,
+          "value": 2626.7961902681636,
+          "code": "LOW_ELECTRICITY_KWH_LAST_YEAR"
+        },
+        {
+          "feature": "fuel_spend_last_6m",
+          "shap": 0.06641636501395873,
+          "value": 350.3557475158312,
+          "code": "HIGH_FUEL_SPEND_LAST_6M"
+        }
+      ],
+      "negative_drivers": [
+        {
+          "feature": "paper_statements",
+          "shap": -2.2561915611037846,
+          "value": 0.0,
+          "code": "LOW_PAPER_STATEMENTS"
+        },
+        {
+          "feature": "gas_kwh_last_year",
+          "shap": -0.07834462153839944,
+          "value": 17488.687788963718,
+          "code": "HIGH_GAS_KWH_LAST_YEAR"
+        },
+        {
+          "feature": "digital_transactions",
+          "shap": -0.04883828419882788,
+          "value": 19.0,
+          "code": "LOW_DIGITAL_TRANSACTIONS"
+        }
+      ]
+    },
+    {
+      "customer_id": "CUST-00025",
+      "positive_drivers": [
+        {
+          "feature": "electricity_kwh_last_year",
+          "shap": 0.04716095357622788,
+          "value": 2718.3439958057274,
+          "code": "LOW_ELECTRICITY_KWH_LAST_YEAR"
+        },
+        {
+          "feature": "annual_mileage",
+          "shap": 0.014697318892047442,
+          "value": 8933.329973429585,
+          "code": "HIGH_ANNUAL_MILEAGE"
+        }
+      ],
+      "negative_drivers": [
+        {
+          "feature": "paper_statements",
+          "shap": -2.2210746425688774,
+          "value": 0.0,
+          "code": "LOW_PAPER_STATEMENTS"
+        },
+        {
+          "feature": "gas_kwh_last_year",
+          "shap": -0.07345301949387277,
+          "value": 14987.864784679217,
+          "code": "HIGH_GAS_KWH_LAST_YEAR"
+        },
+        {
+          "feature": "fuel_spend_last_6m",
+          "shap": -0.008234223730399557,
+          "value": 60.893468785977504,
+          "code": "LOW_FUEL_SPEND_LAST_6M"
+        }
+      ]
+    },
+    {
+      "customer_id": "CUST-00043",
+      "positive_drivers": [
+        {
+          "feature": "paper_statements",
+          "shap": 3.288259809691465,
+          "value": 1.0,
+          "code": "HIGH_PAPER_STATEMENTS"
+        },
+        {
+          "feature": "fuel_spend_last_6m",
+          "shap": 0.32231823190844666,
+          "value": 3.4993721443479084,
+          "code": "LOW_FUEL_SPEND_LAST_6M"
+        },
+        {
+          "feature": "digital_transactions",
+          "shap": 0.2581696436394571,
+          "value": 18.0,
+          "code": "LOW_DIGITAL_TRANSACTIONS"
+        }
+      ],
+      "negative_drivers": []
+    }
+  ]
+}

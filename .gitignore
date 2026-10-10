@@ -1,6 +1,4 @@
 Code/readmes/
-
-# Synthetic raw data and generated output are regenerated, never committed
 Code/data/raw/
 Code/data/public/
 Code/out/_raw_backup/
@@ -11,3 +9,9 @@ __pycache__/
 *.pyc
 .pytest_cache/
 .venv/
+*.parquet
+*.csv
+out/
+data/
+Code/dataset procured/
+scratch_inspect.py
