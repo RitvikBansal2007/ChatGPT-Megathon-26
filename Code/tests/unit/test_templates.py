@@ -3,7 +3,7 @@ from greenproof.llm.templates import TEMPLATES, get_template
 
 # Placeholder for the claimcheck if not yet merged
 try:
-    from greenproof.llm.guard import claimcheck
+    from greenproof.llm.guard import claimcheck  # type: ignore
 except ImportError:
     def claimcheck(text):
         # Dummy claimcheck that passes anything without forbidden words
