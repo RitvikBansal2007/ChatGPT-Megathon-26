@@ -22,9 +22,10 @@ def score(features_row, pid):
         calibrator = load_calibrator(target)
         # Get features safely
         df = pd.DataFrame([features_row])
-        for col in ['customer_id', 'persona']:
-            if col in df.columns:
-                df = df.drop(columns=[col])
+        # Ensure only the features the model expects are passed in
+        if hasattr(model, 'feature_name_'):
+            df = df[[col for col in model.feature_name_ if col in df.columns]]
+            
         raw_pred = model.predict_proba(df)[:, 1]
         calib_pred = calibrator(raw_pred)[0]
 
@@ -70,7 +71,7 @@ def load_verified_model(target):
     model_path = os.path.join(MODELS_DIR, filename)
     # 15. "Tamper-proof" fix: Don't just trust whatever types the file declares.
     # Instead, we explicitly set trusted=True since we verified the SHA256 hash.
-    return sio.load(model_path, trusted=True)
+    return sio.load(model_path, trusted=sio.get_untrusted_types(file=model_path))
 
 def score_customers(customer_ids):
     # Load full feature dataset
