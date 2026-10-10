@@ -13,7 +13,7 @@ ROLES: list[str] = [
     "Customer – Aisha (GP03)",
     "Customer – Marcus (GP02)",
     "Customer – Fatima (GP04)",
-    "Customer – Persona 5",
+    "Customer – Tom (GP01)",
     "Customer – Persona 6",
     "Customer – Persona 7",
     "Customer – Persona 8",

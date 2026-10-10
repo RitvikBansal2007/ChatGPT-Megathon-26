@@ -92,13 +92,24 @@ def test_opportunities_return_list(monkeypatch):
 
 
 def test_all_five_statuses_covered(monkeypatch):
-    """client.get_opportunities must cover all 5 statuses (one per fixture file)."""
+    """One card per product per persona; the five demo personas cover all five statuses."""
     import client
     monkeypatch.setenv("DEMO_MODE", "fixtures")
-    opps = client.get_opportunities("CUST-0001")
-    statuses = {o.get("status") for o in opps}
-    expected = {"RECOMMEND", "SOFT_SURFACE", "ABSTAIN", "REVIEW", "RULED_OUT"}
-    assert expected == statuses, f"Missing statuses: {expected - statuses}"
+    statuses = set()
+    for cid in ("CUST-0001", "CUST-0002", "CUST-0003", "CUST-0004", "CUST-0005"):
+        gp01 = [o for o in client.get_opportunities(cid) if o["opportunity_id"] == "GP01"]
+        assert len(gp01) == 1, f"{cid}: expected one GP01 card, got {len(gp01)}"
+        statuses.add(gp01[0]["status"])
+    assert statuses == {"RECOMMEND", "SOFT_SURFACE", "ABSTAIN", "REVIEW", "RULED_OUT"}
+
+
+def test_hub_opens_proof_card():
+    """Regression: tiles must find their opportunity (keyed on opportunity_id)."""
+    os.environ["DEMO_MODE"] = "fixtures"
+    at = AppTest.from_file(str(APP_DIR / "pages/1_Customer_Hub.py"), default_timeout=30).run()
+    at.button(key="tile_GP01").click().run()
+    assert not at.exception
+    assert not any("No opportunity data" in i.value for i in at.info)
 
 
 def test_opportunity_has_required_contract_fields(monkeypatch):

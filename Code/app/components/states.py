@@ -13,6 +13,8 @@ import html
 import streamlit as st
 import theme
 
+C = theme.COLORS
+
 _MISSING_LABELS = {
     "annual_mileage":   "your annual mileage",
     "roof_suitability": "your roof suitability",
@@ -48,7 +50,7 @@ def render_abstain(opp: dict) -> None:
         f'border-radius:16px;padding:16px 20px;">'
         + _status_pill("ABSTAIN")
         + f'<h3 style="margin:10px 0 6px;font-size:16px;">Not enough information to estimate this one yet.</h3>'
-        f'<p style="color:#5C7A6B;font-size:14px;margin:0;">Add <strong>{html.escape(missing_label)}</strong> and we can give you a range.</p>'
+        f'<p style="color:{C["muted"]};font-size:14px;margin:0;">Add <strong>{html.escape(missing_label)}</strong> and we can give you a range.</p>'
         f'</div>',
         unsafe_allow_html=True,
     )
@@ -70,8 +72,8 @@ def render_review(opp: dict) -> None:
         f'border-radius:16px;padding:16px 20px;">'
         + _status_pill("REVIEW")
         + f'<h3 style="margin:10px 0 6px;font-size:16px;">We\'re seeing mixed signals.</h3>'
-        f'<p style="color:#5C7A6B;font-size:14px;margin:0 0 4px;">{html.escape(msg)}</p>'
-        f'<p style="font-size:11px;color:#8AA79A;margin:0;">Impact estimate hidden until resolved.</p>'
+        f'<p style="color:{C["muted"]};font-size:14px;margin:0 0 4px;">{html.escape(msg)}</p>'
+        f'<p style="font-size:11px;color:{C["muted"]};margin:0;">Impact estimate hidden until resolved.</p>'
         f'</div>',
         unsafe_allow_html=True,
     )
@@ -102,17 +104,17 @@ def render_ruled_out(opp: dict) -> None:
         f'border-radius:16px;padding:16px 20px;">'
         + _status_pill("RULED_OUT")
         + f'<h3 style="margin:10px 0 6px;font-size:16px;">Why not?</h3>'
-        f'<p style="color:#5C7A6B;font-size:14px;margin:0 0 8px;">{html.escape(rule_text)}</p>'
-        + (f'<span style="font-size:10px;font-family:monospace;background:#E3EFE9;'
+        f'<p style="color:{C["muted"]};font-size:14px;margin:0 0 8px;">{html.escape(rule_text)}</p>'
+        + (f'<span style="font-size:10px;font-family:monospace;background:{C["surface_inset"]};'
            f'padding:2px 6px;border-radius:4px;">{html.escape(rule_tag)}</span>' if rule_tag else "")
-        + f'<p style="font-size:11px;color:#8AA79A;margin-top:8px;">If your circumstances change, we\'ll re-check automatically.</p>'
+        + f'<p style="font-size:11px;color:{C["muted"]};margin-top:8px;">If your circumstances change, we\'ll re-check automatically.</p>'
         f'</div>',
         unsafe_allow_html=True,
     )
     # NO action button per playbook. Ghost link only.
     st.markdown(
         '<div style="margin-top:8px;">'
-        '<a href="#" style="color:#0F7A55;font-size:12px;">See what else fits</a></div>',
+        f'<a href="#" style="color:{C["primary_text"]};font-size:12px;">See what else fits</a></div>',
         unsafe_allow_html=True,
     )
 
@@ -130,7 +132,7 @@ def render_soft_surface(opp: dict) -> None:
         f'border-radius:16px;padding:16px 20px;">'
         + _status_pill("SOFT_SURFACE")
         + f'<h3 style="margin:10px 0 6px;font-size:16px;">{headline}</h3>'
-        f'<p style="color:#5C7A6B;font-size:12px;margin:0;">This is for your awareness. '
+        f'<p style="color:{C["muted"]};font-size:12px;margin:0;">This is for your awareness. '
         f"We'll surface it more prominently when it fits your situation better.</p>"
         f'</div>',
         unsafe_allow_html=True,

@@ -18,6 +18,8 @@ import streamlit as st
 import theme
 import client
 
+C = theme.COLORS
+
 MUTATIONS = [
     ("SET_VEHICLE_BEV",   "Set vehicle to EV"),
     ("REMOVE_MILEAGE",    "Remove annual mileage"),
@@ -42,11 +44,11 @@ def render(customer_id: str, opportunity_id: str, role: str) -> None:
 
     with st.sidebar:
         st.markdown(
-            '<div style="background:#F1F8F4;border:1px solid #C8E6D4;border-radius:12px;'
+            f'<div style="background:{C["background"]};border:1px solid {C["border"]};border-radius:12px;'
             'padding:14px 16px;margin-bottom:12px;">'
             '<div style="font-size:10px;font-family:monospace;font-weight:700;'
-            'color:#0F7A55;margin-bottom:6px;">SCENARIO LAB</div>'
-            '<p style="font-size:11px;color:#6B8A7C;margin:0;">Toggle inputs to see how '
+            f'color:{C["primary_text"]};margin-bottom:6px;">SCENARIO LAB</div>'
+            f'<p style="font-size:11px;color:{C["border_strong"]};margin:0;">Toggle inputs to see how '
             'the recommendation changes.</p>'
             '</div>',
             unsafe_allow_html=True,
@@ -78,7 +80,7 @@ def render(customer_id: str, opportunity_id: str, role: str) -> None:
 
         st.markdown(
             '<div style="font-size:10px;font-family:monospace;font-weight:700;'
-            'color:#B4232A;margin-bottom:6px;">RED-TEAM</div>',
+            f'color:{C["error"]};margin-bottom:6px;">RED-TEAM</div>',
             unsafe_allow_html=True,
         )
         st.caption("Inject a known-bad claim and see Claim-Check catch it.")
@@ -108,10 +110,10 @@ def _render_scenario_result(result: dict) -> None:
         a_tok = theme.STATUS.get(a_status, {})
         st.markdown(
             f'<div style="display:flex;align-items:center;gap:8px;margin:4px 0;flex-wrap:wrap;">'
-            f'<span style="font-size:10px;font-family:monospace;background:#E3EFE9;'
+            f'<span style="font-size:10px;font-family:monospace;background:{C["surface_inset"]};'
             f'padding:2px 6px;border-radius:4px;">{html.escape(pid)}</span>'
             f'<span style="color:{b_tok.get("fg","#888")};font-weight:700;font-size:12px;">{html.escape(b_status)}</span>'
-            f'<span style="color:#8AA79A;">→</span>'
+            f'<span style="color:{C["muted"]};">→</span>'
             f'<span style="color:{a_tok.get("fg","#888")};font-weight:700;font-size:12px;">{html.escape(a_status)}</span>'
             f'</div>',
             unsafe_allow_html=True,
@@ -160,15 +162,15 @@ def _render_redteam_result(cc: dict) -> None:
             if span in highlighted:
                 highlighted = highlighted.replace(
                     span,
-                    f'<mark style="background:#FDECEA;color:#B4232A;border-radius:3px;'
+                    f'<mark style="background:{C["error_tint"]};color:{C["error"]};border-radius:3px;'
                     f'padding:0 2px;">{span}</mark>'
-                    f'<sup style="font-family:monospace;font-size:9px;color:#B4232A;'
+                    f'<sup style="font-family:monospace;font-size:9px;color:{C["error"]};'
                     f'margin-left:1px;">{rule_id}</sup>',
                     1,
                 )
 
         st.markdown(
-            f'<div style="background:#FFF8F8;border:1px solid #F5C6C6;border-radius:10px;'
+            f'<div style="background:{C["error_surface"]};border:1px solid {C["error_border"]};border-radius:10px;'
             f'padding:10px 14px;font-size:13px;line-height:1.6;">{highlighted}</div>',
             unsafe_allow_html=True,
         )
@@ -176,7 +178,7 @@ def _render_redteam_result(cc: dict) -> None:
         if violations:
             rule_ids = " · ".join(v.get("rule", "") for v in violations)
             st.markdown(
-                f'<p style="font-size:11px;font-family:monospace;color:#B4232A;margin:4px 0 0;">'
+                f'<p style="font-size:11px;font-family:monospace;color:{C["error"]};margin:4px 0 0;">'
                 f'Rules fired: {html.escape(rule_ids)}</p>',
                 unsafe_allow_html=True,
             )

@@ -51,6 +51,7 @@ _CUSTOMER_STATUS_MAP = {
     "CUST-0002": "REVIEW",       # Marcus — REVIEW
     "CUST-0003": "RULED_OUT",    # Aisha — all RULED_OUT
     "CUST-0004": "SOFT_SURFACE", # Fatima — SOFT_SURFACE
+    "CUST-0005": "ABSTAIN",      # Tom — ABSTAIN (one missing input)
 }
 
 

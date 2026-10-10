@@ -18,6 +18,8 @@ import streamlit as st
 import theme
 from components import badges, claim_stamp, states
 
+C = theme.COLORS
+
 _PATHWAY_META = {
     "GP01": {"name": "EV Finance",        "icon": "🚗"},
     "GP02": {"name": "Green Home Loan",   "icon": "🏠"},
@@ -63,9 +65,9 @@ def _render_recommend(opp: dict) -> None:
         f'<div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:10px;">'
         f'<span class="gd-pill gd-status--recommend" role="status">'
         f'{html.escape(s["glyph"])} {html.escape(s["label"])}</span>'
-        f'<span style="font-size:11px;font-family:monospace;background:#E3EFE9;'
+        f'<span style="font-size:11px;font-family:monospace;background:{C["surface_inset"]};'
         f'padding:2px 8px;border-radius:4px;">{product}</span>'
-        + (f'<span style="font-size:11px;color:#8AA79A;margin-left:auto;">AS OF {html.escape(str(data_as_of))}</span>'
+        + (f'<span style="font-size:11px;color:{C["muted"]};margin-left:auto;">AS OF {html.escape(str(data_as_of))}</span>'
            if data_as_of else "")
         + f'</div>'
         f'<h3 style="margin:0 0 8px;font-size:17px;line-height:1.4;">{headline}</h3>',
@@ -75,7 +77,7 @@ def _render_recommend(opp: dict) -> None:
     # Why-now chip
     if why_now:
         st.markdown(
-            f'<div style="background:#E8F8FF;border:1px solid #22B8CF;border-radius:20px;'
+            f'<div style="background:{C["accent_tint"]};border:1px solid {C["accent_border"]};border-radius:20px;'
             f'padding:6px 14px;font-size:12px;display:inline-flex;align-items:center;'
             f'gap:6px;margin-bottom:12px;">⏰ Why now: {html.escape(why_now)}</div>',
             unsafe_allow_html=True,
@@ -85,7 +87,7 @@ def _render_recommend(opp: dict) -> None:
     if reason_codes:
         st.markdown(
             '<p style="font-size:11px;font-weight:600;text-transform:uppercase;'
-            'letter-spacing:.05em;color:#8AA79A;margin:0 0 6px;">Why you\'re seeing this</p>',
+            f'letter-spacing:.05em;color:{C["muted"]};margin:0 0 6px;">Why you\'re seeing this</p>',
             unsafe_allow_html=True,
         )
         chips_html = ""
@@ -98,15 +100,15 @@ def _render_recommend(opp: dict) -> None:
             date = html.escape(str(rc.get("observed_at", "")))
             code = html.escape(rc.get("code", ""))
             chips_html += (
-                f'<div style="background:#F1F8F4;border:1px solid #C8E6D4;border-radius:10px;'
+                f'<div style="background:{C["background"]};border:1px solid {C["border"]};border-radius:10px;'
                 f'padding:8px 12px;margin-bottom:6px;display:flex;gap:10px;align-items:flex-start;">'
                 f'<span>{icon}</span>'
                 f'<div style="min-width:0;">'
                 f'<div style="font-size:13px;">{display}</div>'
                 f'<div style="display:flex;gap:6px;margin-top:4px;">'
-                f'<span style="font-size:10px;font-family:monospace;background:#E3EFE9;'
+                f'<span style="font-size:10px;font-family:monospace;background:{C["surface_inset"]};'
                 f'padding:1px 5px;border-radius:3px;">{code}</span>'
-                f'<span style="font-size:10px;color:#8AA79A;">{src_label} · {date}</span>'
+                f'<span style="font-size:10px;color:{C["muted"]};">{src_label} · {date}</span>'
                 f'</div></div></div>'
             )
         st.markdown(chips_html, unsafe_allow_html=True)
@@ -137,9 +139,9 @@ def _render_recommend(opp: dict) -> None:
                 hi  = impact.get("high")
                 disp = impact.get("display", "")
                 st.markdown(
-                    f'<div style="background:#DDF8EA;border-radius:10px;padding:14px 16px;margin-bottom:8px;">'
-                    f'<div style="font-size:10px;font-family:monospace;color:#8AA79A;margin-bottom:4px;">ESTIMATE</div>'
-                    f'<div style="font-size:26px;font-weight:800;color:#0F7A55;line-height:1.2;">'
+                    f'<div style="background:{C["primary_tint"]};border-radius:10px;padding:14px 16px;margin-bottom:8px;">'
+                    f'<div style="font-size:10px;font-family:monospace;color:{C["muted"]};margin-bottom:4px;">ESTIMATE</div>'
+                    f'<div style="font-size:26px;font-weight:800;color:{C["primary_text"]};line-height:1.2;">'
                     f'{html.escape(disp)}</div>'
                     f'</div>',
                     unsafe_allow_html=True,
@@ -171,7 +173,7 @@ def _render_recommend(opp: dict) -> None:
 
     st.markdown(
         '<div style="text-align:center;margin-top:8px;">'
-        '<a href="#" style="color:#0F7A55;font-size:12px;">Talk to a person</a></div>',
+        f'<a href="#" style="color:{C["primary_text"]};font-size:12px;">Talk to a person</a></div>',
         unsafe_allow_html=True,
     )
     st.caption(disclaimer)

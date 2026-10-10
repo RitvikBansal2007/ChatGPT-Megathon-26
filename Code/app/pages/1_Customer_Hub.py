@@ -26,6 +26,7 @@ _ROLE_TO_CID = {
     "Customer – Aisha (GP03)":  "CUST-0003",
     "Customer – Marcus (GP02)": "CUST-0002",
     "Customer – Fatima (GP04)": "CUST-0004",
+    "Customer – Tom (GP01)":    "CUST-0005",
 }
 _DEFAULT_CID = "CUST-0001"
 _STATUS_ORDER = {"RECOMMEND": 0, "REVIEW": 1, "ABSTAIN": 2, "SOFT_SURFACE": 3, "RULED_OUT": 4}
@@ -73,7 +74,7 @@ opportunities.sort(
     )
 )
 opp_by_product: dict[str, dict] = {
-    o.get("id", o.get("product_id", "")): o for o in opportunities
+    o.get("opportunity_id", ""): o for o in opportunities
 }
 
 # ── Initialise session state ─────────────────────────────────────────────────
@@ -98,7 +99,7 @@ for col, (pid, meta) in zip(tile_cols, _PATHWAY_META.items()):
             f'<div style="font-size:22px;margin-bottom:4px;" aria-hidden="true">{s_tok["glyph"]}</div>'
             f'<div style="font-weight:700;font-size:14px;margin-bottom:6px;">{meta["name"]}</div>'
             f'<span class="gd-pill {s_tok["css_class"]}" style="font-size:11px;padding:2px 8px;">'
-            f'{s_tok["label"]}</span>'
+            f'{s_tok["label"] if opp else "No data yet"}</span>'
             f'</div>',
             unsafe_allow_html=True,
         )

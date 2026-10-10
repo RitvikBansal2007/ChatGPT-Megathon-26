@@ -1,5 +1,5 @@
 # GreenDash — G3 Context Memory
-<!-- AUTO-UPDATED by agent. Last update: 2026-10-11 ~04:50 IST (names replaced by role codes; full audit in untracked team/) -->
+<!-- AUTO-UPDATED by agent. Last update: 2026-10-11 ~05:15 IST (Hub fixture bug fixed; illustrative label; colours tokenised) -->
 
 > **Project renamed:** `greenproof` → `greendash` (by teammates, commit `96ca5fb`)
 > Repo: https://github.com/<org>/megathon26-chatgpt  
@@ -53,6 +53,18 @@ Team rules (G1-K): focused fixes, no overlapping edits, share commit SHAs + conc
 
 ---
 
+
+## 🛠 G3 UI fixes at 05:15 (after the audit)
+
+- **Bug fixed: Customer Hub showed no Proof Card in fixtures mode.** `app/pages/1_Customer_Hub.py` keyed cards on the pre-contract field `id`/`product_id`; every tile fell back to "Good to know" and opening one said "No opportunity data". Now keyed on `opportunity_id`. Regression test `test_hub_opens_proof_card` added. (Earlier "fixtures mode is demo-ready" statements were wrong for the Hub until this fix.)
+- **ABSTAIN reachable:** role `Customer – Tom (GP01)` → `CUST-0005` → ABSTAIN fixture. Demo personas now cover all five states on the EV card: Priya RECOMMEND, Marcus REVIEW, Aisha RULED_OUT, Fatima SOFT_SURFACE, Tom ABSTAIN.
+- Tiles with no fixture data (Green Home, Solar) now say "No data yet" instead of a status.
+- **Receipts:** "Illustrative figures — not measured results" warning, shown unless the eval payload has `"measured": true` (G2-M sets that when real numbers land).
+- **Brand:** all 46 hard-coded hex colours moved to `theme.COLORS` (5 tint tokens added). Two off-palette greys replaced by the `muted` token (one was 2.6:1 contrast).
+- UI smoke tests: 16 of 16 pass. Scenario Lab toggle and red-team button exercised via AppTest in fixtures mode.
+- Still open (G3): logo in header, Cockpit dark mode check, phone-width check, browser walk-through with G1-A's script.
+
+---
 
 ## ✅ COMPLETED — ALL STEPS DONE EXCEPT 5 + 6
 

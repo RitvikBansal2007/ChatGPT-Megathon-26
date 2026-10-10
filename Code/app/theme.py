@@ -40,6 +40,12 @@ COLORS: Final[dict[str, str]] = {
     "warning": "#8A5A00",          # from #F59E0B
     "error": "#B4232A",            # from #E5484D; Claim-Check BLOCKED only, never a refusal
     "info": "#2F5FBF",             # from #4C8DFF
+    # tints (fills behind semantic text)
+    "error_tint": "#FDECEA",       # blocked-claim highlight
+    "error_surface": "#FFF8F8",    # blocked-claim panel
+    "error_border": "#F5C6C6",
+    "accent_tint": "#E8F8FF",      # Why-now chip fill
+    "accent_border": "#22B8CF",    # Aqua
 }
 
 # Cockpit (dark mode) tokens. Brand hues are used as-is here: all pass on Abyss.

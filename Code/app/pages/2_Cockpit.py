@@ -12,6 +12,8 @@ import theme
 import client
 from components.chrome import banner, current_role
 
+C = theme.COLORS
+
 st.set_page_config(page_title="GreenDash – Cockpit", layout="wide")
 st.markdown(theme.css(), unsafe_allow_html=True)
 
@@ -126,12 +128,12 @@ with col_scatter:
         ]:
             fig_scatter.add_annotation(
                 x=x, y=y, text=txt, showarrow=False,
-                font=dict(size=10, color="#6B8A7C", family="JetBrains Mono, monospace"),
+                font=dict(size=10, color=C["border_strong"], family="JetBrains Mono, monospace"),
                 opacity=0.7,
             )
         # Centre cross lines
-        fig_scatter.add_hline(y=800, line_dash="dot", line_color="#6B8A7C", line_width=1, opacity=0.4)
-        fig_scatter.add_vline(x=0.5, line_dash="dot", line_color="#6B8A7C", line_width=1, opacity=0.4)
+        fig_scatter.add_hline(y=800, line_dash="dot", line_color=C["border_strong"], line_width=1, opacity=0.4)
+        fig_scatter.add_vline(x=0.5, line_dash="dot", line_color=C["border_strong"], line_width=1, opacity=0.4)
         fig_scatter.update_layout(
             paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(241,248,244,0.5)",
             xaxis_title="Propensity →", yaxis_title="Estimated impact (kg CO₂e) →",

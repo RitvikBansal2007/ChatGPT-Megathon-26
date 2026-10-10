@@ -13,6 +13,9 @@ Sentence fields:
 
 import html
 import streamlit as st
+import theme
+
+C = theme.COLORS
 
 
 def render(explanation: dict | None) -> None:
@@ -32,16 +35,16 @@ def render(explanation: dict | None) -> None:
     if blocked:
         stamp_label += f" · {blocked} blocked"
 
-    status_color = "#0F7A55" if cc_status == "PASS" else "#B4232A"
+    status_color = C["primary_text"] if cc_status == "PASS" else C["error"]
 
     st.markdown(
-        f'<div style="background:#DDF8EA;border:1px solid #19C37D;border-radius:10px;'
+        f'<div style="background:{C["primary_tint"]};border:1px solid {C["primary"]};border-radius:10px;'
         f'padding:10px 14px;display:flex;align-items:center;gap:10px;margin:12px 0;">'
         f'<span style="font-size:18px;">🛡</span>'
         f'<div>'
         f'<strong style="color:{status_color};font-size:13px;">{html.escape(stamp_label)}</strong>'
         + (f'<span style="margin-left:8px;font-size:10px;font-family:monospace;'
-           f'background:#E3EFE9;padding:2px 6px;border-radius:4px;">Standard summary</span>'
+           f'background:{C["surface_inset"]};padding:2px 6px;border-radius:4px;">Standard summary</span>'
            if is_template else "")
         + f"</div></div>",
         unsafe_allow_html=True,
@@ -52,7 +55,7 @@ def render(explanation: dict | None) -> None:
             for i, sent in enumerate(sentences, 1):
                 check = sent.get("check", "PASS")
                 icon  = "✓" if check == "PASS" else ("⚠" if check == "TEMPLATE" else "✗")
-                color = "#0F7A55" if check == "PASS" else ("#F5B53D" if check == "TEMPLATE" else "#B4232A")
+                color = C["primary_text"] if check == "PASS" else (C["warning"] if check == "TEMPLATE" else C["error"])
                 st.markdown(
                     f'<span style="color:{color};font-weight:700;">{icon}</span> '
                     f'{html.escape(sent.get("text",""))}',
