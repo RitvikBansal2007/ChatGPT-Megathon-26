@@ -280,6 +280,15 @@ input,select,textarea{font-size:16px !important;}
 .gd-footnote{font-size:12px;line-height:16px;color:var(--gd-muted);margin-top:12px;}
 .gd-banner{background:#0A3B2C;color:#FFFFFF;border-radius:14px;padding:8px 12px;
   font-size:12px;line-height:16px;font-weight:600;margin-bottom:16px;}
+/* Clear Streamlit's fixed 60px top toolbar so the banner is visible.
+   Higher specificity than the .block-container rules in the media queries. */
+[data-testid="stMainBlockContainer"].block-container{padding-top:72px;}
+/* Synthetic-data banner: a keyed st.container(key="gd_banner"), so the
+   text is a normal widget and never sits inside raw HTML. Deep Forest pill. */
+.st-key-gd_banner{display:inline-flex;width:auto !important;align-self:flex-start;
+  background:#0A3B2C;border-radius:999px;padding:6px 16px;min-height:32px;justify-content:center;margin-bottom:8px;}
+.st-key-gd_banner p,.st-key-gd_banner [data-testid="stMarkdownContainer"]{color:#FFFFFF;
+  font-size:12px;line-height:16px;font-weight:600;letter-spacing:.02em;margin:0;}
 .gd-link{color:#0F7A55;font-weight:600;text-decoration:underline;display:inline-flex;align-items:center;min-height:44px;}
 .gd-actions{display:flex;flex-direction:column;gap:8px;margin-top:16px;}
 .gd-feedback{display:flex;flex-wrap:wrap;gap:8px;}

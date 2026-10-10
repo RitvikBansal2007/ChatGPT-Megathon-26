@@ -1,0 +1,331 @@
+/* ==========================================================================
+   greendash · design tokens
+   Source of truth: greendash-brand-guidelines.md v1.0 (sections 04, 05, 08, 09)
+   Every colour, radius, shadow, space, type size and motion value used in the
+   prototype is defined here. Components reference tokens only.
+   Theme: <html data-theme="light|dark">. Light is the default (customer);
+   business pages set data-theme="dark".
+   ========================================================================== */
+
+:root {
+  /* ---------- 4.1 Brand colour constants (theme-independent) ---------- */
+  --c-verdant: #19C37D;      /* action, RECOMMEND, CO2e family. Never white text on it. */
+  --c-canopy: #0F7A55;       /* green text and icons on light surfaces */
+  --c-deep-forest: #0A3B2C;
+  --c-mint: #7BE5B5;         /* glass highlights, focus ring on dark */
+  --c-dew: #DDF8EA;          /* tinted fills on light */
+
+  /* 4.2 Metric families (never reused across families, never summed) */
+  --c-amber: #F5B53D;        /* Energy (kWh) */
+  --c-aqua: #22B8CF;         /* Paper (sheets avoided) */
+  --c-iris: #8B7CF6;         /* Digital adoption */
+  --c-slate-sage: #8AA79A;   /* neutral series, baselines, SOFT_SURFACE */
+
+  /* 4.4 Semantic (never chart series) */
+  --c-success: #22A06B;
+  --c-warning: #F59E0B;
+  --c-error: #E5484D;
+  --c-info: #4C8DFF;
+
+  /* 4.3 Surfaces */
+  --c-abyss: #06110D;
+  --c-night-moss: #0C1D16;
+  --c-deep-glass: #122A21;
+  --c-mist: #F1F8F4;
+  --c-pure: #FFFFFF;
+  --c-fog: #E3EFE9;
+  --c-ink: #0B1F18;
+  --c-ink-soft: #4A6358;
+
+  /* 3.3 Logo colours (wordmark only; never UI) */
+  --c-logo-green: #6BB888;
+  --c-logo-slate: #62777C;
+  --c-logo-navy: #182028;
+
+  /* Device bezel for the phone frame on the hub/mobile stage */
+  --c-bezel: #050B09;
+
+  /* Metric family aliases */
+  --fam-co2: var(--c-verdant);
+  --fam-energy: var(--c-amber);
+  --fam-paper: var(--c-aqua);
+  --fam-digital: var(--c-iris);
+  --fam-neutral: var(--c-slate-sage);
+  --est-opacity: 0.55;       /* Estimated = 55% fill + dashed top edge */
+
+  /* ---------- 5.1 Typefaces ---------- */
+  --font-display: "Plus Jakarta Sans", "SF Pro Display", system-ui, sans-serif;
+  --font-body: "Inter", "SF Pro Text", "Roboto", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", "SF Mono", "Roboto Mono", ui-monospace, monospace;
+  --font-features-body: "tnum" 1, "cv11" 1;
+
+  /* ---------- 5.2 Type scale (desktop / dashboard) ---------- */
+  --fs-display: 56px;  --lh-display: 64px;  --tr-display: -0.03em;
+  --fs-h1: 40px;       --lh-h1: 48px;       --tr-h1: -0.02em;
+  --fs-h2: 28px;       --lh-h2: 36px;       --tr-h2: -0.01em;
+  --fs-h3: 20px;       --lh-h3: 28px;
+  --fs-subtitle: 16px; --lh-subtitle: 24px;
+  --fs-body-l: 16px;   --lh-body-l: 24px;
+  --fs-body: 14px;     --lh-body: 20px;
+  --fs-kpi: 44px;      --lh-kpi: 48px;      --tr-kpi: -0.02em;
+  --fs-data: 14px;     --lh-data: 20px;
+  --fs-label: 12px;    --lh-label: 16px;    --tr-label: 0.02em;
+  --fs-tag: 11px;      --lh-tag: 16px;      --tr-tag: 0.12em;
+
+  /* ---------- 9 Spacing (4px base, multiples of 4 only) ---------- */
+  --s-1: 4px;   --s-2: 8px;   --s-3: 12px;  --s-4: 16px;  --s-5: 20px;
+  --s-6: 24px;  --s-8: 32px;  --s-10: 40px; --s-12: 48px; --s-16: 64px;
+  --s-20: 80px;
+  --gutter: 24px;
+  --margin: 32px;
+  --content-max: 1280px;
+  --nav-w: 264px;
+  --rail-w: 88px;
+  --tap: 44px;
+
+  /* ---------- 8.3 Corner radii ---------- */
+  --r-widget: 28px;     /* dashboard widget / large card */
+  --r-card: 24px;       /* Proof Card, mobile card */
+  --r-modal: 28px;
+  --r-sheet: 32px;      /* bottom sheet top corners */
+  --r-control: 14px;    /* standard button, input, select */
+  --r-pill: 999px;      /* primary CTA, chip, badge, tag */
+  --r-table: 20px;
+  --r-well: 16px;
+  --r-tooltip: 12px;
+  --r-bar-top: 6px;
+  --r-bar-bottom: 2px;
+  --r-device: 52px;
+
+  /* ---------- 8.6 Motion ---------- */
+  --dur-micro: 150ms;
+  --dur-ui: 250ms;
+  --dur-page: 400ms;
+  --dur-ambient: 40s;
+  --ease-decel: cubic-bezier(0.05, 0.7, 0.1, 1);
+  --ease-accel: cubic-bezier(0.3, 0, 0.8, 0.15);
+  --ease-std: cubic-bezier(0.2, 0, 0, 1);
+
+  /* ---------- 8.1 Glass recipe (blur + saturate per tier) ---------- */
+  --g1-filter: blur(16px) saturate(140%);
+  --g2-filter: blur(24px) saturate(160%);
+  --g3-filter: blur(40px) saturate(180%);
+
+  /* =================== LIGHT THEME (default) =================== */
+  color-scheme: light;
+  --bg: var(--c-mist);
+  --surface-1: var(--c-pure);
+  --surface-2: var(--c-fog);
+  --well: var(--c-fog);
+  --g0-fill: var(--c-pure);
+  --g0-border: rgba(11, 31, 24, 0.08);
+
+  --g1-fill: rgba(255, 255, 255, 0.62);
+  --g1-fill-hi: rgba(255, 255, 255, 0.72);
+  --g2-fill: rgba(255, 255, 255, 0.80);
+  --g2-fill-hi: rgba(255, 255, 255, 0.88);
+  --g3-fill: rgba(255, 255, 255, 0.88);
+  --g3-fill-hi: rgba(255, 255, 255, 0.94);
+  --edge-1: rgba(255, 255, 255, 0.90);
+  --edge-2: rgba(255, 255, 255, 1);
+  --edge-3: rgba(255, 255, 255, 1);
+  --edge-lo: rgba(255, 255, 255, 0.25);
+  --edge-ring: rgba(11, 31, 24, 0.06);      /* faint dark outer ring in light mode */
+  --inner-hi: rgba(255, 255, 255, 0.85);
+  --inner-lo: rgba(11, 31, 24, 0.03);
+  --inner-glow: rgba(255, 255, 255, 0.30);
+  --glass-fallback: var(--c-pure);
+  --glass-fallback-strong: var(--c-pure);
+  --scrim: rgba(6, 17, 13, 0.36);
+  --scrim-strong: rgba(6, 17, 13, 0.60);
+
+  --text: var(--c-ink);
+  --text-2: var(--c-ink-soft);
+  --text-3: #5F756B;
+  --text-inverse: var(--c-pure);
+  --accent: var(--c-verdant);
+  --accent-text: var(--c-canopy);
+  --accent-pressed: var(--c-canopy);
+  --on-accent: var(--c-abyss);
+  --accent-wash: var(--c-dew);
+  --focus: var(--c-canopy);
+  --border: rgba(11, 31, 24, 0.10);
+  --border-strong: rgba(11, 31, 24, 0.18);
+  --divider: rgba(11, 31, 24, 0.08);
+  --gridline: rgba(11, 31, 24, 0.08);
+  --axis-text: var(--c-ink-soft);
+  --hover: rgba(11, 31, 24, 0.04);
+  --pressed: rgba(11, 31, 24, 0.08);
+  --skeleton: rgba(11, 31, 24, 0.06);
+  --skeleton-hi: rgba(255, 255, 255, 0.70);
+
+  /* Text-safe semantic tones (derived for 4.5:1 on Mist) */
+  --success-tx: #157A4F;
+  --warning-tx: #8A5A00;
+  --error-tx: #B42318;
+  --info-tx: #2A5DB0;
+  --success-wash: rgba(34, 160, 107, 0.12);
+  --warning-wash: rgba(245, 158, 11, 0.16);
+  --error-wash: rgba(229, 72, 77, 0.10);
+  --info-wash: rgba(76, 141, 255, 0.12);
+
+  /* 4.5 Card statuses: fg = icon/edge, bg = fill, tx = text */
+  --st-rec-fg: var(--c-canopy);   --st-rec-bg: var(--c-dew);              --st-rec-tx: var(--c-canopy);  --st-rec-edge: var(--c-verdant);
+  --st-soft-fg: var(--c-ink-soft);--st-soft-bg: var(--c-fog);             --st-soft-tx: var(--c-ink-soft); --st-soft-edge: var(--c-slate-sage);
+  --st-abs-fg: var(--warning-tx); --st-abs-bg: var(--warning-wash);       --st-abs-tx: var(--warning-tx); --st-abs-edge: var(--c-warning);
+  --st-rev-fg: var(--info-tx);    --st-rev-bg: var(--info-wash);          --st-rev-tx: var(--info-tx);    --st-rev-edge: var(--c-info);
+  --st-out-fg: var(--c-ink-soft); --st-out-bg: var(--c-fog);              --st-out-tx: var(--c-ink-soft); --st-out-edge: var(--c-slate-sage);
+
+  /* 4.6 Verdict levels */
+  --lv-high-bg: var(--c-dew);           --lv-high-edge: var(--c-verdant);  --lv-high-tx: var(--c-canopy);
+  --lv-med-bg: var(--warning-wash);     --lv-med-edge: var(--c-amber);     --lv-med-tx: var(--warning-tx);
+  --lv-low-bg: var(--c-fog);            --lv-low-edge: var(--c-slate-sage);--lv-low-tx: var(--c-ink-soft);
+  --el-pass-bg: var(--success-wash);    --el-pass-edge: var(--c-success);  --el-pass-tx: var(--success-tx);
+  --el-need-bg: var(--warning-wash);    --el-need-edge: var(--c-warning);  --el-need-tx: var(--warning-tx);
+  --el-no-bg: var(--c-fog);             --el-no-edge: var(--c-slate-sage); --el-no-tx: var(--c-ink-soft);
+  --meter-off: rgba(11, 31, 24, 0.12);
+  --whynow-bg: rgba(34, 184, 207, 0.12);
+  --whynow-fg: #0E7C8C;               /* Aqua darkened for 3:1 icon contrast on light */
+  --bezel-edge: rgba(255, 255, 255, 0.08);
+
+  /* 8.2 Elevation (green-black tinted, light mode) */
+  --elev-1: 0 2px 8px rgba(11, 31, 24, 0.06);
+  --elev-2: 0 8px 24px rgba(11, 31, 24, 0.10);
+  --elev-3: 0 12px 32px rgba(11, 31, 24, 0.14);
+  --elev-4: 0 20px 48px rgba(11, 31, 24, 0.18);
+  --elev-5: 0 28px 64px rgba(11, 31, 24, 0.22);
+  --tonal-2: transparent;
+  --tonal-4: transparent;
+  --cta-glow: 0 6px 18px rgba(25, 195, 125, 0.28);
+
+  /* 8.1 Ambient backdrop orbs */
+  --orb-1: rgba(15, 122, 85, 0.22);
+  --orb-2: rgba(25, 195, 125, 0.14);
+  --orb-3: rgba(34, 184, 207, 0.10);
+  --grain-opacity: 0.02;
+
+  /* Logo variant visibility */
+  --logo-on-light: inline-block;
+  --logo-on-dark: none;
+}
+
+/* =================== DARK THEME =================== */
+[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: var(--c-abyss);
+  --surface-1: var(--c-night-moss);
+  --surface-2: var(--c-deep-glass);
+  --well: var(--c-deep-glass);
+  --g0-fill: var(--c-deep-glass);
+  --g0-border: rgba(255, 255, 255, 0.06);
+
+  --g1-fill: rgba(255, 255, 255, 0.08);
+  --g1-fill-hi: rgba(255, 255, 255, 0.12);
+  --g2-fill: rgba(255, 255, 255, 0.10);
+  --g2-fill-hi: rgba(255, 255, 255, 0.18);
+  --g3-fill: rgba(255, 255, 255, 0.16);
+  --g3-fill-hi: rgba(255, 255, 255, 0.22);
+  --edge-1: rgba(255, 255, 255, 0.16);
+  --edge-2: rgba(255, 255, 255, 0.24);
+  --edge-3: rgba(255, 255, 255, 0.32);
+  --edge-lo: rgba(255, 255, 255, 0.04);
+  --edge-ring: transparent;
+  --inner-hi: rgba(255, 255, 255, 0.30);
+  --inner-lo: rgba(255, 255, 255, 0.05);
+  --inner-glow: rgba(255, 255, 255, 0.04);
+  --glass-fallback: var(--c-deep-glass);
+  --glass-fallback-strong: #173329;
+  --scrim: rgba(0, 6, 4, 0.50);
+  --scrim-strong: rgba(0, 6, 4, 0.70);
+
+  --text: rgba(255, 255, 255, 0.94);
+  --text-2: rgba(255, 255, 255, 0.68);
+  --text-3: rgba(255, 255, 255, 0.50);
+  --text-inverse: var(--c-ink);
+  --accent: var(--c-verdant);
+  --accent-text: var(--c-verdant);
+  --accent-pressed: var(--c-canopy);
+  --on-accent: var(--c-abyss);
+  --accent-wash: rgba(25, 195, 125, 0.14);
+  --focus: var(--c-mint);
+  --border: rgba(255, 255, 255, 0.12);
+  --border-strong: rgba(255, 255, 255, 0.22);
+  --divider: rgba(255, 255, 255, 0.08);
+  --gridline: rgba(255, 255, 255, 0.08);
+  --axis-text: rgba(255, 255, 255, 0.68);
+  --hover: rgba(255, 255, 255, 0.05);
+  --pressed: rgba(255, 255, 255, 0.09);
+  --skeleton: rgba(255, 255, 255, 0.06);
+  --skeleton-hi: rgba(255, 255, 255, 0.12);
+
+  --success-tx: #3CC489;
+  --warning-tx: var(--c-amber);
+  --error-tx: #FF8A8E;
+  --info-tx: #8DB4FF;
+  --success-wash: rgba(34, 160, 107, 0.18);
+  --warning-wash: rgba(245, 158, 11, 0.16);
+  --error-wash: rgba(229, 72, 77, 0.16);
+  --info-wash: rgba(76, 141, 255, 0.16);
+
+  --st-rec-fg: var(--c-verdant);   --st-rec-bg: rgba(25, 195, 125, 0.16);  --st-rec-tx: var(--c-mint);    --st-rec-edge: var(--c-verdant);
+  --st-soft-fg: var(--c-slate-sage);--st-soft-bg: rgba(138, 167, 154, 0.14);--st-soft-tx: var(--text-2);  --st-soft-edge: var(--c-slate-sage);
+  --st-abs-fg: var(--c-warning);   --st-abs-bg: var(--warning-wash);        --st-abs-tx: var(--c-amber);   --st-abs-edge: var(--c-warning);
+  --st-rev-fg: var(--c-info);      --st-rev-bg: var(--info-wash);           --st-rev-tx: var(--info-tx);   --st-rev-edge: var(--c-info);
+  --st-out-fg: var(--c-slate-sage);--st-out-bg: rgba(138, 167, 154, 0.10);  --st-out-tx: var(--text-2);   --st-out-edge: var(--c-slate-sage);
+
+  --lv-high-bg: rgba(25, 195, 125, 0.14);   --lv-high-edge: var(--c-verdant);  --lv-high-tx: var(--c-mint);
+  --lv-med-bg: rgba(245, 181, 61, 0.14);    --lv-med-edge: var(--c-amber);     --lv-med-tx: var(--c-amber);
+  --lv-low-bg: rgba(138, 167, 154, 0.12);   --lv-low-edge: var(--c-slate-sage);--lv-low-tx: var(--text-2);
+  --el-pass-bg: var(--success-wash);        --el-pass-edge: var(--c-success);  --el-pass-tx: var(--success-tx);
+  --el-need-bg: var(--warning-wash);        --el-need-edge: var(--c-warning);  --el-need-tx: var(--c-amber);
+  --el-no-bg: rgba(138, 167, 154, 0.12);    --el-no-edge: var(--c-slate-sage); --el-no-tx: var(--text-2);
+  --meter-off: rgba(255, 255, 255, 0.14);
+  --whynow-bg: rgba(34, 184, 207, 0.16);
+  --whynow-fg: var(--c-aqua);
+
+  --elev-1: 0 2px 8px rgba(0, 12, 8, 0.30);
+  --elev-2: 0 8px 24px rgba(0, 12, 8, 0.40);
+  --elev-3: 0 12px 32px rgba(0, 12, 8, 0.48);
+  --elev-4: 0 20px 48px rgba(0, 12, 8, 0.55);
+  --elev-5: 0 28px 64px rgba(0, 12, 8, 0.60);
+  --tonal-2: rgba(25, 195, 125, 0.05);   /* M3 tonal elevation: level 2 adds 5% Verdant */
+  --tonal-4: rgba(25, 195, 125, 0.08);   /* level 4 adds 8% */
+  --cta-glow: 0 6px 22px rgba(25, 195, 125, 0.30);
+
+  --orb-1: rgba(15, 122, 85, 0.40);
+  --orb-2: rgba(25, 195, 125, 0.18);
+  --orb-3: rgba(34, 184, 207, 0.12);
+
+  --logo-on-light: none;
+  --logo-on-dark: inline-block;
+}
+
+/* 5.3 Mobile type scale: compact window class and the phone frame */
+@media (max-width: 599px) {
+  :root {
+    --fs-display: 36px; --lh-display: 44px;
+    --fs-h1: 28px;      --lh-h1: 36px;
+    --fs-h2: 22px;      --lh-h2: 28px;
+    --fs-h3: 18px;      --lh-h3: 24px;
+    --fs-kpi: 36px;     --lh-kpi: 40px;
+    --gutter: 16px;
+    --margin: 16px;
+  }
+}
+.gd-device {
+  --fs-display: 36px; --lh-display: 44px;
+  --fs-h1: 28px;      --lh-h1: 36px;
+  --fs-h2: 22px;      --lh-h2: 28px;
+  --fs-h3: 18px;      --lh-h3: 24px;
+  --fs-kpi: 36px;     --lh-kpi: 40px;
+  --gutter: 16px;
+  --margin: 16px;
+}
+@media (min-width: 600px) and (max-width: 1199px) {
+  :root { --margin: 24px; }
+}
+
+/* Reduced motion: replace movement with short cross-fades */
+@media (prefers-reduced-motion: reduce) {
+  :root { --dur-ui: 150ms; --dur-page: 150ms; }
+}
