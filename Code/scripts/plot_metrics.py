@@ -10,8 +10,8 @@ import shap
 import sys
 
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
-from greenproof.models.utils import load_data, get_features_and_targets
-from greenproof.models.evaluate_models import load_calibrator
+from greendash.models.utils import load_data, get_features_and_targets
+from greendash.models.evaluate_models import load_calibrator
 
 def plot_all(output_dir):
     os.makedirs(output_dir, exist_ok=True)

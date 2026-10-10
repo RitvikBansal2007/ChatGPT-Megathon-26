@@ -1,7 +1,7 @@
-# Rules for app/ (GreenProof UI)
+# Rules for app/ (GreenDash UI)
 
 - Read docs/3 Architecture.md sections 1.7, 2 and 5.5 before UI work.
-- Only create or edit files under app/. Never edit greenproof/, api/, fixtures/ or contracts.py.
+- Only create or edit files under app/. Never edit greendash/, api/, fixtures/ or contracts.py.
 - All data comes through app/client.py. Pages never import engines directly.
 - Colours, spacing and fonts come only from app/theme.py. No hard-coded hex values.
 - The ONLY unsafe_allow_html call is st.markdown(theme.css(), unsafe_allow_html=True) once per page. Never put any data value inside HTML. Render data with st.metric, st.write, st.dataframe, st.plotly_chart, st.badge-style widgets.

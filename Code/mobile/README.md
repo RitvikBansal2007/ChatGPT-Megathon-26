@@ -1,4 +1,4 @@
-# GreenProof — Native Mobile App
+# GreenDash — Native Mobile App
 
 > **Status: [DESIGN] — not built in the hackathon prototype.**
 > The hackathon delivers a mobile-first responsive Streamlit Customer Hub tested at 390px.

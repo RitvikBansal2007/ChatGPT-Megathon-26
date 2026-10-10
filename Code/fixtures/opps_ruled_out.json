@@ -1,0 +1,89 @@
+{
+  "customer_id": "CUST-0001",
+  "persona": "Fixture persona",
+  "cutoff_date": "2026-06-30",
+  "outcome_window_days": 90,
+  "run_manifest": "sha256:fixture",
+  "opportunities": [
+    {
+      "opportunity_id": "GP01",
+      "opportunity_name": "EV Finance",
+      "status": "RULED_OUT",
+      "propensity": 0.31,
+      "likelihood_band": "LOW",
+      "confidence": {
+        "overall": 0.88,
+        "completeness": 0.95,
+        "recency": 0.92,
+        "stability": 0.86,
+        "in_distribution": 0.81
+      },
+      "eligibility": {
+        "result": "NOT_ELIGIBLE",
+        "rules_fired": [
+          "GP01-R1"
+        ],
+        "rules_version": "rules-1.0",
+        "plain_reasons": [
+          "You already own an electric car."
+        ]
+      },
+      "reason_codes": [
+        {
+          "code": "HIGH_FUEL_SPEND",
+          "phrase": "Fuel spend above your usual range",
+          "metric": "avg_monthly_fuel_gbp",
+          "value": 185,
+          "display": "185 GBP per month",
+          "observed_at": "2026-06-30",
+          "source": "inferred_transactions"
+        },
+        {
+          "code": "HIGH_ANNUAL_MILEAGE",
+          "phrase": "High annual mileage",
+          "metric": "annual_mileage",
+          "value": 11200,
+          "display": "11,200 miles per year",
+          "observed_at": "2026-05-14",
+          "source": "customer_declared"
+        }
+      ],
+      "why_now": {
+        "trigger": "CAR_FINANCE_ENDING",
+        "display": "Car finance ends in 74 days",
+        "observed_at": "2026-06-30"
+      },
+      "impact": {
+        "status": "NOT_APPLICABLE",
+        "metric_family": null,
+        "unit": null,
+        "low": null,
+        "central": null,
+        "high": null,
+        "display": null,
+        "formula": null,
+        "baseline": null,
+        "horizon": null,
+        "factor_refs": [],
+        "quality": null,
+        "missing_inputs": []
+      },
+      "digital_adoption": null,
+      "explanation": {
+        "sentences": [
+          {
+            "text": "Your fuel spend has been above your usual range, so an EV may be worth exploring.",
+            "fields": [
+              "reason_codes.0"
+            ],
+            "check": "PASS"
+          }
+        ],
+        "source": "template",
+        "claimcheck_status": "PASS"
+      },
+      "next_action": null,
+      "data_as_of": "2026-06-30"
+    }
+  ]
+}

@@ -1,7 +1,7 @@
 rules:
   # Locked decisions first (highest priority)
   - category: Utilities
-    keywords: ["dual fuel", "water", "sewerage"]
+    keywords: ["dual fuel", "water", "sewerage", "gas dual"]
   - category: Fuel
     keywords: ["petrol", "diesel", "ev charge", "rapid charge", "fuel station"]
   - category: Other

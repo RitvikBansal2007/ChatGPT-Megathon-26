@@ -1,4 +1,4 @@
-# GreenProof
+# GreenDash
 
 > The green recommendation that shows its receipts.  
 > ML predicts. Rules decide eligibility. The carbon engine calculates. The LLM only explains. Claim-Check verifies.
@@ -59,10 +59,10 @@ pytest tests/              # backend unit / security / invariance tests
 | Folder | Owner |
 |---|---|
 | `app/`, `mobile/`, `slides/`, `docs/diagrams/`, `README.md` | G3 — Ritvik |
-| `api/`, `greenproof/features`, `greenproof/rules`, `greenproof/orchestrator.py`, `greenproof/db/`, `greenproof/scenarios/`, `config/`, `Makefile`, `pyproject.toml`, `fixtures/` | G1-A — Akshit |
-| `greenproof/security/`, `greenproof/llm/minimise.py`, `greenproof/llm/guard.py`, `greenproof/llm/claimcheck.py`, `infra/`, `SECURITY.md` | G1-K — Kratik |
-| `greenproof/generator/`, `greenproof/carbon/`, `ingest/`, `data/priors/` | G2-An — Aniket |
-| `greenproof/models/`, `greenproof/categoriser/`, `greenproof/llm/explainer.py`, `greenproof/llm/client.py`, `greenproof/llm/templates.py`, `eval/`, `docs/EVALUATION.md` | G2-M — Madhav |
+| `api/`, `greendash/features`, `greendash/rules`, `greendash/orchestrator.py`, `greendash/db/`, `greendash/scenarios/`, `config/`, `Makefile`, `pyproject.toml`, `fixtures/` | G1-A — Akshit |
+| `greendash/security/`, `greendash/llm/minimise.py`, `greendash/llm/guard.py`, `greendash/llm/claimcheck.py`, `infra/`, `SECURITY.md` | G1-K — Kratik |
+| `greendash/generator/`, `greendash/carbon/`, `ingest/`, `data/priors/` | G2-An — Aniket |
+| `greendash/models/`, `greendash/categoriser/`, `greendash/llm/explainer.py`, `greendash/llm/client.py`, `greendash/llm/templates.py`, `eval/`, `docs/EVALUATION.md` | G2-M — Madhav |
 
 Cross-folder changes → 2-line PR + chat ping.
 

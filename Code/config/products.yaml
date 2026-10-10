@@ -1,0 +1,104 @@
+rules_version: rules-1.0
+
+products:
+  GP01:
+    name: EV Finance
+    category: Transport
+    intended_use: "Finance to replace an existing petrol/diesel/hybrid car with a battery electric vehicle."
+    sustainability_metric: emissions
+    rules:
+      - id: GP01-R1
+        result: NOT_ELIGIBLE
+        plain: "You already own an electric car, and we have no second vehicle on record."
+        when:
+          all:
+            - {field: vehicle_fuel_type, op: eq, value: BEV}
+            - {field: second_vehicle, op: eq, value: false}
+            - {field: fuel_ev_conflict, op: eq, value: false}
+      - id: GP01-R2
+        result: NEEDS_VERIFICATION
+        plain: "We do not have a vehicle record for you yet."
+        when:
+          all:
+            - {field: has_vehicle_record, op: eq, value: false}
+      - id: GP01-R3
+        result: NEEDS_VERIFICATION
+        plain: "Your vehicle record and your fuel spend do not match."
+        when:
+          all:
+            - {field: fuel_ev_conflict, op: eq, value: true}
+      - id: GP01-R4
+        result: NOT_ELIGIBLE
+        plain: "Your circumstances changed: you no longer have a car on record, so we have paused this suggestion."
+        when:
+          all:
+            - {field: vehicle_sold, op: eq, value: true}
+
+  GP02:
+    name: Green Home Loan
+    category: Home efficiency
+    intended_use: "Finance for fabric and heating upgrades that cut gas use: insulation, glazing, boiler or heat pump. NOT rooftop solar (that is GP03)."
+    sustainability_metric: energy
+    rules:
+      - id: GP02-R1
+        result: NOT_ELIGIBLE
+        plain: "This product is for homeowners, and your record shows you rent."
+        when:
+          all:
+            - {field: home_owner, op: eq, value: false}
+      - id: GP02-R2
+        result: NEEDS_VERIFICATION
+        plain: "We could not confirm that you own your home."
+        when:
+          all:
+            - {field: home_owner, op: is_null}
+
+  GP03:
+    name: Solar Finance
+    category: Home generation
+    intended_use: "Finance for rooftop solar panels (and battery) at a home the customer owns. NOT insulation or heating (that is GP02)."
+    sustainability_metric: energy
+    rules:
+      - id: GP03-R1
+        result: NOT_ELIGIBLE
+        plain: "This product is for homeowners, and your record shows you rent."
+        when:
+          all:
+            - {field: home_owner, op: eq, value: false}
+      - id: GP03-R2
+        result: NOT_ELIGIBLE
+        plain: "You already have solar panels."
+        when:
+          all:
+            - {field: existing_solar, op: eq, value: true}
+      - id: GP03-R3
+        result: NOT_ELIGIBLE
+        plain: "Your roof is recorded as unsuitable for solar."
+        when:
+          all:
+            - {field: roof_suitability, op: eq, value: unsuitable}
+      - id: GP03-R4
+        result: NEEDS_VERIFICATION
+        plain: "We could not confirm that you own your home."
+        when:
+          all:
+            - {field: home_owner, op: is_null}
+
+  GP04:
+    name: Paperless Banking
+    category: Digital
+    intended_use: "Switch paper statements to digital. Reported as paper sheets saved and digital adoption, never as CO2e."
+    sustainability_metric: paper
+    rules:
+      - id: GP04-R1
+        result: NOT_ELIGIBLE
+        plain: "You already receive all your statements digitally."
+        when:
+          all:
+            - {field: paper_statements_12m, op: eq, value: 0}
+      - id: GP04-R2
+        result: NOT_ELIGIBLE
+        plain: "You told us you need paper statements, so we will not suggest switching."
+        when:
+          all:
+            - {field: accessibility_paper_need, op: eq, value: true}

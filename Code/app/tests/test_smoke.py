@@ -1,5 +1,9 @@
-"""Smoke tests: every page renders without exception, with banner, theme, and title.
-Also tests role switching, client mode guards, and badge/state rendering from fixtures.
+"""Smoke tests aligned to real contracts.py (frozen by Akshit, G1-A).
+
+Opportunity shape: CustomerOpportunities wrapper with .opportunities list.
+Fixture files: opps_recommend.json, opps_abstain.json, opps_review.json,
+               opps_ruled_out.json, opps_soft_surface.json,
+               claimcheck_response.json, scenario_response.json
 """
 
 import os
@@ -9,11 +13,12 @@ from pathlib import Path
 import pytest
 from streamlit.testing.v1 import AppTest
 
-APP_DIR = Path(__file__).resolve().parent.parent
+APP_DIR  = Path(__file__).resolve().parent.parent
 REPO_ROOT = APP_DIR.parent
 
 if str(APP_DIR) not in sys.path:
     sys.path.insert(0, str(APP_DIR))
+
 
 PAGES = [
     "Home.py",
@@ -27,7 +32,6 @@ PAGES = [
 
 @pytest.mark.parametrize("page", PAGES)
 def test_page_renders_without_exception(page):
-    """Every page must load cleanly in fixtures mode."""
     os.environ["DEMO_MODE"] = "fixtures"
     at = AppTest.from_file(str(APP_DIR / page), default_timeout=30).run()
     assert not at.exception, f"{page} raised: {at.exception}"
@@ -69,35 +73,68 @@ def test_client_path_traversal_guard(monkeypatch):
         client.get_opportunities("../../etc/passwd")
 
 
-# ── Fixture loading tests ────────────────────────────────────────────────────
+# ── Contract-shape tests ─────────────────────────────────────────────────────
 
-def test_fixtures_load_all(monkeypatch):
+def test_opportunities_return_list(monkeypatch):
     import client
     monkeypatch.setenv("DEMO_MODE", "fixtures")
     opps = client.get_opportunities("CUST-0001")
     assert isinstance(opps, list)
     assert len(opps) > 0
 
-    portfolio = client.get_portfolio()
-    assert "metrics" in portfolio
-    assert "funnel" in portfolio
 
-    ev = client.get_eval()
-    assert "baselines" in ev
-
-    scenario = client.run_scenario("CUST-0001", ["SET_VEHICLE_BEV"])
-    assert "before" in scenario
-
-    cc = client.claimcheck("CUST-0001", "GP01", ["Test sentence."])
-    assert "violations" in cc
-
-
-def test_all_five_statuses_present(monkeypatch):
-    """Opportunities fixture must cover all five statuses for CP1."""
+def test_all_five_statuses_covered(monkeypatch):
+    """client.get_opportunities must cover all 5 statuses (one per fixture file)."""
     import client
     monkeypatch.setenv("DEMO_MODE", "fixtures")
     opps = client.get_opportunities("CUST-0001")
-    statuses = {o["status"] for o in opps}
-    # At least 4 statuses in the default fixture (RECOMMEND, SOFT_SURFACE, ABSTAIN, RULED_OUT)
-    expected = {"RECOMMEND", "SOFT_SURFACE", "ABSTAIN", "RULED_OUT"}
-    assert expected.issubset(statuses), f"Missing statuses: {expected - statuses}"
+    statuses = {o.get("status") for o in opps}
+    expected = {"RECOMMEND", "SOFT_SURFACE", "ABSTAIN", "REVIEW", "RULED_OUT"}
+    assert expected == statuses, f"Missing statuses: {expected - statuses}"
+
+
+def test_opportunity_has_required_contract_fields(monkeypatch):
+    """Every opportunity must have the required fields from contracts.py."""
+    import client
+    monkeypatch.setenv("DEMO_MODE", "fixtures")
+    opps = client.get_opportunities("CUST-0001")
+    required = {"opportunity_id", "opportunity_name", "status", "propensity",
+                "likelihood_band", "eligibility", "impact"}
+    for opp in opps:
+        missing = required - set(opp.keys())
+        assert not missing, f"Opp {opp.get('opportunity_id')} missing fields: {missing}"
+
+
+def test_claimcheck_contract_shape(monkeypatch):
+    import client
+    monkeypatch.setenv("DEMO_MODE", "fixtures")
+    cc = client.claimcheck("CUST-0001", "GP01", ["Test sentence."])
+    assert "verdict" in cc
+    assert "sentences" in cc
+    assert "fallback_text" in cc
+    assert "blocked_total" in cc
+    # Each sentence must have violations with rule + span
+    for sent in cc.get("sentences", []):
+        for v in sent.get("violations", []):
+            assert "rule" in v
+            assert "span" in v
+
+
+def test_scenario_contract_shape(monkeypatch):
+    import client
+    monkeypatch.setenv("DEMO_MODE", "fixtures")
+    sc = client.run_scenario("CUST-0001", ["SET_VEHICLE_BEV"])
+    assert "before" in sc
+    assert "after" in sc
+    assert "diff" in sc
+    assert "invariance_ok" in sc
+    assert "elapsed_ms" in sc
+
+
+def test_portfolio_and_eval_load(monkeypatch):
+    import client
+    monkeypatch.setenv("DEMO_MODE", "fixtures")
+    portfolio = client.get_portfolio()
+    assert "metrics" in portfolio
+    ev = client.get_eval()
+    assert "baselines" in ev

@@ -15,8 +15,8 @@ ROOT = Path(__file__).resolve().parent.parent.parent
 sys.path.insert(0, str(ROOT))
 
 from greendash.llm.guard import generate_canary
-from greenproof.llm import explain as ex
-from greenproof.llm.templates import get_template
+from greendash.llm import explain as ex
+from greendash.llm.templates import get_template
 
 CANARY = "CANARY-EXPLAIN-0123456789abcdef"
 
@@ -86,7 +86,7 @@ def test_uses_real_gateway_and_returns_pass():
 
 
 def test_no_dummy_security_stubs_left():
-    src = (ROOT / "greenproof" / "llm" / "explain.py").read_text(encoding="utf-8")
+    src = (ROOT / "greendash" / "llm" / "explain.py").read_text(encoding="utf-8")
     for dead in ("pre_check", "post_check", "DummyResult", "def minimise", "def check("):
         assert dead not in src
 
@@ -268,7 +268,7 @@ def test_default_provider_is_built_from_config(monkeypatch):
     assert res["claimcheck_status"] == "PASS"
     assert captured["model"] == "configured-model-xyz"
     assert captured["config"]["temperature"] == 0.0
-    assert "gemini-flash-latest" not in (ROOT / "greenproof/llm/explain.py").read_text(encoding="utf-8")
+    assert "gemini-flash-latest" not in (ROOT / "greendash/llm/explain.py").read_text(encoding="utf-8")
 
 
 @pytest.mark.parametrize("bad", [

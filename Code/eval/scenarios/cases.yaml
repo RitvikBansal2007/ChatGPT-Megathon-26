@@ -1,0 +1,36 @@
+- {id: B01, tag: baseline,     persona: CUST-0001, mutations: [], expected: {GP01: {status: RECOMMEND}, GP04: {not_status: RULED_OUT}}}
+- {id: B02, tag: conflict,     persona: CUST-0002, mutations: [], expected: {GP01: {status: REVIEW}, GP02: {status: ABSTAIN}}}
+- {id: B03, tag: ruled_out,    persona: CUST-0003, mutations: [], expected: {GP01: {status: RULED_OUT, rule: GP01-R1}, GP03: {status: RULED_OUT, rule: GP03-R2}, GP04: {status: RULED_OUT, rule: GP04-R1}}}
+- {id: B04, tag: insufficient, persona: CUST-0004, mutations: [], expected: {GP01: {status: ABSTAIN}, GP02: {status: ABSTAIN}, GP03: {status: ABSTAIN}, GP04: {status: RECOMMEND}}}
+- {id: B05, tag: baseline,     persona: CUST-0005, mutations: [], expected: {GP02: {status: RECOMMEND}}}
+- {id: B06, tag: missing,      persona: CUST-0006, mutations: [], expected: {GP03: {status: ABSTAIN, impact_status: INSUFFICIENT_DATA}}}
+- {id: B07, tag: ruled_out,    persona: CUST-0007, mutations: [], expected: {GP02: {status: RULED_OUT, rule: GP02-R1}, GP03: {status: RULED_OUT, rule: GP03-R1}, GP04: {status: RECOMMEND}}}
+- {id: B08, tag: ruled_out,    persona: CUST-0008, mutations: [], expected: {GP04: {status: RULED_OUT, rule: GP04-R2}}}
+
+- {id: M01, tag: ruled_out,    persona: CUST-0001, mutations: [SET_VEHICLE_BEV],  expected: {GP01: {status: RULED_OUT, rule: GP01-R1}}}
+- {id: M02, tag: insufficient, persona: CUST-0001, mutations: [REMOVE_MILEAGE],   expected: {GP01: {status: ABSTAIN, impact_status: INSUFFICIENT_DATA}}}
+- {id: M03, tag: ruled_out,    persona: CUST-0001, mutations: [SELL_CAR],          expected: {GP01: {status: RULED_OUT, rule: GP01-R4}}}
+- {id: M04, tag: conflict,     persona: CUST-0001, mutations: [ADD_CONFLICT_FUEL], expected: {GP01: {status: REVIEW, rule: GP01-R3}}}
+- {id: M05, tag: ruled_out,    persona: CUST-0001, mutations: [SET_RENTER],        expected: {GP02: {status: RULED_OUT}, GP03: {status: RULED_OUT}, GP01: {status: RECOMMEND}}}
+- {id: M06, tag: missing,      persona: CUST-0001, mutations: [MAKE_STALE],         expected: {GP01: {recency_max: 0.8}}}
+- {id: M07, tag: insufficient, persona: CUST-0005, mutations: [REMOVE_ENERGY],     expected: {GP02: {status: ABSTAIN, impact_status: INSUFFICIENT_DATA}}}
+- {id: M08, tag: ruled_out,    persona: CUST-0005, mutations: [SET_RENTER],         expected: {GP02: {status: RULED_OUT, rule: GP02-R1}}}
+- {id: M09, tag: ruled_out,    persona: CUST-0006, mutations: [SET_RENTER],         expected: {GP03: {status: RULED_OUT, rule: GP03-R1}}}
+- {id: M10, tag: ruled_out,    persona: CUST-0003, mutations: [SET_RENTER],         expected: {GP03: {status: RULED_OUT}}}
+- {id: M11, tag: ruled_out,    persona: CUST-0003, mutations: [SELL_CAR],           expected: {GP01: {status: RULED_OUT, rule: GP01-R4}}}
+- {id: M12, tag: conflict,     persona: CUST-0002, mutations: [SET_VEHICLE_BEV],    expected: {GP01: {status: RULED_OUT, rule: GP01-R1}}}
+- {id: M13, tag: ruled_out,    persona: CUST-0002, mutations: [SELL_CAR],           expected: {GP01: {status: RULED_OUT, rule: GP01-R4}}}
+- {id: M14, tag: ruled_out,    persona: CUST-0007, mutations: [REMOVE_ENERGY],       expected: {GP02: {status: RULED_OUT}}}
+- {id: M15, tag: ruled_out,    persona: CUST-0001, mutations: [REMOVE_MILEAGE, SET_VEHICLE_BEV], expected: {GP01: {status: RULED_OUT}}}
+- {id: M16, tag: conflict,     persona: CUST-0001, mutations: [REMOVE_MILEAGE, ADD_CONFLICT_FUEL], expected: {GP01: {status: REVIEW}}}
+- {id: M17, tag: ruled_out,    persona: CUST-0004, mutations: [SET_RENTER],         expected: {GP02: {status: RULED_OUT}, GP03: {status: RULED_OUT}, GP01: {status: ABSTAIN}}}
+- {id: M18, tag: ruled_out,    persona: CUST-0008, mutations: [REMOVE_ENERGY],       expected: {GP04: {status: RULED_OUT, rule: GP04-R2}}}
+- {id: M19, tag: insufficient, persona: CUST-0006, mutations: [REMOVE_ENERGY],      expected: {GP03: {status: ABSTAIN, impact_status: INSUFFICIENT_DATA}}}
+- {id: M20, tag: ruled_out,    persona: CUST-0003, mutations: [REMOVE_MILEAGE],      expected: {GP01: {status: RULED_OUT, rule: GP01-R1}}}
+- {id: M21, tag: insufficient, persona: CUST-0004, mutations: [REMOVE_ENERGY],      expected: {GP02: {status: ABSTAIN}, GP03: {status: ABSTAIN}}}
+- {id: M22, tag: missing,      persona: CUST-0001, mutations: [MAKE_STALE, REMOVE_MILEAGE], expected: {GP01: {status: ABSTAIN}}}
+- {id: M23, tag: ruled_out,    persona: CUST-0001, mutations: [SELL_CAR, SET_RENTER], expected: {GP01: {status: RULED_OUT}, GP02: {status: RULED_OUT}, GP03: {status: RULED_OUT}}}
+- {id: M24, tag: baseline,     persona: CUST-0005, mutations: [SET_VEHICLE_BEV],     expected: {GP02: {status: RECOMMEND}}}
+- {id: M25, tag: missing,      persona: CUST-0005, mutations: [MAKE_STALE],         expected: {GP02: {recency_max: 0.8}}}
+- {id: M26, tag: insufficient, persona: CUST-0002, mutations: [REMOVE_ENERGY],      expected: {GP02: {status: ABSTAIN}}}
+- {id: M27, tag: baseline,     persona: CUST-0006, mutations: [SELL_CAR],           expected: {GP03: {status: ABSTAIN}}}

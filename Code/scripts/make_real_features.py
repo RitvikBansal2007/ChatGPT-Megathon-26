@@ -2,11 +2,10 @@ import pandas as pd
 import numpy as np
 import os
 
-def build_features():
-    raw_dir = 'Code/data/raw'
-    out_dir = 'Code/data/features'
+def build_features(cutoff_date: str = '2011-06-01', raw_dir: str = 'Code/data/raw', out_dir: str = 'Code/data/features'):
     os.makedirs(out_dir, exist_ok=True)
-    
+    cutoff = pd.to_datetime(cutoff_date)
+        
     # 1. Load customers & labels
     customers = pd.read_csv(f'{raw_dir}/customers.csv')
     labels = pd.read_csv(f'{raw_dir}/take_up_labels.csv')
@@ -20,6 +19,8 @@ def build_features():
 
     try:
         txns = pd.read_csv(f'{raw_dir}/transactions.csv')
+        txns['date'] = pd.to_datetime(txns['date'])
+        txns = txns[txns['date'] < cutoff]
         
         fuel_txns = txns[txns['true_category'] == 'Fuel']
         # Assuming debit is positive or we just take absolute amount
@@ -49,6 +50,9 @@ def build_features():
     # 4. Energy Usage
     try:
         energy = pd.read_csv(f'{raw_dir}/energy_usage.csv')
+        energy['dt'] = pd.to_datetime(energy['month'] + '-01')
+        energy = energy[energy['dt'] < cutoff]
+        
         energy_agg = energy.groupby('customer_id')[['electricity_kwh', 'gas_kwh']].sum().reset_index()
         energy_agg.rename(columns={'electricity_kwh': 'electricity_kwh_last_year', 'gas_kwh': 'gas_kwh_last_year'}, inplace=True)
         df = pd.merge(df, energy_agg, on='customer_id', how='left')
@@ -62,6 +66,9 @@ def build_features():
     # 5. Digital Usage
     try:
         digital = pd.read_csv(f'{raw_dir}/digital_usage.csv')
+        digital['dt'] = pd.to_datetime(digital['month'] + '-01')
+        digital = digital[digital['dt'] < cutoff]
+        
         # We need paper_statements (max or sum > 0)
         paper = digital.groupby('customer_id')['paper_statements'].sum().reset_index()
         paper['paper_statements'] = (paper['paper_statements'] > 0).astype(int)
@@ -92,4 +99,8 @@ def build_features():
     print(f"Saved real features to {out_path} with shape {df.shape}")
 
 if __name__ == '__main__':
-    build_features()
+    import argparse
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--cutoff-date', type=str, default='2011-06-01', help='Prediction cutoff date')
+    args = parser.parse_args()
+    build_features(cutoff_date=args.cutoff_date)
