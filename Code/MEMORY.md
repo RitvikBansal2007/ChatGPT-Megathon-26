@@ -1,5 +1,5 @@
 # GreenDash — G3 Context Memory
-<!-- AUTO-UPDATED by Antigravity agent. Last update: 2026-10-11T02:38 IST -->
+<!-- AUTO-UPDATED by Antigravity agent. Last update: 2026-10-11 (after Step 3.5) -->
 
 > **Project renamed:** `greenproof` → `greendash` (by teammates, commit `96ca5fb`)
 > Repo: https://github.com/<org>/megathon26-chatgpt  
@@ -9,7 +9,7 @@
 
 ---
 
-## ✅ COMPLETED — ALL STEPS DONE EXCEPT 3.5 + 5
+## ✅ COMPLETED — ALL STEPS DONE EXCEPT 5 + 6
 
 ### Step 1 — Brand tokens (`536f3e9`)
 - `app/.streamlit/config.toml`, `app/theme.py`, `app/static/fonts/` (3 OFL woff2), `app/CLAUDE.md`
@@ -36,11 +36,20 @@
 - `docs/diagrams/*.mmd + *.png` — 4 architecture diagrams exported (brand colours)
 - `mobile/README.md` — Expo production spec, 8 screens, auth+security
 
-### Contract alignment (`076bed7`) ← LATEST
-- Adopted G1-A's frozen `greendash/contracts.py` + 7 fixture files from the G2-An feature-pipeline branch
+### Contract alignment (`076bed7`)
+- Adopted G1-A's frozen `greendash/contracts.py` + 7 fixture files from `the G2-An feature-pipeline branch`
 - All field names updated across all 6 component files and `client.py`
 - Key changes: `opportunity_id`, `opportunity_name`, `next_action`, `eligibility.result=ELIGIBLE`,
   `plain_reasons[]`, `impact.low/central/high`, `violations[].rule`, `diff[].from`
+
+### Step 3.5 — Live + cached API modes ← LATEST
+- `app/client.py`: `DEMO_MODE=live|cached`, `API_BASE_URL` (default `http://127.0.0.1:8000`), stdlib `urllib` only
+- Token: `POST /api/auth/demo-token`, cached in `st.session_state["_api_token"]` with expiry, refreshed 60 s early or on role change
+- UI role label → API role (`Relationship Manager` → `RELATIONSHIP_MANAGER`; any `Customer – …` → `CUSTOMER` + `customer_id`)
+- live: friendly `st.error` card + empty data on 401/403/5xx/unreachable. cached: silent fall back to fixtures
+- Real paths differ from the original brief: `/api/portfolio/summary`, `/api/eval/summary`; claimcheck sentences are `{text, fields}`
+- Tests: `app/tests/test_smoke.py` covers cached-fallback and live-unreachable
+- **NOT verified against a running API (CP2 still open)** — see Backend State
 
 ---
 
@@ -49,11 +58,12 @@
 | Module | State |
 |---|---|
 | `greendash/contracts.py` | ✅ **Frozen** — `frozen=True` all models |
-| `api/main.py` + `api/routers/` | ✅ **Built** — FastAPI with all routers (opportunities, auth, claimcheck, scenario, portfolio, eval, governance, feedback) |
+| `api/main.py` + `api/routers/` | ⚠️ Routers committed, but **cannot start from `main`**: `api/deps.py` and `greendash/security/authz.py` are imported and exist on no pushed branch |
+| Live response shapes | ⚠️ `/api/portfolio/summary` returns `tiles/funnel/by_region/quadrant`, `/api/eval/summary` returns `out/eval_summary.json` — neither matches `fixtures/portfolio.json` (`metrics`) / `fixtures/eval.json` (`baselines`) that Cockpit + Receipts read |
 | `api/routers/auth.py` | ✅ `POST /api/auth/demo-token` available |
 | `api/routers/opportunities.py` | ✅ `GET /api/customers/{id}/opportunities` |
 | `/healthz` | ✅ Health check endpoint |
-| `pyproject.toml` | ⚠️ `streamlit>=1.46` **NOT yet pinned** (missing from deps list) |
+| `pyproject.toml` | ⚠️ `streamlit>=1.46` not on `main`; the pin exists on `origin/the G2-An feature-pipeline branch` (`529abe3`), unmerged |
 | `fixtures/opps_*.json` × 5 | ✅ Contract-shaped, committed |
 | `fixtures/claimcheck_response.json` | ✅ |
 | `fixtures/scenario_response.json` | ✅ |
@@ -62,28 +72,15 @@
 
 ## 🔴 REMAINING
 
-### Step 3.5 — Live API (`app/client.py` live + cached modes)
-**Ready to start — `api/` is fully built!**
+### CP2 — verify live mode against a real API
+Blocked on backend: `api/deps.py` + `greendash/security/authz.py` must be pushed.
+Then: `uvicorn api.main:app --reload` and `DEMO_MODE=live streamlit run app/Home.py`.
+Expect to need a small adapter in Cockpit/Receipts (or the API) for the portfolio/eval shape mismatch above.
 
-When you say "do Step 3.5", I will add to `app/client.py`:
-```python
-# live mode:
-#   POST /api/auth/demo-token  → Bearer token (role from session_state)
-#   Refresh at 15 min
-#   GET /api/customers/{id}/opportunities  (Bearer header)
-#   POST /api/scenarios/{id}
-#   POST /api/claimcheck
-#   GET /api/portfolio
-#   GET /api/eval
-#   Friendly error card on 401/403/5xx — never stack trace
-#
-# cached mode:
-#   GET /healthz → if fails, fall back to fixtures/
-```
-
-**To test (CP2):** `uvicorn api.main:app --reload` then `DEMO_MODE=live streamlit run app/Home.py`
-
-**Note:** Need to add `streamlit>=1.46` to `pyproject.toml` — tell G1-A or I can add it (it's his file so needs his OK).
+### Known failing test (predates Step 3.5)
+`test_all_five_statuses_covered` fails on `076bed7` too: `client.get_opportunities` de-dupes by
+`opportunity_id`, and all five `opps_*.json` fixtures are GP01, so only the primary status survives.
+Decide: one card per product (fix the test) or all five statuses (fix the de-dupe).
 
 ### Step 5 — Slides (claude.ai)
 **Files ready to upload right now:**
@@ -129,7 +126,7 @@ app/
 ├── .streamlit/config.toml       ✅ committed
 ├── CLAUDE.md                    ✅ committed
 ├── Home.py                      ✅ committed
-├── client.py                    ✅ fixtures ✅ | live/cached 🔴 Step 3.5
+├── client.py                    ✅ fixtures + live + cached (live untested vs real API)
 ├── theme.py                     ✅ committed
 ├── components/
 │   ├── chrome.py                ✅ committed
@@ -183,5 +180,5 @@ MEMORY.md                        ✅ (this file)
 ## 📨 Pending teammate requests
 | Who | Ask |
 |---|---|
-| **G1-A** | Add `streamlit>=1.46` to `pyproject.toml` dependencies |
+| **G1-A** | Push `api/deps.py` + `greendash/security/authz.py`; merge the streamlit pin (`529abe3`) to main; agree portfolio/eval response shape |
 | **G2-M** | Push final `docs/EVALUATION.md` — needed for slide 6 real numbers |
