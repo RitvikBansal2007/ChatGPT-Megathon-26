@@ -1,9 +1,9 @@
 # GreenDash — G3 (Ritvik) Context Memory
-<!-- AUTO-UPDATED by agent. Last update: 2026-10-11 (Madhav's fix commit `6c41d76` re-reviewed) -->
+<!-- AUTO-UPDATED by agent. Last update: 2026-10-11 (second CP2 run, local API at `f93f8ff`) -->
 
 > **Project renamed:** `greenproof` → `greendash` (by teammates, commit `96ca5fb`)
 > Repo: https://github.com/IIIT-ECell/megathon26-chatgpt  
-> Branch: `main` (backend state checked at `cb2173d`) · Root: `megathon26-chatgpt/Code/`
+> Branch: `main` (backend state checked at `f93f8ff`) · Root: `megathon26-chatgpt/Code/`
 > Ritvik owns: `app/`, `mobile/`, `slides/`, `docs/diagrams/`, `README.md`, `MEMORY.md`  
 > **NEVER TOUCH:** `greendash/`, `api/`, `data/`, `config/`, `eval/`, `tests/`
 > **Backend owner: Aniket** — as of 2026-10-11 Aniket has taken over all of Akshit's (G1-A) work. Send every backend/API ask to Aniket, not Akshit.
@@ -60,14 +60,14 @@
 |---|---|
 | `greendash/contracts.py` | ✅ **Frozen** — `frozen=True` all models |
 | `api/main.py` + `api/routers/` | ✅ **Starts from `main`** at `cb2173d` (`ENV=demo uvicorn api.main:app`), `/healthz` OK |
-| **CP2 result (client.py live mode vs local API, all 6 roles)** | ⚠️ 2 of 6 work: `demo-token` ✅, `/api/eval/summary` ✅ (returns `fixtures/eval.json`). Failing: opportunities **404** + claimcheck **404** (`out/packs/<id>.json` not in repo, fallback `fixtures/status.json` doesn't exist); portfolio **500** (`out/packs/portfolio_rows.parquet` missing, error leaks the path); scenario **422** (contracts are `strict`, so the `Mutation` enum rejects JSON strings — no HTTP client can call it) |
-| Building packs | 🔴 `python -m greendash.packs` fails on `main`: `KeyError: 'customer_key'` (features use `customer_id`) |
+| **CP2 result, run 2 (client.py live mode vs local API at `f93f8ff`, all 6 roles)** | ⚠️ Still 2 of 6: `demo-token` ✅ (no `ENV` needed now), eval ✅. All others **500**: opportunities + claimcheck — `api/services.py` builds `CustomerOpportunities` without required `cutoff_date`, `outcome_window_days`, `run_manifest`; scenario — `data/raw/customers.parquet` not in repo (422 enum issue is fixed); portfolio — `data/features/audit_attrs.parquet` not in repo. 500 bodies leak paths and validation dumps |
+| Building packs | ⚠️ `python -m greendash.packs` now runs (20,000 packs, `out/packs/` is gitignored so each machine must generate). But every pack has propensity 0.5 / MEDIUM because of the model hash mismatch (20,000 "Scoring error" lines) → **zero RECOMMEND and zero REVIEW**; Priya (CUST-0001) GP01 comes out SOFT_SURFACE. The demo script's RECOMMEND card cannot appear in live mode |
 | Files deleted by rename commit `96ca5fb` | ✅ All 20 restored in `cb2173d` (real `claimcheck.py` 177 lines, `carbon/engine.py` 109 lines) |
 | `api/deps.py` + `greendash/security/authz.py` | ⚠️ Still no real auth: `/api/eval/summary` returns 200 **with no token**. Aniket says Kratik ships real verification in his Production PR |
 | Portfolio/eval shapes | ⚠️ `aafd480` says `/api/portfolio/summary` + `/api/eval/summary` now match the UI fixtures (`metrics` / `baselines`) — **unverified**, needs a running API |
 | `backend/` package | ℹ️ Older sub-package from `9d5f6d5` (`/health`, `/api/v1/transactions`). Akshit confirmed: **ignore it, the demo API is `api/`** |
 | `api/routers/auth.py` | ✅ `POST /api/auth/demo-token` works (needs `ENV=demo`) |
-| `api/routers/opportunities.py` | 🔴 404 until packs exist (see CP2 result) |
+| `api/routers/opportunities.py` | 🔴 500 (see CP2 result) |
 | `/healthz` | ✅ Health check endpoint |
 | `pyproject.toml` | ✅ `streamlit>=1.46` pinned on `main` |
 | `fixtures/opps_*.json` × 5 | ✅ Contract-shaped, committed |
@@ -102,7 +102,7 @@ Madhav says his deliverables are "locked in". What the repo shows:
 ## 🔴 REMAINING
 
 ### CP2 — verify live mode against a real API
-Ran once (see Backend State → CP2 result): client side works — token, role mapping, error cards. Blocked on backend (owner: **Aniket**): commit or generate `out/packs/`, fix `greendash.packs` `customer_key` error, fix `/api/scenario` strict-enum 422. Aniket's LAN IP `10.166.113.188:8000` was unreachable from Ritvik's machine (timeout) — test locally with `ENV=demo uvicorn api.main:app`.
+Ran twice (see Backend State → CP2 result): client side works — token, role mapping, error cards. Blocked on backend: Aniket — `api/services.py` missing fields, two data files not in repo; Madhav — `data/models/hashes.json` mismatch (no RECOMMEND until fixed). **Demo fallback: `DEMO_MODE=fixtures` is unaffected and is the safe mode to present.** Test locally with `uvicorn api.main:app`; Aniket's `10.166.113.188:8000` was unreachable.
 No frontend adapter planned: the API was adapted to the fixture shapes (`aafd480`); confirm on first live run.
 
 ### Known failing test (predates Step 3.5)
@@ -208,6 +208,6 @@ MEMORY.md                        ✅ (this file)
 ## 📨 Pending teammate requests
 | Who | Ask |
 |---|---|
-| **Aniket** (now also covering Akshit's G1-A work) | Packs for the 8 personas (`out/packs/CUST-000x.json` + `portfolio_rows.parquet`) or a working `make packs`; `/api/scenario` 422 on string mutations; check why `10.166.113.188:8000` is unreachable (firewall / different Wi-Fi) |
+| **Aniket** (now also covering Akshit's G1-A work) | `api/services.py`: pass `cutoff_date`, `outcome_window_days`, `run_manifest` to `CustomerOpportunities`; commit or generate `data/raw/customers.parquet` + `data/features/audit_attrs.parquet`; stop returning `str(exc)` in 500 bodies |
 | **Kratik (G1-K)** | Caddy CSP (`font-src 'self'`, `frame-ancestors 'none'`); proxy Streamlit only, not port 8000; keep branch `g1-kratik/claimcheck` until Claim-Check is restored on main |
 | **Madhav (G2-M)** | Sent second review of `6c41d76`. Blocking: regenerate `data/models/hashes.json` (scoring returns 0.5 for everyone); real measured metrics; remove hard-coded confidence + `£100` reason code |
