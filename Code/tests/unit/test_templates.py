@@ -1,7 +1,7 @@
 import pytest
 from greenproof.llm.templates import TEMPLATES, get_template
 
-# Placeholder for Kratik's claimcheck if not yet merged
+# Placeholder for the claimcheck if not yet merged
 try:
     from greenproof.llm.guard import claimcheck
 except ImportError:

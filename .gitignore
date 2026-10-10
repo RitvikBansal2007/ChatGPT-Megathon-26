@@ -13,3 +13,5 @@ __pycache__/
 *.csv
 out/
 data/
+Code/dataset procured/
+scratch_inspect.py

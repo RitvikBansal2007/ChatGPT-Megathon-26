@@ -22,11 +22,11 @@ def create_fallback_priors():
         },
         "annual_elec_kwh_quantiles": {
             "source": "ofgem_tdcv_fallback",
-            "q": {"5": 1500, "25": 2000, "50": 2700, "75": 3500, "95": 6000}
+            "q": {"5": 1500, "25": 1800, "50": 2700, "75": 4100, "95": 6000}
         },
         "annual_gas_kwh_quantiles": {
             "source": "ofgem_tdcv_fallback",
-            "q": {"5": 5000, "25": 8000, "50": 11500, "75": 15000, "95": 22000}
+            "q": {"5": 5000, "25": 7500, "50": 11500, "75": 17000, "95": 22000}
         },
         "monthly_elec_seasonality": {
             "source": "ukpn_smartmeter_fallback",
