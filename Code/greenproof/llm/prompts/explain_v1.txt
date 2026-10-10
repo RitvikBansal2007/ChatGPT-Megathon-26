@@ -1,0 +1,15 @@
+Here is the verified Evidence Pack for the customer:
+<evidence_pack>
+{PACK_JSON}
+</evidence_pack>
+
+Based strictly on this data, provide:
+1. A short explanation (1-2 sentences) of why they received this recommendation or status.
+2. The specific impact metrics formatted nicely.
+
+Output JSON schema:
+{
+  "explanation": "Your explanation text here.",
+  "metrics_summary": "Summary of metrics here.",
+  "canary": "The canary token goes here"
+}

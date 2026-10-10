@@ -1,0 +1,20 @@
+rules:
+  # Locked decisions first (highest priority)
+  - category: Utilities
+    keywords: ["dual fuel", "water", "sewerage"]
+  - category: Fuel
+    keywords: ["petrol", "diesel", "ev charge", "rapid charge", "fuel station"]
+  - category: Other
+    keywords: ["taxi", "uber", "bolt", "ride-hail", "groceries", "dining", "shopping"]
+  - category: Public Transport
+    keywords: ["train", "bus", "tram", "tube"]
+
+  # Proposed boundaries
+  - category: Electricity
+    keywords: ["electricity"]
+  - category: Gas
+    keywords: ["gas"]
+  - category: Automotive
+    keywords: ["vehicle purchase", "servicing", "mot", "tyres", "parts", "parking"]
+  - category: Home Improvement
+    keywords: ["insulation", "glazing", "boilers", "diy", "home improvement", "solar"]

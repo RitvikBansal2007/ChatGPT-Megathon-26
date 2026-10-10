@@ -1,0 +1,51 @@
+# Templates for fallback in case LLM fails or is unavailable
+
+TEMPLATES = {
+    "GP01": { # EV Finance
+        "ELIGIBLE": "You are eligible for EV Finance. Your transaction history indicates sufficient fuel spend and mileage to benefit from this product.",
+        "RECOMMEND": "We strongly recommend our EV Finance product! Converting to an electric vehicle based on your current £{fuel_spend} fuel spend could save you money and reduce carbon emissions.",
+        "INELIGIBLE": "Currently, you do not meet the criteria for EV Finance. This may be due to low recorded fuel spend or mileage.",
+        "PENDING": "Your EV Finance recommendation is currently pending review.",
+        "REJECTED": "Based on your recent transaction profile, an EV Finance product is not recommended at this time."
+    },
+    "GP02": { # Green Home Loan
+        "ELIGIBLE": "You are eligible for a Green Home Loan. Your energy consumption profile suggests you could benefit from home efficiency improvements.",
+        "RECOMMEND": "We recommend our Green Home Loan to help reduce your {gas_kwh} kWh annual gas consumption with better insulation or a new boiler.",
+        "INELIGIBLE": "Currently, you do not meet the criteria for a Green Home Loan. Your energy consumption is already highly efficient.",
+        "PENDING": "Your Green Home Loan recommendation is pending further data analysis.",
+        "REJECTED": "Based on your profile, a Green Home Loan is not recommended at this time."
+    },
+    "GP03": { # Solar Finance
+        "ELIGIBLE": "You are eligible for Solar Finance. Your electricity usage indicates you could significantly benefit from solar panels.",
+        "RECOMMEND": "We recommend Solar Finance! Generating your own energy could drastically reduce your {elec_kwh} kWh annual electricity usage from the grid.",
+        "INELIGIBLE": "Currently, you do not meet the criteria for Solar Finance. Your electricity usage may not be high enough to justify the installation cost.",
+        "PENDING": "Your Solar Finance recommendation is currently pending.",
+        "REJECTED": "Solar Finance is not recommended for your profile at this time."
+    },
+    "GP04": { # Paperless Banking
+        "ELIGIBLE": "You are eligible to switch to Paperless Banking. Our records show you currently receive paper statements.",
+        "RECOMMEND": "We recommend switching to Paperless Banking! This small change reduces paper waste and provides instant access to your statements online.",
+        "INELIGIBLE": "You are already using Paperless Banking, or it is not applicable to your account types.",
+        "PENDING": "Your Paperless Banking status is pending.",
+        "REJECTED": "Paperless Banking is not recommended for your current account structure."
+    }
+}
+
+def get_template(product_id, status, context_data=None):
+    """
+    Returns the deterministic template for a given product and status.
+    Formats the string with context_data if provided.
+    """
+    if context_data is None:
+        context_data = {
+            "fuel_spend": "[FUEL_SPEND]",
+            "gas_kwh": "[GAS_KWH]",
+            "elec_kwh": "[ELEC_KWH]"
+        }
+        
+    template = TEMPLATES.get(product_id, {}).get(status, "Status information is currently unavailable.")
+    
+    try:
+        return template.format(**context_data)
+    except KeyError:
+        return template
