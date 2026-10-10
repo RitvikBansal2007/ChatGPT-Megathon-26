@@ -1,19 +1,20 @@
 {
   "session_id": "session_001",
-  "current_phase": "Phase 5: Synthetic Customer Population & Labels",
-  "current_subtask": "Implement generator modules",
+  "current_phase": "Phase 8: Deliverables generation & Handover",
+  "current_subtask": "Generate Deliverables",
   "completed_subtasks": [
     "Phase 1: Environment & Repository Baseline",
     "Verify/configure git remote",
     "Pull latest remote changes, merge without conflicts, commit initial baseline",
     "Phase 2: Datasets Procurement & Factor Curation",
     "Phase 3: Merchant Template Generator",
-    "Phase 4: Ingestion Pipeline & Prior Extraction"
-  ],
-  "pending_subtasks": [
+    "Phase 4: Ingestion Pipeline & Prior Extraction",
     "Phase 5: Synthetic Customer Population & Labels",
     "Phase 6: Deterministic Carbon Engine",
     "Phase 7: Evaluation Set & Governance Documentation"
+  ],
+  "pending_subtasks": [
+    "Phase 8: Deliverables generation & Handover"
   ],
   "locked_decisions": {
     "cutoff_date": "2026-06-30",
