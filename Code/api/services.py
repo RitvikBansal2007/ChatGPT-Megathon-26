@@ -13,4 +13,13 @@ def load_customer_packs(key: str, display_id: str) -> CustomerOpportunities:
     if not f.exists():
         raise HTTPException(status_code=404, detail="Customer not found")
     data = json.loads(f.read_text())
-    return CustomerOpportunities(customer_id=display_id, opportunities=[v for _, v in sorted(data.items())])
+    import yaml
+    from datetime import date
+    cfg = yaml.safe_load(Path("config/decisions.yaml").read_text())
+    return CustomerOpportunities(
+        customer_id=display_id,
+        opportunities=[v for _, v in sorted(data.items())],
+        cutoff_date=date.fromisoformat(cfg["cutoff_date"]),
+        outcome_window_days=cfg["outcome_window_days"],
+        run_manifest="dev-local"
+    )

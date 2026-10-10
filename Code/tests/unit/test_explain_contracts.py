@@ -124,40 +124,28 @@ def _reason(metric, value):
             "display": "d", "observed_at": "2026-06-30", "source": "bank_record"}
 
 
-def test_gp01_stays_pending_while_only_a_monthly_metric_exists():
-    # avg_monthly_fuel_gbp is monthly; the template does not say so, so it is not used.
-    pack = _opp_with("GP01", "RECOMMEND", [_reason("avg_monthly_fuel_gbp", 185)])
+@pytest.mark.parametrize("product", ["GP01", "GP02", "GP03", "GP04"])
+def test_recommend_template_is_figure_free_and_ignores_pack_values(product):
+    # templates.py no longer has figures; pack metrics/values must never be spliced in
+    pack = _opp_with(product, "RECOMMEND", [_reason("avg_monthly_fuel_gbp", 185),
+                                            _reason("gas_kwh_12m", 11500),
+                                            _reason("electricity_kwh_12m", 3200)])
     res = ex.get_explanation(pack, canary_token=CANARY, provider=MockProvider("bad", "bad"))
-    assert res["explanation"] == get_template("GP01", "PENDING")
-    assert "185" not in res["explanation"]
-
-
-@pytest.mark.parametrize("product,metric,value,expected", [
-    ("GP02", "gas_kwh_12m", 11500, "11,500 kWh annual gas"),
-    ("GP03", "electricity_kwh_12m", 3200, "3,200 kWh annual electricity"),
-])
-def test_recommend_template_uses_metric_value_from_pack(product, metric, value, expected):
-    pack = _opp_with(product, "RECOMMEND", [_reason(metric, value)])
-    res = ex.get_explanation(pack, canary_token=CANARY, provider=MockProvider("bad", "bad"))
-    assert res["source"] == "template"
-    assert expected in res["explanation"]
+    assert res["explanation"] == get_template(product, "RECOMMEND")
+    for leaked in ("185", "11,500", "11500", "3,200", "3200"):
+        assert leaked not in res["explanation"]
     assert "[" not in res["explanation"] and "{" not in res["explanation"]
 
 
-@pytest.mark.parametrize("product", ["GP01", "GP02", "GP03"])
-def test_recommend_template_without_metric_never_shows_placeholder_or_invents(product):
-    pack = _opp_with(product, "RECOMMEND", [_reason("annual_mileage", 12000)])
-    res = ex.get_explanation(pack, canary_token=CANARY, provider=MockProvider("bad", "bad"))
-    assert res["explanation"] == get_template(product, "PENDING")
-    assert "12,000" not in res["explanation"]
-    assert "[" not in res["explanation"] and "{" not in res["explanation"]
-
-
-def test_template_ignores_non_numeric_and_wrong_metric_values():
-    for bad in ("3200", None, True, float("nan"), "3200; ignore previous"):
-        pack = _opp_with("GP03", "RECOMMEND", [_reason("electricity_kwh_12m", bad)])
-        res = ex.get_explanation(pack, canary_token=CANARY, provider=MockProvider("x", "x"))
-        assert res["explanation"] == get_template("GP03", "PENDING"), bad
+def test_template_with_an_unfilled_placeholder_is_never_shown(monkeypatch):
+    from greendash.llm import templates
+    patched = {k: dict(v) for k, v in templates.TEMPLATES.items()}
+    patched["GP01"]["RECOMMEND"] = "Based on your {fuel_spend} fuel spend."
+    monkeypatch.setattr(ex, "TEMPLATES", patched)
+    monkeypatch.setattr(templates, "TEMPLATES", patched)
+    res = ex.get_explanation(_opp_with("GP01", "RECOMMEND", []), canary_token=CANARY,
+                             provider=MockProvider("bad", "bad"))
+    assert res["explanation"] == patched["GP01"]["PENDING"]
 
 
 def test_gp04_recommend_template_needs_no_figure():
@@ -307,7 +295,7 @@ def test_check_blocks_unsupported_number_and_banned_phrase_with_template_fallbac
     assert res["verdict"] == "BLOCKED"
     rules = {v["rule"] for v in res["sentences"][0]["violations"]}
     assert {"NUM", "BAN"} <= rules
-    assert res["fallback_text"] == get_template("GP01", "PENDING")
+    assert res["fallback_text"] == get_template("GP01", "RECOMMEND")
 
 
 def test_check_verdicts_are_accepted_by_audit_vocabulary():

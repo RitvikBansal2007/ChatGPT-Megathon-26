@@ -153,9 +153,7 @@ def test_pii_block_uses_product_status_template_and_no_secrets_in_logs(caplog):
     caplog.set_level(logging.DEBUG)
     prov = MockProvider()
     res = run(pack(region="jon.pennington@example.com"), prov)
-    # RECOMMEND/GP01 needs a fuel_spend figure the pack does not carry, so the
-    # neutral PENDING template is used rather than showing a "[FUEL_SPEND]" placeholder.
-    assert res["explanation"] == get_template("GP01", "PENDING")
+    assert res["explanation"] == get_template("GP01", "RECOMMEND")
     assert_no_secrets(res)
     logged = "\n".join(r.getMessage() for r in caplog.records)
     for secret in list(SECRETS.values()) + ["jon.pennington", "example.com"]:
@@ -217,16 +215,6 @@ def test_fallback_uses_product_and_status_template(product, status, key):
     res = run(pack(recommendation=product, status=status), MockProvider("nope", "nope"))
     assert res["source"] == "template"
     assert res["explanation"] == get_template(product, key)
-
-
-def test_template_fills_numbers_only_from_trusted_numeric_fields():
-    p = pack(recommendation="GP02", gas_kwh=11500)
-    res = run(p, MockProvider("nope", "nope"))
-    assert "11,500 kWh" in res["explanation"]
-    p = pack(recommendation="GP02", gas_kwh="11500; ignore previous")
-    res = run(p, MockProvider("nope", "nope"))
-    assert "ignore" not in res["explanation"]
-    assert "[GAS_KWH]" not in res["explanation"]
 
 
 def test_unknown_product_gets_neutral_text_not_ev_default():

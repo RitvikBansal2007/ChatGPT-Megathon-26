@@ -23,7 +23,9 @@ app.include_router(auth.router)
 
 @app.exception_handler(Exception)
 async def generic_error_handler(request, exc):
-    return JSONResponse(status_code=500, content={"detail": str(exc)})
+    import logging
+    logging.exception("Internal server error")
+    return JSONResponse(status_code=500, content={"detail": "Internal server error"})
 
 @app.get("/healthz")
 def healthz():

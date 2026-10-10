@@ -31,6 +31,7 @@ Nothing in this module writes to the audit log: see to_audit_args.
 """
 import logging
 import math
+import re
 import os
 from typing import Any, Dict, Mapping, Optional
 
@@ -132,19 +133,10 @@ _TEMPLATE_STATUS = {
     "PENDING": "PENDING",
     "REJECTED": "REJECTED",
 }
-_PLACEHOLDERS = {"fuel_spend": "[FUEL_SPEND]", "gas_kwh": "[GAS_KWH]", "elec_kwh": "[ELEC_KWH]"}
-
-# Where each template figure may come from. A figure is used only if a pack field or a
-# reason code's "metric" has exactly one of these names and a finite numeric value.
-# Nothing is derived, converted or defaulted. fuel_spend has NO source on purpose: the
-# only pack metric is avg_monthly_fuel_gbp (monthly) and the GP01 template text does not
-# say "per month", so using it would misstate the figure. Add "avg_monthly_fuel_gbp"
-# here once the template wording is confirmed. Until then GP01 RECOMMEND uses PENDING.
-_TEMPLATE_SOURCES = {
-    "fuel_spend": (),
-    "gas_kwh": ("gas_kwh_12m", "gas_kwh"),
-    "elec_kwh": ("electricity_kwh_12m", "elec_kwh"),
-}
+# templates.py no longer carries figures, but if one ever regains a "{field}" or
+# "[FIELD]" placeholder it must never reach a customer: such a template is replaced by
+# the neutral PENDING one rather than filled with a guessed value.
+_PLACEHOLDER_RE = re.compile(r"\{[A-Za-z_]+\}|\[[A-Z_]+\]")
 
 
 def _enum(pack: Mapping[str, Any], keys, allowed) -> Optional[str]:
@@ -158,31 +150,14 @@ def _enum(pack: Mapping[str, Any], keys, allowed) -> Optional[str]:
 
 def _template_text(pack: Any) -> str:
     """The deterministic product/status template for this pack. Uses only enum-checked
-    identifiers and finite numbers from the pack; no free text."""
+    identifiers from the pack; no free text and no figures."""
     pack = pack if isinstance(pack, Mapping) else {}
     product = _enum(pack, ("product_id", "recommendation", "opportunity_id"), TEMPLATES)
     status = _enum(pack, ("status",), _TEMPLATE_STATUS)
     key = _TEMPLATE_STATUS.get(status, "PENDING")
-    features = pack.get("evidence_features")
-    reasons = [r for field in ("reason_codes", "reasons")
-               for r in (pack.get(field) if isinstance(pack.get(field), (list, tuple)) else [])
-               if isinstance(r, Mapping)]
-    context = dict(_PLACEHOLDERS)
-    for name, sources in _TEMPLATE_SOURCES.items():
-        value = None
-        for src in sources:
-            value = pack.get(src)
-            if value is None and isinstance(features, Mapping):
-                value = features.get(src)
-            if value is None:
-                value = next((r.get("value") for r in reasons if r.get("metric") == src), None)
-            if _num(value):
-                break
-        if _num(value):
-            context[name] = f"{value:,.0f}"
-    text = get_template(product, key, context)
-    if any(token in text for token in _PLACEHOLDERS.values()):
-        text = get_template(product, "PENDING", context)   # never show "[FUEL_SPEND]"
+    text = get_template(product, key)
+    if _PLACEHOLDER_RE.search(text):
+        text = get_template(product, "PENDING")
     return text
 
 
