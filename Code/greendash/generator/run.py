@@ -31,8 +31,10 @@ def main():
             continue
         if "customer_id" in df.columns:
             df = df.sort_values("customer_id")
-        path = out_dir / f"{name}.parquet"
-        df.to_parquet(path, index=False, engine="pyarrow", compression="snappy")
+        path_parquet = out_dir / f"{name}.parquet"
+        path_csv = out_dir / f"{name}.csv"
+        df.to_parquet(path_parquet, index=False, engine="pyarrow", compression="snappy")
+        df.to_csv(path_csv, index=False)
         
     print("Generation complete!")
 
