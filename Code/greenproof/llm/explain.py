@@ -6,8 +6,11 @@ from greenproof.llm.templates import get_template
 
 # Kratik's security modules - wrapped in try/except so it doesn't break until he merges his branch
 try:
+    # pyrefly: ignore [missing-import]
     from greenproof.llm.minimise import minimise
+    # pyrefly: ignore [missing-import]
     from greenproof.llm.guard import pre_check, post_check
+    # pyrefly: ignore [missing-import]
     from greenproof.llm.claimcheck import check
 except ImportError:
     # Dummy fallbacks until Kratik merges
