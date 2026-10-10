@@ -1,11 +1,12 @@
 # GreenDash — G3 (Ritvik) Context Memory
-<!-- AUTO-UPDATED by agent. Last update: 2026-10-11 (backend state as of `aafd480`) -->
+<!-- AUTO-UPDATED by agent. Last update: 2026-10-11 (backend state as of `cd3ba7d`; backend owner now Aniket) -->
 
 > **Project renamed:** `greenproof` → `greendash` (by teammates, commit `96ca5fb`)
 > Repo: https://github.com/IIIT-ECell/megathon26-chatgpt  
-> Branch: `main` (backend state checked at `aafd480`) · Root: `megathon26-chatgpt/Code/`
+> Branch: `main` (backend state checked at `cd3ba7d`) · Root: `megathon26-chatgpt/Code/`
 > Ritvik owns: `app/`, `mobile/`, `slides/`, `docs/diagrams/`, `README.md`, `MEMORY.md`  
 > **NEVER TOUCH:** `greendash/`, `api/`, `data/`, `config/`, `eval/`, `tests/`
+> **Backend owner: Aniket** — as of 2026-10-11 Aniket has taken over all of Akshit's (G1-A) work. Send every backend/API ask to Aniket, not Akshit.
 
 ---
 
@@ -58,9 +59,10 @@
 | Module | State |
 |---|---|
 | `greendash/contracts.py` | ✅ **Frozen** — `frozen=True` all models |
-| `api/main.py` + `api/routers/` | 🔴 **Still cannot start from `main`** (checked at `aafd480` by running `uvicorn api.main:app`): `greendash/llm/claimcheck.py` is missing, and `greendash/contracts.py` has no `CustomerPacks` (it is `CustomerOpportunities`) though `api/services.py` + `api/routers/opportunities.py` import it |
+| `api/main.py` + `api/routers/` | 🔴 **Still cannot start from `main`** (checked at `cd3ba7d`): `greendash/llm/claimcheck.py` is missing, and `greendash/contracts.py` has no `CustomerPacks` (it is `CustomerOpportunities`) though `api/services.py` + `api/routers/opportunities.py` import it |
+| Files deleted by rename commit `96ca5fb` | 🔴 20 files under `greendash/` deleted and still missing: `llm/` (7, incl. Kratik's `claimcheck.py`, `gateway.py`, `guard.py`), `carbon/` (4, incl. `engine.py`), `generator/` (8), `greendash/__init__.py`. Recoverable from `96ca5fb^` or `origin/g1-kratik/claimcheck` |
 | First-request failures (from reading the code) | 🔴 `settings.ENV` / `settings.DEMO_MODE` don't exist in `config/settings.py` (only `demo_mode`); `issue_token()` takes 1 arg but `auth.py` passes 2; `scenario.py` reads `principal.role` but `require_role` returns a dict |
-| `api/deps.py` + `greendash/security/authz.py` | ⚠️ Pushed (`d74e266`) but **stubs**: `require_role` ignores the token, `require_subject` is empty — no real auth. Akshit runs uvicorn with `--host 0.0.0.0` |
+| `api/deps.py` + `greendash/security/authz.py` | ⚠️ Pushed (`d74e266`) but **stubs**: `require_role` ignores the token, `require_subject` is empty — no real auth. Don't expose port 8000 (`--host 0.0.0.0`) on a shared network |
 | Portfolio/eval shapes | ⚠️ `aafd480` says `/api/portfolio/summary` + `/api/eval/summary` now match the UI fixtures (`metrics` / `baselines`) — **unverified**, needs a running API |
 | `backend/` package | ℹ️ Older sub-package from `9d5f6d5` (`/health`, `/api/v1/transactions`). Akshit confirmed: **ignore it, the demo API is `api/`** |
 | `api/routers/auth.py` | ⚠️ `POST /api/auth/demo-token` defined, will 500 (see above) |
@@ -76,9 +78,9 @@
 ## 🔴 REMAINING
 
 ### CP2 — verify live mode against a real API
-Blocked on backend: Akshit's laptop runs code that isn't pushed (see Backend State). Also need his LAN IP for `API_BASE_URL` — not sent yet.
+Blocked on backend (owner: **Aniket**): restore the files deleted by `96ca5fb`, fix the `api/` errors in Backend State, then send a LAN IP / tunnel URL for `API_BASE_URL`.
 Then: `uvicorn api.main:app --reload` and `DEMO_MODE=live streamlit run app/Home.py`.
-No frontend adapter planned: Akshit adapted the API to the fixture shapes (`aafd480`); confirm on first live run.
+No frontend adapter planned: the API was adapted to the fixture shapes (`aafd480`); confirm on first live run.
 
 ### Known failing test (predates Step 3.5)
 `test_all_five_statuses_covered` fails on `076bed7` too: `client.get_opportunities` de-dupes by
@@ -183,5 +185,6 @@ MEMORY.md                        ✅ (this file)
 ## 📨 Pending teammate requests
 | Who | Ask |
 |---|---|
-| **Akshit (G1-A)** | Send LAN IP; push untracked files (`greendash/llm/claimcheck.py`, `CustomerPacks`, settings `ENV`/`DEMO_MODE`, real `api/deps.py`); fix `issue_token` call + `principal.role` |
-| **Madhav (G2-M)** | Push final `docs/EVALUATION.md` — needed for slide 6 real numbers |
+| **Aniket** (now also covering Akshit's G1-A work) | Restore the 20 files deleted by `96ca5fb`; fix `CustomerPacks` import, settings `ENV`/`DEMO_MODE`, `issue_token` call, `principal.role`; real `api/deps.py`; then send LAN IP for CP2 |
+| **Kratik (G1-K)** | Caddy CSP (`font-src 'self'`, `frame-ancestors 'none'`); proxy Streamlit only, not port 8000; keep branch `g1-kratik/claimcheck` until Claim-Check is restored on main |
+| **Madhav (G2-M)** | `docs/EVALUATION.md` exists but lacks slide-6 numbers: AUC per product, LR + heuristic baselines, scenario pass/fail, categoriser macro-F1; also clarify LLM eval count ("100 mocked, 2 processed") |
