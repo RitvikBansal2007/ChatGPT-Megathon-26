@@ -21,5 +21,5 @@ def load_customer_packs(key: str, display_id: str) -> CustomerOpportunities:
         opportunities=[v for _, v in sorted(data.items())],
         cutoff_date=date.fromisoformat(cfg["cutoff_date"]),
         outcome_window_days=cfg["outcome_window_days"],
-        run_manifest="dev-local"
+        run_manifest="sha256:352a838558cb95f7961c2d94c4e862ca198bbdb59435c39ad21912452ca9f548"
     )
