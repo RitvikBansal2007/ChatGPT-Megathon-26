@@ -1,0 +1,40 @@
+# Secret scanning for GreenDash (gitleaks v8).
+#
+# The built-in gitleaks rules stay ON (useDefault). The rules below add detection
+# for this project's own variables, which generic rules can miss.
+#
+# There is deliberately NO allowlist: nothing is exempted from scanning. If a real
+# false positive appears, add a narrow, commented exception for that one file or
+# commit, never a directory or a rule-wide suppression.
+#
+# Each rule needs an assignment (NAME=value or NAME: value) with a value long and
+# random enough to be a real secret. Empty values and <placeholders> do not match.
+
+title = "GreenDash secret scanning"
+
+[extend]
+useDefault = true
+
+[[rules]]
+id = "greendash-data-key"
+description = "DATA_KEY or DATA_KEY_OLD set to a 32-byte base64 key (AES-256-GCM field encryption)"
+regex = '''(?i)\bDATA_KEY(?:_OLD)?\b["']?\s*[:=]\s*["']?([A-Za-z0-9+/_-]{43})'''
+secretGroup = 1
+entropy = 3.5
+keywords = ["data_key"]
+
+[[rules]]
+id = "greendash-pseudonym-key"
+description = "PSEUDONYM_KEY set to a literal value (HMAC key for pseudonymous IDs)"
+regex = '''(?i)\bPSEUDONYM_KEY\b["']?\s*[:=]\s*["']?([^\s"'<>$,)]{16,})'''
+secretGroup = 1
+entropy = 3.0
+keywords = ["pseudonym_key"]
+
+[[rules]]
+id = "greendash-gemini-api-key-assignment"
+description = "GEMINI_API_KEY set to a literal value (LLM provider key)"
+regex = '''(?i)\bGEMINI_API_KEY\b["']?\s*[:=]\s*["']?([A-Za-z0-9_-]{20,})'''
+secretGroup = 1
+entropy = 3.0
+keywords = ["gemini_api_key"]
