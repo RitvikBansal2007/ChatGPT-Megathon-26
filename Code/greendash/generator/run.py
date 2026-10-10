@@ -7,9 +7,9 @@ import numpy as np
 ROOT = Path(__file__).resolve().parent.parent.parent
 sys.path.insert(0, str(ROOT))
 
-from greenproof.generator.tables import build_all_tables
-from greenproof.generator.personas import inject_personas
-from greenproof.generator.labels import generate_labels
+from greendash.generator.tables import build_all_tables
+from greendash.generator.personas import inject_personas
+from greendash.generator.labels import generate_labels
 
 def main():
     print("Generating synthetic data...")

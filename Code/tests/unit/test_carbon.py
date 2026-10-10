@@ -4,9 +4,9 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent.parent
 sys.path.insert(0, str(ROOT))
 
-from greenproof.carbon.formulas import ev_switch, green_home_efficiency, solar_install, paperless
-from greenproof.carbon.units import fmt_kg, fmt_range_kg, fmt_kwh, fmt_sheets
-from greenproof.carbon.engine import estimate, load_factors
+from greendash.carbon.formulas import ev_switch, green_home_efficiency, solar_install, paperless
+from greendash.carbon.units import fmt_kg, fmt_range_kg, fmt_kwh, fmt_sheets
+from greendash.carbon.engine import estimate, load_factors
 
 def test_ev_switch_hand_calc():
     saved, text = ev_switch(10_000, 0.30, 0.30, 0.20)
