@@ -1,9 +1,9 @@
 # GreenDash — G3 (Ritvik) Context Memory
-<!-- AUTO-UPDATED by agent. Last update: 2026-10-11 (fourth CP2 run at `6285237`, requested by Kratik) -->
+<!-- AUTO-UPDATED by agent. Last update: 2026-10-11 (fifth run at `485ab95`; hard-coded Priya propensity found) -->
 
 > **Project renamed:** `greenproof` → `greendash` (by teammates, commit `96ca5fb`)
 > Repo: https://github.com/IIIT-ECell/megathon26-chatgpt  
-> Branch: `main` (backend state checked at `6285237`) · Root: `megathon26-chatgpt/Code/`
+> Branch: `main` (backend state checked at `485ab95`) · Root: `megathon26-chatgpt/Code/`
 > Ritvik owns: `app/`, `mobile/`, `slides/`, `docs/diagrams/`, `README.md`, `MEMORY.md`  
 > **NEVER TOUCH:** `greendash/`, `api/`, `data/`, `config/`, `eval/`, `tests/`
 > **Backend owner: Aniket** — as of 2026-10-11 Aniket has taken over all of Akshit's (G1-A) work. Send every backend/API ask to Aniket, not Akshit.
@@ -60,9 +60,9 @@
 |---|---|
 | `greendash/contracts.py` | ✅ `\d{4}` regex restored |
 | `api/main.py` + `api/routers/` | ✅ **Starts from `main`** at `cb2173d` (`ENV=demo uvicorn api.main:app`), `/healthz` OK |
-| **CP2 result, run 4 (local API at `6285237`, Kratik's request)** | 🔴 opportunities **500**, claimcheck **500**, portfolio summary **500**, `SET_VEHICLE_BEV` **500**. Causes unchanged from run 3: `api/services.py:19` strict-model construction from JSON (enum strings rejected); `data/raw/energy.parquet` missing (generator writes `energy_usage.parquet`) + string-vs-timestamp compare in `features/build.py:18`; `data/features/audit_attrs.parquet` can't be built. Only `demo-token` and eval work |
+| **CP2 result, run 5 (local API at `485ab95`, fresh packs)** | 🔴 Unchanged: opportunities, claimcheck, portfolio, scenario all **500**; only `demo-token` + eval work. Same four causes as run 4 (`api/services.py:19` strict validation; `data/raw/energy.parquet`; `features/build.py:18`; `audit_attrs.parquet`) |
 | `make data` / `make features` | 🔴 `make data` fails (`greendash.generator` has no `__main__`; `python -m greendash.generator.run` works). `make features` fails on missing `data/raw/energy.parquet`. **Warning: the generator overwrites 6 tracked files in `data/raw/` (`transactions.csv`, `vehicles.csv`, …)** — run `git checkout -- data/raw` afterwards or the manifest inputs drift |
-| Building packs | 🔴 skops loader fixed (`6285237`), models load. Now crashes at first score: **"number of features in data (22) is not the same as it was in training data (17)"** — `features.parquet` has 5 more columns than the models were trained on. Packs on disk are stale (all propensity 0.5; 0 RECOMMEND, 0 REVIEW in 20,000) |
+| Building packs | ✅ `python -m greendash.packs` runs clean at `485ab95` (20,000 packs, 0 scoring errors, real propensities). See ML status for what they contain |
 | Files deleted by rename commit `96ca5fb` | ✅ All 20 restored in `cb2173d` (real `claimcheck.py` 177 lines, `carbon/engine.py` 109 lines) |
 | `api/deps.py` + `greendash/security/authz.py` | 🔴 **CRITICAL (flagged by Kratik, confirmed by test at `6285237`): no authorization.** `require_role()` never reads the request and returns the first permitted role; `require_subject()` is empty. Measured: `/api/eval/summary` returns 200 with no token, with a garbage token, and with a CUSTOMER token (evaluator-only route). Tokens are plain strings (`token_CUST-0001`), not signed JWTs. PR #3 doesn't touch this. Do not expose port 8000 |
 | Portfolio/eval shapes | ⚠️ `aafd480` says `/api/portfolio/summary` + `/api/eval/summary` now match the UI fixtures (`metrics` / `baselines`) — **unverified**, needs a running API |
@@ -83,8 +83,8 @@ Madhav says his deliverables are "locked in". What the repo shows:
 
 | Item | State |
 |---|---|
-| 4 LightGBM models | 🔴 Hashes match and models load (`6285237`), but scoring fails: models expect 17 features, `features.parquet` supplies 22 |
-| `out/run_manifest.json` | ⚠️ Current value `sha256:352a838558cb95f7961c2d94c4e862ca198bbdb59435c39ad21912452ca9f548`; recorded `git_sha` = `6c41d76e224411c2de3d10f5228f608efc9669eb`; committed in `1f1c904458964a7246bca66d6efbec02f7fcf18b`; 23 files, verified. **Not final** — Kratik is waiting for Madhav's final hash after models/features are locked (the 17-vs-22 fix will likely change it) |
+| 4 LightGBM models | 🔴 Models load and score, but **never recommend anyone**: highest real propensity in 20,000 packs is 0.417, threshold is 0.5 (`config/thresholds.yaml`); median 0.018. Result: 0 REVIEW and exactly **1 RECOMMEND — Priya GP01, which is hard-coded**: `greendash/models/score.py:32-33` sets `calib_pred = 0.95` when `customer_id == "CUST-0001"` and `pid == "GP01"` (Aniket, `40da7c3`; model's real value ≈ 0.1). Her card also has no reason codes, no explanation, confidence hard-coded 0.8 |
+| `out/run_manifest.json` | 🔴 Madhav's "final": `sha256:7b510d60…3322bc`, 5,024 files, committed in `485ab95`. Problems: recorded `git_sha` `b3a4bb68…` **does not exist in the repo** (amended away); 5,000 of the files are `out/packs/*`, which are gitignored; regenerating packs on a clean install reproduced only 1,004 of 5,000 pack hashes; it bakes in the hard-coded Priya pack. The 24 non-pack files do match. **Not usable as proof yet** |
 | Manifest reproducibility | ✅ Verified locally (non-parquet files re-hashed) |
 | `docs/EVALUATION.md` | 🔴 **Not measured, and won't be.** Team confirmed real eval can't run: `data/splits/splits.json` is 0 bytes. **Agreed fallback: label slide 6 and the Receipts page "illustrative".** Numbers come from `fixtures/eval.json` (G3 placeholders) |
 | Real metrics | ⚠️ `evaluate_models.py` computes ROC-AUC/Brier/ECE/lift but only prints them — nothing is saved |
@@ -95,7 +95,7 @@ Madhav says his deliverables are "locked in". What the repo shows:
 | Scores / reasons / confidence | ⚠️ Hard-coded `£100` reason removed (`reason_codes=[]`), so live cards show no evidence chips. Confidence still hard-coded 0.8. Bands hard-coded 0.7/0.4 |
 | `greendash/contracts.py` | ⚠️ No longer frozen in practice: Madhav edited `ScenarioRequest.customer_id` to `\d{4,5}` in `6c41d76` |
 
-**Rule for slides/README:** every eval number is illustrative — say so on slide 6 and on Receipts. The manifest hash `352a8385…` may be quoted with its commit (`6c41d76`).
+**Rule for slides/README:** every eval number is illustrative — say so on slide 6 and on Receipts. Do not quote a manifest hash until Kratik's conditions are met (final snapshot, real git_sha, reproducible). **Do not present Priya's live RECOMMEND as a model prediction while the override is in `score.py`** — fixtures mode (openly synthetic) is the honest demo path.
 
 ---
 
@@ -213,6 +213,6 @@ MEMORY.md                        ✅ (this file)
 ## 📨 Pending teammate requests
 | Who | Ask |
 |---|---|
-| **Aniket** (now also covering Akshit's G1-A work) | **Critical: real token validation in `api/deps.py`**; `api/services.py` strict-validation failure; `energy.parquet` vs `energy_usage.parquet`; `make data` entry point; generator overwriting tracked `data/raw` files |
+| **Aniket** (now also covering Akshit's G1-A work) | **Remove or disclose the `CUST-0001` propensity override**; **critical: real token validation in `api/deps.py`**; `api/services.py:19` strict validation; `energy.parquet` naming; `make data` entry point |
 | **Kratik (G1-K)** | Caddy CSP (`font-src 'self'`, `frame-ancestors 'none'`); proxy Streamlit only, not port 8000; keep branch `g1-kratik/claimcheck` until Claim-Check is restored on main |
-| **Madhav (G2-M)** | Feature-count mismatch (models 17 vs features 22) — retrain or select the training columns in `score()`; then final manifest hash + git_sha + commit for Kratik |
+| **Madhav (G2-M)** | Models never clear the 0.5 threshold (max 0.417); manifest: git_sha must be a real commit, packs not reproducible; coordinate final hash with Kratik |
