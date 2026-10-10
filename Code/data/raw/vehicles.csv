@@ -1,6 +1,5 @@
 customer_id,vehicle_type,fuel_type,vehicle_age,annual_mileage
 CUST-0001,car,petrol,8,11500
-CUST-0002,car,bev,8,9000
 CUST-0003,car,bev,2,11165
 CUST-0004,car,diesel,7,8428
 CUST-0006,car,diesel,10,4524
@@ -3995,3 +3994,4 @@ CUST-4997,car,petrol,11,8642
 CUST-4998,car,petrol,8,5606
 CUST-4999,car,petrol,6,14883
 CUST-5000,car,petrol,3,13155
+CUST-0002,car,bev,8,9000
