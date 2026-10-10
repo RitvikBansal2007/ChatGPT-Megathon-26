@@ -1,0 +1,33 @@
+{
+ "artefacts": {
+  "config/assumptions.yaml": "c681aeefafd428df08814e362a23248d9e3c50419186500e02a221803f09f42a",
+  "config/categories.yaml": "fe5cae034f958118a82e97d9616e7a42dd9f1bb5b7221691fd37e7d2285ca872",
+  "config/decisions.yaml": "4d2eabebda0bf8d13f09685f1ae0ff3cd082673089fce9765a86f695b3cc2d8f",
+  "config/factors.csv": "ef5da0c00c2ac034842cf111da4f46c4bd5bb6bfc6b83fd406125dd8a097f7a2",
+  "config/llm.yaml": "ec93cccd669b3c0de45aa95a393e0cda7ee0642eeddb5642944731fc886d6d87",
+  "config/products.yaml": "1e6afee933983285c44c309422f0d9a6df75db3980890f124ae6e144bed4e7a5",
+  "config/settings.py": "5755910cdb65004008984fae0b12a05d34a00ba808aae5412e1f55ed89e6589a",
+  "config/thresholds.yaml": "65ca106b750088f1fee750756546fe5adbdedf5189c599133bcb9e847e028ca4",
+  "data/features/features.parquet": "b7ef2085cc824f52aabb391666351bd1668565680a7d1093bd486675b477f6a1",
+  "data/priors/priors.json": "8f318425fd85f938f5c849565d37baefde58e7ac913de31bb9e410e9a6359796",
+  "greendash/llm/prompts/explain_v1.txt": "8b2899cbbbc0275553ef16a27c637ffb131a082ca3f15e693f7f3e4a369bd130",
+  "greendash/llm/prompts/system_v1.txt": "310848642629020a5fd2d8f1e8cfe5314e11d097e0f0ce47c9fd0735fcb8ca38",
+  "out/models/GP01.txt": "b96d5b66ba7c12b3acb76d878608f26378372b4b2e7bb92c76eaceaf60630780",
+  "out/models/GP01_iso.json": "89f49c229a80f00fbdb484dfafe9b461198c13ed61bdead4914013591f9499b6",
+  "out/models/GP02.txt": "54aed17bebac2aec5c4a491465bb7a292491008146870beeb6d0b74ce2c4335b",
+  "out/models/GP02_iso.json": "89f49c229a80f00fbdb484dfafe9b461198c13ed61bdead4914013591f9499b6",
+  "out/models/GP03.txt": "5aef9b58c12d7b16ed2e07fb931b1e10e6906b89701d8413ba52f77ddd615b68",
+  "out/models/GP03_iso.json": "89f49c229a80f00fbdb484dfafe9b461198c13ed61bdead4914013591f9499b6",
+  "out/models/GP04.txt": "bcfc2aca4e7569c1b8be8ead235b97ff2e5332b3e41b567d01dc1fb71765da09",
+  "out/models/GP04_iso.json": "89f49c229a80f00fbdb484dfafe9b461198c13ed61bdead4914013591f9499b6",
+  "out/test_predictions.csv": "42863c5686c0ece0fb83b8c8027cf2f4cb3d52beb4aef07eb54f375db77d27c9"
+ },
+ "cutoff_date": "2026-06-30",
+ "factor_vintage": "2026.1",
+ "git_sha": "6af7a2ac1f43d23355fef8c345f7d9fceba9e0ab",
+ "manifest_hash": "sha256:bbbea75f09662e64350190dc35632ec6c195a9bedaf8b208139c4d3398660887",
+ "outcome_window_days": 90,
+ "prompt_version": "v1.2",
+ "rules_version": "v1.0",
+ "seed": 42
+}

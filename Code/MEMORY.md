@@ -1,5 +1,5 @@
 # GreenDash — G3 Context Memory
-<!-- AUTO-UPDATED by agent. Last update: 2026-10-11 (backend state as of `cd3ba7d`; backend owner now G2-An) -->
+<!-- AUTO-UPDATED by agent. Last update: 2026-10-11 (state as of `a3fa7ad`; G2-M status + G2↔G3 integration review added) -->
 
 > **Project renamed:** `greenproof` → `greendash` (by teammates, commit `96ca5fb`)
 > Repo: https://github.com/<org>/megathon26-chatgpt  
@@ -60,7 +60,7 @@
 |---|---|
 | `greendash/contracts.py` | ✅ **Frozen** — `frozen=True` all models |
 | `api/main.py` + `api/routers/` | 🔴 **Still cannot start from `main`** (checked at `cd3ba7d`): `greendash/llm/claimcheck.py` is missing, and `greendash/contracts.py` has no `CustomerPacks` (it is `CustomerOpportunities`) though `api/services.py` + `api/routers/opportunities.py` import it |
-| Files deleted by rename commit `96ca5fb` | 🔴 20 files under `greendash/` deleted and still missing: `llm/` (7, incl. G1-K's `claimcheck.py`, `gateway.py`, `guard.py`), `carbon/` (4, incl. `engine.py`), `generator/` (8), `greendash/__init__.py`. Recoverable from `96ca5fb^` or `origin/the G1-K claimcheck branch` |
+| Files deleted by rename commit `96ca5fb` | 🔴 Not restored — `1319866` added stubs for `llm/claimcheck.py` and `carbon/engine.py` instead (see ML / LLM status). Still missing: `llm/gateway.py`, `guard.py`, `minimise.py`, `providers.py`, `textnorm.py`, `carbon/formulas.py`, `units.py`, all of `generator/`. Real versions recoverable from `96ca5fb^` or `origin/the G1-K claimcheck branch` |
 | First-request failures (from reading the code) | 🔴 `settings.ENV` / `settings.DEMO_MODE` don't exist in `config/settings.py` (only `demo_mode`); `issue_token()` takes 1 arg but `auth.py` passes 2; `scenario.py` reads `principal.role` but `require_role` returns a dict |
 | `api/deps.py` + `greendash/security/authz.py` | ⚠️ Pushed (`d74e266`) but **stubs**: `require_role` ignores the token, `require_subject` is empty — no real auth. Don't expose port 8000 (`--host 0.0.0.0`) on a shared network |
 | Portfolio/eval shapes | ⚠️ `aafd480` says `/api/portfolio/summary` + `/api/eval/summary` now match the UI fixtures (`metrics` / `baselines`) — **unverified**, needs a running API |
@@ -74,6 +74,29 @@
 | `fixtures/scenario_response.json` | ✅ |
 
 ---
+
+## 🧪 ML / LLM STATUS (G2-M, G2-M) — reviewed read-only at `a3fa7ad`
+
+G2-M says his deliverables are "locked in". What the repo shows:
+
+| Item | State |
+|---|---|
+| 4 LightGBM models | ✅ `data/models/take_up_GP0{1-4}_lgb.skops` + `hashes.json` |
+| `out/run_manifest.json` | ✅ Committed (`9bab839`). Hash `sha256:bbbea75f…0887`, computed on `6af7a2a`, 21 artefacts |
+| Manifest reproducibility | 🔴 `out/models/*` now committed (`a3fa7ad`) and match, but `out/test_predictions.csv` is still missing and `config/settings.py` changed in `1319866`, so the hash **no longer matches `main`**. Hash covers `out/models/*.txt`; `score.py` loads `data/models/*.skops` — different files. `out/models/GP01_iso.json` is a 3-point placeholder calibrator |
+| `docs/EVALUATION.md` | 🔴 **Do not use for slides — circular.** Since `a3fa7ad`, `eval/report.py` generates it by reading `fixtures/eval.json`, i.e. G3's own invented placeholders (AUC 0.847 etc., F1 0.891, 28/30 scenarios, LLM 97%). None of it is measured. "100 mocked packs" is hard-coded; real judged n = 2 |
+| Real metrics | ⚠️ `evaluate_models.py` computes ROC-AUC/Brier/ECE/lift but only prints them — nothing is saved |
+| `fixtures/eval.json` | 🔴 G3 placeholder numbers (invented in `1d1fc0d`). `/api/eval/summary` now just returns this file (`aafd480`), so Receipts shows invented numbers in **every** mode until real ones replace it |
+| LLM explainer on `main` | 🔴 Never runs: `minimise.py` + `guard.py` still missing (deleted by `96ca5fb`) → fail-closed fallback rejects every call → always template |
+| **Stubs added by `1319866` ("Fix API startup issues")** | 🔴 `greendash/llm/claimcheck.py` is now a 10-line stub that returns PASS for every sentence (G1-K's real one was 163 lines, still on `origin/the G1-K claimcheck branch`); `greendash/carbon/engine.py` `estimate()` always returns `NOT_APPLICABLE`; `greendash/models/score.py` `score()` returns constant `0.5`. **Red-team demo will show 0 violations and no impact numbers in live mode** |
+| Explainer output shape | 🔴 Returns `{explanation: str|dict, source, claimcheck_status}`; contract + `claim_stamp.py` need `sentences[{text, fields, check}]`. Status `PII_BLOCK` is not in the contract |
+| Fallback template | 🔴 Always uses the `REJECTED` template and reads `pack["recommendation"]` (field is `opportunity_id`) → every fallback says "EV Finance … is not recommended" |
+| Scores / reasons / confidence | 🔴 Not contract-shaped: no `likelihood_band`, no `ConfidenceParts`, reason codes lack `phrase/display/observed_at/source`; IDs are `CUST-00001` (5 digits) vs UI/API `CUST-0001` |
+
+**Rule for slides/README:** quote no metric from `EVALUATION.md` or `fixtures/eval.json` as real. The manifest hash may be quoted only with its commit (`6af7a2a`) and the caveat that the model files it covers are not in the repo.
+
+---
+
 
 ## 🔴 REMAINING
 
@@ -186,5 +209,5 @@ MEMORY.md                        ✅ (this file)
 | Who | Ask |
 |---|---|
 | **G2-An** (now also covering G1-A's G1-A work) | Restore the 20 files deleted by `96ca5fb`; fix `CustomerPacks` import, settings `ENV`/`DEMO_MODE`, `issue_token` call, `principal.role`; real `api/deps.py`; then send LAN IP for CP2 |
-| **G1-K** | Caddy CSP (`font-src 'self'`, `frame-ancestors 'none'`); proxy Streamlit only, not port 8000; keep branch the G1-K claimcheck branch until Claim-Check is restored on main |
-| **G2-M** | `docs/EVALUATION.md` exists but lacks slide-6 numbers: AUC per product, LR + heuristic baselines, scenario pass/fail, categoriser macro-F1; also clarify LLM eval count ("100 mocked, 2 processed") |
+| **G1-K** | Caddy CSP (`font-src 'self'`, `frame-ancestors 'none'`); proxy Streamlit only, not port 8000; keep branch `the G1-K claimcheck branch` until Claim-Check is restored on main |
+| **G2-M** | Sent the integration flaw list (see "ML / LLM status"). Blocking for slide 6: real AUC/baseline/scenario/F1 numbers written to a file, and an honest LLM-eval sample size |
