@@ -1,14 +1,57 @@
 # GreenDash — G3 Context Memory
-<!-- AUTO-UPDATED by agent. Last update: 2026-10-11 (fifth run at `485ab95`; hard-coded Priya propensity found) -->
+<!-- AUTO-UPDATED by agent. Last update: 2026-10-11 ~04:00 IST (final status at break; `main` at `8fa8033`) -->
 
 > **Project renamed:** `greenproof` → `greendash` (by teammates, commit `96ca5fb`)
 > Repo: https://github.com/<org>/megathon26-chatgpt  
-> Branch: `main` (backend state checked at `485ab95`) · Root: `megathon26-chatgpt/Code/`
+> Branch: `main` (backend state checked at `8fa8033`, after PR #3 merge) · Root: `megathon26-chatgpt/Code/`
 > G3 owns: `app/`, `mobile/`, `slides/`, `docs/diagrams/`, `README.md`, `MEMORY.md`  
 > **NEVER TOUCH:** `greendash/`, `api/`, `data/`, `config/`, `eval/`, `tests/`
 > **Backend owner: G2-An** — as of 2026-10-11 G2-An has taken over all of G1-A's (G1-A) work. Send every backend/API ask to G2-An, not G1-A.
 
 ---
+
+## 📌 FINAL STATUS AT BREAK (04:00 IST, work resumes 04:45) — `main` at `8fa8033`
+
+**Demo-ready today:** web app in `DEMO_MODE=fixtures`. **Not ready:** live mode (4 of 6 API calls fail), real metrics, final manifest, auth.
+
+Team roles as stated by Kratik: Aniket coordinates backend, Madhav scoring/model fixes, Ritvik live UI/API integration + final manifest run, Kratik security. **Slides are now Akshit's, not G3's** (Ritvik, 04:00). PR #2 and PR #3 (Kratik's production explainer + Claim-Check integration) are merged; PR #3 not yet exercised end to end by G3 (needs an LLM key).
+
+Team rules (Kratik): focused fixes, no overlapping edits, share commit SHAs + concrete test results, one final integrated `main` and one final manifest.
+
+### To do — Ritvik (G3)
+1. Focused Step 3.5 re-test when Aniket's fixes land: startup/health/token, opportunities, claimcheck, portfolio, `SET_VEHICLE_BEV`, role-gated screens. Report only remaining failures with exact errors.
+2. Final manifest (Kratik's request): on the agreed final `main`, run `make all`, regenerate + commit `out/run_manifest.json`, confirm model hashes match files, send Kratik (a) manifest SHA-256, (b) its recorded `git_sha`, (c) commit containing it. Blocked until `make all` works.
+3. "Illustrative figures" label on `app/pages/3_Receipts.py`; give Akshit the same wording for slide 6.
+4. Rehearse demo script in fixtures mode; backup video.
+5. Hand Akshit the slide inputs (screenshots in `docs/design/`, diagrams in `docs/diagrams/`, `app/theme.py` colours).
+6. Optional: brand clean-up; settle failing smoke test `test_all_five_statuses_covered`.
+
+### To do — Aniket (backend coordinator)
+1. `api/services.py:19` — build `CustomerOpportunities` with `model_validate_json` / non-strict (opportunities + claimcheck).
+2. `energy.parquet` vs `energy_usage.parquet` (scenario, `make features`, portfolio's `audit_attrs.parquet`); string-vs-timestamp in `greendash/features/build.py:18`.
+3. `make data` entry point; generator overwriting tracked `data/raw/*.csv`.
+4. Remove or disclose the Priya override (`greendash/models/score.py:32-33`, propensity forced to 0.95).
+5. Test from a fresh clone before reporting fixed.
+
+### To do — Madhav (scoring/model)
+1. Per-product recommend thresholds — 0.5 is unreachable (best real propensity 0.417; take-up base rates 3–6%).
+2. Regenerate `data/splits/splits.json` (0 bytes) and produce measured eval numbers.
+3. Real confidence parts and reason codes in `score()` (currently 0.8 and `[]`).
+
+### To do — Kratik (security)
+1. Decide owner for real token validation in `api/deps.py` (no check today) and land it.
+2. Caddy + CSP; proxy Streamlit only, never port 8000.
+3. Final hash into README + submission form after G3 confirms the three values.
+
+### To do — Akshit
+1. 8-slide deck → `slides/`. Slide 6 numbers are illustrative unless Madhav delivers measured ones.
+
+### Open decisions
+- Cut-off time after which the demo is fixtures-only.
+- Whether the Priya override stays (and is disclosed) or goes.
+
+---
+
 
 ## ✅ COMPLETED — ALL STEPS DONE EXCEPT 5 + 6
 
@@ -60,7 +103,7 @@
 |---|---|
 | `greendash/contracts.py` | ✅ `\d{4}` regex restored |
 | `api/main.py` + `api/routers/` | ✅ **Starts from `main`** at `cb2173d` (`ENV=demo uvicorn api.main:app`), `/healthz` OK |
-| **CP2 result, run 5 (local API at `485ab95`, fresh packs)** | 🔴 Unchanged: opportunities, claimcheck, portfolio, scenario all **500**; only `demo-token` + eval work. Same four causes as run 4 (`api/services.py:19` strict validation; `data/raw/energy.parquet`; `features/build.py:18`; `audit_attrs.parquet`) |
+| **CP2 result, run 6 (local API at `8fa8033`, after PR #3, fresh packs)** | 🔴 Works: startup, `/healthz`, `demo-token`, eval. Fails (all 500): **opportunities + claimcheck** — `api/services.py:19` `ValidationError: 30 validation errors for CustomerOpportunities … Input should be an instance of ProductId`; **portfolio** — `api/routers/portfolio.py:14` `FileNotFoundError: data/features/audit_attrs.parquet`; **scenario SET_VEHICLE_BEV** — `greendash/scenarios/run.py:23` `FileNotFoundError: data/raw/energy.parquet`. Auth: eval returns 200 with no token / garbage token / CUSTOMER token; evaluator demo token is the literal string `token_None` |
 | `make data` / `make features` | 🔴 `make data` fails (`greendash.generator` has no `__main__`; `python -m greendash.generator.run` works). `make features` fails on missing `data/raw/energy.parquet`. **Warning: the generator overwrites 6 tracked files in `data/raw/` (`transactions.csv`, `vehicles.csv`, …)** — run `git checkout -- data/raw` afterwards or the manifest inputs drift |
 | Building packs | ✅ `python -m greendash.packs` runs clean at `485ab95` (20,000 packs, 0 scoring errors, real propensities). See ML status for what they contain |
 | Files deleted by rename commit `96ca5fb` | ✅ All 20 restored in `cb2173d` (real `claimcheck.py` 177 lines, `carbon/engine.py` 109 lines) |
@@ -115,7 +158,7 @@ Decide: one card per product (fix the test) or all five statuses (fix the de-dup
 - `app/pages/3_Receipts.py`: add a visible "Illustrative figures — not measured results" note (icon + text)
 - Slide 6: same label; do not present AUC/F1/scenario numbers as results
 
-### Step 5 — Slides (claude.ai)
+### Step 5 — Slides — **now owned by Akshit** (prompt below kept for him)
 **Files ready to upload right now:**
 - `docs/design/proof_card.png`
 - `docs/design/cockpit.png`
@@ -190,7 +233,7 @@ fixtures/
 docs/design/                     ✅ proof_card.png + cockpit.png
 docs/diagrams/                   ✅ 4× .mmd + 4× .png (2400px, brand colours)
 mobile/README.md                 ✅ Expo production spec (8 screens)
-slides/                          🔴 Step 5 — generate on claude.ai
+slides/                          🔴 Step 5 — Akshit
 MEMORY.md                        ✅ (this file)
 ```
 
