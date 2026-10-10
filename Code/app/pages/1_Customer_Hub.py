@@ -1,136 +1,60 @@
-"""Customer Hub — four pathway tiles, always visible, ordered by status then propensity.
-
-Scenario Lab side panel visible to Evaluator and Relationship Manager roles.
-Mobile-first: single column under 640px (handled by theme.css()).
-All data via client.py only.
-"""
-
+"""Customer Hub: four pathway tiles (always visible), the Proof Card, Scenario Lab and red-team."""
 import streamlit as st
 
-import theme
 import client
-from components.chrome import banner, current_role
-from components import proof_card, scenario_lab
+import theme as T
+from components import proof_card, shell
+from components.scenario_lab import redteam, scenario_lab
 
-st.set_page_config(page_title="GreenDash – Customer Hub", layout="wide")
-st.markdown(theme.css(), unsafe_allow_html=True)
+T.setup("Customer Hub")
+persona = shell.sidebar()
+shell.gate("hub", "the Customer Hub")
 
-banner()
-st.title("Customer Hub")
-role = current_role()
-st.caption(f"Viewing as: {role}")
+doc = client.opportunities(persona["customer_id"], client.role())
+opps = {o["opportunity_id"]: o for o in doc["opportunities"]}
 
-# ── Derive customer ID from role ─────────────────────────────────────────────
-_ROLE_TO_CID = {
-    "Customer – Priya (GP01)":  "CUST-0001",
-    "Customer – Aisha (GP03)":  "CUST-0003",
-    "Customer – Marcus (GP02)": "CUST-0002",
-    "Customer – Fatima (GP04)": "CUST-0004",
-    "Customer – Tom (GP01)":    "CUST-0005",
-}
-_DEFAULT_CID = "CUST-0001"
-_STATUS_ORDER = {"RECOMMEND": 0, "REVIEW": 1, "ABSTAIN": 2, "SOFT_SURFACE": 3, "RULED_OUT": 4}
-_PATHWAY_META = {
-    "GP01": {"name": "EV Finance",        "icon": ":material/directions_car:"},
-    "GP02": {"name": "Green Home Loan",   "icon": ":material/home:"},
-    "GP03": {"name": "Solar Finance",     "icon": ":material/wb_sunny:"},
-    "GP04": {"name": "Paperless Banking", "icon": ":material/description:"},
-}
+# Default card: the most prominent status (RECOMMEND > REVIEW > ABSTAIN > SOFT_SURFACE > RULED_OUT)
+ORDER = {"RECOMMEND": 0, "REVIEW": 1, "ABSTAIN": 2, "SOFT_SURFACE": 3, "RULED_OUT": 4}
+sel_key = f"pathway::{persona['customer_id']}"
+if sel_key not in st.session_state:
+    st.session_state[sel_key] = sorted(opps.values(), key=lambda o: ORDER[o["status"]])[0]["opportunity_id"]
 
-customer_id = _ROLE_TO_CID.get(role, _DEFAULT_CID)
+st.markdown(f"## Hi {T.esc(doc['display_name'])}")
+T.render(f'<div class="gd-row"><span class="gd-chip">Data as of 30 Jun 2026</span><span class="gd-chip">{T.esc(doc["region"])}</span>'
+         + "".join(f'<span class="gd-chip">{T.esc(t)}</span>' for t in doc.get("tags", [])) + "</div>")
 
-# ── Scenario Lab (sidebar — only for allowed roles) ──────────────────────────
-selected_pid = st.session_state.get("hub_selected")
-opp_id = selected_pid or "GP01"
-scenario_lab.render(customer_id, opp_id, role)
+if all(o["status"] == "RULED_OUT" for o in opps.values()):
+    T.banner("You're all set. Every pathway is ruled out for a plain reason: open any tile to see why.", "ok")
 
-# ── Load opportunities ───────────────────────────────────────────────────────
-with st.spinner("Loading your opportunities…"):
-    try:
-        opportunities: list[dict] = client.get_opportunities(customer_id)
-    except FileNotFoundError:
-        st.warning(
-            "Fixture file not found — run the app from the repo root with "
-            "`DEMO_MODE=fixtures streamlit run app/Home.py`.",
-            icon=":material/warning:",
-        )
-        opportunities = []
-    except Exception as exc:
-        st.error(f"Could not load opportunities. {exc}", icon=":material/error:")
-        opportunities = []
-
-if not opportunities:
-    st.info(
-        "No opportunities loaded. Make sure `fixtures/opportunities.json` exists.",
-        icon=":material/construction:",
-    )
-    st.stop()
-
-# ── Sort: status order then propensity desc ──────────────────────────────────
-opportunities.sort(
-    key=lambda o: (
-        _STATUS_ORDER.get(o.get("status", "SOFT_SURFACE"), 99),
-        -o.get("propensity", 0),
-    )
-)
-opp_by_product: dict[str, dict] = {
-    o.get("opportunity_id", ""): o for o in opportunities
-}
-
-# ── Initialise session state ─────────────────────────────────────────────────
-if "hub_selected" not in st.session_state:
-    st.session_state["hub_selected"] = None
-
-# ── Pathway tile row ─────────────────────────────────────────────────────────
-st.subheader("Your green pathways")
-st.caption("All four pathways are always visible — we show you where you stand on each.")
-
-tile_cols = st.columns(4, gap="small")
-for col, (pid, meta) in zip(tile_cols, _PATHWAY_META.items()):
-    opp = opp_by_product.get(pid)
-    status = opp.get("status", "SOFT_SURFACE") if opp else "SOFT_SURFACE"
-    s_tok = theme.STATUS.get(status, theme.STATUS["SOFT_SURFACE"])
-    is_selected = st.session_state["hub_selected"] == pid
-    border = f"3px solid {s_tok['border']}" if is_selected else f"1px solid {s_tok['border']}"
-
+st.markdown("#### Your four green pathways")
+cols = st.columns(4)
+for col, gp in zip(cols, ["GP01", "GP02", "GP03", "GP04"]):
     with col:
-        st.markdown(
-            f'<div class="gd-card" style="cursor:pointer;border:{border};background:{s_tok["bg"]};">'
-            f'<div style="font-size:22px;margin-bottom:4px;" aria-hidden="true">{s_tok["glyph"]}</div>'
-            f'<div style="font-weight:700;font-size:14px;margin-bottom:6px;">{meta["name"]}</div>'
-            f'<span class="gd-pill {s_tok["css_class"]}" style="font-size:11px;padding:2px 8px;">'
-            f'{s_tok["label"] if opp else "No data yet"}</span>'
-            f'</div>',
-            unsafe_allow_html=True,
-        )
-        if st.button(
-            "Open" if not is_selected else "✓ Open",
-            key=f"tile_{pid}",
-            use_container_width=True,
-            type="primary" if is_selected else "secondary",
-        ):
-            st.session_state["hub_selected"] = pid
+        T.render(T.tile(opps[gp], st.session_state[sel_key] == gp))
+        if st.button(f"Open {opps[gp]['opportunity_name']}", key=f"open-{gp}", width="stretch"):
+            st.session_state[sel_key] = gp
             st.rerun()
 
-# ── Selected Proof Card ──────────────────────────────────────────────────────
-selected_pid = st.session_state.get("hub_selected")
-if selected_pid:
-    st.divider()
-    opp = opp_by_product.get(selected_pid)
-    meta = _PATHWAY_META.get(selected_pid, {"name": selected_pid})
-    st.subheader(f"{meta['name']}")
-
-    if opp:
-        # Responsive columns: full width on mobile, max 480px on desktop
-        card_col, spacer = st.columns([5, 4])
-        with card_col:
-            proof_card.render(opp)
+left, right = st.columns([3, 2], gap="large")
+with left:
+    if st.session_state.get("insights-on", True):
+        proof_card.render(doc, opps[st.session_state[sel_key]], key=f"{persona['customer_id']}-{st.session_state[sel_key]}")
     else:
-        st.info(
-            f"No opportunity data for {meta['name']} yet.",
-            icon=":material/construction:",
-        )
+        T.banner("Insights are off. Switch them back on in Your data whenever you like.", "info")
 
-    if st.button("← All pathways", key="back_hub", type="secondary"):
-        st.session_state["hub_selected"] = None
-        st.rerun()
+with right:
+    with st.container(key="gd-panel-data"):
+        st.markdown("#### Your data")
+        for f in doc.get("data_freshness", []):
+            T.render(f'<p style="margin:4px 0;display:flex;justify-content:space-between;gap:8px"><span>{T.esc(f["source"])}</span>'
+                     f'<span class="gd-date">{T.esc(f["asOf"]).upper()} · {"DECLARED" if f["kind"] == "declared" else "INFERRED"}</span></p>')
+        st.markdown("**What we used / what we didn't**")
+        st.caption("Used: spending categories, products, energy and digital usage. "
+                   "Not used to drive recommendations: age, income or fine-grained postcode.")
+        st.toggle("Show me green insights", value=True, key="insights-on", help="Switching this off replaces every card with one placeholder.")
+    if shell.can("lab"):
+        scenario_lab(persona["customer_id"])
+    if shell.can("redteam"):
+        redteam()
+
+T.footer()

@@ -1,0 +1,46 @@
+{
+  "request": {
+    "customer_id": "CUST-0001",
+    "opportunity_id": "GP01",
+    "sentences": [
+      {
+        "text": "Switching will save you 4,000 kg a year and you're pre-approved.",
+        "fields": []
+      }
+    ]
+  },
+  "response": {
+    "verdict": "BLOCKED",
+    "sentences": [
+      {
+        "text": "Switching will save you 4,000 kg a year and you're pre-approved.",
+        "status": "BLOCKED",
+        "violations": [
+          {
+            "rule": "BAN",
+            "span": "will save",
+            "start": 10,
+            "end": 19,
+            "detail": "Banned phrase"
+          },
+          {
+            "rule": "NUM",
+            "span": "4,000 kg",
+            "start": 24,
+            "end": 32,
+            "detail": "Not in Evidence Pack allow-list"
+          },
+          {
+            "rule": "BAN",
+            "span": "pre-approved",
+            "start": 51,
+            "end": 63,
+            "detail": "Banned phrase"
+          }
+        ]
+      }
+    ],
+    "fallback_text": "Your fuel spend has been above your usual level, so an EV could be worth exploring. Eligibility has not been confirmed.",
+    "blocked_total": 8
+  }
+}

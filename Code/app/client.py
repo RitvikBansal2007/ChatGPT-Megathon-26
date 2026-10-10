@@ -1,23 +1,17 @@
-"""The single data gateway for the GreenDash UI.
+"""greendash · data client for the Streamlit app.
 
-Pages call these functions and nothing else for data. DEMO_MODE (env) picks
-the source:
+One switch, DEMO_MODE:
+  fixtures  read fixtures/*.json only. No API, no models. Works with nothing else running.
+  cached    call the API; fall back to fixtures silently if the health check or a request fails.
+  live      call the FastAPI service with a Bearer token; on failure show a friendly card and stop the page.
 
-  fixtures (default)  read contract-shaped JSON from <repo>/fixtures/
-  live                FastAPI at API_BASE_URL with a demo Bearer token; on any
-                      failure show a friendly card and return empty data
-  cached              same API, but silently fall back to fixtures when
-                      /healthz or a request fails
+The UI never computes a verdict. Propensity, eligibility and impact always come
+from the API (or its fixture snapshot). The only local logic is an offline
+stand-in for Claim-Check and the mileage ladder; the real verifier is
+greendash/llm/claimcheck.py.
 
-Contract shapes mirror greendash/contracts.py (frozen by G1-A).
-
-Rules:
-- Never holds the LLM key
-- Never logs tokens, request bodies or response bodies
-- No network calls in fixtures mode
-- Path-traversal guard on all IDs used in filenames
+Never logs tokens, request bodies or response bodies.
 """
-
 from __future__ import annotations
 
 import json
@@ -27,234 +21,230 @@ import time
 import urllib.error
 import urllib.request
 from pathlib import Path
-from typing import Any
 
 import streamlit as st
 
 VALID_MODES = ("fixtures", "cached", "live")
-FIXTURES_DIR = Path(__file__).resolve().parent.parent / "fixtures"
+FIXTURES = Path(os.getenv("GREENDASH_FIXTURES", Path(__file__).resolve().parents[1] / "fixtures"))
+TIMEOUT = 10
 
-_SAFE_ID = re.compile(r"^[A-Za-z0-9_-]{1,64}$")
-
-# Status → per-status fixture file name (G1-A's naming convention)
-_STATUS_FIXTURES = {
-    "RECOMMEND":    "opps_recommend",
-    "SOFT_SURFACE": "opps_soft_surface",
-    "ABSTAIN":      "opps_abstain",
-    "REVIEW":       "opps_review",
-    "RULED_OUT":    "opps_ruled_out",
-}
-
-# Customer → which status fixture to load first for that persona
-_CUSTOMER_STATUS_MAP = {
-    "CUST-0001": "RECOMMEND",    # Priya — EV RECOMMEND
-    "CUST-0002": "REVIEW",       # Marcus — REVIEW
-    "CUST-0003": "RULED_OUT",    # Aisha — all RULED_OUT
-    "CUST-0004": "SOFT_SURFACE", # Fatima — SOFT_SURFACE
-    "CUST-0005": "ABSTAIN",      # Tom — ABSTAIN (one missing input)
+ROLES = {
+    "CUSTOMER": "Customer",
+    "RELATIONSHIP_MANAGER": "Relationship Manager",
+    "PORTFOLIO_ANALYST": "Portfolio Analyst",
+    "AUDITOR": "Auditor",
+    "EVALUATOR": "Evaluator",
 }
 
 
-def demo_mode() -> str:
-    """Return DEMO_MODE env, validated."""
-    mode = os.environ.get("DEMO_MODE", "fixtures").strip().lower()
-    if mode not in VALID_MODES:
-        raise ValueError(f"DEMO_MODE must be one of {VALID_MODES}, got {mode!r}")
-    return mode
+# ------------------------------------------------------------------ helpers
+def _fixture(name: str):
+    with open(FIXTURES / name, encoding="utf-8") as fh:
+        return json.load(fh)
+
+
+def mode() -> str:
+    m = os.getenv("DEMO_MODE", "fixtures").strip().lower()
+    if m not in VALID_MODES:
+        raise ValueError(f"DEMO_MODE must be one of {VALID_MODES}, got {m!r}")
+    return m
+
+
+def role() -> str:
+    return st.session_state.get("role", "EVALUATOR")
 
 
 def _base_url() -> str:
-    url = os.environ.get("API_BASE_URL", "http://127.0.0.1:8000").strip().rstrip("/")
+    url = os.getenv("API_BASE_URL", "http://127.0.0.1:8000").strip().rstrip("/")
     if not url.startswith(("http://", "https://")):  # urllib would also open file://
         raise ValueError("API_BASE_URL must be an http(s) URL")
     return url
 
 
-def _http(method: str, path: str, body: Any = None, token: str | None = None,
-          timeout: float = 10) -> Any:
+def _http(method: str, path: str, body=None, token: str | None = None, timeout: float = TIMEOUT):
     headers = {"Content-Type": "application/json"}
     if token:
         headers["Authorization"] = f"Bearer {token}"
-    req = urllib.request.Request(
-        _base_url() + path, method=method, headers=headers,
-        data=None if body is None else json.dumps(body).encode("utf-8"),
-    )
+    req = urllib.request.Request(_base_url() + path, method=method, headers=headers,
+                                 data=None if body is None else json.dumps(body).encode("utf-8"))
     with urllib.request.urlopen(req, timeout=timeout) as resp:  # noqa: S310 - scheme checked in _base_url
         return json.load(resp)
 
 
-def _identity(customer_id: str | None) -> dict:
-    """Map the UI role label to the API's demo-token body."""
-    role = st.session_state.get("role", "")
-    if not role or role.startswith("Customer"):
-        return {"role": "CUSTOMER", "customer_id": customer_id}
-    return {"role": role.upper().replace(" ", "_")}
-
-
-def _token(customer_id: str | None) -> str:
-    ident = _identity(customer_id)
+def _token() -> str:
+    """Bearer token from /api/auth/demo-token, cached per role and customer until 60 s before expiry."""
+    ident = {"role": role()}
+    if role() == "CUSTOMER":
+        ident["customer_id"] = st.session_state.get("persona_id", "CUST-0001")
     cached = st.session_state.get("_api_token")
     if cached and cached["ident"] == ident and time.time() <= cached["expiry"] - 60:
         return cached["token"]
     data = _http("POST", "/api/auth/demo-token", ident)
-    st.session_state["_api_token"] = {
-        "token": data["access_token"],
-        "expiry": time.time() + float(data.get("expires_in", 900)),
-        "ident": ident,
-    }
+    st.session_state["_api_token"] = {"token": data["access_token"], "ident": ident,
+                                      "expiry": time.time() + float(data.get("expires_in", 900))}
     return data["access_token"]
 
 
-_USE_FIXTURES = object()
+def _api(method: str, path: str, body=None):
+    return _http(method, path, body, _token())
 
 
-def _remote(method: str, path: str, body: Any = None, customer_id: str | None = None) -> Any:
-    """Fetch from the API. Returns _USE_FIXTURES when the caller should read
-    fixtures, or None after showing a friendly card (live mode failure)."""
-    mode = demo_mode()
-    if mode == "fixtures":
-        return _USE_FIXTURES
+def _call(api_fn, fixture_fn):
+    """fixtures: fixtures only. cached: API, then fixtures on any failure. live: API, friendly card on failure."""
+    m = mode()
+    if m == "fixtures":
+        return fixture_fn()
     try:
-        if mode == "cached":
+        if m == "cached":
             _http("GET", "/healthz", timeout=2)
-        return _http(method, path, body, _token(customer_id))
+        return api_fn()
     except urllib.error.HTTPError as exc:
         if exc.code in (401, 403):
             st.session_state.pop("_api_token", None)
-            msg = "This view isn't available for the current role. Switch role on Home and try again."
+            msg = "This view isn't available for your role."
         elif exc.code >= 500:
-            msg = "The GreenDash service hit a problem. Please try again in a moment."
+            msg = "The greendash service hit a problem. Please try again in a moment."
         else:
-            msg = "The GreenDash service couldn't process this request."
-    except (OSError, ValueError, KeyError):  # refused/timeout, bad JSON, missing token field
-        msg = "Can't reach the GreenDash service right now. Please try again in a moment."
-    if mode == "cached":
-        return _USE_FIXTURES
+            msg = "The greendash service couldn't process this request."
+    except (OSError, ValueError, KeyError):  # refused or timed out, bad JSON, missing token field
+        msg = "Can't reach the greendash service right now. Please try again in a moment."
+    if m == "cached":
+        return fixture_fn()
     st.error(msg, icon=":material/error:")
-    return None
+    st.stop()
 
 
-def _safe_id(value: str, field: str) -> str:
-    if not isinstance(value, str) or not _SAFE_ID.match(value):
-        raise ValueError(f"invalid {field}")
-    return value
+def _complete(doc: dict, customer_id: str) -> dict:
+    """Fill presentation fields the API contract does not carry, so pages never KeyError on a live pack."""
+    who = next((p for p in personas() if p["customer_id"] == customer_id), {})
+    doc.setdefault("display_name", who.get("display_name", customer_id))
+    doc.setdefault("customer_key", customer_id)
+    doc.setdefault("region", "")
+    for key in ("tags", "data_freshness", "products_held"):
+        doc.setdefault(key, [])
+    for o in doc.get("opportunities", []):
+        rc = o.get("reason_codes") or []
+        o.setdefault("headline", rc[0]["phrase"] if rc and rc[0].get("phrase") else o.get("opportunity_name", ""))
+        if not o.get("explanation"):
+            o["explanation"] = {"sentences": [], "source": "template", "claimcheck_status": "FALLBACK"}
+        o["next_action"] = o.get("next_action") or {}
+        o["impact"].setdefault("missing_inputs", [])
+    return doc
 
 
-def _load(name: str) -> Any:
-    path = FIXTURES_DIR / f"{name}.json"
-    if not path.is_file():
-        raise FileNotFoundError(f"fixture not found: fixtures/{name}.json")
-    with path.open(encoding="utf-8") as fh:
-        return json.load(fh)
+# ------------------------------------------------------------------ endpoints
+@st.cache_data(show_spinner=False)
+def personas() -> list[dict]:
+    return _fixture("personas.json")
 
 
-def _unwrap_opportunities(data: Any) -> list[dict]:
-    """Handle both the wrapper shape (CustomerOpportunities) and plain lists."""
-    if isinstance(data, dict) and "opportunities" in data:
-        return list(data["opportunities"])
-    if isinstance(data, list):
-        return data
-    return []
+@st.cache_data(show_spinner=False, ttl=60)
+def opportunities(customer_id: str, _role: str = "") -> dict:
+    """GET /api/customers/{id}/opportunities -> Evidence Packs for all four products."""
+    return _complete(_call(lambda: _api("GET", f"/api/customers/{customer_id}/opportunities"),
+                           lambda: _fixture(f"opportunities_{customer_id}.json")), customer_id)
 
 
-# ── Public API ────────────────────────────────────────────────────────────────
+def scenario(customer_id: str, mutations: list[str]) -> dict:
+    """POST /api/scenario. Offline results are precomputed, one mutation at a time."""
+    def fx():
+        if len(mutations) != 1:
+            return {"error": "Pick one change at a time."}
+        return _fixture("scenarios.json")["results"][customer_id][mutations[0]]
+    return _call(lambda: _api("POST", "/api/scenario", {"customer_id": customer_id, "mutations": mutations}), fx)
 
-def get_opportunities(customer_id: str) -> list[dict]:
-    """Return opportunity list for one customer.
 
-    Loading order:
-    1. fixtures/opportunities_<customer_id>.json   (per-customer override)
-    2. Status-based fixture from _CUSTOMER_STATUS_MAP + all other status fixtures
-       combined into one list (covers all five status examples for the demo)
-    3. fixtures/opportunities.json                 (legacy fallback)
-    """
-    cid = _safe_id(customer_id, "customer_id")
-    live = _remote("GET", f"/api/customers/{cid}/opportunities", customer_id=cid)
-    if live is not _USE_FIXTURES:
-        return _unwrap_opportunities(live)
+@st.cache_data(show_spinner=False)
+def mutation_catalogue() -> list[dict]:
+    return _fixture("scenarios.json")["mutations"]
 
-    # 1. Per-customer override
-    per_cust = FIXTURES_DIR / f"opportunities_{cid}.json"
-    if per_cust.is_file():
-        return _unwrap_opportunities(_load(f"opportunities_{cid}"))
 
-    # 2. Combine all 5 per-status fixtures → one opportunity per product
-    #    Primary status from _CUSTOMER_STATUS_MAP; the rest fill the other products
-    opps: list[dict] = []
-    primary_status = _CUSTOMER_STATUS_MAP.get(cid, "RECOMMEND")
-    seen_products: set[str] = set()
+def claimcheck(customer_id: str, opportunity_id: str, text: str) -> dict:
+    """POST /api/claimcheck. Offline, a small local stand-in runs the same rule families (NUM, BAN, METRIC, IMPLIED)."""
+    return _call(lambda: _api("POST", "/api/claimcheck", {"customer_id": customer_id, "opportunity_id": opportunity_id,
+                                                           "sentences": [{"text": text, "fields": []}]}),
+                 lambda: _local_claimcheck(customer_id, opportunity_id, text))
 
-    # Load primary status first so it sorts top
-    primary_file = _STATUS_FIXTURES[primary_status]
-    try:
-        primary_opps = _unwrap_opportunities(_load(primary_file))
-        for o in primary_opps:
-            pid = o.get("opportunity_id", "")
-            if pid not in seen_products:
-                opps.append(o)
-                seen_products.add(pid)
-    except FileNotFoundError:
-        pass
 
-    # Fill remaining products with the other status fixtures
-    for status, fname in _STATUS_FIXTURES.items():
-        if status == primary_status:
-            continue
+@st.cache_data(show_spinner=False, ttl=60)
+def portfolio(_role: str = "") -> dict:
+    return _call(lambda: _api("GET", "/api/portfolio/summary"), lambda: _fixture("portfolio_summary.json"))
+
+
+@st.cache_data(show_spinner=False, ttl=60)
+def eval_summary(_role: str = "") -> dict:
+    return _call(lambda: _api("GET", "/api/eval/summary"), lambda: _fixture("eval_summary.json"))
+
+
+# ------------------------------------------------------------------ offline stand-ins
+BANNED = ["save the planet", "carbon neutral", "pre-approved", "eco-friendly", "you qualify", "guaranteed", "green score", "will save", "approved"]
+NUM_RE = re.compile(r"(£\s?)?\d[\d,]*(?:\.\d+)?\s?(%|kg|tonnes?|t\b|kwh|miles?|sheets?|days?|months?|years?)?", re.I)
+
+
+def _nums(text: str) -> set[float]:
+    out = set()
+    for m in NUM_RE.finditer(re.sub(r"CO[2₂]", "CO_", text)):
+        tok = m.group(0)
+        value = re.sub(r"[£,\s%a-zA-Z]", "", tok)
         try:
-            for o in _unwrap_opportunities(_load(fname)):
-                pid = o.get("opportunity_id", "")
-                if pid not in seen_products:
-                    opps.append(o)
-                    seen_products.add(pid)
-        except FileNotFoundError:
-            pass
-
-    if opps:
-        return opps
-
-    # 3. Legacy fallback
-    legacy = _load("opportunities") if (FIXTURES_DIR / "opportunities.json").is_file() else []
-    return _unwrap_opportunities(legacy)
+            n = float(value)
+        except ValueError:
+            continue
+        unit = (m.group(2) or "").lower()
+        if unit in ("t", "tonne", "tonnes"):
+            n *= 1000
+        out.add(round(n, 3))
+    return out
 
 
-def run_scenario(customer_id: str, mutations: list[str] | list[dict] | dict) -> dict:
-    """Scenario Lab result. fixtures mode returns canned scenario_response.json."""
-    _safe_id(customer_id, "customer_id")
-    if not isinstance(mutations, (list, dict)):
-        raise ValueError("mutations must be a list or dict")
-    live = _remote("POST", "/api/scenario",
-                   {"customer_id": customer_id, "mutations": mutations}, customer_id)
-    if live is not _USE_FIXTURES:
-        return live or {}
-    return dict(_load("scenario_response"))
+def _local_claimcheck(customer_id: str, opportunity_id: str, text: str) -> dict:
+    pack = next(o for o in _fixture(f"opportunities_{customer_id}.json")["opportunities"] if o["opportunity_id"] == opportunity_id)
+    im = pack["impact"]
+    bag = [r["display"] + " " + r["observed_at"] for r in pack["reason_codes"]]
+    if pack.get("why_now"):
+        bag.append(pack["why_now"]["display"])
+    bag += [str(im.get(k)) for k in ("low", "central", "high") if im.get(k) is not None]
+    bag += [im.get("bills") or "", im.get("baseline") or ""]
+    allow = set().union(*[_nums(s) for s in bag]) if bag else set()
+
+    src = re.sub(r"CO[2₂]e?", lambda m: "CO" + "_" * (len(m.group(0)) - 2), text)
+    taken, violations = [], []
+
+    def add(rule, start, end, detail):
+        if any(start < b and end > a for a, b in taken):
+            return
+        taken.append((start, end))
+        violations.append({"rule": rule, "span": text[start:end], "start": start, "end": end, "detail": detail})
+
+    for w in BANNED:  # longest first so "pre-approved" is not also counted as "approved"
+        for m in re.finditer(r"\b" + w.replace("-", r"[-\s]?") + r"\b", src, re.I):
+            add("BAN", m.start(), m.end(), "Banned phrase")
+    for m in NUM_RE.finditer(src):
+        if not re.search(r"\d", m.group(0)):
+            continue
+        if not (_nums(m.group(0)) & allow):
+            add("NUM", m.start(), m.start() + len(m.group(0).rstrip()), "Not in Evidence Pack allow-list")
+    if opportunity_id == "GP04":
+        for m in re.finditer(r"\b(CO__?|carbon|emissions?)\b", src, re.I):
+            add("METRIC", m.start(), m.end(), "Paperless reports paper and digital adoption only")
+    for m in re.finditer(r"\b(halve[sd]?|double[sd]?|triple[sd]?|\d+\s?x|\d+ times)\b", src, re.I):
+        add("IMPLIED", m.start(), m.end(), "Implied quantity without a backing field")
+    violations.sort(key=lambda v: v["start"])
+    blocked = bool(violations)
+    fallback = _fixture("claimcheck_redteam.json")["response"]["fallback_text"] if blocked and opportunity_id == "GP01" else pack["explanation"]["sentences"][0]["text"]
+    return {"verdict": "BLOCKED" if blocked else "PASS",
+            "sentences": [{"text": text, "status": "BLOCKED" if blocked else "PASS", "violations": violations}],
+            "fallback_text": fallback if blocked else None}
 
 
-def claimcheck(customer_id: str, opportunity_id: str, sentences: list[str]) -> dict:
-    """Claim-Check result. fixtures mode returns canned claimcheck_response.json."""
-    _safe_id(customer_id, "customer_id")
-    _safe_id(opportunity_id, "opportunity_id")
-    if not isinstance(sentences, list) or not all(isinstance(s, str) for s in sentences):
-        raise ValueError("sentences must be a list of strings")
-    live = _remote("POST", "/api/claimcheck", {
-        "customer_id": customer_id, "opportunity_id": opportunity_id,
-        "sentences": [{"text": s, "fields": []} for s in sentences],  # API's SentenceIn shape
-    }, customer_id)
-    if live is not _USE_FIXTURES:
-        return live or {}
-    return dict(_load("claimcheck_response"))
+# shortcut: indicative figure, not a DESNZ factor; replace with an API call when the carbon engine exposes a re-run endpoint
+ILLUSTRATIVE_EV_KG_PER_MILE = 0.158
 
 
-def get_portfolio() -> dict:
-    """k-anonymised portfolio aggregates for the Cockpit."""
-    live = _remote("GET", "/api/portfolio/summary")
-    if live is not _USE_FIXTURES:
-        return live or {}
-    return dict(_load("portfolio"))
-
-
-def get_eval() -> dict:
-    """Evaluation summary for the Receipts page."""
-    live = _remote("GET", "/api/eval/summary")
-    if live is not _USE_FIXTURES:
-        return live or {}
-    return dict(_load("eval"))
+def ladder_mileage(miles: int) -> dict:
+    """Indicative stand-in for re-running the carbon engine with declared mileage."""
+    def r50(x):
+        return int(round(x / 50.0) * 50)
+    central = miles * ILLUSTRATIVE_EV_KG_PER_MILE
+    return {"low": r50(central * 0.79), "central": r50(central), "high": r50(central * 1.21),
+            "bills": f"About £{int(round(miles * 0.067 / 10) * 10):,} a year less on fuel and servicing, central estimate.", "quality": "HIGH"}

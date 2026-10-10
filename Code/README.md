@@ -17,7 +17,7 @@ python -m venv .venv && source .venv/bin/activate
 pip install -r requirements.lock       # hash-pinned; needs Python 3.11
 ```
 
-> **Requires:** `streamlit >= 1.46` (for variable font support in config.toml)
+> **Requires:** `streamlit >= 1.50` (the UI uses `width="stretch"` and variable fonts in config.toml)
 
 ### 2. Run the UI (fixtures mode — no API key needed)
 

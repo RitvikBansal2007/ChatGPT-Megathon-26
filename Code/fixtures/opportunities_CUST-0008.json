@@ -1,0 +1,306 @@
+{
+  "customer_id": "CUST-0008",
+  "customer_key": "cust_e93b07",
+  "persona": "Eleanor — Accessibility paper need flagged. Paperless is never suggested.",
+  "display_name": "Eleanor",
+  "region": "Wales",
+  "tags": [
+    "Accessibility: paper statements",
+    "Homeowner"
+  ],
+  "cutoff_date": "2026-06-30",
+  "outcome_window_days": 90,
+  "run_manifest": "sha256:fixture-draft",
+  "data_freshness": [
+    {
+      "source": "Transactions",
+      "asOf": "30 Jun 2026",
+      "kind": "inferred"
+    },
+    {
+      "source": "Accessibility preferences",
+      "asOf": "11 Nov 2025",
+      "kind": "declared"
+    }
+  ],
+  "products_held": [
+    {
+      "name": "Current account",
+      "since": "Mar 1998",
+      "status": "Active"
+    },
+    {
+      "name": "Savings account",
+      "since": "Mar 2004",
+      "status": "Active"
+    }
+  ],
+  "opportunities": [
+    {
+      "opportunity_id": "GP01",
+      "opportunity_name": "EV Finance",
+      "product": "GP01 EV Finance",
+      "status": "SOFT_SURFACE",
+      "headline": "Running a car costs more each year. Here's how an EV compares for drivers like you.",
+      "propensity": 0.18,
+      "likelihood_band": "LOW",
+      "confidence": {
+        "overall": 0.84,
+        "completeness": 0.85,
+        "recency": 0.9,
+        "stability": 0.84,
+        "in_distribution": 0.8
+      },
+      "eligibility": {
+        "result": "ELIGIBLE",
+        "rules_fired": [],
+        "rule_text": null,
+        "rules_version": "rules-1.0"
+      },
+      "reason_codes": [],
+      "why_now": null,
+      "impact": {
+        "status": "NOT_APPLICABLE",
+        "metric_family": null,
+        "unit": null,
+        "low": null,
+        "central": null,
+        "high": null,
+        "bills": null,
+        "formula": null,
+        "baseline": null,
+        "horizon": null,
+        "factor_refs": [],
+        "quality": "MEDIUM",
+        "missing_inputs": [],
+        "first_step": null,
+        "secondary": null,
+        "paper": null,
+        "digital_adoption": null
+      },
+      "ladder": null,
+      "ladder_result": null,
+      "review": null,
+      "why_not": null,
+      "explanation": {
+        "source": "template",
+        "claimcheck_status": "PASS",
+        "sentences": [
+          {
+            "text": "Running a car costs more each year. Here's how an EV compares for drivers like you.",
+            "fields": [
+              "catalogue.education"
+            ],
+            "check": "PASS"
+          }
+        ]
+      },
+      "next_action": {
+        "label": "Learn more",
+        "secondary": null,
+        "disclaimer": "Not a credit decision. Estimate, not a guarantee."
+      }
+    },
+    {
+      "opportunity_id": "GP02",
+      "opportunity_name": "Green Home",
+      "product": "GP02 Green Home Loan",
+      "status": "SOFT_SURFACE",
+      "headline": "Homes like yours often start with a loft insulation top-up. Here's what to know.",
+      "propensity": 0.35,
+      "likelihood_band": "LOW",
+      "confidence": {
+        "overall": 0.84,
+        "completeness": 0.85,
+        "recency": 0.9,
+        "stability": 0.84,
+        "in_distribution": 0.8
+      },
+      "eligibility": {
+        "result": "ELIGIBLE",
+        "rules_fired": [],
+        "rule_text": null,
+        "rules_version": "rules-1.0"
+      },
+      "reason_codes": [],
+      "why_now": null,
+      "impact": {
+        "status": "NOT_APPLICABLE",
+        "metric_family": null,
+        "unit": null,
+        "low": null,
+        "central": null,
+        "high": null,
+        "bills": null,
+        "formula": null,
+        "baseline": null,
+        "horizon": null,
+        "factor_refs": [],
+        "quality": "MEDIUM",
+        "missing_inputs": [],
+        "first_step": null,
+        "secondary": null,
+        "paper": null,
+        "digital_adoption": null
+      },
+      "ladder": null,
+      "ladder_result": null,
+      "review": null,
+      "why_not": null,
+      "explanation": {
+        "source": "template",
+        "claimcheck_status": "PASS",
+        "sentences": [
+          {
+            "text": "Homes like yours often start with a loft insulation top-up. Here's what to know.",
+            "fields": [
+              "catalogue.education"
+            ],
+            "check": "PASS"
+          }
+        ]
+      },
+      "next_action": {
+        "label": "Learn more",
+        "secondary": null,
+        "disclaimer": "Not a credit decision. Estimate, not a guarantee."
+      }
+    },
+    {
+      "opportunity_id": "GP03",
+      "opportunity_name": "Solar Finance",
+      "product": "GP03 Solar Finance",
+      "status": "SOFT_SURFACE",
+      "headline": "Your electricity use is around average. Solar may still be worth a look later.",
+      "propensity": 0.3,
+      "likelihood_band": "LOW",
+      "confidence": {
+        "overall": 0.84,
+        "completeness": 0.85,
+        "recency": 0.9,
+        "stability": 0.84,
+        "in_distribution": 0.8
+      },
+      "eligibility": {
+        "result": "ELIGIBLE",
+        "rules_fired": [],
+        "rule_text": null,
+        "rules_version": "rules-1.0"
+      },
+      "reason_codes": [],
+      "why_now": null,
+      "impact": {
+        "status": "NOT_APPLICABLE",
+        "metric_family": null,
+        "unit": null,
+        "low": null,
+        "central": null,
+        "high": null,
+        "bills": null,
+        "formula": null,
+        "baseline": null,
+        "horizon": null,
+        "factor_refs": [],
+        "quality": "MEDIUM",
+        "missing_inputs": [],
+        "first_step": null,
+        "secondary": null,
+        "paper": null,
+        "digital_adoption": null
+      },
+      "ladder": null,
+      "ladder_result": null,
+      "review": null,
+      "why_not": null,
+      "explanation": {
+        "source": "template",
+        "claimcheck_status": "PASS",
+        "sentences": [
+          {
+            "text": "Your electricity use is around average. Solar may still be worth a look later.",
+            "fields": [
+              "catalogue.education"
+            ],
+            "check": "PASS"
+          }
+        ]
+      },
+      "next_action": {
+        "label": "Learn more",
+        "secondary": null,
+        "disclaimer": "Not a credit decision. Estimate, not a guarantee."
+      }
+    },
+    {
+      "opportunity_id": "GP04",
+      "opportunity_name": "Paperless",
+      "product": "GP04 Paperless Banking",
+      "status": "RULED_OUT",
+      "headline": "Not for you right now.",
+      "propensity": 0.6,
+      "likelihood_band": "MEDIUM",
+      "confidence": {
+        "overall": 0.84,
+        "completeness": 0.85,
+        "recency": 0.9,
+        "stability": 0.84,
+        "in_distribution": 0.8
+      },
+      "eligibility": {
+        "result": "NOT_ELIGIBLE",
+        "rules_fired": [
+          "GP04-R2"
+        ],
+        "rule_text": "You've told us you need paper statements, so we won't suggest switching.",
+        "rules_version": "rules-1.0"
+      },
+      "reason_codes": [],
+      "why_now": null,
+      "impact": {
+        "status": "NOT_APPLICABLE",
+        "metric_family": null,
+        "unit": null,
+        "low": null,
+        "central": null,
+        "high": null,
+        "bills": null,
+        "formula": null,
+        "baseline": null,
+        "horizon": null,
+        "factor_refs": [],
+        "quality": null,
+        "missing_inputs": [],
+        "first_step": null,
+        "secondary": null,
+        "paper": null,
+        "digital_adoption": null
+      },
+      "ladder": null,
+      "ladder_result": null,
+      "review": null,
+      "why_not": {
+        "text": "You've told us you need paper statements, so we won't suggest switching.",
+        "rule": "GP04-R2",
+        "change": "You can change this in Profile, Accessibility, at any time."
+      },
+      "explanation": {
+        "source": "template",
+        "claimcheck_status": "PASS",
+        "sentences": [
+          {
+            "text": "Not for you right now. You've told us you need paper statements, so we won't suggest switching.",
+            "fields": [
+              "eligibility.rule"
+            ],
+            "check": "PASS"
+          }
+        ]
+      },
+      "next_action": {
+        "label": null,
+        "secondary": null,
+        "disclaimer": "Not a credit decision. Estimate, not a guarantee."
+      }
+    }
+  ]
+}

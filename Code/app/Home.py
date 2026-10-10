@@ -1,41 +1,39 @@
-"""GreenDash landing page: synthetic-data banner, demo role switcher, page links."""
-
+"""greendash · Home."""
 import streamlit as st
 
-import theme
-from components.chrome import ROLES, banner, current_role
+import client
+import theme as T
+from components import shell
 
-st.set_page_config(page_title="GreenDash", layout="wide")
-st.markdown(theme.css(), unsafe_allow_html=True)  # the only unsafe_allow_html call
+T.setup("Home")
+persona = shell.sidebar()
 
-banner()
-
-st.title("GreenDash")
-st.write(
-    "Green-finance suggestions you can check: every recommendation comes with "
-    "its evidence, its limits, and a clear reason when it is not for you."
-)
-
-# Role lives in st.session_state["role"]. The widget uses its own key so the
-# value survives page switches (Streamlit clears widget keys on other pages).
-role = current_role()
-
-
-def _sync_role() -> None:
-    st.session_state["role"] = st.session_state["_role_select"]
-
-
-st.selectbox(
-    "Demo role",
-    options=ROLES,
-    index=ROLES.index(role) if role in ROLES else 0,
-    key="_role_select",
-    on_change=_sync_role,
-    help="Demo only. Switches the view between synthetic personas and staff roles.",
-)
-st.caption(f"Viewing as: {st.session_state['role']}")
+T.render('<span class="gd-tag">Megathon X · Problem Statement 1 · Lloyds</span>')
+st.title("Green, with receipts.")
+T.render('<p class="gd-muted" style="font-size:17px;max-width:760px">One evidence engine, two audiences. Customers get a next green step they can check. '
+         'Relationship teams get a ranked pipeline they can defend. Every number has a source, every refusal is explained, '
+         'and every AI-written sentence is checked before anyone sees it.</p>')
+T.banner(T.CORE_RULE, "ok")
 
 st.subheader("Where to go")
-st.page_link("pages/1_Customer_Hub.py", label="Customer Hub – your opportunities", icon=":material/eco:")
-st.page_link("pages/2_Cockpit.py", label="Cockpit – portfolio view", icon=":material/monitoring:")
-st.page_link("pages/3_Receipts.py", label="Receipts – how we checked", icon=":material/receipt_long:")
+c1, c2, c3 = st.columns(3)
+with c1, st.container(key="gd-panel-home-hub"):
+    st.markdown("**Customer Hub**")
+    st.caption("Four pathways, always visible. Proof Cards with three separate verdicts, evidence with dates, impact ranges, Claim-Check. Scenario Lab.")
+    st.page_link("pages/1_Customer_Hub.py", label="Open Customer Hub", icon=":material/eco:")
+with c2, st.container(key="gd-panel-home-cockpit"):
+    st.markdown("**Cockpit**")
+    st.caption("Portfolio tiles reported separately, funnel, opportunity quadrant, segments, and drill-down from customer to evidence to action.")
+    st.page_link("pages/2_Cockpit.py", label="Open Cockpit", icon=":material/monitoring:")
+with c3, st.container(key="gd-panel-home-receipts"):
+    st.markdown("**Receipts**")
+    st.caption("Baselines, calibration, confidence terciles, categoriser, LLM evaluation, scenario suite and data-quality gates.")
+    st.page_link("pages/3_Receipts.py", label="Open Receipts", icon=":material/receipt_long:")
+
+st.subheader("Customers")
+st.caption("Pick one in the sidebar.")
+for p in client.personas():
+    T.render(f'<p style="margin:2px 0"><b>{T.esc(p["display_name"])}</b> <span class="gd-tag gd-tag--code">{T.esc(p["customer_id"])}</span> '
+             f'<span class="gd-muted">{T.esc(p["summary"])}</span></p>')
+
+T.footer()

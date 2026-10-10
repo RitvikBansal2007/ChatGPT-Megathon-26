@@ -1,5 +1,5 @@
 # GreenDash — G3 Context Memory
-<!-- AUTO-UPDATED by agent. Last update: 2026-10-11 ~05:15 IST (Hub fixture bug fixed; illustrative label; colours tokenised) -->
+<!-- AUTO-UPDATED by agent. Last update: 2026-10-11 ~06:00 IST (web app redesigned to the brand UI; auth ownership settled) -->
 
 > **Project renamed:** `greenproof` → `greendash` (by teammates, commit `96ca5fb`)
 > Repo: https://github.com/<org>/megathon26-chatgpt  
@@ -53,6 +53,34 @@ Team rules (G1-K): focused fixes, no overlapping edits, share commit SHAs + conc
 
 ---
 
+
+## 🎨 WEB APP REDESIGN at 06:00 — supersedes the older UI notes and file map below
+
+The app in `app/` was replaced with the brand-design Streamlit app from `Desktop/Project Implementation/UI:UX/greendash/` (G3's own design bundle), then adapted.
+
+**Structure now**
+- `app/Home.py`, `app/pages/{1_Customer_Hub,2_Cockpit,3_Receipts}.py`
+- `app/components/shell.py` (sidebar: Role + Customer pickers, role gates), `proof_card.py`, `scenario_lab.py`
+- `app/theme.py` (tokens, SVG icons, HTML building blocks, CSS, `setup(page, dark=False)`, `DARK` chart colours)
+- `app/client.py` (function names: `personas`, `opportunities`, `scenario`, `claimcheck`, `portfolio`, `eval_summary`, `mutation_catalogue`, `ladder_mileage`)
+- `app/assets/` (2 logos). Removed: `components/badges.py`, `states.py`, `claim_stamp.py`, `chrome.py`.
+- New fixtures: `fixtures/personas.json`, `opportunities_CUST-000{1-8}.json`, `scenarios.json` (every mutation × persona), `claimcheck_redteam.json`, `portfolio_summary.json`, `eval_summary.json`. Old `opps_*.json` etc. are no longer read by the UI (`fixtures/eval.json` is still read by the backend).
+
+**What changed on purpose**
+- **No demo-mode wording on screen** (owner's instruction): no "demo", "fixtures", "mode", "test account", no top banner. A test (`test_no_demo_wording_on_screen`) enforces it. The footer keeps one line: core rule + "Synthetic data. Not a credit decision. Every impact figure is an estimate."
+- Receipts still shows "Illustrative figures, not measured results" until the eval payload has `"measured": true`. This is about the numbers being unmeasured, not about demo mode; kept deliberately.
+- 8 personas, each with all four products and their designed outcomes (Priya RECOMMEND, Marcus REVIEW, Aisha all RULED_OUT, Tom ABSTAIN ×3 + Paperless RECOMMEND, Dave Green Home RECOMMEND, Sam Solar ABSTAIN, Jordan renter, Eleanor accessibility RULED_OUT).
+- Role gates in the UI (`shell.ACCESS`): Cockpit hidden from CUSTOMER; Receipts only analyst/auditor/evaluator; Scenario Lab only RM/evaluator; red-team only auditor/evaluator. UI-only — the API still has no auth.
+- Cockpit is dark (brand 4.3): CSS scope `.stApp:has(.st-key-gd-dark)`, tables are `st.table`, charts use `theme.DARK` with `theme=None`.
+- Fonts stay self-hosted (the bundle's Google Fonts import was removed; CSP `font-src 'self'` still holds).
+- `client.py` keeps the Step 3.5 transport: stdlib `urllib`, `API_BASE_URL`, token cached with expiry, cached mode falls back silently, live mode shows a friendly card and stops the page. `_complete()` fills presentation fields (headline, explanation, display name) that the API contract does not carry.
+- Needs `streamlit >= 1.50` (`width="stretch"`); `pyproject.toml` still pins `>=1.46` — ask G2-An to bump.
+- Offline stand-ins that remain in the UI: local Claim-Check (same rule families) and the mileage ladder (indicative factor, marked `shortcut:` in `client.py`).
+- UI tests: 26 of 26 (`app/tests/test_smoke.py`), incl. every persona × pathway, role gates, live-unreachable card.
+
+**Auth ownership settled (G1-K, 06:00):** G2-An implements token validation + role enforcement with tests; G1-K reviews and verifies. Acceptance: missing token 401; malformed token 401; CUSTOMER token on evaluator-only route 403; authorised evaluator/RM allowed; cross-customer access rejected. API stays out of production until these pass.
+
+---
 
 ## 🛠 G3 UI fixes at 05:15 (after the audit)
 

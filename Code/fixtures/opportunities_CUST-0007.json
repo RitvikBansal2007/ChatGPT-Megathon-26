@@ -1,0 +1,338 @@
+{
+  "customer_id": "CUST-0007",
+  "customer_key": "cust_6d2f98",
+  "persona": "Jordan — Rents a flat, high app use, paper statements.",
+  "display_name": "Jordan",
+  "region": "London",
+  "tags": [
+    "Renter",
+    "High app use",
+    "Paper statements"
+  ],
+  "cutoff_date": "2026-06-30",
+  "outcome_window_days": 90,
+  "run_manifest": "sha256:fixture-draft",
+  "data_freshness": [
+    {
+      "source": "Transactions",
+      "asOf": "30 Jun 2026",
+      "kind": "inferred"
+    },
+    {
+      "source": "Home ownership",
+      "asOf": "30 Jun 2026",
+      "kind": "inferred"
+    }
+  ],
+  "products_held": [
+    {
+      "name": "Current account",
+      "since": "Sep 2020",
+      "status": "Active"
+    }
+  ],
+  "opportunities": [
+    {
+      "opportunity_id": "GP01",
+      "opportunity_name": "EV Finance",
+      "product": "GP01 EV Finance",
+      "status": "SOFT_SURFACE",
+      "headline": "Running a car costs more each year. Here's how an EV compares for drivers like you.",
+      "propensity": 0.22,
+      "likelihood_band": "LOW",
+      "confidence": {
+        "overall": 0.84,
+        "completeness": 0.84,
+        "recency": 0.93,
+        "stability": 0.82,
+        "in_distribution": 0.8
+      },
+      "eligibility": {
+        "result": "ELIGIBLE",
+        "rules_fired": [],
+        "rule_text": null,
+        "rules_version": "rules-1.0"
+      },
+      "reason_codes": [],
+      "why_now": null,
+      "impact": {
+        "status": "NOT_APPLICABLE",
+        "metric_family": null,
+        "unit": null,
+        "low": null,
+        "central": null,
+        "high": null,
+        "bills": null,
+        "formula": null,
+        "baseline": null,
+        "horizon": null,
+        "factor_refs": [],
+        "quality": "MEDIUM",
+        "missing_inputs": [],
+        "first_step": null,
+        "secondary": null,
+        "paper": null,
+        "digital_adoption": null
+      },
+      "ladder": null,
+      "ladder_result": null,
+      "review": null,
+      "why_not": null,
+      "explanation": {
+        "source": "template",
+        "claimcheck_status": "PASS",
+        "sentences": [
+          {
+            "text": "Running a car costs more each year. Here's how an EV compares for drivers like you.",
+            "fields": [
+              "catalogue.education"
+            ],
+            "check": "PASS"
+          }
+        ]
+      },
+      "next_action": {
+        "label": "Learn more",
+        "secondary": null,
+        "disclaimer": "Not a credit decision. Estimate, not a guarantee."
+      }
+    },
+    {
+      "opportunity_id": "GP02",
+      "opportunity_name": "Green Home",
+      "product": "GP02 Green Home Loan",
+      "status": "RULED_OUT",
+      "headline": "Not for you right now.",
+      "propensity": 0.3,
+      "likelihood_band": "LOW",
+      "confidence": {
+        "overall": 0.84,
+        "completeness": 0.84,
+        "recency": 0.93,
+        "stability": 0.82,
+        "in_distribution": 0.8
+      },
+      "eligibility": {
+        "result": "NOT_ELIGIBLE",
+        "rules_fired": [
+          "GP02-R1"
+        ],
+        "rule_text": "Green Home Loan is for homeowners, and our records show you rent.",
+        "rules_version": "rules-1.0"
+      },
+      "reason_codes": [],
+      "why_now": null,
+      "impact": {
+        "status": "NOT_APPLICABLE",
+        "metric_family": null,
+        "unit": null,
+        "low": null,
+        "central": null,
+        "high": null,
+        "bills": null,
+        "formula": null,
+        "baseline": null,
+        "horizon": null,
+        "factor_refs": [],
+        "quality": null,
+        "missing_inputs": [],
+        "first_step": null,
+        "secondary": null,
+        "paper": null,
+        "digital_adoption": null
+      },
+      "ladder": null,
+      "ladder_result": null,
+      "review": null,
+      "why_not": {
+        "text": "Green Home Loan is for homeowners, and our records show you rent.",
+        "rule": "GP02-R1",
+        "change": "If you buy a home, we'll re-check."
+      },
+      "explanation": {
+        "source": "template",
+        "claimcheck_status": "PASS",
+        "sentences": [
+          {
+            "text": "Not for you right now. Green Home Loan is for homeowners, and our records show you rent.",
+            "fields": [
+              "eligibility.rule"
+            ],
+            "check": "PASS"
+          }
+        ]
+      },
+      "next_action": {
+        "label": null,
+        "secondary": null,
+        "disclaimer": "Not a credit decision. Estimate, not a guarantee."
+      }
+    },
+    {
+      "opportunity_id": "GP03",
+      "opportunity_name": "Solar Finance",
+      "product": "GP03 Solar Finance",
+      "status": "RULED_OUT",
+      "headline": "Not for you right now.",
+      "propensity": 0.18,
+      "likelihood_band": "LOW",
+      "confidence": {
+        "overall": 0.84,
+        "completeness": 0.84,
+        "recency": 0.93,
+        "stability": 0.82,
+        "in_distribution": 0.8
+      },
+      "eligibility": {
+        "result": "NOT_ELIGIBLE",
+        "rules_fired": [
+          "GP03-R1"
+        ],
+        "rule_text": "Solar Finance is for homeowners, and our records show you rent.",
+        "rules_version": "rules-1.0"
+      },
+      "reason_codes": [],
+      "why_now": null,
+      "impact": {
+        "status": "NOT_APPLICABLE",
+        "metric_family": null,
+        "unit": null,
+        "low": null,
+        "central": null,
+        "high": null,
+        "bills": null,
+        "formula": null,
+        "baseline": null,
+        "horizon": null,
+        "factor_refs": [],
+        "quality": null,
+        "missing_inputs": [],
+        "first_step": null,
+        "secondary": null,
+        "paper": null,
+        "digital_adoption": null
+      },
+      "ladder": null,
+      "ladder_result": null,
+      "review": null,
+      "why_not": {
+        "text": "Solar Finance is for homeowners, and our records show you rent.",
+        "rule": "GP03-R1",
+        "change": "If you buy a home, we'll re-check."
+      },
+      "explanation": {
+        "source": "template",
+        "claimcheck_status": "PASS",
+        "sentences": [
+          {
+            "text": "Not for you right now. Solar Finance is for homeowners, and our records show you rent.",
+            "fields": [
+              "eligibility.rule"
+            ],
+            "check": "PASS"
+          }
+        ]
+      },
+      "next_action": {
+        "label": null,
+        "secondary": null,
+        "disclaimer": "Not a credit decision. Estimate, not a guarantee."
+      }
+    },
+    {
+      "opportunity_id": "GP04",
+      "opportunity_name": "Paperless",
+      "product": "GP04 Paperless Banking",
+      "status": "RECOMMEND",
+      "headline": "You bank in the app every day, but your statements still arrive on paper.",
+      "propensity": 0.74,
+      "likelihood_band": "HIGH",
+      "confidence": {
+        "overall": 0.84,
+        "completeness": 0.84,
+        "recency": 0.93,
+        "stability": 0.82,
+        "in_distribution": 0.8
+      },
+      "eligibility": {
+        "result": "ELIGIBLE",
+        "rules_fired": [],
+        "rule_text": null,
+        "rules_version": "rules-1.0"
+      },
+      "reason_codes": [
+        {
+          "code": "PAPER_STATEMENTS",
+          "display": "Paper statements: 12 of 12 in the last year",
+          "observed_at": "30 Jun 2026",
+          "source": "inferred_transactions"
+        },
+        {
+          "code": "HIGH_DIGITAL_ACTIVITY",
+          "display": "You open the app every day",
+          "observed_at": "30 Jun 2026",
+          "source": "inferred_transactions"
+        }
+      ],
+      "why_now": null,
+      "impact": {
+        "status": "ESTIMATED",
+        "metric_family": "paper",
+        "unit": null,
+        "low": null,
+        "central": null,
+        "high": null,
+        "bills": null,
+        "formula": "Paper statements a year × sheets per statement",
+        "baseline": "Your current statement settings",
+        "horizon": "12 months",
+        "factor_refs": [
+          "Statement page counts (internal, illustrative)"
+        ],
+        "quality": "HIGH",
+        "missing_inputs": [],
+        "first_step": null,
+        "secondary": null,
+        "paper": {
+          "sheets_per_year": 48,
+          "note": "12 statements, about 4 sheets each"
+        },
+        "digital_adoption": {
+          "display": "0%",
+          "unit": "of your statements are digital",
+          "note": "0 of 12 statements"
+        }
+      },
+      "ladder": null,
+      "ladder_result": null,
+      "review": null,
+      "why_not": null,
+      "explanation": {
+        "source": "llm",
+        "claimcheck_status": "PASS",
+        "sentences": [
+          {
+            "text": "You bank in the app every day, but your statements still arrive on paper.",
+            "fields": [
+              "evidence.PAPER_STATEMENTS",
+              "evidence.HIGH_DIGITAL_ACTIVITY"
+            ],
+            "check": "PASS"
+          },
+          {
+            "text": "Going paperless would avoid about 48 sheets of paper a year.",
+            "fields": [
+              "impact.paper"
+            ],
+            "check": "PASS"
+          }
+        ]
+      },
+      "next_action": {
+        "label": "Go paperless",
+        "secondary": "Choose which statements go digital",
+        "disclaimer": "Not a credit decision. Estimate, not a guarantee."
+      }
+    }
+  ]
+}

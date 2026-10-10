@@ -1,0 +1,347 @@
+{
+  "customer_id": "CUST-0006",
+  "customer_key": "cust_ab4410",
+  "persona": "Sam — Homeowner with high electricity use; roof suitability unknown.",
+  "display_name": "Sam",
+  "region": "South West",
+  "tags": [
+    "Homeowner",
+    "High electricity",
+    "Roof unknown"
+  ],
+  "cutoff_date": "2026-06-30",
+  "outcome_window_days": 90,
+  "run_manifest": "sha256:fixture-draft",
+  "data_freshness": [
+    {
+      "source": "Transactions",
+      "asOf": "30 Jun 2026",
+      "kind": "inferred"
+    },
+    {
+      "source": "Energy usage",
+      "asOf": "31 May 2026",
+      "kind": "inferred"
+    },
+    {
+      "source": "Roof suitability",
+      "asOf": "Not on record",
+      "kind": "declared"
+    }
+  ],
+  "products_held": [
+    {
+      "name": "Current account",
+      "since": "Jul 2015",
+      "status": "Active"
+    },
+    {
+      "name": "Mortgage",
+      "since": "Jun 2018",
+      "status": "Active"
+    }
+  ],
+  "opportunities": [
+    {
+      "opportunity_id": "GP01",
+      "opportunity_name": "EV Finance",
+      "product": "GP01 EV Finance",
+      "status": "SOFT_SURFACE",
+      "headline": "Running a car costs more each year. Here's how an EV compares for drivers like you.",
+      "propensity": 0.36,
+      "likelihood_band": "LOW",
+      "confidence": {
+        "overall": 0.82,
+        "completeness": 0.81,
+        "recency": 0.9,
+        "stability": 0.8,
+        "in_distribution": 0.79
+      },
+      "eligibility": {
+        "result": "ELIGIBLE",
+        "rules_fired": [],
+        "rule_text": null,
+        "rules_version": "rules-1.0"
+      },
+      "reason_codes": [],
+      "why_now": null,
+      "impact": {
+        "status": "NOT_APPLICABLE",
+        "metric_family": null,
+        "unit": null,
+        "low": null,
+        "central": null,
+        "high": null,
+        "bills": null,
+        "formula": null,
+        "baseline": null,
+        "horizon": null,
+        "factor_refs": [],
+        "quality": "MEDIUM",
+        "missing_inputs": [],
+        "first_step": null,
+        "secondary": null,
+        "paper": null,
+        "digital_adoption": null
+      },
+      "ladder": null,
+      "ladder_result": null,
+      "review": null,
+      "why_not": null,
+      "explanation": {
+        "source": "template",
+        "claimcheck_status": "PASS",
+        "sentences": [
+          {
+            "text": "Running a car costs more each year. Here's how an EV compares for drivers like you.",
+            "fields": [
+              "catalogue.education"
+            ],
+            "check": "PASS"
+          }
+        ]
+      },
+      "next_action": {
+        "label": "Learn more",
+        "secondary": null,
+        "disclaimer": "Not a credit decision. Estimate, not a guarantee."
+      }
+    },
+    {
+      "opportunity_id": "GP02",
+      "opportunity_name": "Green Home",
+      "product": "GP02 Green Home Loan",
+      "status": "SOFT_SURFACE",
+      "headline": "Homes like yours often start with a loft insulation top-up. Here's what to know.",
+      "propensity": 0.44,
+      "likelihood_band": "MEDIUM",
+      "confidence": {
+        "overall": 0.82,
+        "completeness": 0.81,
+        "recency": 0.9,
+        "stability": 0.8,
+        "in_distribution": 0.79
+      },
+      "eligibility": {
+        "result": "ELIGIBLE",
+        "rules_fired": [],
+        "rule_text": null,
+        "rules_version": "rules-1.0"
+      },
+      "reason_codes": [],
+      "why_now": null,
+      "impact": {
+        "status": "NOT_APPLICABLE",
+        "metric_family": null,
+        "unit": null,
+        "low": null,
+        "central": null,
+        "high": null,
+        "bills": null,
+        "formula": null,
+        "baseline": null,
+        "horizon": null,
+        "factor_refs": [],
+        "quality": "MEDIUM",
+        "missing_inputs": [],
+        "first_step": null,
+        "secondary": null,
+        "paper": null,
+        "digital_adoption": null
+      },
+      "ladder": null,
+      "ladder_result": null,
+      "review": null,
+      "why_not": null,
+      "explanation": {
+        "source": "template",
+        "claimcheck_status": "PASS",
+        "sentences": [
+          {
+            "text": "Homes like yours often start with a loft insulation top-up. Here's what to know.",
+            "fields": [
+              "catalogue.education"
+            ],
+            "check": "PASS"
+          }
+        ]
+      },
+      "next_action": {
+        "label": "Learn more",
+        "secondary": null,
+        "disclaimer": "Not a credit decision. Estimate, not a guarantee."
+      }
+    },
+    {
+      "opportunity_id": "GP03",
+      "opportunity_name": "Solar Finance",
+      "product": "GP03 Solar Finance",
+      "status": "ABSTAIN",
+      "headline": "Solar could suit your electricity use, but we need one detail first.",
+      "propensity": 0.61,
+      "likelihood_band": "MEDIUM",
+      "confidence": {
+        "overall": 0.82,
+        "completeness": 0.81,
+        "recency": 0.9,
+        "stability": 0.8,
+        "in_distribution": 0.79
+      },
+      "eligibility": {
+        "result": "ELIGIBLE",
+        "rules_fired": [],
+        "rule_text": null,
+        "rules_version": "rules-1.0"
+      },
+      "reason_codes": [
+        {
+          "code": "HIGH_ELEC_USE",
+          "display": "Electricity use: about 5,600 kWh a year, above similar homes",
+          "observed_at": "31 May 2026",
+          "source": "inferred_transactions"
+        },
+        {
+          "code": "HOMEOWNER",
+          "display": "You own your home",
+          "observed_at": "30 Jun 2026",
+          "source": "inferred_transactions"
+        }
+      ],
+      "why_now": null,
+      "impact": {
+        "status": "INSUFFICIENT_DATA",
+        "metric_family": "emissions",
+        "unit": null,
+        "low": null,
+        "central": null,
+        "high": null,
+        "bills": null,
+        "formula": null,
+        "baseline": null,
+        "horizon": null,
+        "factor_refs": [],
+        "quality": "LOW",
+        "missing_inputs": [
+          "roof_suitability"
+        ],
+        "first_step": null,
+        "secondary": null,
+        "paper": null,
+        "digital_adoption": null
+      },
+      "ladder": {
+        "field": "roof_suitability",
+        "prompt": "Tell us about your roof and we can give you a range.",
+        "cta": "Answer roof question",
+        "question": "Which way does most of your roof face, and is it shaded?",
+        "input": {
+          "type": "choice",
+          "options": [
+            "South, east or west, mostly unshaded",
+            "North facing or heavily shaded",
+            "Not sure"
+          ]
+        }
+      },
+      "ladder_result": {
+        "quality": "MEDIUM",
+        "low": 500,
+        "central": 580,
+        "high": 660,
+        "bills": "About £450 a year less on electricity, central estimate."
+      },
+      "review": null,
+      "why_not": null,
+      "explanation": {
+        "source": "template",
+        "claimcheck_status": "PASS",
+        "sentences": [
+          {
+            "text": "Solar could suit your electricity use, but we need one detail first.",
+            "fields": [
+              "evidence.HIGH_ELEC_USE"
+            ],
+            "check": "PASS"
+          },
+          {
+            "text": "Tell us about your roof and we can give you a range.",
+            "fields": [
+              "impact.missing.roof_suitability"
+            ],
+            "check": "PASS"
+          }
+        ]
+      },
+      "next_action": {
+        "label": "Answer roof question",
+        "secondary": null,
+        "disclaimer": "Not a credit decision. Estimate, not a guarantee."
+      }
+    },
+    {
+      "opportunity_id": "GP04",
+      "opportunity_name": "Paperless",
+      "product": "GP04 Paperless Banking",
+      "status": "SOFT_SURFACE",
+      "headline": "Paper statements are optional. Here's how digital statements work.",
+      "propensity": 0.4,
+      "likelihood_band": "MEDIUM",
+      "confidence": {
+        "overall": 0.82,
+        "completeness": 0.81,
+        "recency": 0.9,
+        "stability": 0.8,
+        "in_distribution": 0.79
+      },
+      "eligibility": {
+        "result": "ELIGIBLE",
+        "rules_fired": [],
+        "rule_text": null,
+        "rules_version": "rules-1.0"
+      },
+      "reason_codes": [],
+      "why_now": null,
+      "impact": {
+        "status": "NOT_APPLICABLE",
+        "metric_family": null,
+        "unit": null,
+        "low": null,
+        "central": null,
+        "high": null,
+        "bills": null,
+        "formula": null,
+        "baseline": null,
+        "horizon": null,
+        "factor_refs": [],
+        "quality": "MEDIUM",
+        "missing_inputs": [],
+        "first_step": null,
+        "secondary": null,
+        "paper": null,
+        "digital_adoption": null
+      },
+      "ladder": null,
+      "ladder_result": null,
+      "review": null,
+      "why_not": null,
+      "explanation": {
+        "source": "template",
+        "claimcheck_status": "PASS",
+        "sentences": [
+          {
+            "text": "Paper statements are optional. Here's how digital statements work.",
+            "fields": [
+              "catalogue.education"
+            ],
+            "check": "PASS"
+          }
+        ]
+      },
+      "next_action": {
+        "label": "Learn more",
+        "secondary": null,
+        "disclaimer": "Not a credit decision. Estimate, not a guarantee."
+      }
+    }
+  ]
+}
