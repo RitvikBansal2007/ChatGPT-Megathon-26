@@ -1,5 +1,5 @@
 # GreenDash — G3 (Ritvik) Context Memory
-<!-- AUTO-UPDATED by agent. Last update: 2026-10-11 (backend state as of `cd3ba7d`; backend owner now Aniket) -->
+<!-- AUTO-UPDATED by agent. Last update: 2026-10-11 (backend state as of `9bab839`; Madhav status + G2↔G3 integration review added) -->
 
 > **Project renamed:** `greenproof` → `greendash` (by teammates, commit `96ca5fb`)
 > Repo: https://github.com/IIIT-ECell/megathon26-chatgpt  
@@ -74,6 +74,28 @@
 | `fixtures/scenario_response.json` | ✅ |
 
 ---
+
+## 🧪 ML / LLM STATUS (Madhav, G2-M) — reviewed read-only at `9bab839`
+
+Madhav says his deliverables are "locked in". What the repo shows:
+
+| Item | State |
+|---|---|
+| 4 LightGBM models | ✅ `data/models/take_up_GP0{1-4}_lgb.skops` + `hashes.json` |
+| `out/run_manifest.json` | ✅ Committed (`9bab839`). Hash `sha256:bbbea75f…0887`, computed on `6af7a2a`, 21 artefacts |
+| Manifest reproducibility | 🔴 9 of 21 hashed files are not in the repo (`out/models/GP0x.txt`, `GP0x_iso.json`, `out/test_predictions.csv`). The hash covers `out/models/*.txt`, but `score.py` loads `data/models/*.skops` — different files |
+| `docs/EVALUATION.md` | 🔴 **Do not use for slides.** Brier values 0.045/0.080/0.120 are hard-coded defaults in `eval/report.py` (keys `T1/T2/T3` don't exist in `confidence_validation.json`); SHAP plot is a hard-coded dummy; "100 packs" is hard-coded, real n = 2 (`judge.py` slices `[:2]`). No AUC, baselines, scenario or F1 numbers |
+| Real metrics | ⚠️ `evaluate_models.py` computes ROC-AUC/Brier/ECE/lift but only prints them — nothing is saved |
+| `fixtures/eval.json` | 🔴 G3 placeholder numbers (invented in `1d1fc0d`). `/api/eval/summary` now just returns this file (`aafd480`), so Receipts shows invented numbers in **every** mode until real ones replace it |
+| LLM explainer on `main` | 🔴 Never runs: guard/minimise/claimcheck deleted by `96ca5fb` → fail-closed fallback rejects every call → always template |
+| Explainer output shape | 🔴 Returns `{explanation: str|dict, source, claimcheck_status}`; contract + `claim_stamp.py` need `sentences[{text, fields, check}]`. Status `PII_BLOCK` is not in the contract |
+| Fallback template | 🔴 Always uses the `REJECTED` template and reads `pack["recommendation"]` (field is `opportunity_id`) → every fallback says "EV Finance … is not recommended" |
+| Scores / reasons / confidence | 🔴 Not contract-shaped: no `likelihood_band`, no `ConfidenceParts`, reason codes lack `phrase/display/observed_at/source`; IDs are `CUST-00001` (5 digits) vs UI/API `CUST-0001` |
+
+**Rule for slides/README:** quote no metric from `EVALUATION.md` or `fixtures/eval.json` as real. The manifest hash may be quoted only with its commit (`6af7a2a`) and the caveat that the model files it covers are not in the repo.
+
+---
+
 
 ## 🔴 REMAINING
 
@@ -187,4 +209,4 @@ MEMORY.md                        ✅ (this file)
 |---|---|
 | **Aniket** (now also covering Akshit's G1-A work) | Restore the 20 files deleted by `96ca5fb`; fix `CustomerPacks` import, settings `ENV`/`DEMO_MODE`, `issue_token` call, `principal.role`; real `api/deps.py`; then send LAN IP for CP2 |
 | **Kratik (G1-K)** | Caddy CSP (`font-src 'self'`, `frame-ancestors 'none'`); proxy Streamlit only, not port 8000; keep branch `g1-kratik/claimcheck` until Claim-Check is restored on main |
-| **Madhav (G2-M)** | `docs/EVALUATION.md` exists but lacks slide-6 numbers: AUC per product, LR + heuristic baselines, scenario pass/fail, categoriser macro-F1; also clarify LLM eval count ("100 mocked, 2 processed") |
+| **Madhav (G2-M)** | Sent the integration flaw list (see "ML / LLM status"). Blocking for slide 6: real AUC/baseline/scenario/F1 numbers written to a file, and an honest LLM-eval sample size |
