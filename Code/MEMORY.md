@@ -1,5 +1,5 @@
 # GreenDash — G3 (Ritvik) Context Memory
-<!-- AUTO-UPDATED by agent. Last update: 2026-10-11 (CP2 run against local API at `cb2173d`) -->
+<!-- AUTO-UPDATED by agent. Last update: 2026-10-11 (Madhav's fix commit `6c41d76` re-reviewed) -->
 
 > **Project renamed:** `greenproof` → `greendash` (by teammates, commit `96ca5fb`)
 > Repo: https://github.com/IIIT-ECell/megathon26-chatgpt  
@@ -76,24 +76,25 @@
 
 ---
 
-## 🧪 ML / LLM STATUS (Madhav, G2-M) — reviewed read-only at `a3fa7ad`
+## 🧪 ML / LLM STATUS (Madhav, G2-M) — re-reviewed read-only at `6c41d76` (his "all resolved" commit)
 
 Madhav says his deliverables are "locked in". What the repo shows:
 
 | Item | State |
 |---|---|
-| 4 LightGBM models | ✅ `data/models/take_up_GP0{1-4}_lgb.skops` + `hashes.json` |
-| `out/run_manifest.json` | ✅ Committed (`9bab839`). Hash `sha256:bbbea75f…0887`, computed on `6af7a2a`, 21 artefacts |
-| Manifest reproducibility | 🔴 `out/models/*` now committed (`a3fa7ad`) and match, but `out/test_predictions.csv` is still missing and `config/settings.py` changed in `1319866`, so the hash **no longer matches `main`**. Hash covers `out/models/*.txt`; `score.py` loads `data/models/*.skops` — different files. `out/models/GP01_iso.json` is a 3-point placeholder calibrator |
-| `docs/EVALUATION.md` | 🔴 **Do not use for slides — circular.** Since `a3fa7ad`, `eval/report.py` generates it by reading `fixtures/eval.json`, i.e. G3's own invented placeholders (AUC 0.847 etc., F1 0.891, 28/30 scenarios, LLM 97%). None of it is measured. "100 mocked packs" is hard-coded; real judged n = 2 |
+| 4 LightGBM models | 🔴 **Scoring is broken on `main`:** all 4 `data/models/*.skops` fail their own check against `data/models/hashes.json` ("Hash mismatch… Model compromised"). `score()` catches it and silently returns propensity 0.5 / MEDIUM / confidence 0.5 / no reasons for every customer and product (ran it on real feature rows) |
+| `out/run_manifest.json` | ⚠️ **Hash changed** — now `sha256:b637cab2…6734`, built on `a3fa7ad`, 23 artefacts (now covers `data/models` + `data/calibration`). The old `bbbea75f…` hash sent to Kratik is obsolete |
+| Manifest reproducibility | ⚠️ All 23 files present; `config/settings.py` still differs from the manifest (changed after it was built) |
+| `docs/EVALUATION.md` | 🔴 **Still not measured.** Generated from `fixtures/eval.json` (G3's invented placeholders). Madhav's "fix" was copying the fixture to `out/eval_summary.json`, which is gitignored (not in repo) and unused — the API still reads `fixtures/eval.json`. Real judged LLM n = 2 |
 | Real metrics | ⚠️ `evaluate_models.py` computes ROC-AUC/Brier/ECE/lift but only prints them — nothing is saved |
 | `fixtures/eval.json` | 🔴 G3 placeholder numbers (invented in `1d1fc0d`). `/api/eval/summary` now just returns this file (`aafd480`), so Receipts shows invented numbers in **every** mode until real ones replace it |
 | LLM explainer on `main` | ⚠️ Security modules restored in `cb2173d`; not re-tested end to end (needs an LLM key) |
-| Explainer output shape | 🔴 Returns `{explanation: str|dict, source, claimcheck_status}`; contract + `claim_stamp.py` need `sentences[{text, fields, check}]`. Status `PII_BLOCK` is not in the contract |
-| Fallback template | 🔴 Always uses the `REJECTED` template and reads `pack["recommendation"]` (field is `opportunity_id`) → every fallback says "EV Finance … is not recommended" |
-| Scores / reasons / confidence | 🔴 Not contract-shaped: no `likelihood_band`, no `ConfidenceParts`, reason codes lack `phrase/display/observed_at/source`; IDs are `CUST-00001` (5 digits) vs UI/API `CUST-0001` |
+| Explainer output shape | ⚠️ Fallback path now contract-shaped (`sentences[{text, fields, check: TEMPLATE}]`, `FALLBACK`). LLM path wraps `str(parsed)` — the raw dict incl. the canary token — into one sentence, so a successful LLM call would print a Python dict on the card |
+| Fallback template | ⚠️ Now keyed on `opportunity_id` + real status, wording neutralised. Still prints literal `£[FUEL_SPEND]` / `[GAS_KWH] kWh` placeholders (no context passed) |
+| Scores / reasons / confidence | 🔴 `score()` returns a contract-shaped `PropensityVerdict`, but confidence is hard-coded 0.8 and the reason code is hard-coded `HIGH_FUEL_SPEND £100` for every customer and product (incl. Paperless). `reasons.py` still only covers 5 test customers and isn't called by `score()`. Bands hard-coded 0.7/0.4, not from `config/thresholds.yaml` |
+| `greendash/contracts.py` | ⚠️ No longer frozen in practice: Madhav edited `ScenarioRequest.customer_id` to `\d{4,5}` in `6c41d76` |
 
-**Rule for slides/README:** quote no metric from `EVALUATION.md` or `fixtures/eval.json` as real. The manifest hash may be quoted only with its commit (`6af7a2a`) and the caveat that the model files it covers are not in the repo.
+**Rule for slides/README:** quote no metric from `EVALUATION.md` or `fixtures/eval.json` as real. Don't quote either manifest hash until scoring passes its own hash check.
 
 ---
 
@@ -209,4 +210,4 @@ MEMORY.md                        ✅ (this file)
 |---|---|
 | **Aniket** (now also covering Akshit's G1-A work) | Packs for the 8 personas (`out/packs/CUST-000x.json` + `portfolio_rows.parquet`) or a working `make packs`; `/api/scenario` 422 on string mutations; check why `10.166.113.188:8000` is unreachable (firewall / different Wi-Fi) |
 | **Kratik (G1-K)** | Caddy CSP (`font-src 'self'`, `frame-ancestors 'none'`); proxy Streamlit only, not port 8000; keep branch `g1-kratik/claimcheck` until Claim-Check is restored on main |
-| **Madhav (G2-M)** | Sent the integration flaw list (see "ML / LLM status"). Blocking for slide 6: real AUC/baseline/scenario/F1 numbers written to a file, and an honest LLM-eval sample size |
+| **Madhav (G2-M)** | Sent second review of `6c41d76`. Blocking: regenerate `data/models/hashes.json` (scoring returns 0.5 for everyone); real measured metrics; remove hard-coded confidence + `£100` reason code |
