@@ -4,7 +4,7 @@ import time
 from greenproof.llm.client import get_client
 from greenproof.llm.templates import get_template
 
-# Kratik's security modules - wrapped in try/except so it doesn't break until he merges his branch
+# Security modules - wrapped in try/except so it doesn't break until merged
 try:
     # pyrefly: ignore [missing-import]
     from greendash.llm.minimise import minimise

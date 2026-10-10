@@ -1,0 +1,11 @@
+status:
+  default: {propensity_min: 0.5, confidence_min: 0.6}
+  per_product: {}
+freshness: {fresh_days: 60, stale_days: 365}
+why_now:
+  car_finance_ending_days: 90
+  mortgage_started_days: 180
+k_anonymity: 10
+reason_code_min:
+  HIGH_FUEL_SPEND: {metric: avg_monthly_fuel_gbp, min: 120}
+  HIGH_ANNUAL_MILEAGE: {metric: annual_mileage, min: 9000}

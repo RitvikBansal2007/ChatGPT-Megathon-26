@@ -1,0 +1,4 @@
+# GreenProof Decision Configuration
+random_seed: 42
+cutoff_date: "2026-06-30"
+outcome_window_days: 90
