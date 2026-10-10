@@ -16,7 +16,7 @@ def _cid(rows: Rows) -> str:
 def set_vehicle_bev(rows: Rows, cutoff: date) -> Rows:
     rows["vehicles"] = rows["vehicles"].assign(fuel_type="BEV")
     tx, cut = rows["transactions"], pd.Timestamp(cutoff)
-    recent_fuel = (tx["category"] == "Fuel") & (tx["date"] >= cut - pd.Timedelta(days=180))
+    recent_fuel = (tx["true_category"] == "Fuel") & (tx["date"] >= cut - pd.Timedelta(days=180))
     rows["transactions"] = tx[~recent_fuel]
     return rows
 
@@ -34,7 +34,7 @@ def add_conflict_fuel(rows: Rows, cutoff: date) -> Rows:
     extra = pd.DataFrame({
         "transaction_id": [f"SCN-{i}" for i in range(3)], "customer_id": cid,
         "date": [cut - pd.Timedelta(days=d) for d in (15, 45, 75)],
-        "merchant_description": "SHELL 4821 LONDON", "amount": 60.0, "debit_credit": "D", "category": "Fuel"})
+        "merchant_description": "SHELL 4821 LONDON", "amount": 60.0, "debit_credit": "D", "true_category": "Fuel"})
     rows["transactions"] = pd.concat([rows["transactions"], extra], ignore_index=True)
     return rows
 
@@ -56,7 +56,7 @@ def set_renter(rows: Rows, cutoff: date) -> Rows:
 def sell_car(rows: Rows, cutoff: date) -> Rows:
     rows["vehicles"] = rows["vehicles"].assign(status="sold")
     tx, cut = rows["transactions"], pd.Timestamp(cutoff)
-    recent_fuel = (tx["category"] == "Fuel") & (tx["date"] >= cut - pd.Timedelta(days=180))
+    recent_fuel = (tx["true_category"] == "Fuel") & (tx["date"] >= cut - pd.Timedelta(days=180))
     rows["transactions"] = tx[~recent_fuel]
     return rows
 

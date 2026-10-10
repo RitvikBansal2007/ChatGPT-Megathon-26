@@ -12,9 +12,9 @@ def inject_personas(tables: dict, rng):
     customers = tables["customers"]
     transactions = tables["transactions"]
     vehicles = tables["vehicles"]
-    energy = tables["energy_usage"]
+    energy = tables["energy"]
     products = tables["products"]
-    digital = tables["digital_usage"]
+    digital = tables["digital"]
 
     # Persona vehicle records: owners must have a record, non-owners must not.
     need_car = ["CUST-0001", "CUST-0002", "CUST-0003", "CUST-0004", "CUST-0006", "CUST-0008"]
@@ -22,7 +22,8 @@ def inject_personas(tables: dict, rng):
     missing = [c for c in need_car if c not in set(vehicles["customer_id"])]
     if missing:
         add = pd.DataFrame({"customer_id": missing, "vehicle_type": "car", "fuel_type": "petrol",
-                            "vehicle_age": 8, "annual_mileage": 9000})
+                            "vehicle_age": 8, "annual_mileage": 9000, "status": "owned",
+                            "updated_at": pd.Timestamp(CUTOFF_DATE - timedelta(days=10))})
         vehicles = pd.concat([vehicles, add[vehicles.columns]], ignore_index=True)
     vehicles = vehicles[~vehicles["customer_id"].isin(no_car)].reset_index(drop=True)
     
@@ -47,7 +48,7 @@ def inject_personas(tables: dict, rng):
     
     # CUST-0005: Dave (GP02 RECOMMEND) - 1960s semi, high winter gas, EPC D, homeowner
     customers.loc[customers["customer_id"] == "CUST-0005", ["is_persona", "home_owner", "epc_band"]] = [True, True, "D"]
-    energy.loc[(energy["customer_id"] == "CUST-0005") & (energy["month"].str.endswith(("11", "12", "01", "02"))), "gas_kwh"] += 2000
+    energy.loc[(energy["customer_id"] == "CUST-0005") & (energy["month"].dt.month.isin([11, 12, 1, 2])), "gas_kwh"] += 2000
     
     # CUST-0006: Sam (GP03 ABSTAIN) - homeowner, high elec, roof suitability unknown
     customers.loc[customers["customer_id"] == "CUST-0006", ["is_persona", "home_owner", "roof_suitability"]] = [True, True, "unknown"]
@@ -62,8 +63,8 @@ def inject_personas(tables: dict, rng):
     tables["customers"] = customers
     tables["transactions"] = transactions
     tables["vehicles"] = vehicles
-    tables["energy_usage"] = energy
+    tables["energy"] = energy
     tables["products"] = products
-    tables["digital_usage"] = digital
+    tables["digital"] = digital
     
     return tables

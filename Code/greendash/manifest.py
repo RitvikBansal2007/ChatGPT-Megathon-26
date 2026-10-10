@@ -13,6 +13,9 @@ def sha(path: Path) -> str:
     if path.suffix == ".parquet":
         df = pd.read_parquet(path)
         df = df.reindex(sorted(df.columns), axis=1)
+        for c in df.columns:
+            if df[c].dtype == object:
+                df[c] = df[c].astype(str)
         return hashlib.sha256(pd.util.hash_pandas_object(df, index=False).values.tobytes()).hexdigest()
     return hashlib.sha256(path.read_bytes()).hexdigest()
 

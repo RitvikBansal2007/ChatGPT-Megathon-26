@@ -63,8 +63,14 @@ def _action(status: Status, pid: str, impact: ImpactVerdict) -> NextAction | Non
 
 def build_pack(pid: str, features: dict, prop: PropensityVerdict, elig: EligibilityVerdict,
                impact: ImpactVerdict, as_of: date) -> Opportunity:
+    crit_missing = features.get(f"critical_missing_{pid}")
+    if crit_missing is None or len(crit_missing) == 0:
+        crit_missing = []
+    else:
+        crit_missing = list(crit_missing)
+        
     status = decide_status(pid, prop, elig, impact, bool(features.get("fuel_ev_conflict")),
-                           features.get(f"critical_missing_{pid}") or [])
+                           crit_missing)
     digital = None
     if pid == "GP04" and features.get("paper_statements_12m") is not None:
         digital = DigitalAdoption(paper_statements_12m=int(features["paper_statements_12m"]),

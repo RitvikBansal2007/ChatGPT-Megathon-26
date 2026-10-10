@@ -15,16 +15,28 @@ from greendash.models.evaluate_models import load_calibrator
 
 from greendash.contracts import PropensityVerdict, Band, ConfidenceParts
 
+_MODEL_CACHE = {}
+_CALIB_CACHE = {}
+
 def score(features_row, pid):
     try:
         target = f'take_up_{pid}'
-        model = load_verified_model(target)
-        calibrator = load_calibrator(target)
+        if target not in _MODEL_CACHE:
+            _MODEL_CACHE[target] = load_verified_model(target)
+            _CALIB_CACHE[target] = load_calibrator(target)
+        
+        model = _MODEL_CACHE[target]
+        calibrator = _CALIB_CACHE[target]
         # Get features safely
         df = pd.DataFrame([features_row])
         # Ensure only the features the model expects are passed in
         if hasattr(model, 'feature_name_'):
             df = df[[col for col in model.feature_name_ if col in df.columns]]
+            
+        cat_cols = ['epc_band', 'roof_suitability', 'vehicle_fuel_type']
+        for col in cat_cols:
+            if col in df.columns:
+                df[col] = df[col].astype('category')
             
         raw_pred = model.predict_proba(df)[:, 1]
         calib_pred = calibrator(raw_pred)[0]

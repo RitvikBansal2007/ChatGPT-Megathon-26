@@ -25,6 +25,7 @@ def generate_customers(latent, n=5000):
     
     return pd.DataFrame({
         "customer_id": ids,
+        "customer_key": range(1, n + 1),
         "age": ages,
         "income_band": income_bands,
         "postcode": postcodes,
@@ -53,7 +54,9 @@ def generate_vehicles(customers, latent):
         "vehicle_type": "car",
         "fuel_type": fuel_types,
         "vehicle_age": rng.integers(1, 15, size=n),
-        "annual_mileage": rng.integers(2000, 15000, size=n)
+        "annual_mileage": rng.integers(2000, 15000, size=n),
+        "status": "owned",
+        "updated_at": pd.Timestamp(CUTOFF_DATE - timedelta(days=10))
     })
     return df[df["has_car"]].drop(columns=["has_car"]).reset_index(drop=True)
 
@@ -74,7 +77,7 @@ def generate_energy_usage(customers, latent):
             
             rows.append({
                 "customer_id": cid,
-                "month": month_date.strftime("%Y-%m"),
+                "month": pd.Timestamp(month_date.strftime("%Y-%m-01")),
                 "electricity_kwh": max(0, elec_kwh),
                 "gas_kwh": max(0, gas_kwh)
             })
@@ -97,7 +100,7 @@ def generate_transactions(customers, latent):
     df = pd.DataFrame({
         "transaction_id": [f"TXN-{i:06d}" for i in range(1, total_trans + 1)],
         "customer_id": cids,
-        "date": [d.strftime("%Y-%m-%d") for d in dates],
+        "date": pd.to_datetime([d.strftime("%Y-%m-%d") for d in dates]),
         "merchant_description": merchants,
         "amount": amounts,
         "debit_credit": "debit",
@@ -122,7 +125,7 @@ def generate_digital_usage(customers, latent):
             
             rows.append({
                 "customer_id": cid,
-                "month": month_date.strftime("%Y-%m"),
+                "month": pd.Timestamp(month_date.strftime("%Y-%m-01")),
                 "digital_statements": digital_statements,
                 "paper_statements": paper_statements,
                 "digital_transactions": digital_txns,
@@ -138,8 +141,9 @@ def generate_products(customers, latent):
         
         rows.append({
             "customer_id": cid,
-            "product": "Current Account",
-            "start_date": (CUTOFF_DATE - timedelta(days=int(rng.integers(100, 2000)))).strftime("%Y-%m-%d"),
+            "product": "current_account",
+            "start_date": pd.Timestamp((CUTOFF_DATE - timedelta(days=int(rng.integers(100, 2000)))).strftime("%Y-%m-%d")),
+            "end_date": pd.NaT,
             "balance": max(0, rng.normal(1500, 500) + latent["financial_headroom"][i]*1000),
             "status": "ACTIVE"
         })
@@ -147,9 +151,20 @@ def generate_products(customers, latent):
         if latent["car_finance_ending"][i]:
             rows.append({
                 "customer_id": cid,
-                "product": "Car Finance",
-                "start_date": (CUTOFF_DATE - timedelta(days=int(365*3 - 60))).strftime("%Y-%m-%d"), 
+                "product": "car_finance",
+                "start_date": pd.Timestamp((CUTOFF_DATE - timedelta(days=int(365*3 - 60))).strftime("%Y-%m-%d")),
+                "end_date": pd.Timestamp((CUTOFF_DATE + timedelta(days=60)).strftime("%Y-%m-%d")),
                 "balance": 1500.0,
+                "status": "ACTIVE"
+            })
+            
+        if row["home_owner"] and rng.random() < 0.3:
+            rows.append({
+                "customer_id": cid,
+                "product": "mortgage",
+                "start_date": pd.Timestamp((CUTOFF_DATE - timedelta(days=int(rng.integers(100, 2000)))).strftime("%Y-%m-%d")),
+                "end_date": pd.NaT,
+                "balance": max(0, rng.normal(150000, 50000)),
                 "status": "ACTIVE"
             })
             
@@ -181,9 +196,9 @@ def build_all_tables(n=5000):
         "latent": latent,
         "customers": customers,
         "vehicles": vehicles,
-        "energy_usage": energy_usage,
+        "energy": energy_usage,
         "transactions": transactions,
-        "digital_usage": digital_usage,
+        "digital": digital_usage,
         "products": products,
         "green_products": green_products,
         "emissions_factors": factors

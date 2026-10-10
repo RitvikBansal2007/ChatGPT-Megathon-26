@@ -43,7 +43,7 @@ def main() -> None:
         (OUT / f"{rec['customer_id']}.json").write_text(
             json.dumps({p: json.loads(o.model_dump_json(by_alias=True)) for p, o in packs.items()}, sort_keys=True))
         for pid, o in packs.items():
-            rows.append({"customer_key": rec["customer_id"], "product": pid, "status": o.status.value,
+            rows.append({"customer_key": rec["customer_key"], "product": pid, "status": o.status.value,
                          "propensity": o.propensity, "confidence": o.confidence.overall,
                          "eligibility": o.eligibility.result.value, "impact_status": o.impact.status.value,
                          "impact_family": o.impact.metric_family.value if o.impact.metric_family else None,

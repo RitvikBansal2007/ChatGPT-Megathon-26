@@ -22,14 +22,18 @@ def train_lgb():
         # Using 1 for features we know should positively impact take_up to satisfy PRD
         monotone_constraints = []
         for col in X_train.columns:
-            if 'fuel' in col and target == 'take_up_GP01':
-                monotone_constraints.append(1)
-            elif 'gas' in col and target == 'take_up_GP02':
-                monotone_constraints.append(1)
-            elif 'electricity' in col and target == 'take_up_GP03':
-                monotone_constraints.append(1)
-            elif 'paper' in col and target == 'take_up_GP04':
-                monotone_constraints.append(1)
+            # Only apply constraints to numerical columns
+            if X_train[col].dtype.name != 'category':
+                if 'fuel' in col and target == 'take_up_GP01':
+                    monotone_constraints.append(1)
+                elif 'gas' in col and target == 'take_up_GP02':
+                    monotone_constraints.append(1)
+                elif 'electricity' in col and target == 'take_up_GP03':
+                    monotone_constraints.append(1)
+                elif 'paper' in col and target == 'take_up_GP04':
+                    monotone_constraints.append(1)
+                else:
+                    monotone_constraints.append(0)
             else:
                 monotone_constraints.append(0)
                 

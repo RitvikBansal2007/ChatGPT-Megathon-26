@@ -17,6 +17,19 @@ def load_data():
     return train_df, val_df, test_df
 
 def get_features_and_targets(df):
+    # Drop datetime columns and complex types (lists/dicts)
+    df = df.select_dtypes(exclude=['datetime', 'datetime64[ns]'])
+    
+    # Drop list/array columns which can't be converted to category
+    drop_cols = [c for c in df.columns if 'conflict' in c or 'critical_missing' in c]
+    df = df.drop(columns=drop_cols, errors='ignore')
+    
     target_cols = [c for c in df.columns if c.startswith('take_up_')]
     feature_cols = [c for c in df.columns if c not in target_cols and c not in ['customer_id', 'is_persona']]
+    
+    # Cast object/string columns to category for LightGBM
+    for c in feature_cols:
+        if df[c].dtype == 'object' or df[c].dtype == 'string':
+            df[c] = df[c].astype('category')
+                
     return df[feature_cols], df[target_cols]

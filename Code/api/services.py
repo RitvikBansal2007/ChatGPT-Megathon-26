@@ -16,10 +16,12 @@ def load_customer_packs(key: str, display_id: str) -> CustomerOpportunities:
     import yaml
     from datetime import date
     cfg = yaml.safe_load(Path("config/decisions.yaml").read_text())
-    return CustomerOpportunities(
-        customer_id=display_id,
-        opportunities=[v for _, v in sorted(data.items())],
-        cutoff_date=date.fromisoformat(cfg["cutoff_date"]),
-        outcome_window_days=cfg["outcome_window_days"],
-        run_manifest="sha256:352a838558cb95f7961c2d94c4e862ca198bbdb59435c39ad21912452ca9f548"
-    )
+    dict_data = {
+        "customer_id": display_id,
+        "persona": None,
+        "opportunities": [v for _, v in sorted(data.items())],
+        "cutoff_date": cfg["cutoff_date"],
+        "outcome_window_days": cfg["outcome_window_days"],
+        "run_manifest": "sha256:352a838558cb95f7961c2d94c4e862ca198bbdb59435c39ad21912452ca9f548"
+    }
+    return CustomerOpportunities.model_validate_json(json.dumps(dict_data))
