@@ -51,12 +51,20 @@ def test_role_switcher_updates_session_state():
 
 # ── Client mode guard tests ──────────────────────────────────────────────────
 
-@pytest.mark.parametrize("mode", ["cached", "live"])
-def test_client_unimplemented_modes(monkeypatch, mode):
+def test_client_cached_falls_back_to_fixtures(monkeypatch):
     import client
-    monkeypatch.setenv("DEMO_MODE", mode)
-    with pytest.raises(NotImplementedError, match="Step 3.5"):
-        client.get_portfolio()
+    monkeypatch.setenv("DEMO_MODE", "cached")
+    monkeypatch.setenv("API_BASE_URL", "http://127.0.0.1:9")  # nothing listens here
+    assert "metrics" in client.get_portfolio()
+    assert client.get_opportunities("CUST-0001")
+
+
+def test_client_live_unreachable_returns_empty(monkeypatch):
+    import client
+    monkeypatch.setenv("DEMO_MODE", "live")
+    monkeypatch.setenv("API_BASE_URL", "http://127.0.0.1:9")
+    assert client.get_portfolio() == {}
+    assert client.get_opportunities("CUST-0001") == []
 
 
 def test_client_invalid_mode(monkeypatch):
