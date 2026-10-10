@@ -40,16 +40,21 @@ def compute_reasons():
             top_pos_idx = np.argsort(shaps)[-3:][::-1]
             top_neg_idx = np.argsort(shaps)[:3]
             
+            from datetime import date
             pos_reasons = []
             for idx in top_pos_idx:
                 if shaps[idx] > 0:
                     feat_name = X_test.columns[idx]
                     feat_val = features.iloc[idx]
+                    code_val = f"HIGH_{feat_name.upper()}" if feat_val > X_train[feat_name].median() else f"LOW_{feat_name.upper()}"
                     pos_reasons.append({
-                        "feature": feat_name,
-                        "shap": float(shaps[idx]),
+                        "code": code_val,
+                        "phrase": f"{code_val.replace('_', ' ').title()} recorded",
+                        "metric": feat_name,
                         "value": float(feat_val),
-                        "code": f"HIGH_{feat_name.upper()}" if feat_val > X_train[feat_name].median() else f"LOW_{feat_name.upper()}"
+                        "display": str(float(feat_val)),
+                        "observed_at": str(date.today()),
+                        "source": "inferred_transactions"
                     })
                     
             neg_reasons = []
@@ -57,11 +62,15 @@ def compute_reasons():
                 if shaps[idx] < 0:
                     feat_name = X_test.columns[idx]
                     feat_val = features.iloc[idx]
+                    code_val = f"HIGH_{feat_name.upper()}" if feat_val > X_train[feat_name].median() else f"LOW_{feat_name.upper()}"
                     neg_reasons.append({
-                        "feature": feat_name,
-                        "shap": float(shaps[idx]),
+                        "code": code_val,
+                        "phrase": f"{code_val.replace('_', ' ').title()} recorded",
+                        "metric": feat_name,
                         "value": float(feat_val),
-                        "code": f"HIGH_{feat_name.upper()}" if feat_val > X_train[feat_name].median() else f"LOW_{feat_name.upper()}"
+                        "display": str(float(feat_val)),
+                        "observed_at": str(date.today()),
+                        "source": "inferred_transactions"
                     })
                     
             target_reasons.append({

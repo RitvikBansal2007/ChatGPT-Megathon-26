@@ -52,18 +52,24 @@ def get_explanation(evidence_pack, customer_key="dummy", canary_token="canary123
     # 2. Pre-check (PII scan, Canary)
     ok, reason = pre_check(payload)
     if not ok:
-        fallback = get_template(evidence_pack.get("recommendation", "GP01"), "REJECTED")
-        return {"explanation": fallback, "source": "template", "claimcheck_status": "PII_BLOCK"}
+        fallback = get_template(evidence_pack.get("opportunity_id", "GP01"), evidence_pack.get("status", "REJECTED"))
+        return {"sentences": [{"text": fallback, "fields": [], "check": "TEMPLATE"}], "source": "template", "claimcheck_status": "FALLBACK"}
 
     prompt_path = os.path.join(os.path.dirname(__file__), 'prompts', 'explain_v1.txt')
+    system_path = os.path.join(os.path.dirname(__file__), 'prompts', 'system_v1.txt')
     try:
         with open(prompt_path, 'r') as f:
             prompt_template = f.read()
+        with open(system_path, 'r') as f:
+            system_template = f.read()
     except FileNotFoundError:
         # For testing resilience
         prompt_template = "Explain this: {PACK_JSON}"
+        system_template = "You are a helpful assistant. Canary: {CANARY}"
         
-    prompt = prompt_template.replace('{PACK_JSON}', payload).replace('{CANARY_TOKEN}', canary_token)
+    system_prompt = system_template.replace('{CANARY}', canary_token)
+    prompt = prompt_template.replace('{PACK_JSON}', payload)
+    full_prompt = system_prompt + "\n" + prompt
     client = get_client()
     
     # 3. Call LLM with ONE retry
@@ -71,7 +77,7 @@ def get_explanation(evidence_pack, customer_key="dummy", canary_token="canary123
         try:
             response = client.models.generate_content(
                 model="gemini-flash-latest",
-                contents=prompt,
+                contents=full_prompt,
                 config={
                     "response_mime_type": "application/json",
                     "temperature": 0.0
@@ -92,15 +98,20 @@ def get_explanation(evidence_pack, customer_key="dummy", canary_token="canary123
             # 5. Claim-Check Verification
             result = check(parsed, llm_in)
             if result.passed:
-                return {"explanation": parsed, "source": "llm", "claimcheck_status": "PASS"}
+                # Need to map the raw parsed JSON list to Sentence objects shape if it isn't already
+                if isinstance(parsed, dict) and "sentences" in parsed:
+                    sents = parsed["sentences"]
+                else:
+                    sents = [{"text": str(parsed), "fields": [], "check": "PASS"}]
+                return {"sentences": sents, "source": "llm", "claimcheck_status": "PASS"}
                 
         except Exception as e:
             # Fall through to template on network/timeout error
             break
             
     # 6. Fallback if all retries or Claim-Check fails
-    fallback = get_template(evidence_pack.get("recommendation", "GP01"), "REJECTED")
-    return {"explanation": fallback, "source": "template", "claimcheck_status": "FALLBACK"}
+    fallback = get_template(evidence_pack.get("opportunity_id", "GP01"), evidence_pack.get("status", "REJECTED"))
+    return {"sentences": [{"text": fallback, "fields": [], "check": "TEMPLATE"}], "source": "template", "claimcheck_status": "FALLBACK"}
 
 if __name__ == "__main__":
     # Test the explainer

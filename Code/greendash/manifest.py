@@ -6,7 +6,7 @@ from pathlib import Path
 import pandas as pd
 import yaml
 
-ARTEFACTS = ["out/models", "out/packs", "out/test_predictions.csv", "out/splits.json", "out/scenario_results.json",
+ARTEFACTS = ["data/models", "data/calibration", "out/packs", "data/test_predictions.csv", "data/splits", "out/scenario_results.json",
              "data/features", "data/priors", "config", "greendash/llm/prompts"]
 
 def sha(path: Path) -> str:
