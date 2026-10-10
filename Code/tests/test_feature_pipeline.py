@@ -77,9 +77,10 @@ def test_split_integrity(monkeypatch):
         df.to_parquet(f'{features_dir}/features.parquet')
         
         import greenproof.models.split as split_module
+        original_read_parquet = pd.read_parquet
         
         def mock_read_parquet(path):
-            return pd.read_parquet(f'{features_dir}/features.parquet')
+            return original_read_parquet(f'{features_dir}/features.parquet')
             
         def mock_dump(obj, fp, **kwargs):
             with open(f'{splits_dir}/splits.json', 'w') as out_f:
