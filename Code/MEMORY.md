@@ -1,9 +1,9 @@
 # GreenDash — G3 Context Memory
-<!-- AUTO-UPDATED by agent. Last update: 2026-10-11 (state as of `a3fa7ad`; G2-M status + G2↔G3 integration review added) -->
+<!-- AUTO-UPDATED by agent. Last update: 2026-10-11 (CP2 run against local API at `cb2173d`) -->
 
 > **Project renamed:** `greenproof` → `greendash` (by teammates, commit `96ca5fb`)
 > Repo: https://github.com/<org>/megathon26-chatgpt  
-> Branch: `main` (backend state checked at `cd3ba7d`) · Root: `megathon26-chatgpt/Code/`
+> Branch: `main` (backend state checked at `cb2173d`) · Root: `megathon26-chatgpt/Code/`
 > G3 owns: `app/`, `mobile/`, `slides/`, `docs/diagrams/`, `README.md`, `MEMORY.md`  
 > **NEVER TOUCH:** `greendash/`, `api/`, `data/`, `config/`, `eval/`, `tests/`
 > **Backend owner: G2-An** — as of 2026-10-11 G2-An has taken over all of G1-A's (G1-A) work. Send every backend/API ask to G2-An, not G1-A.
@@ -59,14 +59,15 @@
 | Module | State |
 |---|---|
 | `greendash/contracts.py` | ✅ **Frozen** — `frozen=True` all models |
-| `api/main.py` + `api/routers/` | 🔴 **Still cannot start from `main`** (checked at `cd3ba7d`): `greendash/llm/claimcheck.py` is missing, and `greendash/contracts.py` has no `CustomerPacks` (it is `CustomerOpportunities`) though `api/services.py` + `api/routers/opportunities.py` import it |
-| Files deleted by rename commit `96ca5fb` | 🔴 Not restored — `1319866` added stubs for `llm/claimcheck.py` and `carbon/engine.py` instead (see ML / LLM status). Still missing: `llm/gateway.py`, `guard.py`, `minimise.py`, `providers.py`, `textnorm.py`, `carbon/formulas.py`, `units.py`, all of `generator/`. Real versions recoverable from `96ca5fb^` or `origin/the G1-K claimcheck branch` |
-| First-request failures (from reading the code) | 🔴 `settings.ENV` / `settings.DEMO_MODE` don't exist in `config/settings.py` (only `demo_mode`); `issue_token()` takes 1 arg but `auth.py` passes 2; `scenario.py` reads `principal.role` but `require_role` returns a dict |
-| `api/deps.py` + `greendash/security/authz.py` | ⚠️ Pushed (`d74e266`) but **stubs**: `require_role` ignores the token, `require_subject` is empty — no real auth. Don't expose port 8000 (`--host 0.0.0.0`) on a shared network |
+| `api/main.py` + `api/routers/` | ✅ **Starts from `main`** at `cb2173d` (`ENV=demo uvicorn api.main:app`), `/healthz` OK |
+| **CP2 result (client.py live mode vs local API, all 6 roles)** | ⚠️ 2 of 6 work: `demo-token` ✅, `/api/eval/summary` ✅ (returns `fixtures/eval.json`). Failing: opportunities **404** + claimcheck **404** (`out/packs/<id>.json` not in repo, fallback `fixtures/status.json` doesn't exist); portfolio **500** (`out/packs/portfolio_rows.parquet` missing, error leaks the path); scenario **422** (contracts are `strict`, so the `Mutation` enum rejects JSON strings — no HTTP client can call it) |
+| Building packs | 🔴 `python -m greendash.packs` fails on `main`: `KeyError: 'customer_key'` (features use `customer_id`) |
+| Files deleted by rename commit `96ca5fb` | ✅ All 20 restored in `cb2173d` (real `claimcheck.py` 177 lines, `carbon/engine.py` 109 lines) |
+| `api/deps.py` + `greendash/security/authz.py` | ⚠️ Still no real auth: `/api/eval/summary` returns 200 **with no token**. G2-An says G1-K ships real verification in his Production PR |
 | Portfolio/eval shapes | ⚠️ `aafd480` says `/api/portfolio/summary` + `/api/eval/summary` now match the UI fixtures (`metrics` / `baselines`) — **unverified**, needs a running API |
 | `backend/` package | ℹ️ Older sub-package from `9d5f6d5` (`/health`, `/api/v1/transactions`). G1-A confirmed: **ignore it, the demo API is `api/`** |
-| `api/routers/auth.py` | ⚠️ `POST /api/auth/demo-token` defined, will 500 (see above) |
-| `api/routers/opportunities.py` | ⚠️ `GET /api/customers/{id}/opportunities` defined, import fails (see above) |
+| `api/routers/auth.py` | ✅ `POST /api/auth/demo-token` works (needs `ENV=demo`) |
+| `api/routers/opportunities.py` | 🔴 404 until packs exist (see CP2 result) |
 | `/healthz` | ✅ Health check endpoint |
 | `pyproject.toml` | ✅ `streamlit>=1.46` pinned on `main` |
 | `fixtures/opps_*.json` × 5 | ✅ Contract-shaped, committed |
@@ -87,8 +88,7 @@ G2-M says his deliverables are "locked in". What the repo shows:
 | `docs/EVALUATION.md` | 🔴 **Do not use for slides — circular.** Since `a3fa7ad`, `eval/report.py` generates it by reading `fixtures/eval.json`, i.e. G3's own invented placeholders (AUC 0.847 etc., F1 0.891, 28/30 scenarios, LLM 97%). None of it is measured. "100 mocked packs" is hard-coded; real judged n = 2 |
 | Real metrics | ⚠️ `evaluate_models.py` computes ROC-AUC/Brier/ECE/lift but only prints them — nothing is saved |
 | `fixtures/eval.json` | 🔴 G3 placeholder numbers (invented in `1d1fc0d`). `/api/eval/summary` now just returns this file (`aafd480`), so Receipts shows invented numbers in **every** mode until real ones replace it |
-| LLM explainer on `main` | 🔴 Never runs: `minimise.py` + `guard.py` still missing (deleted by `96ca5fb`) → fail-closed fallback rejects every call → always template |
-| **Stubs added by `1319866` ("Fix API startup issues")** | 🔴 `greendash/llm/claimcheck.py` is now a 10-line stub that returns PASS for every sentence (G1-K's real one was 163 lines, still on `origin/the G1-K claimcheck branch`); `greendash/carbon/engine.py` `estimate()` always returns `NOT_APPLICABLE`; `greendash/models/score.py` `score()` returns constant `0.5`. **Red-team demo will show 0 violations and no impact numbers in live mode** |
+| LLM explainer on `main` | ⚠️ Security modules restored in `cb2173d`; not re-tested end to end (needs an LLM key) |
 | Explainer output shape | 🔴 Returns `{explanation: str|dict, source, claimcheck_status}`; contract + `claim_stamp.py` need `sentences[{text, fields, check}]`. Status `PII_BLOCK` is not in the contract |
 | Fallback template | 🔴 Always uses the `REJECTED` template and reads `pack["recommendation"]` (field is `opportunity_id`) → every fallback says "EV Finance … is not recommended" |
 | Scores / reasons / confidence | 🔴 Not contract-shaped: no `likelihood_band`, no `ConfidenceParts`, reason codes lack `phrase/display/observed_at/source`; IDs are `CUST-00001` (5 digits) vs UI/API `CUST-0001` |
@@ -101,8 +101,7 @@ G2-M says his deliverables are "locked in". What the repo shows:
 ## 🔴 REMAINING
 
 ### CP2 — verify live mode against a real API
-Blocked on backend (owner: **G2-An**): restore the files deleted by `96ca5fb`, fix the `api/` errors in Backend State, then send a LAN IP / tunnel URL for `API_BASE_URL`.
-Then: `uvicorn api.main:app --reload` and `DEMO_MODE=live streamlit run app/Home.py`.
+Ran once (see Backend State → CP2 result): client side works — token, role mapping, error cards. Blocked on backend (owner: **G2-An**): commit or generate `out/packs/`, fix `greendash.packs` `customer_key` error, fix `/api/scenario` strict-enum 422. G2-An's LAN IP `10.166.113.188:8000` was unreachable from G3's machine (timeout) — test locally with `ENV=demo uvicorn api.main:app`.
 No frontend adapter planned: the API was adapted to the fixture shapes (`aafd480`); confirm on first live run.
 
 ### Known failing test (predates Step 3.5)
@@ -208,6 +207,6 @@ MEMORY.md                        ✅ (this file)
 ## 📨 Pending teammate requests
 | Who | Ask |
 |---|---|
-| **G2-An** (now also covering G1-A's G1-A work) | Restore the 20 files deleted by `96ca5fb`; fix `CustomerPacks` import, settings `ENV`/`DEMO_MODE`, `issue_token` call, `principal.role`; real `api/deps.py`; then send LAN IP for CP2 |
+| **G2-An** (now also covering G1-A's G1-A work) | Packs for the 8 personas (`out/packs/CUST-000x.json` + `portfolio_rows.parquet`) or a working `make packs`; `/api/scenario` 422 on string mutations; check why `10.166.113.188:8000` is unreachable (firewall / different Wi-Fi) |
 | **G1-K** | Caddy CSP (`font-src 'self'`, `frame-ancestors 'none'`); proxy Streamlit only, not port 8000; keep branch `the G1-K claimcheck branch` until Claim-Check is restored on main |
 | **G2-M** | Sent the integration flaw list (see "ML / LLM status"). Blocking for slide 6: real AUC/baseline/scenario/F1 numbers written to a file, and an honest LLM-eval sample size |
