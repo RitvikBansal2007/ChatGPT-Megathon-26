@@ -13,11 +13,12 @@ import client
 from components.chrome import banner, current_role
 
 C = theme.COLORS
+D = theme.DARK
 
 st.set_page_config(page_title="GreenDash – Cockpit", layout="wide")
 st.markdown(theme.css(), unsafe_allow_html=True)
 
-banner()
+banner(dark=True)
 st.title("Cockpit")
 role = current_role()
 st.caption(f"Viewing as: {role}")
@@ -55,9 +56,9 @@ for col, (key, label, unit, m_token) in zip(m_cols, _M_CONFIG):
     with col:
         st.markdown(
             f'<div class="gd-metric gd-metric--{key.replace("_","").replace("kwh","energy").replace("pct","digital")}" '
-            f'style="border-left-color:{m_token["chart"]};">'
-            f'<div class="gd-tag" style="color:{m_token["text"]};">{label}</div>'
-            f'<div class="gd-metric-value" style="color:{m_token["text"]};">'
+            f'style="border-left-color:{m_token["dark"]};">'
+            f'<div class="gd-tag" style="color:{m_token["dark"]};">{label}</div>'
+            f'<div class="gd-metric-value" style="color:{m_token["dark"]};">'
             f'{val:,}{"%" if key=="digital_pct" else ""}</div>'
             f'<div class="gd-tag" style="margin-top:4px;">{note}</div>'
             f'</div>',
@@ -75,26 +76,27 @@ with col_funnel:
             y=[f["stage"] for f in funnel],
             x=[f["count"] for f in funnel],
             textinfo="value+percent initial",
-            marker_color=theme.METRICS["CO2E"]["chart"],
+            marker_color=theme.METRICS["CO2E"]["dark"],
+            textfont=dict(color=D["on_primary"]),
         ))
         fig_funnel.update_layout(
             paper_bgcolor="rgba(0,0,0,0)",
             plot_bgcolor="rgba(0,0,0,0)",
-            font_family="Inter, system-ui, sans-serif",
+            font=dict(family="Inter, system-ui, sans-serif", color=D["text"]),
             margin=dict(l=0, r=0, t=0, b=0),
             height=320,
         )
-        st.plotly_chart(fig_funnel, use_container_width=True, config={"displayModeBar": False})
+        st.plotly_chart(fig_funnel, use_container_width=True, theme=None, config={"displayModeBar": False})
 
 # ── 3. Scatter quadrant ──────────────────────────────────────────────────────
 with col_scatter:
     st.subheader("Opportunity quadrant")
     if scatter:
         _PRODUCT_COLORS = {
-            "GP01": theme.METRICS["CO2E"]["chart"],
-            "GP02": theme.METRICS["ENERGY"]["chart"],
-            "GP03": theme.METRICS["PAPER"]["chart"],
-            "GP04": theme.METRICS["DIGITAL"]["chart"],
+            "GP01": theme.METRICS["CO2E"]["dark"],
+            "GP02": theme.METRICS["ENERGY"]["dark"],
+            "GP03": theme.METRICS["PAPER"]["dark"],
+            "GP04": theme.METRICS["DIGITAL"]["dark"],
         }
         fig_scatter = go.Figure()
         for row in scatter:
@@ -104,9 +106,9 @@ with col_scatter:
                 mode="markers",
                 marker=dict(
                     size=max(10, row.get("size", 100) / 30),
-                    color=_PRODUCT_COLORS.get(row["product"], "#888"),
+                    color=_PRODUCT_COLORS.get(row["product"], D["muted"]),
                     opacity=0.85,
-                    line=dict(width=1, color="white"),
+                    line=dict(width=1, color=D["background"]),
                 ),
                 name=row["product"],
                 hovertemplate=(
@@ -128,23 +130,22 @@ with col_scatter:
         ]:
             fig_scatter.add_annotation(
                 x=x, y=y, text=txt, showarrow=False,
-                font=dict(size=10, color=C["border_strong"], family="JetBrains Mono, monospace"),
-                opacity=0.7,
+                font=dict(size=10, color=D["muted"], family="JetBrains Mono, monospace"),
             )
         # Centre cross lines
-        fig_scatter.add_hline(y=800, line_dash="dot", line_color=C["border_strong"], line_width=1, opacity=0.4)
-        fig_scatter.add_vline(x=0.5, line_dash="dot", line_color=C["border_strong"], line_width=1, opacity=0.4)
+        fig_scatter.add_hline(y=800, line_dash="dot", line_color=D["border"], line_width=1)
+        fig_scatter.add_vline(x=0.5, line_dash="dot", line_color=D["border"], line_width=1)
         fig_scatter.update_layout(
-            paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(241,248,244,0.5)",
+            paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor=D["surface"],
             xaxis_title="Propensity →", yaxis_title="Estimated impact (kg CO₂e) →",
-            xaxis=dict(range=[0, 1], tickformat=".0%", gridcolor="rgba(11,31,24,0.06)"),
-            yaxis=dict(gridcolor="rgba(11,31,24,0.06)"),
-            font_family="Inter, system-ui, sans-serif",
+            xaxis=dict(range=[0, 1], tickformat=".0%", gridcolor=D["border"], zeroline=False),
+            yaxis=dict(gridcolor=D["border"], zeroline=False),
+            font=dict(family="Inter, system-ui, sans-serif", color=D["text"]),
             showlegend=False,
-            margin=dict(l=0, r=0, t=0, b=0),
+            margin=dict(l=64, r=8, t=8, b=48),  # room for tick labels (no Streamlit chart theme here)
             height=320,
         )
-        st.plotly_chart(fig_scatter, use_container_width=True, config={"displayModeBar": False})
+        st.plotly_chart(fig_scatter, use_container_width=True, theme=None, config={"displayModeBar": False})
 
 st.divider()
 
@@ -155,7 +156,7 @@ if segments:
     import pandas as pd
     df = pd.DataFrame(segments).set_index("region")
     # Ensure <10 strings are preserved
-    st.dataframe(df, use_container_width=True)
+    st.table(df)
 
 st.divider()
 

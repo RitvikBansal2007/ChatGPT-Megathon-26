@@ -61,7 +61,7 @@ def render_badges(opportunity: dict) -> None:
         )
 
     html_out = (
-        '<div style="display:flex;gap:8px;margin:12px 0;" role="group" '
+        '<div class="gd-verdicts" role="group" '
         'aria-label="Three separate verdicts">'
         + _badge(lk["glyph"], lk["title"], lv["label"], lv["bg"], lv["fg"], lv["border"])
         + _badge(ek["glyph"], ek["title"], ev["label"], ev["bg"], ev["fg"], ev["border"])

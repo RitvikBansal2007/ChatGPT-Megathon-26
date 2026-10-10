@@ -4,7 +4,11 @@ No raw HTML here. The banner is a keyed container styled by theme.css()
 (selector .st-key-gd_banner), so its text is a normal Streamlit widget.
 """
 
+from pathlib import Path
+
 import streamlit as st
+
+_LOGOS = Path(__file__).resolve().parent.parent / "brand guidelines"
 
 BANNER_TEXT = "⚠ Synthetic data – demo only"
 
@@ -25,8 +29,16 @@ ROLES: list[str] = [
 DEFAULT_ROLE = ROLES[0]
 
 
-def banner() -> None:
-    """Render the persistent synthetic-data pill (icon + text, never colour alone)."""
+def banner(dark: bool = False) -> None:
+    """Render the logo and the persistent synthetic-data pill (icon + text).
+
+    dark=True (Cockpit, brand guidelines §4.3) also drops a keyed marker that
+    theme.css() uses to switch the whole page to the DARK tokens.
+    """
+    st.logo(str(_LOGOS / ("greendash-logo-dark-transparent.png" if dark else "greendash-logo-on-light.png")),
+            size="large")
+    if dark:
+        st.container(key="gd_dark").markdown("")  # marker only; styled via :has()
     with st.container(key="gd_banner"):
         st.markdown(BANNER_TEXT)
 
