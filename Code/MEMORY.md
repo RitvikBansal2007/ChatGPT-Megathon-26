@@ -1,9 +1,9 @@
 # GreenDash — G3 (Ritvik) Context Memory
-<!-- AUTO-UPDATED by Antigravity agent. Last update: 2026-10-11 (after Step 3.5) -->
+<!-- AUTO-UPDATED by agent. Last update: 2026-10-11 (backend state as of `aafd480`) -->
 
 > **Project renamed:** `greenproof` → `greendash` (by teammates, commit `96ca5fb`)
 > Repo: https://github.com/IIIT-ECell/megathon26-chatgpt  
-> Branch: `main` (HEAD: `076bed7`) · Root: `megathon26-chatgpt/Code/`  
+> Branch: `main` (backend state checked at `aafd480`) · Root: `megathon26-chatgpt/Code/`
 > Ritvik owns: `app/`, `mobile/`, `slides/`, `docs/diagrams/`, `README.md`, `MEMORY.md`  
 > **NEVER TOUCH:** `greendash/`, `api/`, `data/`, `config/`, `eval/`, `tests/`
 
@@ -58,12 +58,15 @@
 | Module | State |
 |---|---|
 | `greendash/contracts.py` | ✅ **Frozen** — `frozen=True` all models |
-| `api/main.py` + `api/routers/` | ⚠️ Routers committed, but **cannot start from `main`**: `api/deps.py` and `greendash/security/authz.py` are imported and exist on no pushed branch |
-| Live response shapes | ⚠️ `/api/portfolio/summary` returns `tiles/funnel/by_region/quadrant`, `/api/eval/summary` returns `out/eval_summary.json` — neither matches `fixtures/portfolio.json` (`metrics`) / `fixtures/eval.json` (`baselines`) that Cockpit + Receipts read |
-| `api/routers/auth.py` | ✅ `POST /api/auth/demo-token` available |
-| `api/routers/opportunities.py` | ✅ `GET /api/customers/{id}/opportunities` |
+| `api/main.py` + `api/routers/` | 🔴 **Still cannot start from `main`** (checked at `aafd480` by running `uvicorn api.main:app`): `greendash/llm/claimcheck.py` is missing, and `greendash/contracts.py` has no `CustomerPacks` (it is `CustomerOpportunities`) though `api/services.py` + `api/routers/opportunities.py` import it |
+| First-request failures (from reading the code) | 🔴 `settings.ENV` / `settings.DEMO_MODE` don't exist in `config/settings.py` (only `demo_mode`); `issue_token()` takes 1 arg but `auth.py` passes 2; `scenario.py` reads `principal.role` but `require_role` returns a dict |
+| `api/deps.py` + `greendash/security/authz.py` | ⚠️ Pushed (`d74e266`) but **stubs**: `require_role` ignores the token, `require_subject` is empty — no real auth. Akshit runs uvicorn with `--host 0.0.0.0` |
+| Portfolio/eval shapes | ⚠️ `aafd480` says `/api/portfolio/summary` + `/api/eval/summary` now match the UI fixtures (`metrics` / `baselines`) — **unverified**, needs a running API |
+| `backend/` package | ℹ️ Older sub-package from `9d5f6d5` (`/health`, `/api/v1/transactions`). Akshit confirmed: **ignore it, the demo API is `api/`** |
+| `api/routers/auth.py` | ⚠️ `POST /api/auth/demo-token` defined, will 500 (see above) |
+| `api/routers/opportunities.py` | ⚠️ `GET /api/customers/{id}/opportunities` defined, import fails (see above) |
 | `/healthz` | ✅ Health check endpoint |
-| `pyproject.toml` | ⚠️ `streamlit>=1.46` not on `main`; the pin exists on `origin/g1-aniket/feature-pipeline` (`529abe3`), unmerged |
+| `pyproject.toml` | ✅ `streamlit>=1.46` pinned on `main` |
 | `fixtures/opps_*.json` × 5 | ✅ Contract-shaped, committed |
 | `fixtures/claimcheck_response.json` | ✅ |
 | `fixtures/scenario_response.json` | ✅ |
@@ -73,9 +76,9 @@
 ## 🔴 REMAINING
 
 ### CP2 — verify live mode against a real API
-Blocked on backend: `api/deps.py` + `greendash/security/authz.py` must be pushed.
+Blocked on backend: Akshit's laptop runs code that isn't pushed (see Backend State). Also need his LAN IP for `API_BASE_URL` — not sent yet.
 Then: `uvicorn api.main:app --reload` and `DEMO_MODE=live streamlit run app/Home.py`.
-Expect to need a small adapter in Cockpit/Receipts (or the API) for the portfolio/eval shape mismatch above.
+No frontend adapter planned: Akshit adapted the API to the fixture shapes (`aafd480`); confirm on first live run.
 
 ### Known failing test (predates Step 3.5)
 `test_all_five_statuses_covered` fails on `076bed7` too: `client.get_opportunities` de-dupes by
@@ -180,5 +183,5 @@ MEMORY.md                        ✅ (this file)
 ## 📨 Pending teammate requests
 | Who | Ask |
 |---|---|
-| **Akshit (G1-A)** | Push `api/deps.py` + `greendash/security/authz.py`; merge the streamlit pin (`529abe3`) to main; agree portfolio/eval response shape |
+| **Akshit (G1-A)** | Send LAN IP; push untracked files (`greendash/llm/claimcheck.py`, `CustomerPacks`, settings `ENV`/`DEMO_MODE`, real `api/deps.py`); fix `issue_token` call + `principal.role` |
 | **Madhav (G2-M)** | Push final `docs/EVALUATION.md` — needed for slide 6 real numbers |
