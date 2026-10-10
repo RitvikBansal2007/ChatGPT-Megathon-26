@@ -117,6 +117,15 @@ def validate_canary(canary: Any) -> str:
     return canary
 
 
+def contains_canary(output: Any, canary: str) -> bool:
+    """True if the canary appears in output (any JSON-serialisable value), compared in
+    canary_form. For evaluators: it needs the canary, but the explainer result never
+    carries it. Raises CanaryError for an unusable canary rather than returning False."""
+    validate_canary(canary)
+    text = output if isinstance(output, str) else json.dumps(output, default=str, ensure_ascii=False)
+    return canary_form(canary) in canary_form(text)
+
+
 def generate_canary() -> str:
     """A fresh random canary (128 bits). Call this explicitly; nothing does it silently."""
     for _ in range(8):

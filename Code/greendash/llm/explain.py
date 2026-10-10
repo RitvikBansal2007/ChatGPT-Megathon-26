@@ -21,6 +21,13 @@ Result keys:
                              | SECURITY_MODULE_UNAVAILABLE | SECURITY_CONFIG_ERROR
     fallback_reason    str|None  fixed code (INPUT_PII, CLAIMCHECK_FAIL, ...); None on PASS
     attempts           int   provider calls made (0 when nothing was sent)
+    sentences          list  [{"text", "fields", "check"}] in contracts.Sentence shape;
+                             "check" is PASS (verified) or TEMPLATE
+
+Adapters (pure functions, no I/O):
+    to_contract_explanation(result) -> dict valid for contracts.Explanation
+    to_audit_args(result, customer_key, product_id) -> kwargs for db.audit.append
+Nothing in this module writes to the audit log: see to_audit_args.
 """
 import logging
 import math
@@ -125,6 +132,16 @@ _TEMPLATE_STATUS = {
 }
 _PLACEHOLDERS = {"fuel_spend": "[FUEL_SPEND]", "gas_kwh": "[GAS_KWH]", "elec_kwh": "[ELEC_KWH]"}
 
+# Where each template figure may come from. A figure is used only if a pack field or a
+# reason code's "metric" has exactly one of these names and a finite numeric value.
+# Nothing is derived, converted or defaulted. Note fuel_spend is a MONTHLY average
+# (avg_monthly_fuel_gbp); the template wording does not say "per month".
+_TEMPLATE_SOURCES = {
+    "fuel_spend": ("avg_monthly_fuel_gbp",),
+    "gas_kwh": ("gas_kwh_12m", "gas_kwh"),
+    "elec_kwh": ("electricity_kwh_12m", "elec_kwh"),
+}
+
 
 def _enum(pack: Mapping[str, Any], keys, allowed) -> Optional[str]:
     """First value under keys that is an exact member of allowed. Never free text."""
@@ -139,15 +156,24 @@ def _template_text(pack: Any) -> str:
     """The deterministic product/status template for this pack. Uses only enum-checked
     identifiers and finite numbers from the pack; no free text."""
     pack = pack if isinstance(pack, Mapping) else {}
-    product = _enum(pack, ("product_id", "recommendation"), TEMPLATES)
+    product = _enum(pack, ("product_id", "recommendation", "opportunity_id"), TEMPLATES)
     status = _enum(pack, ("status",), _TEMPLATE_STATUS)
     key = _TEMPLATE_STATUS.get(status, "PENDING")
     features = pack.get("evidence_features")
+    reasons = [r for field in ("reason_codes", "reasons")
+               for r in (pack.get(field) if isinstance(pack.get(field), (list, tuple)) else [])
+               if isinstance(r, Mapping)]
     context = dict(_PLACEHOLDERS)
-    for name in _PLACEHOLDERS:
-        value = pack.get(name)
-        if value is None and isinstance(features, Mapping):
-            value = features.get(name)
+    for name, sources in _TEMPLATE_SOURCES.items():
+        value = None
+        for src in sources:
+            value = pack.get(src)
+            if value is None and isinstance(features, Mapping):
+                value = features.get(src)
+            if value is None:
+                value = next((r.get("value") for r in reasons if r.get("metric") == src), None)
+            if _num(value):
+                break
         if _num(value):
             context[name] = f"{value:,.0f}"
     text = get_template(product, key, context)
@@ -163,7 +189,35 @@ def _template_result(pack: Any, status: str, reason: Optional[str], attempts: in
         text = "Status information is currently unavailable."
     log.warning("explain template status=%s reason=%s attempts=%d", status, reason, attempts)
     return {"explanation": text, "metrics_summary": "", "source": SOURCE_TEMPLATE,
-            "claimcheck_status": status, "fallback_reason": reason, "attempts": attempts}
+            "claimcheck_status": status, "fallback_reason": reason, "attempts": attempts,
+            "sentences": [{"text": text, "fields": [], "check": "TEMPLATE"}]}
+
+
+# ---- adapters ---------------------------------------------------------------------
+def to_contract_explanation(result: Mapping[str, Any]) -> Dict[str, Any]:
+    """Shape of contracts.Explanation, which is what Opportunity.explanation and the UI
+    claim stamp read. The contract's claimcheck_status is PASS | FALLBACK only, so
+    PII_BLOCK and the SECURITY_* statuses are reported there as FALLBACK. The detailed
+    status stays in result["claimcheck_status"] and in the audit verdict."""
+    sentences = [{"text": s["text"], "fields": list(s.get("fields", [])), "check": s["check"]}
+                 for s in result.get("sentences", [])]
+    return {"sentences": sentences,
+            "source": result["source"],
+            "claimcheck_status": "PASS" if result["claimcheck_status"] == STATUS_PASS else "FALLBACK"}
+
+
+def to_audit_args(result: Mapping[str, Any], customer_key: str, product_id: str) -> Dict[str, Any]:
+    """Keyword arguments for greendash.db.audit.append (verdict is constrained there to
+    PASS | BLOCKED | FALLBACK | PII_BLOCK; source to llm | template | red_team).
+
+    rules_violated carries the fixed fallback reason code, never rule match text:
+    the gateway does not expose which Claim-Check rules fired. customer_key must be
+    the pseudonymous key, never a customer_id or name."""
+    status = result["claimcheck_status"]
+    verdict = status if status in (STATUS_PASS, STATUS_PII_BLOCK) else STATUS_FALLBACK
+    reason = result.get("fallback_reason")
+    return {"customer_key": customer_key, "product_id": product_id, "verdict": verdict,
+            "rules_violated": [reason] if reason else [], "source": result["source"]}
 
 
 # ---- provider -------------------------------------------------------------------
@@ -185,6 +239,18 @@ def _meter(response: Any, prompt_chars: int) -> None:
         raise NonRetryableProviderError("budget")   # spend cap: no retry, template
 
 
+class _Recording:
+    """Provider wrapper that remembers the last raw reply, so the cited fields of an
+    accepted reply can be recovered (the gateway returns sentence text only)."""
+
+    def __init__(self, inner):
+        self._inner, self.last = inner, None
+
+    def generate(self, **kwargs):
+        self.last = self._inner.generate(**kwargs)
+        return self.last
+
+
 def _build_provider(cfg: Mapping[str, Any]):
     from greendash.llm.providers import GeminiProvider
     return GeminiProvider(_lazy_client, model_id=cfg["model_id"],
@@ -201,9 +267,12 @@ def get_explanation(evidence_pack, customer_key="dummy", canary_token=None, *,
     provider / config: injection points for tests; production passes neither.
     """
     try:
+        if hasattr(evidence_pack, "model_dump"):      # contracts.Opportunity
+            evidence_pack = evidence_pack.model_dump(mode="json")
         try:
             from greendash.llm.gateway import LLMGateway, SOURCE_LLM as GW_LLM
-            from greendash.llm.guard import INPUT_PII, CanaryError, generate_canary, validate_canary
+            from greendash.llm.guard import (INPUT_PII, CanaryError, generate_canary,
+                                             guard_post, validate_canary)
         except ImportError:
             return _template_result(evidence_pack, STATUS_MODULE_UNAVAILABLE, "MODULE_UNAVAILABLE")
 
@@ -215,8 +284,9 @@ def get_explanation(evidence_pack, customer_key="dummy", canary_token=None, *,
                 canary = validate_canary(canary_token)
             except CanaryError:
                 canary = generate_canary()
+            recorder = _Recording(provider if provider is not None else _build_provider(cfg))
             gateway = LLMGateway(
-                provider if provider is not None else _build_provider(cfg),
+                recorder,
                 system_prompt=system_prompt, canary=canary,
                 max_attempts=int(cfg["retries"]) + 1,
                 max_tokens=int(cfg["max_tokens"]), timeout_s=float(cfg["timeout_seconds"]),
@@ -227,9 +297,14 @@ def get_explanation(evidence_pack, customer_key="dummy", canary_token=None, *,
         result = gateway.explain(evidence_pack)
         if result.source == GW_LLM:
             log.info("explain status=%s attempts=%d", STATUS_PASS, result.attempts)
+            cited = [list(c) for _, c in guard_post(recorder.last, canary=canary)]
+            if len(cited) != len(result.sentences):
+                cited = [[] for _ in result.sentences]
             return {"explanation": " ".join(result.sentences), "metrics_summary": "",
                     "source": SOURCE_LLM, "claimcheck_status": STATUS_PASS,
-                    "fallback_reason": None, "attempts": result.attempts}
+                    "fallback_reason": None, "attempts": result.attempts,
+                    "sentences": [{"text": t, "fields": f, "check": "PASS"}
+                                  for t, f in zip(result.sentences, cited)]}
         status = STATUS_PII_BLOCK if result.reason == INPUT_PII else STATUS_FALLBACK
         return _template_result(evidence_pack, status, result.reason, result.attempts)
     except Exception:

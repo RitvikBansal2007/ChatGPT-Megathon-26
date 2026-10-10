@@ -1,6 +1,6 @@
 """Scenario Lab — aligned to real contracts.py ScenarioResponse + ClaimCheckResponse.
 
-ScenarioResponse fields (Akshit):
+ScenarioResponse fields (G1-A):
   before / after: dict[ProductId, StatusSnapshot]
   diff[].product / .field / .from / .to / .cause
   invariance_ok, elapsed_ms

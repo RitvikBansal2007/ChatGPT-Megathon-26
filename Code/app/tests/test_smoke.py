@@ -1,4 +1,4 @@
-"""Smoke tests aligned to real contracts.py (frozen by Akshit, G1-A).
+"""Smoke tests aligned to real contracts.py (frozen by G1-A).
 
 Opportunity shape: CustomerOpportunities wrapper with .opportunities list.
 Fixture files: opps_recommend.json, opps_abstain.json, opps_review.json,

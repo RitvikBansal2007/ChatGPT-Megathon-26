@@ -23,6 +23,7 @@ from security.privacy import LLM_ALLOWED_FIELDS, find_pii, llm_payload
 
 # Fields lifted out of pack["carbon"] into the flat dict.
 _CARBON_FIELDS = ("formula", "missing_inputs", "display", "status")
+_IMPACT_FIELDS = ("formula", "missing_inputs", "display")
 
 # Explanation inputs from the scoring contract: {"recommendation", "confidence",
 # "reasons": [{"code", "value", ...}]}. Only the shapes below ever pass.
@@ -73,21 +74,33 @@ def flatten_pack(pack: Mapping[str, Any]) -> Dict[str, Any]:
         for key in _CARBON_FIELDS:
             if key in carbon:
                 flat[key] = carbon[key]
+    # contracts.Opportunity carries the same facts under "impact". Its "status" is the
+    # impact status, not the display status, so it is not lifted over pack["status"].
+    impact = pack.get("impact")
+    if isinstance(impact, Mapping):
+        for key in _IMPACT_FIELDS:
+            if impact.get(key) is not None:
+                flat[key] = impact[key]
     return flat
 
 
 def _contract_fields(pack: Mapping[str, Any], flat: Dict[str, Any]) -> None:
     """Map the scoring contract onto the allow-listed flat shape (in place)."""
     if not (isinstance(flat.get("product_id"), str) and _PRODUCT_RE.match(flat["product_id"])):
-        rec = pack.get("recommendation")
-        if isinstance(rec, str) and _PRODUCT_RE.match(rec):
-            flat["product_id"] = rec
+        for key in ("recommendation", "opportunity_id"):
+            rec = pack.get(key)
+            if isinstance(rec, str) and _PRODUCT_RE.match(rec):
+                flat["product_id"] = rec
+                break
     flat.pop("reasons", None)
     flat.pop("confidence", None)
-    reasons = _clean_reasons(pack.get("reasons"))
+    # "reasons" (flat scoring contract) or "reason_codes" (contracts.Opportunity).
+    reasons = _clean_reasons(pack.get("reasons") or pack.get("reason_codes"))
     if reasons:
         flat["reasons"] = reasons
     confidence = pack.get("confidence")
+    if isinstance(confidence, Mapping):          # contracts.ConfidenceParts
+        confidence = confidence.get("overall")
     if _is_number(confidence) and 0 <= confidence <= 1:
         flat["confidence"] = confidence
 

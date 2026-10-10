@@ -1,10 +1,10 @@
-# GreenDash — G3 (Ritvik) Context Memory
+# GreenDash — G3 Context Memory
 <!-- AUTO-UPDATED by Antigravity agent. Last update: 2026-10-11T02:38 IST -->
 
 > **Project renamed:** `greenproof` → `greendash` (by teammates, commit `96ca5fb`)
-> Repo: https://github.com/IIIT-ECell/megathon26-chatgpt  
+> Repo: https://github.com/<org>/megathon26-chatgpt  
 > Branch: `main` (HEAD: `076bed7`) · Root: `megathon26-chatgpt/Code/`  
-> Ritvik owns: `app/`, `mobile/`, `slides/`, `docs/diagrams/`, `README.md`, `MEMORY.md`  
+> G3 owns: `app/`, `mobile/`, `slides/`, `docs/diagrams/`, `README.md`, `MEMORY.md`  
 > **NEVER TOUCH:** `greendash/`, `api/`, `data/`, `config/`, `eval/`, `tests/`
 
 ---
@@ -37,7 +37,7 @@
 - `mobile/README.md` — Expo production spec, 8 screens, auth+security
 
 ### Contract alignment (`076bed7`) ← LATEST
-- Adopted Akshit's frozen `greendash/contracts.py` + 7 fixture files from `g1-aniket/feature-pipeline`
+- Adopted G1-A's frozen `greendash/contracts.py` + 7 fixture files from the G2-An feature-pipeline branch
 - All field names updated across all 6 component files and `client.py`
 - Key changes: `opportunity_id`, `opportunity_name`, `next_action`, `eligibility.result=ELIGIBLE`,
   `plain_reasons[]`, `impact.low/central/high`, `violations[].rule`, `diff[].from`
@@ -83,7 +83,7 @@ When you say "do Step 3.5", I will add to `app/client.py`:
 
 **To test (CP2):** `uvicorn api.main:app --reload` then `DEMO_MODE=live streamlit run app/Home.py`
 
-**Note:** Need to add `streamlit>=1.46` to `pyproject.toml` — tell Akshit or I can add it (it's his file so needs his OK).
+**Note:** Need to add `streamlit>=1.46` to `pyproject.toml` — tell G1-A or I can add it (it's his file so needs his OK).
 
 ### Step 5 — Slides (claude.ai)
 **Files ready to upload right now:**
@@ -98,7 +98,7 @@ Go to **https://claude.ai** → new chat → paste:
 > "Create an 8-slide hackathon pitch deck for GreenDash (Lloyds green finance brief, Megathon X).
 > Tagline: 'The green recommendation that shows its receipts.'
 > Core rule: 'ML predicts. Rules decide eligibility. The carbon engine calculates. The LLM only explains. Claim-Check verifies.'
-> Slides: 1-Problem, 2-Solution/tagline, 3-System architecture (use the diagram), 4-Customer journey (5 card states), 5-Business Cockpit, 6-Evaluation [TBD — replace after Madhav pushes EVALUATION.md], 7-Governance & Trust, 8-Team + ask.
+> Slides: 1-Problem, 2-Solution/tagline, 3-System architecture (use the diagram), 4-Customer journey (5 card states), 5-Business Cockpit, 6-Evaluation [TBD — replace after G2-M pushes EVALUATION.md], 7-Governance & Trust, 8-Team + ask.
 > Brand: Inter font, Verdant green #19C37D, Abyss dark #06110D."
 
 Save exports to `slides/` and commit.
@@ -147,7 +147,7 @@ app/
 └── static/fonts/                ✅ 3 OFL woff2 files
 
 fixtures/
-├── opps_recommend.json          ✅ Akshit's (CustomerOpportunities shape)
+├── opps_recommend.json          ✅ G1-A's (CustomerOpportunities shape)
 ├── opps_abstain.json            ✅
 ├── opps_review.json             ✅
 ├── opps_ruled_out.json          ✅
@@ -183,5 +183,5 @@ MEMORY.md                        ✅ (this file)
 ## 📨 Pending teammate requests
 | Who | Ask |
 |---|---|
-| **Akshit (G1-A)** | Add `streamlit>=1.46` to `pyproject.toml` dependencies |
-| **Madhav (G2-M)** | Push final `docs/EVALUATION.md` — needed for slide 6 real numbers |
+| **G1-A** | Add `streamlit>=1.46` to `pyproject.toml` dependencies |
+| **G2-M** | Push final `docs/EVALUATION.md` — needed for slide 6 real numbers |

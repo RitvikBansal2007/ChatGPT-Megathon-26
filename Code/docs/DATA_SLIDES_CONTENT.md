@@ -1,6 +1,6 @@
 # GreenDash Data Slides Content
 
-This document contains the required information for the "Data Slides" to be presented by Ritvik (T+9:30-11:00 task).
+This document contains the required information for the "Data Slides" to be presented by G3 (T+9:30-11:00 task).
 
 ## 1. Where the Data Comes From (Licensed Sources)
 All underlying reference distributions and priors are sourced from official, publicly licensed datasets. We strictly adhere to the rule of **"No real data. Ever."**

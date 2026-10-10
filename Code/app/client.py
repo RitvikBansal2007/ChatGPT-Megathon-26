@@ -6,7 +6,7 @@ the source:
   fixtures (default)  read contract-shaped JSON from <repo>/fixtures/
   cached / live       not implemented yet (Step 3.5)
 
-Contract shapes mirror greenproof/contracts.py (frozen by Akshit, G1-A).
+Contract shapes mirror greenproof/contracts.py (frozen by G1-A).
 
 Rules:
 - Never holds the LLM key
@@ -28,7 +28,7 @@ FIXTURES_DIR = Path(__file__).resolve().parent.parent / "fixtures"
 
 _SAFE_ID = re.compile(r"^[A-Za-z0-9_-]{1,64}$")
 
-# Status → per-status fixture file name (Akshit's naming convention)
+# Status → per-status fixture file name (G1-A's naming convention)
 _STATUS_FIXTURES = {
     "RECOMMEND":    "opps_recommend",
     "SOFT_SURFACE": "opps_soft_surface",

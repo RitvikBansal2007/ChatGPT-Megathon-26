@@ -1,6 +1,6 @@
 """Claim-Check stamp aligned to real contracts.py Explanation shape.
 
-Explanation fields (frozen by Akshit):
+Explanation fields (frozen by G1-A):
   explanation["sentences"]         list of Sentence
   explanation["source"]            "llm" | "template"
   explanation["claimcheck_status"] "PASS" | "FALLBACK"
