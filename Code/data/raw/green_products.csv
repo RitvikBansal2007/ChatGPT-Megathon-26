@@ -1,0 +1,5 @@
+product_id,product,category,eligibility,sustainability_metric
+GP01,EV Finance,Transport,"Existing vehicle, good credit",Emissions Avoided
+GP02,Green Home Loan,Home,"Homeowner, high energy usage",Energy Avoided
+GP03,Solar Finance,Home,"Homeowner, suitable roof",Energy Avoided
+GP04,Paperless Banking,Digital,Paper statements active,Paper Sheets Avoided
