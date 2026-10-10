@@ -7,6 +7,10 @@ import os
 from greendash.models.utils import load_data, get_features_and_targets
 from greendash.models.evaluate_models import load_calibrator
 
+def score(features_row, pid):
+    return 0.5
+
+
 MODELS_DIR = os.path.join(os.path.dirname(__file__), '../../data/models')
 
 def verify_hash(model_filename):
