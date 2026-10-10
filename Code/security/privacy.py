@@ -28,6 +28,9 @@ LLM_ALLOWED_FIELDS = frozenset({
     "age_band", "income_band", "region", "home_owner", "has_car", "fuel_type",
     "epc_band", "roof_suitability", "existing_solar",
     "annual_mileage", "gas_kwh", "paper_statements_12m",
+    # Model-side explanation inputs. Only ever filled by greendash.llm.minimise, which keeps
+    # reasons to {code, value} pairs and confidence to a number in [0, 1].
+    "reasons", "confidence",
 })
 # Never allowed, even if someone adds them to the allowlist by mistake.
 LLM_FORBIDDEN_FIELDS = frozenset({
