@@ -15,6 +15,16 @@ def inject_personas(tables: dict, rng):
     energy = tables["energy_usage"]
     products = tables["products"]
     digital = tables["digital_usage"]
+
+    # Persona vehicle records: owners must have a record, non-owners must not.
+    need_car = ["CUST-0001", "CUST-0002", "CUST-0003", "CUST-0004", "CUST-0006", "CUST-0008"]
+    no_car = ["CUST-0005", "CUST-0007"]
+    missing = [c for c in need_car if c not in set(vehicles["customer_id"])]
+    if missing:
+        add = pd.DataFrame({"customer_id": missing, "vehicle_type": "car", "fuel_type": "petrol",
+                            "vehicle_age": 8, "annual_mileage": 9000})
+        vehicles = pd.concat([vehicles, add[vehicles.columns]], ignore_index=True)
+    vehicles = vehicles[~vehicles["customer_id"].isin(no_car)].reset_index(drop=True)
     
     # CUST-0001: Priya (GP01 RECOMMEND) - high fuel, 11k miles, 8yr petrol, car finance ending, homeowner
     customers.loc[customers["customer_id"] == "CUST-0001", ["home_owner", "is_persona", "epc_band"]] = [True, True, "C"]

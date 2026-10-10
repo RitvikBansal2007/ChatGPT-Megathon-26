@@ -1,1 +1,13 @@
 Code/readmes/
+
+# Synthetic raw data and generated output are regenerated, never committed
+Code/data/raw/
+Code/data/public/
+Code/out/_raw_backup/
+.env
+*.key
+*.pem
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/

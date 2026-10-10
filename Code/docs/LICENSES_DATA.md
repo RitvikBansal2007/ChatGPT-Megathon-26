@@ -1,6 +1,6 @@
 # Data Licence Register
 
-Checked by: Aniket. Every row was verified on the publisher's page on the date shown.
+Checked by: data lead. Every row was verified on the publisher's page on the date shown.
 
 | id | publisher | dataset | licence (as stated) | licence URL | checked on | decision | attribution used | used for |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |

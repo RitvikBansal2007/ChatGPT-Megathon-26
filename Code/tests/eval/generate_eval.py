@@ -23,7 +23,7 @@ def generate_eval():
         records.append({
             "customer_id": row["customer_id"],
             "profile": {
-                "age": row["age"],
+                "age_band": f"{(int(row['age']) // 10) * 10}s",
                 "income_band": row["income_band"],
                 "home_owner": bool(row["home_owner"])
             },

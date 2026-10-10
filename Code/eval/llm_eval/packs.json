@@ -1,0 +1,3491 @@
+{
+  "packs": [
+    {
+      "carbon": {
+        "display": {
+          "central": "2,330 kg CO2e",
+          "range": "1,980 to 2,679 kg CO2e per year"
+        },
+        "formula": "annual_miles x petrol factor - annual_miles x kWh per mile x grid factor",
+        "missing_inputs": [],
+        "status": "ESTIMATED"
+      },
+      "customer_id": "CUST-0001",
+      "data_freshness": "fresh",
+      "evidence_features": {
+        "annual_mileage": 11500,
+        "fuel_type": "petrol",
+        "gas_kwh": 11500,
+        "has_car": true,
+        "home_owner": true,
+        "paper_statements_12m": 12,
+        "roof_suitability": "suitable"
+      },
+      "expected_status": "RECOMMEND",
+      "flags": [],
+      "metric_family": "co2e",
+      "pack_id": "P001",
+      "perturbation": "none",
+      "product_id": "GP01"
+    },
+    {
+      "carbon": {
+        "display": {
+          "central": "315 kg CO2e",
+          "range": "105 to 630 kg CO2e per year"
+        },
+        "formula": "gas kWh x reduction fraction (x gas factor for CO2e)",
+        "missing_inputs": [],
+        "status": "ESTIMATED"
+      },
+      "customer_id": "CUST-0001",
+      "data_freshness": "fresh",
+      "evidence_features": {
+        "annual_mileage": 11500,
+        "fuel_type": "petrol",
+        "gas_kwh": 11500,
+        "has_car": true,
+        "home_owner": true,
+        "paper_statements_12m": 12,
+        "roof_suitability": "suitable"
+      },
+      "expected_status": "SOFT_SURFACE",
+      "flags": [],
+      "metric_family": "kwh",
+      "pack_id": "P002",
+      "perturbation": "none",
+      "product_id": "GP02"
+    },
+    {
+      "carbon": {
+        "display": {
+          "central": "787 kg CO2e",
+          "range": "708 to 866 kg CO2e per year"
+        },
+        "formula": "kWp x kWh per kWp (x grid factor for CO2e)",
+        "missing_inputs": [],
+        "status": "ESTIMATED"
+      },
+      "customer_id": "CUST-0001",
+      "data_freshness": "fresh",
+      "evidence_features": {
+        "annual_mileage": 11500,
+        "fuel_type": "petrol",
+        "gas_kwh": 11500,
+        "has_car": true,
+        "home_owner": true,
+        "paper_statements_12m": 12,
+        "roof_suitability": "suitable"
+      },
+      "expected_status": "SOFT_SURFACE",
+      "flags": [],
+      "metric_family": "kwh",
+      "pack_id": "P003",
+      "perturbation": "none",
+      "product_id": "GP03"
+    },
+    {
+      "carbon": {
+        "display": {
+          "central": "36 sheets"
+        },
+        "formula": "paper statements per year x sheets per statement",
+        "missing_inputs": [],
+        "status": "ESTIMATED"
+      },
+      "customer_id": "CUST-0001",
+      "data_freshness": "fresh",
+      "evidence_features": {
+        "annual_mileage": 11500,
+        "fuel_type": "petrol",
+        "gas_kwh": 11500,
+        "has_car": true,
+        "home_owner": true,
+        "paper_statements_12m": 12,
+        "roof_suitability": "suitable"
+      },
+      "expected_status": "RECOMMEND",
+      "flags": [],
+      "metric_family": "paper",
+      "pack_id": "P004",
+      "perturbation": "none",
+      "product_id": "GP04"
+    },
+    {
+      "carbon": {
+        "display": {},
+        "formula": "",
+        "missing_inputs": [],
+        "status": "NOT_APPLICABLE"
+      },
+      "customer_id": "CUST-0002",
+      "data_freshness": "fresh",
+      "evidence_features": {
+        "annual_mileage": 8000,
+        "fuel_type": "bev",
+        "has_car": true,
+        "home_owner": true,
+        "paper_statements_12m": 12,
+        "roof_suitability": "suitable"
+      },
+      "expected_status": "REVIEW",
+      "flags": [],
+      "metric_family": "co2e",
+      "pack_id": "P005",
+      "perturbation": "none",
+      "product_id": "GP01"
+    },
+    {
+      "carbon": {
+        "display": {},
+        "formula": "",
+        "missing_inputs": [
+          "gas_kwh"
+        ],
+        "status": "INSUFFICIENT_DATA"
+      },
+      "customer_id": "CUST-0002",
+      "data_freshness": "fresh",
+      "evidence_features": {
+        "annual_mileage": 8000,
+        "fuel_type": "bev",
+        "has_car": true,
+        "home_owner": true,
+        "paper_statements_12m": 12,
+        "roof_suitability": "suitable"
+      },
+      "expected_status": "ABSTAIN",
+      "flags": [],
+      "metric_family": "kwh",
+      "pack_id": "P006",
+      "perturbation": "none",
+      "product_id": "GP02"
+    },
+    {
+      "carbon": {
+        "display": {
+          "central": "787 kg CO2e",
+          "range": "708 to 866 kg CO2e per year"
+        },
+        "formula": "kWp x kWh per kWp (x grid factor for CO2e)",
+        "missing_inputs": [],
+        "status": "ESTIMATED"
+      },
+      "customer_id": "CUST-0002",
+      "data_freshness": "fresh",
+      "evidence_features": {
+        "annual_mileage": 8000,
+        "fuel_type": "bev",
+        "has_car": true,
+        "home_owner": true,
+        "paper_statements_12m": 12,
+        "roof_suitability": "suitable"
+      },
+      "expected_status": "SOFT_SURFACE",
+      "flags": [],
+      "metric_family": "kwh",
+      "pack_id": "P007",
+      "perturbation": "none",
+      "product_id": "GP03"
+    },
+    {
+      "carbon": {
+        "display": {
+          "central": "36 sheets"
+        },
+        "formula": "paper statements per year x sheets per statement",
+        "missing_inputs": [],
+        "status": "ESTIMATED"
+      },
+      "customer_id": "CUST-0002",
+      "data_freshness": "fresh",
+      "evidence_features": {
+        "annual_mileage": 8000,
+        "fuel_type": "bev",
+        "has_car": true,
+        "home_owner": true,
+        "paper_statements_12m": 12,
+        "roof_suitability": "suitable"
+      },
+      "expected_status": "SOFT_SURFACE",
+      "flags": [],
+      "metric_family": "paper",
+      "pack_id": "P008",
+      "perturbation": "none",
+      "product_id": "GP04"
+    },
+    {
+      "carbon": {
+        "display": {},
+        "formula": "",
+        "missing_inputs": [],
+        "status": "NOT_APPLICABLE"
+      },
+      "customer_id": "CUST-0003",
+      "data_freshness": "fresh",
+      "evidence_features": {
+        "annual_mileage": 6000,
+        "existing_solar": true,
+        "fuel_type": "bev",
+        "gas_kwh": 9000,
+        "has_car": true,
+        "home_owner": true,
+        "paper_statements_12m": 0,
+        "roof_suitability": "suitable"
+      },
+      "expected_status": "RULED_OUT",
+      "flags": [],
+      "metric_family": "co2e",
+      "pack_id": "P009",
+      "perturbation": "none",
+      "product_id": "GP01"
+    },
+    {
+      "carbon": {
+        "display": {
+          "central": "246 kg CO2e",
+          "range": "82 to 493 kg CO2e per year"
+        },
+        "formula": "gas kWh x reduction fraction (x gas factor for CO2e)",
+        "missing_inputs": [],
+        "status": "ESTIMATED"
+      },
+      "customer_id": "CUST-0003",
+      "data_freshness": "fresh",
+      "evidence_features": {
+        "annual_mileage": 6000,
+        "existing_solar": true,
+        "fuel_type": "bev",
+        "gas_kwh": 9000,
+        "has_car": true,
+        "home_owner": true,
+        "paper_statements_12m": 0,
+        "roof_suitability": "suitable"
+      },
+      "expected_status": "SOFT_SURFACE",
+      "flags": [],
+      "metric_family": "kwh",
+      "pack_id": "P010",
+      "perturbation": "none",
+      "product_id": "GP02"
+    },
+    {
+      "carbon": {
+        "display": {},
+        "formula": "",
+        "missing_inputs": [],
+        "status": "NOT_APPLICABLE"
+      },
+      "customer_id": "CUST-0003",
+      "data_freshness": "fresh",
+      "evidence_features": {
+        "annual_mileage": 6000,
+        "existing_solar": true,
+        "fuel_type": "bev",
+        "gas_kwh": 9000,
+        "has_car": true,
+        "home_owner": true,
+        "paper_statements_12m": 0,
+        "roof_suitability": "suitable"
+      },
+      "expected_status": "RULED_OUT",
+      "flags": [],
+      "metric_family": "kwh",
+      "pack_id": "P011",
+      "perturbation": "none",
+      "product_id": "GP03"
+    },
+    {
+      "carbon": {
+        "display": {
+          "central": "0 sheets"
+        },
+        "formula": "paper statements per year x sheets per statement",
+        "missing_inputs": [],
+        "status": "ESTIMATED"
+      },
+      "customer_id": "CUST-0003",
+      "data_freshness": "fresh",
+      "evidence_features": {
+        "annual_mileage": 6000,
+        "existing_solar": true,
+        "fuel_type": "bev",
+        "gas_kwh": 9000,
+        "has_car": true,
+        "home_owner": true,
+        "paper_statements_12m": 0,
+        "roof_suitability": "suitable"
+      },
+      "expected_status": "RULED_OUT",
+      "flags": [],
+      "metric_family": "paper",
+      "pack_id": "P012",
+      "perturbation": "none",
+      "product_id": "GP04"
+    },
+    {
+      "carbon": {
+        "display": {},
+        "formula": "",
+        "missing_inputs": [
+          "annual_mileage"
+        ],
+        "status": "INSUFFICIENT_DATA"
+      },
+      "customer_id": "CUST-0004",
+      "data_freshness": "fresh",
+      "evidence_features": {
+        "fuel_type": "petrol",
+        "has_car": true,
+        "home_owner": true,
+        "paper_statements_12m": 12,
+        "roof_suitability": "unknown"
+      },
+      "expected_status": "ABSTAIN",
+      "flags": [],
+      "metric_family": "co2e",
+      "pack_id": "P013",
+      "perturbation": "none",
+      "product_id": "GP01"
+    },
+    {
+      "carbon": {
+        "display": {},
+        "formula": "",
+        "missing_inputs": [
+          "gas_kwh"
+        ],
+        "status": "INSUFFICIENT_DATA"
+      },
+      "customer_id": "CUST-0004",
+      "data_freshness": "fresh",
+      "evidence_features": {
+        "fuel_type": "petrol",
+        "has_car": true,
+        "home_owner": true,
+        "paper_statements_12m": 12,
+        "roof_suitability": "unknown"
+      },
+      "expected_status": "ABSTAIN",
+      "flags": [],
+      "metric_family": "kwh",
+      "pack_id": "P014",
+      "perturbation": "none",
+      "product_id": "GP02"
+    },
+    {
+      "carbon": {
+        "display": {},
+        "formula": "",
+        "missing_inputs": [
+          "roof_suitability"
+        ],
+        "status": "INSUFFICIENT_DATA"
+      },
+      "customer_id": "CUST-0004",
+      "data_freshness": "fresh",
+      "evidence_features": {
+        "fuel_type": "petrol",
+        "has_car": true,
+        "home_owner": true,
+        "paper_statements_12m": 12,
+        "roof_suitability": "unknown"
+      },
+      "expected_status": "ABSTAIN",
+      "flags": [],
+      "metric_family": "kwh",
+      "pack_id": "P015",
+      "perturbation": "none",
+      "product_id": "GP03"
+    },
+    {
+      "carbon": {
+        "display": {
+          "central": "36 sheets"
+        },
+        "formula": "paper statements per year x sheets per statement",
+        "missing_inputs": [],
+        "status": "ESTIMATED"
+      },
+      "customer_id": "CUST-0004",
+      "data_freshness": "fresh",
+      "evidence_features": {
+        "fuel_type": "petrol",
+        "has_car": true,
+        "home_owner": true,
+        "paper_statements_12m": 12,
+        "roof_suitability": "unknown"
+      },
+      "expected_status": "RECOMMEND",
+      "flags": [],
+      "metric_family": "paper",
+      "pack_id": "P016",
+      "perturbation": "none",
+      "product_id": "GP04"
+    },
+    {
+      "carbon": {
+        "display": {},
+        "formula": "",
+        "missing_inputs": [],
+        "status": "NOT_APPLICABLE"
+      },
+      "customer_id": "CUST-0005",
+      "data_freshness": "fresh",
+      "evidence_features": {
+        "gas_kwh": 16000,
+        "has_car": false,
+        "home_owner": true,
+        "paper_statements_12m": 12,
+        "roof_suitability": "suitable"
+      },
+      "expected_status": "SOFT_SURFACE",
+      "flags": [],
+      "metric_family": "co2e",
+      "pack_id": "P017",
+      "perturbation": "none",
+      "product_id": "GP01"
+    },
+    {
+      "carbon": {
+        "display": {
+          "central": "438 kg CO2e",
+          "range": "146 to 876 kg CO2e per year"
+        },
+        "formula": "gas kWh x reduction fraction (x gas factor for CO2e)",
+        "missing_inputs": [],
+        "status": "ESTIMATED"
+      },
+      "customer_id": "CUST-0005",
+      "data_freshness": "fresh",
+      "evidence_features": {
+        "gas_kwh": 16000,
+        "has_car": false,
+        "home_owner": true,
+        "paper_statements_12m": 12,
+        "roof_suitability": "suitable"
+      },
+      "expected_status": "RECOMMEND",
+      "flags": [],
+      "metric_family": "kwh",
+      "pack_id": "P018",
+      "perturbation": "none",
+      "product_id": "GP02"
+    },
+    {
+      "carbon": {
+        "display": {
+          "central": "787 kg CO2e",
+          "range": "708 to 866 kg CO2e per year"
+        },
+        "formula": "kWp x kWh per kWp (x grid factor for CO2e)",
+        "missing_inputs": [],
+        "status": "ESTIMATED"
+      },
+      "customer_id": "CUST-0005",
+      "data_freshness": "fresh",
+      "evidence_features": {
+        "gas_kwh": 16000,
+        "has_car": false,
+        "home_owner": true,
+        "paper_statements_12m": 12,
+        "roof_suitability": "suitable"
+      },
+      "expected_status": "SOFT_SURFACE",
+      "flags": [],
+      "metric_family": "kwh",
+      "pack_id": "P019",
+      "perturbation": "none",
+      "product_id": "GP03"
+    },
+    {
+      "carbon": {
+        "display": {
+          "central": "36 sheets"
+        },
+        "formula": "paper statements per year x sheets per statement",
+        "missing_inputs": [],
+        "status": "ESTIMATED"
+      },
+      "customer_id": "CUST-0005",
+      "data_freshness": "fresh",
+      "evidence_features": {
+        "gas_kwh": 16000,
+        "has_car": false,
+        "home_owner": true,
+        "paper_statements_12m": 12,
+        "roof_suitability": "suitable"
+      },
+      "expected_status": "SOFT_SURFACE",
+      "flags": [],
+      "metric_family": "paper",
+      "pack_id": "P020",
+      "perturbation": "none",
+      "product_id": "GP04"
+    },
+    {
+      "carbon": {
+        "display": {
+          "central": "1,823 kg CO2e",
+          "range": "1,550 to 2,097 kg CO2e per year"
+        },
+        "formula": "annual_miles x petrol factor - annual_miles x kWh per mile x grid factor",
+        "missing_inputs": [],
+        "status": "ESTIMATED"
+      },
+      "customer_id": "CUST-0006",
+      "data_freshness": "fresh",
+      "evidence_features": {
+        "annual_mileage": 9000,
+        "fuel_type": "petrol",
+        "gas_kwh": 11000,
+        "has_car": true,
+        "home_owner": true,
+        "paper_statements_12m": 12,
+        "roof_suitability": "unknown"
+      },
+      "expected_status": "SOFT_SURFACE",
+      "flags": [],
+      "metric_family": "co2e",
+      "pack_id": "P021",
+      "perturbation": "none",
+      "product_id": "GP01"
+    },
+    {
+      "carbon": {
+        "display": {
+          "central": "301 kg CO2e",
+          "range": "100 to 602 kg CO2e per year"
+        },
+        "formula": "gas kWh x reduction fraction (x gas factor for CO2e)",
+        "missing_inputs": [],
+        "status": "ESTIMATED"
+      },
+      "customer_id": "CUST-0006",
+      "data_freshness": "fresh",
+      "evidence_features": {
+        "annual_mileage": 9000,
+        "fuel_type": "petrol",
+        "gas_kwh": 11000,
+        "has_car": true,
+        "home_owner": true,
+        "paper_statements_12m": 12,
+        "roof_suitability": "unknown"
+      },
+      "expected_status": "SOFT_SURFACE",
+      "flags": [],
+      "metric_family": "kwh",
+      "pack_id": "P022",
+      "perturbation": "none",
+      "product_id": "GP02"
+    },
+    {
+      "carbon": {
+        "display": {},
+        "formula": "",
+        "missing_inputs": [
+          "roof_suitability"
+        ],
+        "status": "INSUFFICIENT_DATA"
+      },
+      "customer_id": "CUST-0006",
+      "data_freshness": "fresh",
+      "evidence_features": {
+        "annual_mileage": 9000,
+        "fuel_type": "petrol",
+        "gas_kwh": 11000,
+        "has_car": true,
+        "home_owner": true,
+        "paper_statements_12m": 12,
+        "roof_suitability": "unknown"
+      },
+      "expected_status": "ABSTAIN",
+      "flags": [],
+      "metric_family": "kwh",
+      "pack_id": "P023",
+      "perturbation": "none",
+      "product_id": "GP03"
+    },
+    {
+      "carbon": {
+        "display": {
+          "central": "36 sheets"
+        },
+        "formula": "paper statements per year x sheets per statement",
+        "missing_inputs": [],
+        "status": "ESTIMATED"
+      },
+      "customer_id": "CUST-0006",
+      "data_freshness": "fresh",
+      "evidence_features": {
+        "annual_mileage": 9000,
+        "fuel_type": "petrol",
+        "gas_kwh": 11000,
+        "has_car": true,
+        "home_owner": true,
+        "paper_statements_12m": 12,
+        "roof_suitability": "unknown"
+      },
+      "expected_status": "SOFT_SURFACE",
+      "flags": [],
+      "metric_family": "paper",
+      "pack_id": "P024",
+      "perturbation": "none",
+      "product_id": "GP04"
+    },
+    {
+      "carbon": {
+        "display": {},
+        "formula": "",
+        "missing_inputs": [],
+        "status": "NOT_APPLICABLE"
+      },
+      "customer_id": "CUST-0007",
+      "data_freshness": "fresh",
+      "evidence_features": {
+        "gas_kwh": 6000,
+        "has_car": false,
+        "home_owner": false,
+        "paper_statements_12m": 12,
+        "roof_suitability": "unknown"
+      },
+      "expected_status": "SOFT_SURFACE",
+      "flags": [],
+      "metric_family": "co2e",
+      "pack_id": "P025",
+      "perturbation": "none",
+      "product_id": "GP01"
+    },
+    {
+      "carbon": {
+        "display": {},
+        "formula": "",
+        "missing_inputs": [],
+        "status": "NOT_APPLICABLE"
+      },
+      "customer_id": "CUST-0007",
+      "data_freshness": "fresh",
+      "evidence_features": {
+        "gas_kwh": 6000,
+        "has_car": false,
+        "home_owner": false,
+        "paper_statements_12m": 12,
+        "roof_suitability": "unknown"
+      },
+      "expected_status": "RULED_OUT",
+      "flags": [],
+      "metric_family": "kwh",
+      "pack_id": "P026",
+      "perturbation": "none",
+      "product_id": "GP02"
+    },
+    {
+      "carbon": {
+        "display": {},
+        "formula": "",
+        "missing_inputs": [],
+        "status": "NOT_APPLICABLE"
+      },
+      "customer_id": "CUST-0007",
+      "data_freshness": "fresh",
+      "evidence_features": {
+        "gas_kwh": 6000,
+        "has_car": false,
+        "home_owner": false,
+        "paper_statements_12m": 12,
+        "roof_suitability": "unknown"
+      },
+      "expected_status": "RULED_OUT",
+      "flags": [],
+      "metric_family": "kwh",
+      "pack_id": "P027",
+      "perturbation": "none",
+      "product_id": "GP03"
+    },
+    {
+      "carbon": {
+        "display": {
+          "central": "36 sheets"
+        },
+        "formula": "paper statements per year x sheets per statement",
+        "missing_inputs": [],
+        "status": "ESTIMATED"
+      },
+      "customer_id": "CUST-0007",
+      "data_freshness": "fresh",
+      "evidence_features": {
+        "gas_kwh": 6000,
+        "has_car": false,
+        "home_owner": false,
+        "paper_statements_12m": 12,
+        "roof_suitability": "unknown"
+      },
+      "expected_status": "RECOMMEND",
+      "flags": [],
+      "metric_family": "paper",
+      "pack_id": "P028",
+      "perturbation": "none",
+      "product_id": "GP04"
+    },
+    {
+      "carbon": {
+        "display": {
+          "central": "1,418 kg CO2e",
+          "range": "1,205 to 1,631 kg CO2e per year"
+        },
+        "formula": "annual_miles x petrol factor - annual_miles x kWh per mile x grid factor",
+        "missing_inputs": [],
+        "status": "ESTIMATED"
+      },
+      "customer_id": "CUST-0008",
+      "data_freshness": "fresh",
+      "evidence_features": {
+        "annual_mileage": 7000,
+        "fuel_type": "petrol",
+        "gas_kwh": 9000,
+        "has_car": true,
+        "home_owner": true,
+        "paper_statements_12m": 12,
+        "roof_suitability": "suitable"
+      },
+      "expected_status": "SOFT_SURFACE",
+      "flags": [],
+      "metric_family": "co2e",
+      "pack_id": "P029",
+      "perturbation": "none",
+      "product_id": "GP01"
+    },
+    {
+      "carbon": {
+        "display": {
+          "central": "246 kg CO2e",
+          "range": "82 to 493 kg CO2e per year"
+        },
+        "formula": "gas kWh x reduction fraction (x gas factor for CO2e)",
+        "missing_inputs": [],
+        "status": "ESTIMATED"
+      },
+      "customer_id": "CUST-0008",
+      "data_freshness": "fresh",
+      "evidence_features": {
+        "annual_mileage": 7000,
+        "fuel_type": "petrol",
+        "gas_kwh": 9000,
+        "has_car": true,
+        "home_owner": true,
+        "paper_statements_12m": 12,
+        "roof_suitability": "suitable"
+      },
+      "expected_status": "SOFT_SURFACE",
+      "flags": [],
+      "metric_family": "kwh",
+      "pack_id": "P030",
+      "perturbation": "none",
+      "product_id": "GP02"
+    },
+    {
+      "carbon": {
+        "display": {
+          "central": "787 kg CO2e",
+          "range": "708 to 866 kg CO2e per year"
+        },
+        "formula": "kWp x kWh per kWp (x grid factor for CO2e)",
+        "missing_inputs": [],
+        "status": "ESTIMATED"
+      },
+      "customer_id": "CUST-0008",
+      "data_freshness": "fresh",
+      "evidence_features": {
+        "annual_mileage": 7000,
+        "fuel_type": "petrol",
+        "gas_kwh": 9000,
+        "has_car": true,
+        "home_owner": true,
+        "paper_statements_12m": 12,
+        "roof_suitability": "suitable"
+      },
+      "expected_status": "SOFT_SURFACE",
+      "flags": [],
+      "metric_family": "kwh",
+      "pack_id": "P031",
+      "perturbation": "none",
+      "product_id": "GP03"
+    },
+    {
+      "carbon": {
+        "display": {},
+        "formula": "",
+        "missing_inputs": [],
+        "status": "NOT_APPLICABLE"
+      },
+      "customer_id": "CUST-0008",
+      "data_freshness": "fresh",
+      "evidence_features": {
+        "annual_mileage": 7000,
+        "fuel_type": "petrol",
+        "gas_kwh": 9000,
+        "has_car": true,
+        "home_owner": true,
+        "paper_statements_12m": 12,
+        "roof_suitability": "suitable"
+      },
+      "expected_status": "RULED_OUT",
+      "flags": [],
+      "metric_family": "paper",
+      "pack_id": "P032",
+      "perturbation": "none",
+      "product_id": "GP04"
+    },
+    {
+      "carbon": {
+        "display": {},
+        "formula": "",
+        "missing_inputs": [],
+        "status": "NOT_APPLICABLE"
+      },
+      "customer_id": "CUST-0005",
+      "data_freshness": "fresh",
+      "evidence_features": {
+        "gas_kwh": 16000,
+        "has_car": false,
+        "home_owner": true,
+        "paper_statements_12m": 12,
+        "roof_suitability": "suitable"
+      },
+      "expected_status": "ABSTAIN",
+      "flags": [],
+      "metric_family": "co2e",
+      "pack_id": "P033",
+      "perturbation": "missing_field",
+      "product_id": "GP01"
+    },
+    {
+      "carbon": {
+        "display": {},
+        "formula": "",
+        "missing_inputs": [],
+        "status": "NOT_APPLICABLE"
+      },
+      "customer_id": "CUST-0007",
+      "data_freshness": "fresh",
+      "evidence_features": {
+        "has_car": false,
+        "home_owner": false,
+        "paper_statements_12m": 12,
+        "roof_suitability": "unknown"
+      },
+      "expected_status": "ABSTAIN",
+      "flags": [
+        "critical_missing"
+      ],
+      "metric_family": "kwh",
+      "pack_id": "P034",
+      "perturbation": "abstain",
+      "product_id": "GP02"
+    },
+    {
+      "carbon": {
+        "display": {},
+        "formula": "",
+        "missing_inputs": [],
+        "status": "NOT_APPLICABLE"
+      },
+      "customer_id": "CUST-0008",
+      "data_freshness": "fresh",
+      "evidence_features": {
+        "annual_mileage": 7000,
+        "fuel_type": "petrol",
+        "gas_kwh": 9000,
+        "has_car": true,
+        "home_owner": true,
+        "roof_suitability": "suitable"
+      },
+      "expected_status": "ABSTAIN",
+      "flags": [
+        "critical_missing"
+      ],
+      "metric_family": "paper",
+      "pack_id": "P035",
+      "perturbation": "abstain",
+      "product_id": "GP04"
+    },
+    {
+      "carbon": {
+        "display": {
+          "central": "301 kg CO2e",
+          "range": "100 to 602 kg CO2e per year"
+        },
+        "formula": "gas kWh x reduction fraction (x gas factor for CO2e)",
+        "missing_inputs": [],
+        "status": "ESTIMATED"
+      },
+      "customer_id": "CUST-0006",
+      "data_freshness": "fresh",
+      "evidence_features": {
+        "annual_mileage": 9000,
+        "fuel_type": "petrol",
+        "gas_kwh": 11000,
+        "has_car": true,
+        "home_owner": true,
+        "paper_statements_12m": 12,
+        "roof_suitability": "unknown"
+      },
+      "expected_status": "RULED_OUT",
+      "flags": [
+        "not_eligible"
+      ],
+      "metric_family": "kwh",
+      "pack_id": "P036",
+      "perturbation": "ruled_out",
+      "product_id": "GP02"
+    },
+    {
+      "carbon": {
+        "display": {},
+        "formula": "",
+        "missing_inputs": [
+          "gas_kwh"
+        ],
+        "status": "INSUFFICIENT_DATA"
+      },
+      "customer_id": "CUST-0004",
+      "data_freshness": "stale",
+      "evidence_features": {
+        "fuel_type": "petrol",
+        "has_car": true,
+        "home_owner": true,
+        "paper_statements_12m": 12,
+        "roof_suitability": "unknown"
+      },
+      "expected_status": "ABSTAIN",
+      "flags": [],
+      "metric_family": "kwh",
+      "pack_id": "P037",
+      "perturbation": "stale",
+      "product_id": "GP02"
+    },
+    {
+      "carbon": {
+        "display": {},
+        "formula": "",
+        "missing_inputs": [
+          "gas_kwh"
+        ],
+        "status": "INSUFFICIENT_DATA"
+      },
+      "customer_id": "CUST-0004",
+      "data_freshness": "fresh",
+      "evidence_features": {
+        "fuel_type": "petrol",
+        "has_car": true,
+        "home_owner": true,
+        "paper_statements_12m": 12,
+        "roof_suitability": "unknown"
+      },
+      "expected_status": "ABSTAIN",
+      "flags": [],
+      "metric_family": "kwh",
+      "pack_id": "P038",
+      "perturbation": "missing_field",
+      "product_id": "GP02"
+    },
+    {
+      "carbon": {
+        "display": {},
+        "formula": "",
+        "missing_inputs": [
+          "gas_kwh"
+        ],
+        "status": "INSUFFICIENT_DATA"
+      },
+      "customer_id": "CUST-0004",
+      "data_freshness": "fresh",
+      "evidence_features": {
+        "fuel_type": "petrol",
+        "has_car": true,
+        "home_owner": true,
+        "paper_statements_12m": 12,
+        "roof_suitability": "unknown"
+      },
+      "expected_status": "ABSTAIN",
+      "flags": [
+        "critical_missing"
+      ],
+      "metric_family": "kwh",
+      "pack_id": "P039",
+      "perturbation": "abstain",
+      "product_id": "GP02"
+    },
+    {
+      "carbon": {
+        "display": {},
+        "formula": "",
+        "missing_inputs": [],
+        "status": "NOT_APPLICABLE"
+      },
+      "customer_id": "CUST-0007",
+      "data_freshness": "fresh",
+      "evidence_features": {
+        "gas_kwh": 6000,
+        "has_car": false,
+        "home_owner": false,
+        "paper_statements_12m": 12
+      },
+      "expected_status": "ABSTAIN",
+      "flags": [],
+      "metric_family": "kwh",
+      "pack_id": "P040",
+      "perturbation": "missing_field",
+      "product_id": "GP03"
+    },
+    {
+      "carbon": {
+        "display": {},
+        "formula": "",
+        "missing_inputs": [
+          "roof_suitability"
+        ],
+        "status": "INSUFFICIENT_DATA"
+      },
+      "customer_id": "CUST-0003",
+      "data_freshness": "fresh",
+      "evidence_features": {
+        "annual_mileage": 6000,
+        "existing_solar": true,
+        "fuel_type": "bev",
+        "gas_kwh": 9000,
+        "has_car": true,
+        "home_owner": true,
+        "paper_statements_12m": 0
+      },
+      "expected_status": "ABSTAIN",
+      "flags": [],
+      "metric_family": "kwh",
+      "pack_id": "P041",
+      "perturbation": "missing_field",
+      "product_id": "GP03"
+    },
+    {
+      "carbon": {
+        "display": {},
+        "formula": "",
+        "missing_inputs": [
+          "gas_kwh"
+        ],
+        "status": "INSUFFICIENT_DATA"
+      },
+      "customer_id": "CUST-0002",
+      "data_freshness": "fresh",
+      "evidence_features": {
+        "annual_mileage": 8000,
+        "fuel_type": "bev",
+        "has_car": true,
+        "home_owner": true,
+        "paper_statements_12m": 12,
+        "roof_suitability": "suitable"
+      },
+      "expected_status": "ABSTAIN",
+      "flags": [
+        "critical_missing"
+      ],
+      "metric_family": "kwh",
+      "pack_id": "P042",
+      "perturbation": "abstain",
+      "product_id": "GP02"
+    },
+    {
+      "carbon": {
+        "display": {},
+        "formula": "",
+        "missing_inputs": [],
+        "status": "NOT_APPLICABLE"
+      },
+      "customer_id": "CUST-0003",
+      "data_freshness": "fresh",
+      "evidence_features": {
+        "annual_mileage": 6000,
+        "existing_solar": true,
+        "fuel_type": "bev",
+        "gas_kwh": 9000,
+        "has_car": true,
+        "home_owner": true,
+        "paper_statements_12m": 0,
+        "roof_suitability": "suitable"
+      },
+      "expected_status": "RULED_OUT",
+      "flags": [
+        "not_eligible"
+      ],
+      "metric_family": "kwh",
+      "pack_id": "P043",
+      "perturbation": "ruled_out",
+      "product_id": "GP03"
+    },
+    {
+      "carbon": {
+        "display": {
+          "central": "2,330 kg CO2e",
+          "range": "1,980 to 2,679 kg CO2e per year"
+        },
+        "formula": "annual_miles x petrol factor - annual_miles x kWh per mile x grid factor",
+        "missing_inputs": [],
+        "status": "ESTIMATED"
+      },
+      "customer_id": "CUST-0001",
+      "data_freshness": "fresh",
+      "evidence_features": {
+        "annual_mileage": 11500,
+        "fuel_type": "petrol",
+        "gas_kwh": 11500,
+        "has_car": true,
+        "home_owner": true,
+        "paper_statements_12m": 12,
+        "roof_suitability": "suitable"
+      },
+      "expected_status": "REVIEW",
+      "flags": [
+        "conflict"
+      ],
+      "metric_family": "co2e",
+      "pack_id": "P044",
+      "perturbation": "conflict",
+      "product_id": "GP01"
+    },
+    {
+      "carbon": {
+        "display": {
+          "central": "36 sheets"
+        },
+        "formula": "paper statements per year x sheets per statement",
+        "missing_inputs": [],
+        "status": "ESTIMATED"
+      },
+      "customer_id": "CUST-0001",
+      "data_freshness": "fresh",
+      "evidence_features": {
+        "annual_mileage": 11500,
+        "fuel_type": "petrol",
+        "gas_kwh": 11500,
+        "has_car": true,
+        "home_owner": true,
+        "paper_statements_12m": 12,
+        "roof_suitability": "suitable"
+      },
+      "expected_status": "REVIEW",
+      "flags": [
+        "conflict"
+      ],
+      "metric_family": "paper",
+      "pack_id": "P045",
+      "perturbation": "conflict",
+      "product_id": "GP04"
+    },
+    {
+      "carbon": {
+        "display": {
+          "central": "787 kg CO2e",
+          "range": "708 to 866 kg CO2e per year"
+        },
+        "formula": "kWp x kWh per kWp (x grid factor for CO2e)",
+        "missing_inputs": [],
+        "status": "ESTIMATED"
+      },
+      "customer_id": "CUST-0001",
+      "data_freshness": "stale",
+      "evidence_features": {
+        "annual_mileage": 11500,
+        "fuel_type": "petrol",
+        "gas_kwh": 11500,
+        "has_car": true,
+        "home_owner": true,
+        "paper_statements_12m": 12,
+        "roof_suitability": "suitable"
+      },
+      "expected_status": "ABSTAIN",
+      "flags": [],
+      "metric_family": "kwh",
+      "pack_id": "P046",
+      "perturbation": "stale",
+      "product_id": "GP03"
+    },
+    {
+      "carbon": {
+        "display": {},
+        "formula": "",
+        "missing_inputs": [],
+        "status": "NOT_APPLICABLE"
+      },
+      "customer_id": "CUST-0007",
+      "data_freshness": "fresh",
+      "evidence_features": {
+        "gas_kwh": 6000,
+        "has_car": false,
+        "home_owner": false,
+        "paper_statements_12m": 12,
+        "roof_suitability": "unknown"
+      },
+      "expected_status": "ABSTAIN",
+      "flags": [
+        "critical_missing"
+      ],
+      "metric_family": "co2e",
+      "pack_id": "P047",
+      "perturbation": "abstain",
+      "product_id": "GP01"
+    },
+    {
+      "carbon": {
+        "display": {},
+        "formula": "",
+        "missing_inputs": [
+          "paper_statements_12m"
+        ],
+        "status": "INSUFFICIENT_DATA"
+      },
+      "customer_id": "CUST-0006",
+      "data_freshness": "fresh",
+      "evidence_features": {
+        "annual_mileage": 9000,
+        "fuel_type": "petrol",
+        "gas_kwh": 11000,
+        "has_car": true,
+        "home_owner": true,
+        "roof_suitability": "unknown"
+      },
+      "expected_status": "ABSTAIN",
+      "flags": [
+        "critical_missing"
+      ],
+      "metric_family": "paper",
+      "pack_id": "P048",
+      "perturbation": "abstain",
+      "product_id": "GP04"
+    },
+    {
+      "carbon": {
+        "display": {},
+        "formula": "",
+        "missing_inputs": [
+          "roof_suitability"
+        ],
+        "status": "INSUFFICIENT_DATA"
+      },
+      "customer_id": "CUST-0006",
+      "data_freshness": "fresh",
+      "evidence_features": {
+        "annual_mileage": 9000,
+        "fuel_type": "petrol",
+        "gas_kwh": 11000,
+        "has_car": true,
+        "home_owner": true,
+        "paper_statements_12m": 12,
+        "roof_suitability": "unknown"
+      },
+      "expected_status": "REVIEW",
+      "flags": [
+        "conflict"
+      ],
+      "metric_family": "kwh",
+      "pack_id": "P049",
+      "perturbation": "conflict",
+      "product_id": "GP03"
+    },
+    {
+      "carbon": {
+        "display": {},
+        "formula": "",
+        "missing_inputs": [
+          "roof_suitability"
+        ],
+        "status": "INSUFFICIENT_DATA"
+      },
+      "customer_id": "CUST-0004",
+      "data_freshness": "fresh",
+      "evidence_features": {
+        "fuel_type": "petrol",
+        "has_car": true,
+        "home_owner": true,
+        "paper_statements_12m": 12
+      },
+      "expected_status": "ABSTAIN",
+      "flags": [
+        "critical_missing"
+      ],
+      "metric_family": "kwh",
+      "pack_id": "P050",
+      "perturbation": "abstain",
+      "product_id": "GP03"
+    },
+    {
+      "carbon": {
+        "display": {},
+        "formula": "",
+        "missing_inputs": [
+          "roof_suitability"
+        ],
+        "status": "INSUFFICIENT_DATA"
+      },
+      "customer_id": "CUST-0006",
+      "data_freshness": "fresh",
+      "evidence_features": {
+        "annual_mileage": 9000,
+        "fuel_type": "petrol",
+        "gas_kwh": 11000,
+        "has_car": true,
+        "home_owner": true,
+        "paper_statements_12m": 12
+      },
+      "expected_status": "ABSTAIN",
+      "flags": [],
+      "metric_family": "kwh",
+      "pack_id": "P051",
+      "perturbation": "missing_field",
+      "product_id": "GP03"
+    },
+    {
+      "carbon": {
+        "display": {},
+        "formula": "",
+        "missing_inputs": [
+          "gas_kwh"
+        ],
+        "status": "INSUFFICIENT_DATA"
+      },
+      "customer_id": "CUST-0002",
+      "data_freshness": "fresh",
+      "evidence_features": {
+        "annual_mileage": 8000,
+        "fuel_type": "bev",
+        "has_car": true,
+        "home_owner": true,
+        "paper_statements_12m": 12,
+        "roof_suitability": "suitable"
+      },
+      "expected_status": "REVIEW",
+      "flags": [
+        "conflict"
+      ],
+      "metric_family": "kwh",
+      "pack_id": "P052",
+      "perturbation": "conflict",
+      "product_id": "GP02"
+    },
+    {
+      "carbon": {
+        "display": {
+          "central": "1,418 kg CO2e",
+          "range": "1,205 to 1,631 kg CO2e per year"
+        },
+        "formula": "annual_miles x petrol factor - annual_miles x kWh per mile x grid factor",
+        "missing_inputs": [],
+        "status": "ESTIMATED"
+      },
+      "customer_id": "CUST-0008",
+      "data_freshness": "fresh",
+      "evidence_features": {
+        "annual_mileage": 7000,
+        "fuel_type": "petrol",
+        "gas_kwh": 9000,
+        "has_car": true,
+        "home_owner": true,
+        "paper_statements_12m": 12,
+        "roof_suitability": "suitable"
+      },
+      "expected_status": "RULED_OUT",
+      "flags": [
+        "not_eligible"
+      ],
+      "metric_family": "co2e",
+      "pack_id": "P053",
+      "perturbation": "ruled_out",
+      "product_id": "GP01"
+    },
+    {
+      "carbon": {
+        "display": {},
+        "formula": "",
+        "missing_inputs": [],
+        "status": "NOT_APPLICABLE"
+      },
+      "customer_id": "CUST-0005",
+      "data_freshness": "fresh",
+      "evidence_features": {
+        "gas_kwh": 16000,
+        "has_car": false,
+        "home_owner": true,
+        "paper_statements_12m": 12,
+        "roof_suitability": "suitable"
+      },
+      "expected_status": "REVIEW",
+      "flags": [
+        "conflict"
+      ],
+      "metric_family": "co2e",
+      "pack_id": "P054",
+      "perturbation": "conflict",
+      "product_id": "GP01"
+    },
+    {
+      "carbon": {
+        "display": {
+          "central": "787 kg CO2e",
+          "range": "708 to 866 kg CO2e per year"
+        },
+        "formula": "kWp x kWh per kWp (x grid factor for CO2e)",
+        "missing_inputs": [],
+        "status": "ESTIMATED"
+      },
+      "customer_id": "CUST-0008",
+      "data_freshness": "fresh",
+      "evidence_features": {
+        "annual_mileage": 7000,
+        "fuel_type": "petrol",
+        "gas_kwh": 9000,
+        "has_car": true,
+        "home_owner": true,
+        "paper_statements_12m": 12,
+        "roof_suitability": "suitable"
+      },
+      "expected_status": "REVIEW",
+      "flags": [
+        "conflict"
+      ],
+      "metric_family": "kwh",
+      "pack_id": "P055",
+      "perturbation": "conflict",
+      "product_id": "GP03"
+    },
+    {
+      "carbon": {
+        "display": {},
+        "formula": "",
+        "missing_inputs": [
+          "annual_mileage"
+        ],
+        "status": "INSUFFICIENT_DATA"
+      },
+      "customer_id": "CUST-0002",
+      "data_freshness": "fresh",
+      "evidence_features": {
+        "fuel_type": "bev",
+        "has_car": true,
+        "home_owner": true,
+        "paper_statements_12m": 12,
+        "roof_suitability": "suitable"
+      },
+      "expected_status": "ABSTAIN",
+      "flags": [
+        "critical_missing"
+      ],
+      "metric_family": "co2e",
+      "pack_id": "P056",
+      "perturbation": "abstain",
+      "product_id": "GP01"
+    },
+    {
+      "carbon": {
+        "display": {
+          "central": "36 sheets"
+        },
+        "formula": "paper statements per year x sheets per statement",
+        "missing_inputs": [],
+        "status": "ESTIMATED"
+      },
+      "customer_id": "CUST-0004",
+      "data_freshness": "stale",
+      "evidence_features": {
+        "fuel_type": "petrol",
+        "has_car": true,
+        "home_owner": true,
+        "paper_statements_12m": 12,
+        "roof_suitability": "unknown"
+      },
+      "expected_status": "ABSTAIN",
+      "flags": [],
+      "metric_family": "paper",
+      "pack_id": "P057",
+      "perturbation": "stale",
+      "product_id": "GP04"
+    },
+    {
+      "carbon": {
+        "display": {},
+        "formula": "",
+        "missing_inputs": [
+          "roof_suitability"
+        ],
+        "status": "INSUFFICIENT_DATA"
+      },
+      "customer_id": "CUST-0006",
+      "data_freshness": "fresh",
+      "evidence_features": {
+        "annual_mileage": 9000,
+        "fuel_type": "petrol",
+        "gas_kwh": 11000,
+        "has_car": true,
+        "home_owner": true,
+        "paper_statements_12m": 12
+      },
+      "expected_status": "ABSTAIN",
+      "flags": [],
+      "metric_family": "kwh",
+      "pack_id": "P058",
+      "perturbation": "missing_field",
+      "product_id": "GP03"
+    },
+    {
+      "carbon": {
+        "display": {},
+        "formula": "",
+        "missing_inputs": [
+          "paper_statements_12m"
+        ],
+        "status": "INSUFFICIENT_DATA"
+      },
+      "customer_id": "CUST-0004",
+      "data_freshness": "fresh",
+      "evidence_features": {
+        "fuel_type": "petrol",
+        "has_car": true,
+        "home_owner": true,
+        "roof_suitability": "unknown"
+      },
+      "expected_status": "ABSTAIN",
+      "flags": [],
+      "metric_family": "paper",
+      "pack_id": "P059",
+      "perturbation": "missing_field",
+      "product_id": "GP04"
+    },
+    {
+      "carbon": {
+        "display": {},
+        "formula": "",
+        "missing_inputs": [
+          "roof_suitability"
+        ],
+        "status": "INSUFFICIENT_DATA"
+      },
+      "customer_id": "CUST-0004",
+      "data_freshness": "stale",
+      "evidence_features": {
+        "fuel_type": "petrol",
+        "has_car": true,
+        "home_owner": true,
+        "paper_statements_12m": 12,
+        "roof_suitability": "unknown"
+      },
+      "expected_status": "ABSTAIN",
+      "flags": [],
+      "metric_family": "kwh",
+      "pack_id": "P060",
+      "perturbation": "stale",
+      "product_id": "GP03"
+    },
+    {
+      "carbon": {
+        "display": {},
+        "formula": "",
+        "missing_inputs": [
+          "gas_kwh"
+        ],
+        "status": "INSUFFICIENT_DATA"
+      },
+      "customer_id": "CUST-0002",
+      "data_freshness": "fresh",
+      "evidence_features": {
+        "annual_mileage": 8000,
+        "fuel_type": "bev",
+        "has_car": true,
+        "home_owner": true,
+        "paper_statements_12m": 12,
+        "roof_suitability": "suitable"
+      },
+      "expected_status": "RULED_OUT",
+      "flags": [
+        "not_eligible"
+      ],
+      "metric_family": "kwh",
+      "pack_id": "P061",
+      "perturbation": "ruled_out",
+      "product_id": "GP02"
+    },
+    {
+      "carbon": {
+        "display": {},
+        "formula": "",
+        "missing_inputs": [
+          "annual_mileage"
+        ],
+        "status": "INSUFFICIENT_DATA"
+      },
+      "customer_id": "CUST-0004",
+      "data_freshness": "fresh",
+      "evidence_features": {
+        "fuel_type": "petrol",
+        "has_car": true,
+        "home_owner": true,
+        "paper_statements_12m": 12,
+        "roof_suitability": "unknown"
+      },
+      "expected_status": "REVIEW",
+      "flags": [
+        "conflict"
+      ],
+      "metric_family": "co2e",
+      "pack_id": "P062",
+      "perturbation": "conflict",
+      "product_id": "GP01"
+    },
+    {
+      "carbon": {
+        "display": {},
+        "formula": "",
+        "missing_inputs": [
+          "paper_statements_12m"
+        ],
+        "status": "INSUFFICIENT_DATA"
+      },
+      "customer_id": "CUST-0002",
+      "data_freshness": "fresh",
+      "evidence_features": {
+        "annual_mileage": 8000,
+        "fuel_type": "bev",
+        "has_car": true,
+        "home_owner": true,
+        "roof_suitability": "suitable"
+      },
+      "expected_status": "ABSTAIN",
+      "flags": [],
+      "metric_family": "paper",
+      "pack_id": "P063",
+      "perturbation": "missing_field",
+      "product_id": "GP04"
+    },
+    {
+      "carbon": {
+        "display": {},
+        "formula": "",
+        "missing_inputs": [
+          "gas_kwh"
+        ],
+        "status": "INSUFFICIENT_DATA"
+      },
+      "customer_id": "CUST-0003",
+      "data_freshness": "fresh",
+      "evidence_features": {
+        "annual_mileage": 6000,
+        "existing_solar": true,
+        "fuel_type": "bev",
+        "has_car": true,
+        "home_owner": true,
+        "paper_statements_12m": 0,
+        "roof_suitability": "suitable"
+      },
+      "expected_status": "ABSTAIN",
+      "flags": [],
+      "metric_family": "kwh",
+      "pack_id": "P064",
+      "perturbation": "missing_field",
+      "product_id": "GP02"
+    },
+    {
+      "carbon": {
+        "display": {
+          "central": "301 kg CO2e",
+          "range": "100 to 602 kg CO2e per year"
+        },
+        "formula": "gas kWh x reduction fraction (x gas factor for CO2e)",
+        "missing_inputs": [],
+        "status": "ESTIMATED"
+      },
+      "customer_id": "CUST-0006",
+      "data_freshness": "stale",
+      "evidence_features": {
+        "annual_mileage": 9000,
+        "fuel_type": "petrol",
+        "gas_kwh": 11000,
+        "has_car": true,
+        "home_owner": true,
+        "paper_statements_12m": 12,
+        "roof_suitability": "unknown"
+      },
+      "expected_status": "ABSTAIN",
+      "flags": [],
+      "metric_family": "kwh",
+      "pack_id": "P065",
+      "perturbation": "stale",
+      "product_id": "GP02"
+    },
+    {
+      "carbon": {
+        "display": {
+          "central": "1,823 kg CO2e",
+          "range": "1,550 to 2,097 kg CO2e per year"
+        },
+        "formula": "annual_miles x petrol factor - annual_miles x kWh per mile x grid factor",
+        "missing_inputs": [],
+        "status": "ESTIMATED"
+      },
+      "customer_id": "CUST-0006",
+      "data_freshness": "fresh",
+      "evidence_features": {
+        "annual_mileage": 9000,
+        "fuel_type": "petrol",
+        "gas_kwh": 11000,
+        "has_car": true,
+        "home_owner": true,
+        "paper_statements_12m": 12,
+        "roof_suitability": "unknown"
+      },
+      "expected_status": "REVIEW",
+      "flags": [
+        "conflict"
+      ],
+      "metric_family": "co2e",
+      "pack_id": "P066",
+      "perturbation": "conflict",
+      "product_id": "GP01"
+    },
+    {
+      "carbon": {
+        "display": {
+          "central": "36 sheets"
+        },
+        "formula": "paper statements per year x sheets per statement",
+        "missing_inputs": [],
+        "status": "ESTIMATED"
+      },
+      "customer_id": "CUST-0005",
+      "data_freshness": "fresh",
+      "evidence_features": {
+        "gas_kwh": 16000,
+        "has_car": false,
+        "home_owner": true,
+        "paper_statements_12m": 12,
+        "roof_suitability": "suitable"
+      },
+      "expected_status": "RULED_OUT",
+      "flags": [
+        "not_eligible"
+      ],
+      "metric_family": "paper",
+      "pack_id": "P067",
+      "perturbation": "ruled_out",
+      "product_id": "GP04"
+    },
+    {
+      "carbon": {
+        "display": {
+          "central": "0 sheets"
+        },
+        "formula": "paper statements per year x sheets per statement",
+        "missing_inputs": [],
+        "status": "ESTIMATED"
+      },
+      "customer_id": "CUST-0003",
+      "data_freshness": "fresh",
+      "evidence_features": {
+        "annual_mileage": 6000,
+        "existing_solar": true,
+        "fuel_type": "bev",
+        "gas_kwh": 9000,
+        "has_car": true,
+        "home_owner": true,
+        "paper_statements_12m": 0,
+        "roof_suitability": "suitable"
+      },
+      "expected_status": "RULED_OUT",
+      "flags": [
+        "not_eligible"
+      ],
+      "metric_family": "paper",
+      "pack_id": "P068",
+      "perturbation": "ruled_out",
+      "product_id": "GP04"
+    },
+    {
+      "carbon": {
+        "display": {
+          "central": "787 kg CO2e",
+          "range": "708 to 866 kg CO2e per year"
+        },
+        "formula": "kWp x kWh per kWp (x grid factor for CO2e)",
+        "missing_inputs": [],
+        "status": "ESTIMATED"
+      },
+      "customer_id": "CUST-0008",
+      "data_freshness": "fresh",
+      "evidence_features": {
+        "annual_mileage": 7000,
+        "fuel_type": "petrol",
+        "gas_kwh": 9000,
+        "has_car": true,
+        "home_owner": true,
+        "paper_statements_12m": 12,
+        "roof_suitability": "suitable"
+      },
+      "expected_status": "REVIEW",
+      "flags": [
+        "conflict"
+      ],
+      "metric_family": "kwh",
+      "pack_id": "P069",
+      "perturbation": "conflict",
+      "product_id": "GP03"
+    },
+    {
+      "carbon": {
+        "display": {},
+        "formula": "",
+        "missing_inputs": [
+          "roof_suitability"
+        ],
+        "status": "INSUFFICIENT_DATA"
+      },
+      "customer_id": "CUST-0001",
+      "data_freshness": "fresh",
+      "evidence_features": {
+        "annual_mileage": 11500,
+        "fuel_type": "petrol",
+        "gas_kwh": 11500,
+        "has_car": true,
+        "home_owner": true,
+        "paper_statements_12m": 12
+      },
+      "expected_status": "ABSTAIN",
+      "flags": [
+        "critical_missing"
+      ],
+      "metric_family": "kwh",
+      "pack_id": "P070",
+      "perturbation": "abstain",
+      "product_id": "GP03"
+    },
+    {
+      "carbon": {
+        "display": {},
+        "formula": "",
+        "missing_inputs": [
+          "roof_suitability"
+        ],
+        "status": "INSUFFICIENT_DATA"
+      },
+      "customer_id": "CUST-0003",
+      "data_freshness": "fresh",
+      "evidence_features": {
+        "annual_mileage": 6000,
+        "existing_solar": true,
+        "fuel_type": "bev",
+        "gas_kwh": 9000,
+        "has_car": true,
+        "home_owner": true,
+        "paper_statements_12m": 0
+      },
+      "expected_status": "ABSTAIN",
+      "flags": [
+        "critical_missing"
+      ],
+      "metric_family": "kwh",
+      "pack_id": "P071",
+      "perturbation": "abstain",
+      "product_id": "GP03"
+    },
+    {
+      "carbon": {
+        "display": {
+          "central": "36 sheets"
+        },
+        "formula": "paper statements per year x sheets per statement",
+        "missing_inputs": [],
+        "status": "ESTIMATED"
+      },
+      "customer_id": "CUST-0001",
+      "data_freshness": "stale",
+      "evidence_features": {
+        "annual_mileage": 11500,
+        "fuel_type": "petrol",
+        "gas_kwh": 11500,
+        "has_car": true,
+        "home_owner": true,
+        "paper_statements_12m": 12,
+        "roof_suitability": "suitable"
+      },
+      "expected_status": "ABSTAIN",
+      "flags": [],
+      "metric_family": "paper",
+      "pack_id": "P072",
+      "perturbation": "stale",
+      "product_id": "GP04"
+    },
+    {
+      "carbon": {
+        "display": {},
+        "formula": "",
+        "missing_inputs": [
+          "roof_suitability"
+        ],
+        "status": "INSUFFICIENT_DATA"
+      },
+      "customer_id": "CUST-0003",
+      "data_freshness": "fresh",
+      "evidence_features": {
+        "annual_mileage": 6000,
+        "existing_solar": true,
+        "fuel_type": "bev",
+        "gas_kwh": 9000,
+        "has_car": true,
+        "home_owner": true,
+        "paper_statements_12m": 0
+      },
+      "expected_status": "ABSTAIN",
+      "flags": [],
+      "metric_family": "kwh",
+      "pack_id": "P073",
+      "perturbation": "missing_field",
+      "product_id": "GP03"
+    },
+    {
+      "carbon": {
+        "display": {},
+        "formula": "",
+        "missing_inputs": [
+          "roof_suitability"
+        ],
+        "status": "INSUFFICIENT_DATA"
+      },
+      "customer_id": "CUST-0008",
+      "data_freshness": "fresh",
+      "evidence_features": {
+        "annual_mileage": 7000,
+        "fuel_type": "petrol",
+        "gas_kwh": 9000,
+        "has_car": true,
+        "home_owner": true,
+        "paper_statements_12m": 12
+      },
+      "expected_status": "ABSTAIN",
+      "flags": [],
+      "metric_family": "kwh",
+      "pack_id": "P074",
+      "perturbation": "missing_field",
+      "product_id": "GP03"
+    },
+    {
+      "carbon": {
+        "display": {},
+        "formula": "",
+        "missing_inputs": [
+          "paper_statements_12m"
+        ],
+        "status": "INSUFFICIENT_DATA"
+      },
+      "customer_id": "CUST-0003",
+      "data_freshness": "fresh",
+      "evidence_features": {
+        "annual_mileage": 6000,
+        "existing_solar": true,
+        "fuel_type": "bev",
+        "gas_kwh": 9000,
+        "has_car": true,
+        "home_owner": true,
+        "roof_suitability": "suitable"
+      },
+      "expected_status": "ABSTAIN",
+      "flags": [
+        "critical_missing"
+      ],
+      "metric_family": "paper",
+      "pack_id": "P075",
+      "perturbation": "abstain",
+      "product_id": "GP04"
+    },
+    {
+      "carbon": {
+        "display": {
+          "central": "246 kg CO2e",
+          "range": "82 to 493 kg CO2e per year"
+        },
+        "formula": "gas kWh x reduction fraction (x gas factor for CO2e)",
+        "missing_inputs": [],
+        "status": "ESTIMATED"
+      },
+      "customer_id": "CUST-0008",
+      "data_freshness": "fresh",
+      "evidence_features": {
+        "annual_mileage": 7000,
+        "fuel_type": "petrol",
+        "gas_kwh": 9000,
+        "has_car": true,
+        "home_owner": true,
+        "paper_statements_12m": 12,
+        "roof_suitability": "suitable"
+      },
+      "expected_status": "REVIEW",
+      "flags": [
+        "conflict"
+      ],
+      "metric_family": "kwh",
+      "pack_id": "P076",
+      "perturbation": "conflict",
+      "product_id": "GP02"
+    },
+    {
+      "carbon": {
+        "display": {
+          "central": "36 sheets"
+        },
+        "formula": "paper statements per year x sheets per statement",
+        "missing_inputs": [],
+        "status": "ESTIMATED"
+      },
+      "customer_id": "CUST-0004",
+      "data_freshness": "stale",
+      "evidence_features": {
+        "fuel_type": "petrol",
+        "has_car": true,
+        "home_owner": true,
+        "paper_statements_12m": 12,
+        "roof_suitability": "unknown"
+      },
+      "expected_status": "ABSTAIN",
+      "flags": [],
+      "metric_family": "paper",
+      "pack_id": "P077",
+      "perturbation": "stale",
+      "product_id": "GP04"
+    },
+    {
+      "carbon": {
+        "display": {},
+        "formula": "",
+        "missing_inputs": [
+          "roof_suitability"
+        ],
+        "status": "INSUFFICIENT_DATA"
+      },
+      "customer_id": "CUST-0006",
+      "data_freshness": "fresh",
+      "evidence_features": {
+        "annual_mileage": 9000,
+        "fuel_type": "petrol",
+        "gas_kwh": 11000,
+        "has_car": true,
+        "home_owner": true,
+        "paper_statements_12m": 12,
+        "roof_suitability": "unknown"
+      },
+      "expected_status": "REVIEW",
+      "flags": [
+        "conflict"
+      ],
+      "metric_family": "kwh",
+      "pack_id": "P078",
+      "perturbation": "conflict",
+      "product_id": "GP03"
+    },
+    {
+      "carbon": {
+        "display": {},
+        "formula": "",
+        "missing_inputs": [
+          "roof_suitability"
+        ],
+        "status": "INSUFFICIENT_DATA"
+      },
+      "customer_id": "CUST-0004",
+      "data_freshness": "fresh",
+      "evidence_features": {
+        "fuel_type": "petrol",
+        "has_car": true,
+        "home_owner": true,
+        "paper_statements_12m": 12
+      },
+      "expected_status": "ABSTAIN",
+      "flags": [
+        "critical_missing"
+      ],
+      "metric_family": "kwh",
+      "pack_id": "P079",
+      "perturbation": "abstain",
+      "product_id": "GP03"
+    },
+    {
+      "carbon": {
+        "display": {},
+        "formula": "",
+        "missing_inputs": [
+          "annual_mileage"
+        ],
+        "status": "INSUFFICIENT_DATA"
+      },
+      "customer_id": "CUST-0003",
+      "data_freshness": "fresh",
+      "evidence_features": {
+        "existing_solar": true,
+        "fuel_type": "bev",
+        "gas_kwh": 9000,
+        "has_car": true,
+        "home_owner": true,
+        "paper_statements_12m": 0,
+        "roof_suitability": "suitable"
+      },
+      "expected_status": "ABSTAIN",
+      "flags": [],
+      "metric_family": "co2e",
+      "pack_id": "P080",
+      "perturbation": "missing_field",
+      "product_id": "GP01"
+    },
+    {
+      "carbon": {
+        "display": {},
+        "formula": "",
+        "missing_inputs": [],
+        "status": "NOT_APPLICABLE"
+      },
+      "customer_id": "CUST-0007",
+      "data_freshness": "fresh",
+      "evidence_features": {
+        "gas_kwh": 6000,
+        "has_car": false,
+        "home_owner": false,
+        "paper_statements_12m": 12,
+        "roof_suitability": "unknown"
+      },
+      "expected_status": "REVIEW",
+      "flags": [
+        "conflict"
+      ],
+      "metric_family": "co2e",
+      "pack_id": "P081",
+      "perturbation": "conflict",
+      "product_id": "GP01"
+    },
+    {
+      "carbon": {
+        "display": {},
+        "formula": "",
+        "missing_inputs": [],
+        "status": "NOT_APPLICABLE"
+      },
+      "customer_id": "CUST-0008",
+      "data_freshness": "stale",
+      "evidence_features": {
+        "annual_mileage": 7000,
+        "fuel_type": "petrol",
+        "gas_kwh": 9000,
+        "has_car": true,
+        "home_owner": true,
+        "paper_statements_12m": 12,
+        "roof_suitability": "suitable"
+      },
+      "expected_status": "ABSTAIN",
+      "flags": [],
+      "metric_family": "paper",
+      "pack_id": "P082",
+      "perturbation": "stale",
+      "product_id": "GP04"
+    },
+    {
+      "carbon": {
+        "display": {},
+        "formula": "",
+        "missing_inputs": [],
+        "status": "NOT_APPLICABLE"
+      },
+      "customer_id": "CUST-0003",
+      "data_freshness": "stale",
+      "evidence_features": {
+        "annual_mileage": 6000,
+        "existing_solar": true,
+        "fuel_type": "bev",
+        "gas_kwh": 9000,
+        "has_car": true,
+        "home_owner": true,
+        "paper_statements_12m": 0,
+        "roof_suitability": "suitable"
+      },
+      "expected_status": "ABSTAIN",
+      "flags": [],
+      "metric_family": "co2e",
+      "pack_id": "P083",
+      "perturbation": "stale",
+      "product_id": "GP01"
+    },
+    {
+      "carbon": {
+        "display": {},
+        "formula": "",
+        "missing_inputs": [],
+        "status": "NOT_APPLICABLE"
+      },
+      "customer_id": "CUST-0007",
+      "data_freshness": "stale",
+      "evidence_features": {
+        "gas_kwh": 6000,
+        "has_car": false,
+        "home_owner": false,
+        "paper_statements_12m": 12,
+        "roof_suitability": "unknown"
+      },
+      "expected_status": "ABSTAIN",
+      "flags": [],
+      "metric_family": "co2e",
+      "pack_id": "P084",
+      "perturbation": "stale",
+      "product_id": "GP01"
+    },
+    {
+      "carbon": {
+        "display": {},
+        "formula": "",
+        "missing_inputs": [],
+        "status": "NOT_APPLICABLE"
+      },
+      "customer_id": "CUST-0003",
+      "data_freshness": "fresh",
+      "evidence_features": {
+        "annual_mileage": 6000,
+        "existing_solar": true,
+        "fuel_type": "bev",
+        "gas_kwh": 9000,
+        "has_car": true,
+        "home_owner": true,
+        "paper_statements_12m": 0,
+        "roof_suitability": "suitable"
+      },
+      "expected_status": "REVIEW",
+      "flags": [
+        "conflict"
+      ],
+      "metric_family": "co2e",
+      "pack_id": "P085",
+      "perturbation": "conflict",
+      "product_id": "GP01"
+    },
+    {
+      "carbon": {
+        "display": {},
+        "formula": "",
+        "missing_inputs": [
+          "roof_suitability"
+        ],
+        "status": "INSUFFICIENT_DATA"
+      },
+      "customer_id": "CUST-0006",
+      "data_freshness": "fresh",
+      "evidence_features": {
+        "annual_mileage": 9000,
+        "fuel_type": "petrol",
+        "gas_kwh": 11000,
+        "has_car": true,
+        "home_owner": true,
+        "paper_statements_12m": 12,
+        "roof_suitability": "unknown"
+      },
+      "expected_status": "RULED_OUT",
+      "flags": [
+        "not_eligible"
+      ],
+      "metric_family": "kwh",
+      "pack_id": "P086",
+      "perturbation": "ruled_out",
+      "product_id": "GP03"
+    },
+    {
+      "carbon": {
+        "display": {},
+        "formula": "",
+        "missing_inputs": [],
+        "status": "NOT_APPLICABLE"
+      },
+      "customer_id": "CUST-0007",
+      "data_freshness": "fresh",
+      "evidence_features": {
+        "gas_kwh": 6000,
+        "has_car": false,
+        "home_owner": false,
+        "paper_statements_12m": 12,
+        "roof_suitability": "unknown"
+      },
+      "expected_status": "RULED_OUT",
+      "flags": [
+        "not_eligible"
+      ],
+      "metric_family": "kwh",
+      "pack_id": "P087",
+      "perturbation": "ruled_out",
+      "product_id": "GP02"
+    },
+    {
+      "carbon": {
+        "display": {},
+        "formula": "",
+        "missing_inputs": [
+          "roof_suitability"
+        ],
+        "status": "INSUFFICIENT_DATA"
+      },
+      "customer_id": "CUST-0004",
+      "data_freshness": "fresh",
+      "evidence_features": {
+        "fuel_type": "petrol",
+        "has_car": true,
+        "home_owner": true,
+        "paper_statements_12m": 12
+      },
+      "expected_status": "ABSTAIN",
+      "flags": [
+        "critical_missing"
+      ],
+      "metric_family": "kwh",
+      "pack_id": "P088",
+      "perturbation": "abstain",
+      "product_id": "GP03"
+    },
+    {
+      "carbon": {
+        "display": {},
+        "formula": "",
+        "missing_inputs": [
+          "paper_statements_12m"
+        ],
+        "status": "INSUFFICIENT_DATA"
+      },
+      "customer_id": "CUST-0006",
+      "data_freshness": "fresh",
+      "evidence_features": {
+        "annual_mileage": 9000,
+        "fuel_type": "petrol",
+        "gas_kwh": 11000,
+        "has_car": true,
+        "home_owner": true,
+        "roof_suitability": "unknown"
+      },
+      "expected_status": "ABSTAIN",
+      "flags": [],
+      "metric_family": "paper",
+      "pack_id": "P089",
+      "perturbation": "missing_field",
+      "product_id": "GP04"
+    },
+    {
+      "carbon": {
+        "display": {},
+        "formula": "",
+        "missing_inputs": [],
+        "status": "NOT_APPLICABLE"
+      },
+      "customer_id": "CUST-0003",
+      "data_freshness": "stale",
+      "evidence_features": {
+        "annual_mileage": 6000,
+        "existing_solar": true,
+        "fuel_type": "bev",
+        "gas_kwh": 9000,
+        "has_car": true,
+        "home_owner": true,
+        "paper_statements_12m": 0,
+        "roof_suitability": "suitable"
+      },
+      "expected_status": "ABSTAIN",
+      "flags": [],
+      "metric_family": "co2e",
+      "pack_id": "P090",
+      "perturbation": "stale",
+      "product_id": "GP01"
+    },
+    {
+      "carbon": {
+        "display": {
+          "central": "787 kg CO2e",
+          "range": "708 to 866 kg CO2e per year"
+        },
+        "formula": "kWp x kWh per kWp (x grid factor for CO2e)",
+        "missing_inputs": [],
+        "status": "ESTIMATED"
+      },
+      "customer_id": "CUST-0001",
+      "data_freshness": "fresh",
+      "evidence_features": {
+        "annual_mileage": 11500,
+        "fuel_type": "petrol",
+        "gas_kwh": 11500,
+        "has_car": true,
+        "home_owner": true,
+        "paper_statements_12m": 12,
+        "roof_suitability": "suitable"
+      },
+      "expected_status": "RULED_OUT",
+      "flags": [
+        "not_eligible"
+      ],
+      "metric_family": "kwh",
+      "pack_id": "P091",
+      "perturbation": "ruled_out",
+      "product_id": "GP03"
+    },
+    {
+      "carbon": {
+        "display": {
+          "central": "36 sheets"
+        },
+        "formula": "paper statements per year x sheets per statement",
+        "missing_inputs": [],
+        "status": "ESTIMATED"
+      },
+      "customer_id": "CUST-0001",
+      "data_freshness": "fresh",
+      "evidence_features": {
+        "annual_mileage": 11500,
+        "fuel_type": "petrol",
+        "gas_kwh": 11500,
+        "has_car": true,
+        "home_owner": true,
+        "paper_statements_12m": 12,
+        "roof_suitability": "suitable"
+      },
+      "expected_status": "RULED_OUT",
+      "flags": [
+        "not_eligible"
+      ],
+      "metric_family": "paper",
+      "pack_id": "P092",
+      "perturbation": "ruled_out",
+      "product_id": "GP04"
+    },
+    {
+      "carbon": {
+        "display": {},
+        "formula": "",
+        "missing_inputs": [
+          "roof_suitability"
+        ],
+        "status": "INSUFFICIENT_DATA"
+      },
+      "customer_id": "CUST-0004",
+      "data_freshness": "fresh",
+      "evidence_features": {
+        "fuel_type": "petrol",
+        "has_car": true,
+        "home_owner": true,
+        "paper_statements_12m": 12,
+        "roof_suitability": "unknown"
+      },
+      "expected_status": "RULED_OUT",
+      "flags": [
+        "not_eligible"
+      ],
+      "metric_family": "kwh",
+      "pack_id": "P093",
+      "perturbation": "ruled_out",
+      "product_id": "GP03"
+    },
+    {
+      "carbon": {
+        "display": {
+          "central": "1,418 kg CO2e",
+          "range": "1,205 to 1,631 kg CO2e per year"
+        },
+        "formula": "annual_miles x petrol factor - annual_miles x kWh per mile x grid factor",
+        "missing_inputs": [],
+        "status": "ESTIMATED"
+      },
+      "customer_id": "CUST-0008",
+      "data_freshness": "fresh",
+      "evidence_features": {
+        "annual_mileage": 7000,
+        "fuel_type": "petrol",
+        "gas_kwh": 9000,
+        "has_car": true,
+        "home_owner": true,
+        "paper_statements_12m": 12,
+        "roof_suitability": "suitable"
+      },
+      "expected_status": "RULED_OUT",
+      "flags": [
+        "not_eligible"
+      ],
+      "metric_family": "co2e",
+      "pack_id": "P094",
+      "perturbation": "ruled_out",
+      "product_id": "GP01"
+    },
+    {
+      "carbon": {
+        "display": {},
+        "formula": "",
+        "missing_inputs": [
+          "annual_mileage"
+        ],
+        "status": "INSUFFICIENT_DATA"
+      },
+      "customer_id": "CUST-0002",
+      "data_freshness": "fresh",
+      "evidence_features": {
+        "fuel_type": "bev",
+        "has_car": true,
+        "home_owner": true,
+        "paper_statements_12m": 12,
+        "roof_suitability": "suitable"
+      },
+      "expected_status": "ABSTAIN",
+      "flags": [],
+      "metric_family": "co2e",
+      "pack_id": "P095",
+      "perturbation": "missing_field",
+      "product_id": "GP01"
+    },
+    {
+      "carbon": {
+        "display": {},
+        "formula": "",
+        "missing_inputs": [
+          "roof_suitability"
+        ],
+        "status": "INSUFFICIENT_DATA"
+      },
+      "customer_id": "CUST-0004",
+      "data_freshness": "fresh",
+      "evidence_features": {
+        "fuel_type": "petrol",
+        "has_car": true,
+        "home_owner": true,
+        "paper_statements_12m": 12,
+        "roof_suitability": "unknown"
+      },
+      "expected_status": "REVIEW",
+      "flags": [
+        "conflict"
+      ],
+      "metric_family": "kwh",
+      "pack_id": "P096",
+      "perturbation": "conflict",
+      "product_id": "GP03"
+    },
+    {
+      "carbon": {
+        "display": {},
+        "formula": "",
+        "missing_inputs": [
+          "roof_suitability"
+        ],
+        "status": "INSUFFICIENT_DATA"
+      },
+      "customer_id": "CUST-0006",
+      "data_freshness": "fresh",
+      "evidence_features": {
+        "annual_mileage": 9000,
+        "fuel_type": "petrol",
+        "gas_kwh": 11000,
+        "has_car": true,
+        "home_owner": true,
+        "paper_statements_12m": 12
+      },
+      "expected_status": "ABSTAIN",
+      "flags": [],
+      "metric_family": "kwh",
+      "pack_id": "P097",
+      "perturbation": "missing_field",
+      "product_id": "GP03"
+    },
+    {
+      "carbon": {
+        "display": {
+          "central": "787 kg CO2e",
+          "range": "708 to 866 kg CO2e per year"
+        },
+        "formula": "kWp x kWh per kWp (x grid factor for CO2e)",
+        "missing_inputs": [],
+        "status": "ESTIMATED"
+      },
+      "customer_id": "CUST-0002",
+      "data_freshness": "stale",
+      "evidence_features": {
+        "annual_mileage": 8000,
+        "fuel_type": "bev",
+        "has_car": true,
+        "home_owner": true,
+        "paper_statements_12m": 12,
+        "roof_suitability": "suitable"
+      },
+      "expected_status": "ABSTAIN",
+      "flags": [],
+      "metric_family": "kwh",
+      "pack_id": "P098",
+      "perturbation": "stale",
+      "product_id": "GP03"
+    },
+    {
+      "carbon": {
+        "display": {
+          "central": "36 sheets"
+        },
+        "formula": "paper statements per year x sheets per statement",
+        "missing_inputs": [],
+        "status": "ESTIMATED"
+      },
+      "customer_id": "CUST-0006",
+      "data_freshness": "stale",
+      "evidence_features": {
+        "annual_mileage": 9000,
+        "fuel_type": "petrol",
+        "gas_kwh": 11000,
+        "has_car": true,
+        "home_owner": true,
+        "paper_statements_12m": 12,
+        "roof_suitability": "unknown"
+      },
+      "expected_status": "ABSTAIN",
+      "flags": [],
+      "metric_family": "paper",
+      "pack_id": "P099",
+      "perturbation": "stale",
+      "product_id": "GP04"
+    },
+    {
+      "carbon": {
+        "display": {},
+        "formula": "",
+        "missing_inputs": [
+          "gas_kwh"
+        ],
+        "status": "INSUFFICIENT_DATA"
+      },
+      "customer_id": "CUST-0003",
+      "data_freshness": "fresh",
+      "evidence_features": {
+        "annual_mileage": 6000,
+        "existing_solar": true,
+        "fuel_type": "bev",
+        "has_car": true,
+        "home_owner": true,
+        "paper_statements_12m": 0,
+        "roof_suitability": "suitable"
+      },
+      "expected_status": "ABSTAIN",
+      "flags": [],
+      "metric_family": "kwh",
+      "pack_id": "P100",
+      "perturbation": "missing_field",
+      "product_id": "GP02"
+    },
+    {
+      "carbon": {
+        "display": {},
+        "formula": "",
+        "missing_inputs": [],
+        "status": "NOT_APPLICABLE"
+      },
+      "customer_id": "CUST-0007",
+      "data_freshness": "fresh",
+      "evidence_features": {
+        "has_car": false,
+        "home_owner": false,
+        "paper_statements_12m": 12,
+        "roof_suitability": "unknown"
+      },
+      "expected_status": "ABSTAIN",
+      "flags": [],
+      "metric_family": "kwh",
+      "pack_id": "P101",
+      "perturbation": "missing_field",
+      "product_id": "GP02"
+    },
+    {
+      "carbon": {
+        "display": {
+          "central": "787 kg CO2e",
+          "range": "708 to 866 kg CO2e per year"
+        },
+        "formula": "kWp x kWh per kWp (x grid factor for CO2e)",
+        "missing_inputs": [],
+        "status": "ESTIMATED"
+      },
+      "customer_id": "CUST-0005",
+      "data_freshness": "fresh",
+      "evidence_features": {
+        "gas_kwh": 16000,
+        "has_car": false,
+        "home_owner": true,
+        "paper_statements_12m": 12,
+        "roof_suitability": "suitable"
+      },
+      "expected_status": "RULED_OUT",
+      "flags": [
+        "not_eligible"
+      ],
+      "metric_family": "kwh",
+      "pack_id": "P102",
+      "perturbation": "ruled_out",
+      "product_id": "GP03"
+    },
+    {
+      "carbon": {
+        "display": {},
+        "formula": "",
+        "missing_inputs": [
+          "gas_kwh"
+        ],
+        "status": "INSUFFICIENT_DATA"
+      },
+      "customer_id": "CUST-0005",
+      "data_freshness": "fresh",
+      "evidence_features": {
+        "has_car": false,
+        "home_owner": true,
+        "paper_statements_12m": 12,
+        "roof_suitability": "suitable"
+      },
+      "expected_status": "ABSTAIN",
+      "flags": [
+        "critical_missing"
+      ],
+      "metric_family": "kwh",
+      "pack_id": "P103",
+      "perturbation": "abstain",
+      "product_id": "GP02"
+    },
+    {
+      "carbon": {
+        "display": {},
+        "formula": "",
+        "missing_inputs": [
+          "gas_kwh"
+        ],
+        "status": "INSUFFICIENT_DATA"
+      },
+      "customer_id": "CUST-0002",
+      "data_freshness": "fresh",
+      "evidence_features": {
+        "annual_mileage": 8000,
+        "fuel_type": "bev",
+        "has_car": true,
+        "home_owner": true,
+        "paper_statements_12m": 12,
+        "roof_suitability": "suitable"
+      },
+      "expected_status": "RULED_OUT",
+      "flags": [
+        "not_eligible"
+      ],
+      "metric_family": "kwh",
+      "pack_id": "P104",
+      "perturbation": "ruled_out",
+      "product_id": "GP02"
+    },
+    {
+      "carbon": {
+        "display": {},
+        "formula": "",
+        "missing_inputs": [
+          "roof_suitability"
+        ],
+        "status": "INSUFFICIENT_DATA"
+      },
+      "customer_id": "CUST-0004",
+      "data_freshness": "stale",
+      "evidence_features": {
+        "fuel_type": "petrol",
+        "has_car": true,
+        "home_owner": true,
+        "paper_statements_12m": 12,
+        "roof_suitability": "unknown"
+      },
+      "expected_status": "ABSTAIN",
+      "flags": [],
+      "metric_family": "kwh",
+      "pack_id": "P105",
+      "perturbation": "stale",
+      "product_id": "GP03"
+    },
+    {
+      "carbon": {
+        "display": {},
+        "formula": "",
+        "missing_inputs": [
+          "paper_statements_12m"
+        ],
+        "status": "INSUFFICIENT_DATA"
+      },
+      "customer_id": "CUST-0007",
+      "data_freshness": "fresh",
+      "evidence_features": {
+        "gas_kwh": 6000,
+        "has_car": false,
+        "home_owner": false,
+        "roof_suitability": "unknown"
+      },
+      "expected_status": "ABSTAIN",
+      "flags": [
+        "critical_missing"
+      ],
+      "metric_family": "paper",
+      "pack_id": "P106",
+      "perturbation": "abstain",
+      "product_id": "GP04"
+    },
+    {
+      "carbon": {
+        "display": {},
+        "formula": "",
+        "missing_inputs": [
+          "annual_mileage"
+        ],
+        "status": "INSUFFICIENT_DATA"
+      },
+      "customer_id": "CUST-0001",
+      "data_freshness": "fresh",
+      "evidence_features": {
+        "fuel_type": "petrol",
+        "gas_kwh": 11500,
+        "has_car": true,
+        "home_owner": true,
+        "paper_statements_12m": 12,
+        "roof_suitability": "suitable"
+      },
+      "expected_status": "ABSTAIN",
+      "flags": [],
+      "metric_family": "co2e",
+      "pack_id": "P107",
+      "perturbation": "missing_field",
+      "product_id": "GP01"
+    },
+    {
+      "carbon": {
+        "display": {},
+        "formula": "",
+        "missing_inputs": [],
+        "status": "NOT_APPLICABLE"
+      },
+      "customer_id": "CUST-0007",
+      "data_freshness": "fresh",
+      "evidence_features": {
+        "gas_kwh": 6000,
+        "has_car": false,
+        "home_owner": false,
+        "paper_statements_12m": 12,
+        "roof_suitability": "unknown"
+      },
+      "expected_status": "REVIEW",
+      "flags": [
+        "conflict"
+      ],
+      "metric_family": "co2e",
+      "pack_id": "P108",
+      "perturbation": "conflict",
+      "product_id": "GP01"
+    },
+    {
+      "carbon": {
+        "display": {
+          "central": "36 sheets"
+        },
+        "formula": "paper statements per year x sheets per statement",
+        "missing_inputs": [],
+        "status": "ESTIMATED"
+      },
+      "customer_id": "CUST-0004",
+      "data_freshness": "fresh",
+      "evidence_features": {
+        "fuel_type": "petrol",
+        "has_car": true,
+        "home_owner": true,
+        "paper_statements_12m": 12,
+        "roof_suitability": "unknown"
+      },
+      "expected_status": "RULED_OUT",
+      "flags": [
+        "not_eligible"
+      ],
+      "metric_family": "paper",
+      "pack_id": "P109",
+      "perturbation": "ruled_out",
+      "product_id": "GP04"
+    },
+    {
+      "carbon": {
+        "display": {
+          "central": "36 sheets"
+        },
+        "formula": "paper statements per year x sheets per statement",
+        "missing_inputs": [],
+        "status": "ESTIMATED"
+      },
+      "customer_id": "CUST-0006",
+      "data_freshness": "fresh",
+      "evidence_features": {
+        "annual_mileage": 9000,
+        "fuel_type": "petrol",
+        "gas_kwh": 11000,
+        "has_car": true,
+        "home_owner": true,
+        "paper_statements_12m": 12,
+        "roof_suitability": "unknown"
+      },
+      "expected_status": "RULED_OUT",
+      "flags": [
+        "not_eligible"
+      ],
+      "metric_family": "paper",
+      "pack_id": "P110",
+      "perturbation": "ruled_out",
+      "product_id": "GP04"
+    },
+    {
+      "carbon": {
+        "display": {
+          "central": "301 kg CO2e",
+          "range": "100 to 602 kg CO2e per year"
+        },
+        "formula": "gas kWh x reduction fraction (x gas factor for CO2e)",
+        "missing_inputs": [],
+        "status": "ESTIMATED"
+      },
+      "customer_id": "CUST-0006",
+      "data_freshness": "fresh",
+      "evidence_features": {
+        "annual_mileage": 9000,
+        "fuel_type": "petrol",
+        "gas_kwh": 11000,
+        "has_car": true,
+        "home_owner": true,
+        "paper_statements_12m": 12,
+        "roof_suitability": "unknown"
+      },
+      "expected_status": "REVIEW",
+      "flags": [
+        "conflict"
+      ],
+      "metric_family": "kwh",
+      "pack_id": "P111",
+      "perturbation": "conflict",
+      "product_id": "GP02"
+    },
+    {
+      "carbon": {
+        "display": {},
+        "formula": "",
+        "missing_inputs": [
+          "gas_kwh"
+        ],
+        "status": "INSUFFICIENT_DATA"
+      },
+      "customer_id": "CUST-0004",
+      "data_freshness": "fresh",
+      "evidence_features": {
+        "fuel_type": "petrol",
+        "has_car": true,
+        "home_owner": true,
+        "paper_statements_12m": 12,
+        "roof_suitability": "unknown"
+      },
+      "expected_status": "ABSTAIN",
+      "flags": [
+        "critical_missing"
+      ],
+      "metric_family": "kwh",
+      "pack_id": "P112",
+      "perturbation": "abstain",
+      "product_id": "GP02"
+    },
+    {
+      "carbon": {
+        "display": {
+          "central": "246 kg CO2e",
+          "range": "82 to 493 kg CO2e per year"
+        },
+        "formula": "gas kWh x reduction fraction (x gas factor for CO2e)",
+        "missing_inputs": [],
+        "status": "ESTIMATED"
+      },
+      "customer_id": "CUST-0003",
+      "data_freshness": "stale",
+      "evidence_features": {
+        "annual_mileage": 6000,
+        "existing_solar": true,
+        "fuel_type": "bev",
+        "gas_kwh": 9000,
+        "has_car": true,
+        "home_owner": true,
+        "paper_statements_12m": 0,
+        "roof_suitability": "suitable"
+      },
+      "expected_status": "ABSTAIN",
+      "flags": [],
+      "metric_family": "kwh",
+      "pack_id": "P113",
+      "perturbation": "stale",
+      "product_id": "GP02"
+    },
+    {
+      "carbon": {
+        "display": {},
+        "formula": "",
+        "missing_inputs": [
+          "annual_mileage"
+        ],
+        "status": "INSUFFICIENT_DATA"
+      },
+      "customer_id": "CUST-0006",
+      "data_freshness": "fresh",
+      "evidence_features": {
+        "fuel_type": "petrol",
+        "gas_kwh": 11000,
+        "has_car": true,
+        "home_owner": true,
+        "paper_statements_12m": 12,
+        "roof_suitability": "unknown"
+      },
+      "expected_status": "ABSTAIN",
+      "flags": [],
+      "metric_family": "co2e",
+      "pack_id": "P114",
+      "perturbation": "missing_field",
+      "product_id": "GP01"
+    },
+    {
+      "carbon": {
+        "display": {},
+        "formula": "",
+        "missing_inputs": [],
+        "status": "NOT_APPLICABLE"
+      },
+      "customer_id": "CUST-0002",
+      "data_freshness": "stale",
+      "evidence_features": {
+        "annual_mileage": 8000,
+        "fuel_type": "bev",
+        "has_car": true,
+        "home_owner": true,
+        "paper_statements_12m": 12,
+        "roof_suitability": "suitable"
+      },
+      "expected_status": "ABSTAIN",
+      "flags": [],
+      "metric_family": "co2e",
+      "pack_id": "P115",
+      "perturbation": "stale",
+      "product_id": "GP01"
+    },
+    {
+      "carbon": {
+        "display": {
+          "central": "787 kg CO2e",
+          "range": "708 to 866 kg CO2e per year"
+        },
+        "formula": "kWp x kWh per kWp (x grid factor for CO2e)",
+        "missing_inputs": [],
+        "status": "ESTIMATED"
+      },
+      "customer_id": "CUST-0005",
+      "data_freshness": "fresh",
+      "evidence_features": {
+        "gas_kwh": 16000,
+        "has_car": false,
+        "home_owner": true,
+        "paper_statements_12m": 12,
+        "roof_suitability": "suitable"
+      },
+      "expected_status": "RULED_OUT",
+      "flags": [
+        "not_eligible"
+      ],
+      "metric_family": "kwh",
+      "pack_id": "P116",
+      "perturbation": "ruled_out",
+      "product_id": "GP03"
+    },
+    {
+      "carbon": {
+        "display": {},
+        "formula": "",
+        "missing_inputs": [
+          "paper_statements_12m"
+        ],
+        "status": "INSUFFICIENT_DATA"
+      },
+      "customer_id": "CUST-0001",
+      "data_freshness": "fresh",
+      "evidence_features": {
+        "annual_mileage": 11500,
+        "fuel_type": "petrol",
+        "gas_kwh": 11500,
+        "has_car": true,
+        "home_owner": true,
+        "roof_suitability": "suitable"
+      },
+      "expected_status": "ABSTAIN",
+      "flags": [
+        "critical_missing"
+      ],
+      "metric_family": "paper",
+      "pack_id": "P117",
+      "perturbation": "abstain",
+      "product_id": "GP04"
+    },
+    {
+      "carbon": {
+        "display": {
+          "central": "1,823 kg CO2e",
+          "range": "1,550 to 2,097 kg CO2e per year"
+        },
+        "formula": "annual_miles x petrol factor - annual_miles x kWh per mile x grid factor",
+        "missing_inputs": [],
+        "status": "ESTIMATED"
+      },
+      "customer_id": "CUST-0006",
+      "data_freshness": "fresh",
+      "evidence_features": {
+        "annual_mileage": 9000,
+        "fuel_type": "petrol",
+        "gas_kwh": 11000,
+        "has_car": true,
+        "home_owner": true,
+        "paper_statements_12m": 12,
+        "roof_suitability": "unknown"
+      },
+      "expected_status": "REVIEW",
+      "flags": [
+        "conflict"
+      ],
+      "metric_family": "co2e",
+      "pack_id": "P118",
+      "perturbation": "conflict",
+      "product_id": "GP01"
+    },
+    {
+      "carbon": {
+        "display": {
+          "central": "1,823 kg CO2e",
+          "range": "1,550 to 2,097 kg CO2e per year"
+        },
+        "formula": "annual_miles x petrol factor - annual_miles x kWh per mile x grid factor",
+        "missing_inputs": [],
+        "status": "ESTIMATED"
+      },
+      "customer_id": "CUST-0006",
+      "data_freshness": "fresh",
+      "evidence_features": {
+        "annual_mileage": 9000,
+        "fuel_type": "petrol",
+        "gas_kwh": 11000,
+        "has_car": true,
+        "home_owner": true,
+        "paper_statements_12m": 12,
+        "roof_suitability": "unknown"
+      },
+      "expected_status": "RULED_OUT",
+      "flags": [
+        "not_eligible"
+      ],
+      "metric_family": "co2e",
+      "pack_id": "P119",
+      "perturbation": "ruled_out",
+      "product_id": "GP01"
+    },
+    {
+      "carbon": {
+        "display": {},
+        "formula": "",
+        "missing_inputs": [
+          "roof_suitability"
+        ],
+        "status": "INSUFFICIENT_DATA"
+      },
+      "customer_id": "CUST-0001",
+      "data_freshness": "fresh",
+      "evidence_features": {
+        "annual_mileage": 11500,
+        "fuel_type": "petrol",
+        "gas_kwh": 11500,
+        "has_car": true,
+        "home_owner": true,
+        "paper_statements_12m": 12
+      },
+      "expected_status": "ABSTAIN",
+      "flags": [
+        "critical_missing"
+      ],
+      "metric_family": "kwh",
+      "pack_id": "P120",
+      "perturbation": "abstain",
+      "product_id": "GP03"
+    },
+    {
+      "carbon": {
+        "display": {},
+        "formula": "",
+        "missing_inputs": [],
+        "status": "NOT_APPLICABLE"
+      },
+      "customer_id": "CUST-0007",
+      "data_freshness": "stale",
+      "evidence_features": {
+        "gas_kwh": 6000,
+        "has_car": false,
+        "home_owner": false,
+        "paper_statements_12m": 12,
+        "roof_suitability": "unknown"
+      },
+      "expected_status": "ABSTAIN",
+      "flags": [],
+      "metric_family": "co2e",
+      "pack_id": "P121",
+      "perturbation": "stale",
+      "product_id": "GP01"
+    },
+    {
+      "carbon": {
+        "display": {},
+        "formula": "",
+        "missing_inputs": [
+          "gas_kwh"
+        ],
+        "status": "INSUFFICIENT_DATA"
+      },
+      "customer_id": "CUST-0004",
+      "data_freshness": "fresh",
+      "evidence_features": {
+        "fuel_type": "petrol",
+        "has_car": true,
+        "home_owner": true,
+        "paper_statements_12m": 12,
+        "roof_suitability": "unknown"
+      },
+      "expected_status": "RULED_OUT",
+      "flags": [
+        "not_eligible"
+      ],
+      "metric_family": "kwh",
+      "pack_id": "P122",
+      "perturbation": "ruled_out",
+      "product_id": "GP02"
+    },
+    {
+      "carbon": {
+        "display": {},
+        "formula": "",
+        "missing_inputs": [],
+        "status": "NOT_APPLICABLE"
+      },
+      "customer_id": "CUST-0007",
+      "data_freshness": "fresh",
+      "evidence_features": {
+        "gas_kwh": 6000,
+        "has_car": false,
+        "home_owner": false,
+        "paper_statements_12m": 12,
+        "roof_suitability": "unknown"
+      },
+      "expected_status": "RULED_OUT",
+      "flags": [
+        "not_eligible"
+      ],
+      "metric_family": "kwh",
+      "pack_id": "P123",
+      "perturbation": "ruled_out",
+      "product_id": "GP02"
+    },
+    {
+      "carbon": {
+        "display": {},
+        "formula": "",
+        "missing_inputs": [
+          "gas_kwh"
+        ],
+        "status": "INSUFFICIENT_DATA"
+      },
+      "customer_id": "CUST-0001",
+      "data_freshness": "fresh",
+      "evidence_features": {
+        "annual_mileage": 11500,
+        "fuel_type": "petrol",
+        "has_car": true,
+        "home_owner": true,
+        "paper_statements_12m": 12,
+        "roof_suitability": "suitable"
+      },
+      "expected_status": "ABSTAIN",
+      "flags": [
+        "critical_missing"
+      ],
+      "metric_family": "kwh",
+      "pack_id": "P124",
+      "perturbation": "abstain",
+      "product_id": "GP02"
+    },
+    {
+      "carbon": {
+        "display": {},
+        "formula": "",
+        "missing_inputs": [
+          "gas_kwh"
+        ],
+        "status": "INSUFFICIENT_DATA"
+      },
+      "customer_id": "CUST-0002",
+      "data_freshness": "stale",
+      "evidence_features": {
+        "annual_mileage": 8000,
+        "fuel_type": "bev",
+        "has_car": true,
+        "home_owner": true,
+        "paper_statements_12m": 12,
+        "roof_suitability": "suitable"
+      },
+      "expected_status": "ABSTAIN",
+      "flags": [],
+      "metric_family": "kwh",
+      "pack_id": "P125",
+      "perturbation": "stale",
+      "product_id": "GP02"
+    },
+    {
+      "carbon": {
+        "display": {
+          "central": "36 sheets"
+        },
+        "formula": "paper statements per year x sheets per statement",
+        "missing_inputs": [],
+        "status": "ESTIMATED"
+      },
+      "customer_id": "CUST-0004",
+      "data_freshness": "fresh",
+      "evidence_features": {
+        "fuel_type": "petrol",
+        "has_car": true,
+        "home_owner": true,
+        "paper_statements_12m": 12,
+        "roof_suitability": "unknown"
+      },
+      "expected_status": "RULED_OUT",
+      "flags": [
+        "not_eligible"
+      ],
+      "metric_family": "paper",
+      "pack_id": "P126",
+      "perturbation": "ruled_out",
+      "product_id": "GP04"
+    },
+    {
+      "carbon": {
+        "display": {},
+        "formula": "",
+        "missing_inputs": [
+          "roof_suitability"
+        ],
+        "status": "INSUFFICIENT_DATA"
+      },
+      "customer_id": "CUST-0002",
+      "data_freshness": "fresh",
+      "evidence_features": {
+        "annual_mileage": 8000,
+        "fuel_type": "bev",
+        "has_car": true,
+        "home_owner": true,
+        "paper_statements_12m": 12
+      },
+      "expected_status": "ABSTAIN",
+      "flags": [
+        "critical_missing"
+      ],
+      "metric_family": "kwh",
+      "pack_id": "P127",
+      "perturbation": "abstain",
+      "product_id": "GP03"
+    },
+    {
+      "carbon": {
+        "display": {},
+        "formula": "",
+        "missing_inputs": [
+          "roof_suitability"
+        ],
+        "status": "INSUFFICIENT_DATA"
+      },
+      "customer_id": "CUST-0003",
+      "data_freshness": "fresh",
+      "evidence_features": {
+        "annual_mileage": 6000,
+        "existing_solar": true,
+        "fuel_type": "bev",
+        "gas_kwh": 9000,
+        "has_car": true,
+        "home_owner": true,
+        "paper_statements_12m": 0
+      },
+      "expected_status": "ABSTAIN",
+      "flags": [
+        "critical_missing"
+      ],
+      "metric_family": "kwh",
+      "pack_id": "P128",
+      "perturbation": "abstain",
+      "product_id": "GP03"
+    },
+    {
+      "carbon": {
+        "display": {},
+        "formula": "",
+        "missing_inputs": [
+          "gas_kwh"
+        ],
+        "status": "INSUFFICIENT_DATA"
+      },
+      "customer_id": "CUST-0006",
+      "data_freshness": "fresh",
+      "evidence_features": {
+        "annual_mileage": 9000,
+        "fuel_type": "petrol",
+        "has_car": true,
+        "home_owner": true,
+        "paper_statements_12m": 12,
+        "roof_suitability": "unknown"
+      },
+      "expected_status": "ABSTAIN",
+      "flags": [
+        "critical_missing"
+      ],
+      "metric_family": "kwh",
+      "pack_id": "P129",
+      "perturbation": "abstain",
+      "product_id": "GP02"
+    },
+    {
+      "carbon": {
+        "display": {},
+        "formula": "",
+        "missing_inputs": [
+          "annual_mileage"
+        ],
+        "status": "INSUFFICIENT_DATA"
+      },
+      "customer_id": "CUST-0002",
+      "data_freshness": "fresh",
+      "evidence_features": {
+        "fuel_type": "bev",
+        "has_car": true,
+        "home_owner": true,
+        "paper_statements_12m": 12,
+        "roof_suitability": "suitable"
+      },
+      "expected_status": "ABSTAIN",
+      "flags": [],
+      "metric_family": "co2e",
+      "pack_id": "P130",
+      "perturbation": "missing_field",
+      "product_id": "GP01"
+    }
+  ],
+  "perturbation_counts": {
+    "abstain": 22,
+    "conflict": 17,
+    "missing_field": 20,
+    "ruled_out": 21,
+    "stale": 18
+  },
+  "seed": 42,
+  "total": 130
+}

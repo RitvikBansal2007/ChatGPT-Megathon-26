@@ -1,6 +1,6 @@
-{"customer_id": "CUST-0018", "profile": {"age": 23, "income_band": "80k+", "home_owner": true}, "ground_truth_GP01": 1}
-{"customer_id": "CUST-0028", "profile": {"age": 78, "income_band": "80k+", "home_owner": true}, "ground_truth_GP01": 1}
-{"customer_id": "CUST-0085", "profile": {"age": 32, "income_band": "80k+", "home_owner": true}, "ground_truth_GP01": 1}
-{"customer_id": "CUST-0001", "profile": {"age": 48, "income_band": "80k+", "home_owner": true}, "ground_truth_GP01": 0}
-{"customer_id": "CUST-0002", "profile": {"age": 23, "income_band": "20k-40k", "home_owner": true}, "ground_truth_GP01": 0}
-{"customer_id": "CUST-0003", "profile": {"age": 63, "income_band": "40k-60k", "home_owner": true}, "ground_truth_GP01": 0}
+{"customer_id": "CUST-0018", "profile": {"age_band": "20s", "income_band": "80k+", "home_owner": true}, "ground_truth_GP01": 1}
+{"customer_id": "CUST-0025", "profile": {"age_band": "70s", "income_band": "60k-80k", "home_owner": true}, "ground_truth_GP01": 1}
+{"customer_id": "CUST-0085", "profile": {"age_band": "30s", "income_band": "80k+", "home_owner": true}, "ground_truth_GP01": 1}
+{"customer_id": "CUST-0001", "profile": {"age_band": "40s", "income_band": "80k+", "home_owner": true}, "ground_truth_GP01": 0}
+{"customer_id": "CUST-0002", "profile": {"age_band": "20s", "income_band": "20k-40k", "home_owner": true}, "ground_truth_GP01": 0}
+{"customer_id": "CUST-0003", "profile": {"age_band": "60s", "income_band": "40k-60k", "home_owner": true}, "ground_truth_GP01": 0}

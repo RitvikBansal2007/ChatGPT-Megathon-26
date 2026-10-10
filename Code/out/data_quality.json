@@ -1,0 +1,120 @@
+{
+  "all_pass": true,
+  "gates": [
+    {
+      "detail": {
+        "failures": {},
+        "tables_checked": 5
+      },
+      "gate": "Schema conformance (pandera)",
+      "result": "PASS",
+      "threshold": "100%"
+    },
+    {
+      "detail": {
+        "digital_usage": 0,
+        "energy_usage": 0,
+        "products": 0,
+        "take_up_labels": 0,
+        "transaction_labels": 0,
+        "transactions": 0,
+        "vehicles": 0
+      },
+      "gate": "Foreign-key integrity",
+      "result": "PASS",
+      "threshold": "0 orphans"
+    },
+    {
+      "detail": {
+        "take_up_GP01": {
+          "in_range": true,
+          "rate_all": 0.0514,
+          "rate_eligible": 0.0643,
+          "target": [
+            0.04,
+            0.08
+          ]
+        },
+        "take_up_GP02": {
+          "in_range": true,
+          "rate_all": 0.0342,
+          "rate_eligible": 0.0484,
+          "target": [
+            0.03,
+            0.06
+          ]
+        },
+        "take_up_GP03": {
+          "in_range": true,
+          "rate_all": 0.0284,
+          "rate_eligible": 0.0402,
+          "target": [
+            0.02,
+            0.05
+          ]
+        },
+        "take_up_GP04": {
+          "in_range": true,
+          "rate_all": 0.056,
+          "rate_eligible": 0.1835,
+          "target": [
+            0.15,
+            0.25
+          ]
+        }
+      },
+      "gate": "Take-up base rates",
+      "result": "PASS",
+      "threshold": "inside target ranges"
+    },
+    {
+      "detail": {
+        "max_single_feature_auc": {
+          "take_up_GP01": 0.7,
+          "take_up_GP02": 0.7156,
+          "take_up_GP03": 0.6906,
+          "take_up_GP04": 0.5604
+        }
+      },
+      "gate": "Single-feature AUC",
+      "result": "PASS",
+      "threshold": "< 0.80"
+    },
+    {
+      "detail": {
+        "facts": {
+          "CUST-0001_petrol_8y": true,
+          "CUST-0002_bev_record": true,
+          "CUST-0003_bev_solar_paperless": true,
+          "CUST-0004_short_history_paper": true,
+          "CUST-0005_homeowner_epc_D": true,
+          "CUST-0006_roof_unknown": true,
+          "CUST-0007_renter_paper": true,
+          "CUST-0008_accessibility": true
+        },
+        "raw_signal_facts_matched": "8 of 8"
+      },
+      "gate": "Persona raw-signal facts",
+      "result": "PASS",
+      "threshold": "8 of 8"
+    },
+    {
+      "detail": {
+        "differing_files": [],
+        "files": 10,
+        "manifest_sha256": "ec780082c8846807a67eca56482c47bc67f4596df6c13f75454819ad8f6b8c5e"
+      },
+      "gate": "Same seed, two runs",
+      "result": "PASS",
+      "threshold": "identical sha256"
+    },
+    {
+      "detail": {
+        "hits": 0
+      },
+      "gate": "PII scan on public data",
+      "result": "PASS",
+      "threshold": "0 hits"
+    }
+  ]
+}
