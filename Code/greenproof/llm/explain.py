@@ -7,11 +7,11 @@ from greenproof.llm.templates import get_template
 # Kratik's security modules - wrapped in try/except so it doesn't break until he merges his branch
 try:
     # pyrefly: ignore [missing-import]
-    from greenproof.llm.minimise import minimise
+    from greendash.llm.minimise import minimise
     # pyrefly: ignore [missing-import]
-    from greenproof.llm.guard import pre_check, post_check
+    from greendash.llm.guard import pre_check, post_check
     # pyrefly: ignore [missing-import]
-    from greenproof.llm.claimcheck import check
+    from greendash.llm.claimcheck import check
 except ImportError:
     # Fail-closed safe fallbacks: if security modules fail to load, ALWAYS reject LLM usage.
     def minimise(pack): return pack
