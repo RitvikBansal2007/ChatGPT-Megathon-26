@@ -46,10 +46,10 @@ def estimate(features: dict, product_id: str, factors: dict, assumptions: dict =
     assumptions = assumptions if assumptions is not None else load_assumptions()
 
     if product_id == "GP01":
-        if not features.get("has_car"):
-            return CarbonEstimate(status="NOT_APPLICABLE")
         if features.get("annual_mileage") is None:
             return CarbonEstimate(status="INSUFFICIENT_DATA", missing_inputs=["annual_mileage"])
+        if features.get("annual_mileage", 0) <= 0 and features.get("fuel_spend_last_6m", 0) <= 0:
+            return CarbonEstimate(status="NOT_APPLICABLE")
         if features.get("fuel_type") == "bev":
             return CarbonEstimate(status="NOT_APPLICABLE")
         ice_key = "car_diesel_average" if features.get("fuel_type") == "diesel" else "car_petrol_average"
