@@ -1,5 +1,5 @@
 # GreenDash — G3 (Ritvik) Context Memory
-<!-- AUTO-UPDATED by agent. Last update: 2026-10-11 (state as of `1319866`; Madhav status + G2↔G3 integration review added) -->
+<!-- AUTO-UPDATED by agent. Last update: 2026-10-11 (state as of `a3fa7ad`; Madhav status + G2↔G3 integration review added) -->
 
 > **Project renamed:** `greenproof` → `greendash` (by teammates, commit `96ca5fb`)
 > Repo: https://github.com/IIIT-ECell/megathon26-chatgpt  
@@ -75,7 +75,7 @@
 
 ---
 
-## 🧪 ML / LLM STATUS (Madhav, G2-M) — reviewed read-only at `1319866`
+## 🧪 ML / LLM STATUS (Madhav, G2-M) — reviewed read-only at `a3fa7ad`
 
 Madhav says his deliverables are "locked in". What the repo shows:
 
@@ -83,8 +83,8 @@ Madhav says his deliverables are "locked in". What the repo shows:
 |---|---|
 | 4 LightGBM models | ✅ `data/models/take_up_GP0{1-4}_lgb.skops` + `hashes.json` |
 | `out/run_manifest.json` | ✅ Committed (`9bab839`). Hash `sha256:bbbea75f…0887`, computed on `6af7a2a`, 21 artefacts |
-| Manifest reproducibility | 🔴 9 of 21 hashed files are not in the repo (`out/models/GP0x.txt`, `GP0x_iso.json`, `out/test_predictions.csv`). The hash covers `out/models/*.txt`, but `score.py` loads `data/models/*.skops` — different files |
-| `docs/EVALUATION.md` | 🔴 **Do not use for slides.** Brier values 0.045/0.080/0.120 are hard-coded defaults in `eval/report.py` (keys `T1/T2/T3` don't exist in `confidence_validation.json`); SHAP plot is a hard-coded dummy; "100 packs" is hard-coded, real n = 2 (`judge.py` slices `[:2]`). No AUC, baselines, scenario or F1 numbers |
+| Manifest reproducibility | 🔴 `out/models/*` now committed (`a3fa7ad`) and match, but `out/test_predictions.csv` is still missing and `config/settings.py` changed in `1319866`, so the hash **no longer matches `main`**. Hash covers `out/models/*.txt`; `score.py` loads `data/models/*.skops` — different files. `out/models/GP01_iso.json` is a 3-point placeholder calibrator |
+| `docs/EVALUATION.md` | 🔴 **Do not use for slides — circular.** Since `a3fa7ad`, `eval/report.py` generates it by reading `fixtures/eval.json`, i.e. G3's own invented placeholders (AUC 0.847 etc., F1 0.891, 28/30 scenarios, LLM 97%). None of it is measured. "100 mocked packs" is hard-coded; real judged n = 2 |
 | Real metrics | ⚠️ `evaluate_models.py` computes ROC-AUC/Brier/ECE/lift but only prints them — nothing is saved |
 | `fixtures/eval.json` | 🔴 G3 placeholder numbers (invented in `1d1fc0d`). `/api/eval/summary` now just returns this file (`aafd480`), so Receipts shows invented numbers in **every** mode until real ones replace it |
 | LLM explainer on `main` | 🔴 Never runs: `minimise.py` + `guard.py` still missing (deleted by `96ca5fb`) → fail-closed fallback rejects every call → always template |
