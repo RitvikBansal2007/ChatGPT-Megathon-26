@@ -60,7 +60,7 @@
 |---|---|
 | `greendash/contracts.py` | ✅ **Frozen** — `frozen=True` all models |
 | `api/main.py` + `api/routers/` | 🔴 **Still cannot start from `main`** (checked at `cd3ba7d`): `greendash/llm/claimcheck.py` is missing, and `greendash/contracts.py` has no `CustomerPacks` (it is `CustomerOpportunities`) though `api/services.py` + `api/routers/opportunities.py` import it |
-| Files deleted by rename commit `96ca5fb` | 🔴 20 files under `greendash/` deleted and still missing: `llm/` (7, incl. G1-K's `claimcheck.py`, `gateway.py`, `guard.py`), `carbon/` (4, incl. `engine.py`), `generator/` (8), `greendash/__init__.py`. Recoverable from `96ca5fb^` or `origin/g1-kratik/claimcheck` |
+| Files deleted by rename commit `96ca5fb` | 🔴 20 files under `greendash/` deleted and still missing: `llm/` (7, incl. G1-K's `claimcheck.py`, `gateway.py`, `guard.py`), `carbon/` (4, incl. `engine.py`), `generator/` (8), `greendash/__init__.py`. Recoverable from `96ca5fb^` or `origin/the G1-K claimcheck branch` |
 | First-request failures (from reading the code) | 🔴 `settings.ENV` / `settings.DEMO_MODE` don't exist in `config/settings.py` (only `demo_mode`); `issue_token()` takes 1 arg but `auth.py` passes 2; `scenario.py` reads `principal.role` but `require_role` returns a dict |
 | `api/deps.py` + `greendash/security/authz.py` | ⚠️ Pushed (`d74e266`) but **stubs**: `require_role` ignores the token, `require_subject` is empty — no real auth. Don't expose port 8000 (`--host 0.0.0.0`) on a shared network |
 | Portfolio/eval shapes | ⚠️ `aafd480` says `/api/portfolio/summary` + `/api/eval/summary` now match the UI fixtures (`metrics` / `baselines`) — **unverified**, needs a running API |
@@ -186,5 +186,5 @@ MEMORY.md                        ✅ (this file)
 | Who | Ask |
 |---|---|
 | **G2-An** (now also covering G1-A's G1-A work) | Restore the 20 files deleted by `96ca5fb`; fix `CustomerPacks` import, settings `ENV`/`DEMO_MODE`, `issue_token` call, `principal.role`; real `api/deps.py`; then send LAN IP for CP2 |
-| **G1-K (G1-K)** | Caddy CSP (`font-src 'self'`, `frame-ancestors 'none'`); proxy Streamlit only, not port 8000; keep branch `g1-kratik/claimcheck` until Claim-Check is restored on main |
+| **G1-K** | Caddy CSP (`font-src 'self'`, `frame-ancestors 'none'`); proxy Streamlit only, not port 8000; keep branch the G1-K claimcheck branch until Claim-Check is restored on main |
 | **G2-M** | `docs/EVALUATION.md` exists but lacks slide-6 numbers: AUC per product, LR + heuristic baselines, scenario pass/fail, categoriser macro-F1; also clarify LLM eval count ("100 mocked, 2 processed") |
