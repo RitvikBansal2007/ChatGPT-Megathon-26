@@ -1,5 +1,4 @@
-# Megathon X: Singularity
-## Project GreenProof
+# Megathon 2026 · Project GreenProof
 
 ### Setup Instructions
 1. Run `pip install -r requirements.txt` (or use your preferred package manager).
