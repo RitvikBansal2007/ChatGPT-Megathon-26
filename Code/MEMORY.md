@@ -1,12 +1,13 @@
 # GreenDash — G3 Context Memory
-<!-- AUTO-UPDATED by agent. Last update: 2026-10-11 ~04:00 IST (final status at break; `main` at `8fa8033`) -->
+<!-- AUTO-UPDATED by agent. Last update: 2026-10-11 ~04:50 IST (names replaced by role codes; full audit in untracked team/) -->
 
 > **Project renamed:** `greenproof` → `greendash` (by teammates, commit `96ca5fb`)
 > Repo: https://github.com/<org>/megathon26-chatgpt  
 > Branch: `main` (backend state checked at `8fa8033`, after PR #3 merge) · Root: `megathon26-chatgpt/Code/`
 > G3 owns: `app/`, `mobile/`, `slides/`, `docs/diagrams/`, `README.md`, `MEMORY.md`  
 > **NEVER TOUCH:** `greendash/`, `api/`, `data/`, `config/`, `eval/`, `tests/`
-> **Backend owner: G2-An** — as of 2026-10-11 G2-An has taken over all of G1-A's (G1-A) work. Send every backend/API ask to G2-An, not G1-A.
+> **Role codes (no names in tracked files — `tests/unit/test_privacy.py` enforces it):** G1-K security · G1-A slides/pitch/demo (from 04:45) · G2-An backend/API/data pipeline · G2-M models/eval · G3 integration + UI/UX. Per-person work files live in the untracked `team/` folder — never commit it.
+> **Backend owner: G2-An** — as of 2026-10-11 G2-An has taken over all of G1-A's backend work. Send every backend/API ask to G2-An, not G1-A.
 
 ---
 
@@ -14,37 +15,37 @@
 
 **Demo-ready today:** web app in `DEMO_MODE=fixtures`. **Not ready:** live mode (4 of 6 API calls fail), real metrics, final manifest, auth.
 
-Team roles as stated by Kratik: Aniket coordinates backend, Madhav scoring/model fixes, Ritvik live UI/API integration + final manifest run, Kratik security. **Slides are now Akshit's, not G3's** (Ritvik, 04:00). PR #2 and PR #3 (Kratik's production explainer + Claim-Check integration) are merged; PR #3 not yet exercised end to end by G3 (needs an LLM key).
+Team roles as stated by G1-K: G2-An coordinates backend, G2-M scoring/model fixes, G3 live UI/API integration + final manifest run, G1-K security. **Slides are now G1-A's, not G3's** (G3, 04:00). PR #2 and PR #3 (G1-K's production explainer + Claim-Check integration) are merged; PR #3 not yet exercised end to end by G3 (needs an LLM key).
 
-Team rules (Kratik): focused fixes, no overlapping edits, share commit SHAs + concrete test results, one final integrated `main` and one final manifest.
+Team rules (G1-K): focused fixes, no overlapping edits, share commit SHAs + concrete test results, one final integrated `main` and one final manifest.
 
-### To do — Ritvik (G3)
-1. Focused Step 3.5 re-test when Aniket's fixes land: startup/health/token, opportunities, claimcheck, portfolio, `SET_VEHICLE_BEV`, role-gated screens. Report only remaining failures with exact errors.
-2. Final manifest (Kratik's request): on the agreed final `main`, run `make all`, regenerate + commit `out/run_manifest.json`, confirm model hashes match files, send Kratik (a) manifest SHA-256, (b) its recorded `git_sha`, (c) commit containing it. Blocked until `make all` works.
-3. "Illustrative figures" label on `app/pages/3_Receipts.py`; give Akshit the same wording for slide 6.
+### To do — G3
+1. Focused Step 3.5 re-test when G2-An's fixes land: startup/health/token, opportunities, claimcheck, portfolio, `SET_VEHICLE_BEV`, role-gated screens. Report only remaining failures with exact errors.
+2. Final manifest (G1-K's request): on the agreed final `main`, run `make all`, regenerate + commit `out/run_manifest.json`, confirm model hashes match files, send G1-K (a) manifest SHA-256, (b) its recorded `git_sha`, (c) commit containing it. Blocked until `make all` works.
+3. "Illustrative figures" label on `app/pages/3_Receipts.py`; give G1-A the same wording for slide 6.
 4. Rehearse demo script in fixtures mode; backup video.
-5. Hand Akshit the slide inputs (screenshots in `docs/design/`, diagrams in `docs/diagrams/`, `app/theme.py` colours).
+5. Hand G1-A the slide inputs (screenshots in `docs/design/`, diagrams in `docs/diagrams/`, `app/theme.py` colours).
 6. Optional: brand clean-up; settle failing smoke test `test_all_five_statuses_covered`.
 
-### To do — Aniket (backend coordinator)
+### To do — G2-An (backend coordinator)
 1. `api/services.py:19` — build `CustomerOpportunities` with `model_validate_json` / non-strict (opportunities + claimcheck).
 2. `energy.parquet` vs `energy_usage.parquet` (scenario, `make features`, portfolio's `audit_attrs.parquet`); string-vs-timestamp in `greendash/features/build.py:18`.
 3. `make data` entry point; generator overwriting tracked `data/raw/*.csv`.
 4. Remove or disclose the Priya override (`greendash/models/score.py:32-33`, propensity forced to 0.95).
 5. Test from a fresh clone before reporting fixed.
 
-### To do — Madhav (scoring/model)
+### To do — G2-M (scoring/model)
 1. Per-product recommend thresholds — 0.5 is unreachable (best real propensity 0.417; take-up base rates 3–6%).
 2. Regenerate `data/splits/splits.json` (0 bytes) and produce measured eval numbers.
 3. Real confidence parts and reason codes in `score()` (currently 0.8 and `[]`).
 
-### To do — Kratik (security)
+### To do — G1-K (security)
 1. Decide owner for real token validation in `api/deps.py` (no check today) and land it.
 2. Caddy + CSP; proxy Streamlit only, never port 8000.
 3. Final hash into README + submission form after G3 confirms the three values.
 
-### To do — Akshit
-1. 8-slide deck → `slides/`. Slide 6 numbers are illustrative unless Madhav delivers measured ones.
+### To do — G1-A
+1. 8-slide deck → `slides/`. Slide 6 numbers are illustrative unless G2-M delivers measured ones.
 
 ### Open decisions
 - Cut-off time after which the demo is fixtures-only.
@@ -81,7 +82,7 @@ Team rules (Kratik): focused fixes, no overlapping edits, share commit SHAs + co
 - `mobile/README.md` — Expo production spec, 8 screens, auth+security
 
 ### Contract alignment (`076bed7`)
-- Adopted G1-A's frozen `greendash/contracts.py` + 7 fixture files from `the G2-An feature-pipeline branch`
+- Adopted G1-A's frozen `greendash/contracts.py` + 7 fixture files from G2-An's `feature-pipeline` branch
 - All field names updated across all 6 component files and `client.py`
 - Key changes: `opportunity_id`, `opportunity_name`, `next_action`, `eligibility.result=ELIGIBLE`,
   `plain_reasons[]`, `impact.low/central/high`, `violations[].rule`, `diff[].from`
@@ -158,7 +159,7 @@ Decide: one card per product (fix the test) or all five statuses (fix the de-dup
 - `app/pages/3_Receipts.py`: add a visible "Illustrative figures — not measured results" note (icon + text)
 - Slide 6: same label; do not present AUC/F1/scenario numbers as results
 
-### Step 5 — Slides — **now owned by Akshit** (prompt below kept for him)
+### Step 5 — Slides — **now owned by G1-A** (prompt below kept for him)
 **Files ready to upload right now:**
 - `docs/design/proof_card.png`
 - `docs/design/cockpit.png`
@@ -233,7 +234,7 @@ fixtures/
 docs/design/                     ✅ proof_card.png + cockpit.png
 docs/diagrams/                   ✅ 4× .mmd + 4× .png (2400px, brand colours)
 mobile/README.md                 ✅ Expo production spec (8 screens)
-slides/                          🔴 Step 5 — Akshit
+slides/                          🔴 Step 5 — G1-A
 MEMORY.md                        ✅ (this file)
 ```
 
