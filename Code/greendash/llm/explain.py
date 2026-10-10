@@ -116,13 +116,15 @@ def load_llm_config(path: Optional[str] = None) -> Dict[str, Any]:
 
 # ---- deterministic templates ---------------------------------------------------
 # Orchestrator display status (or eligibility verdict) -> templates.py status key.
+# templates.py has a template per display status (RECOMMEND, SOFT_SURFACE, ABSTAIN,
+# REVIEW, RULED_OUT); eligibility verdicts map onto the nearest existing template.
 # Unknown or missing statuses use PENDING, the one template that claims nothing.
 _TEMPLATE_STATUS = {
     "RECOMMEND": "RECOMMEND",
-    "SOFT_SURFACE": "PENDING",
-    "REVIEW": "PENDING",
-    "ABSTAIN": "PENDING",
-    "RULED_OUT": "INELIGIBLE",
+    "SOFT_SURFACE": "SOFT_SURFACE",
+    "REVIEW": "REVIEW",
+    "ABSTAIN": "ABSTAIN",
+    "RULED_OUT": "RULED_OUT",
     "NOT_ELIGIBLE": "INELIGIBLE",
     "ELIGIBLE": "ELIGIBLE",
     "NEEDS_VERIFICATION": "PENDING",

@@ -205,8 +205,11 @@ def test_provider_error_falls_back_with_template():
 
 
 @pytest.mark.parametrize("product,status,key", [
-    ("GP02", "RULED_OUT", "INELIGIBLE"),
-    ("GP03", "REVIEW", "PENDING"),
+    ("GP02", "RULED_OUT", "RULED_OUT"),
+    ("GP03", "REVIEW", "REVIEW"),
+    ("GP04", "SOFT_SURFACE", "SOFT_SURFACE"),
+    ("GP01", "ABSTAIN", "ABSTAIN"),
+    ("GP03", "NOT_ELIGIBLE", "INELIGIBLE"),
     ("GP04", "RECOMMEND", "RECOMMEND"),    # GP04's RECOMMEND text has no placeholder
     ("GP01", "ELIGIBLE", "ELIGIBLE"),
 ])
