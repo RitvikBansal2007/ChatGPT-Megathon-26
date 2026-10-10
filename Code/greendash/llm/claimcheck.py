@@ -12,12 +12,19 @@ wrote and compares it with facts the engines already produced. It is determinist
 - BAN:   no phrase from the banned list (credit-decision wording, certainty claims,
          vague green claims) may appear.
 
+All three rules compare against a normalised form of the sentence (textnorm.py:
+NFKC, case folding, a small table of Cyrillic/Greek lookalike letters, no combining
+or invisible marks). The sentence itself is never changed or returned; the
+Violation.text field shows the matched text in that normalised form.
+
 Not implemented yet: VERDICT, METRIC, PRODUCT, IMPLIED.
 """
 import re
 from dataclasses import dataclass
 from decimal import Decimal
 from typing import Dict, Iterable, List, Sequence
+
+from greendash.llm.textnorm import normalise
 
 # Rule IDs, in the order violations are reported.
 NUM, FIELD, BAN = "NUM", "FIELD", "BAN"
@@ -56,9 +63,13 @@ _FIELD_PATH = re.compile(r"(?<![\w.])([a-z_][a-z_0-9]*(?:\.[a-z_0-9]+)+)(?!\w)")
 
 
 def _numbers_in(text: str) -> Dict[str, str]:
-    """Map normalised value -> first raw text, for every number in text."""
+    """Map normalised value -> first matched text, for every number in text.
+
+    Matching runs on the normalised form of the text (see textnorm.py), so fullwidth
+    digits and commas are read as ordinary ones. The caller's text is not changed.
+    """
     found: Dict[str, str] = {}
-    for m in _NUMBER.finditer(text or ""):
+    for m in _NUMBER.finditer(normalise(text or "")):
         whole, frac, unit = m.group(1), m.group(2), m.group(3)
         value = Decimal(whole.replace(",", "") + (frac or ""))
         if unit:
@@ -93,7 +104,7 @@ def _check_fields(sentence: str, allowed_fields: Iterable[str],
 
     for field in cited_fields:
         flag(field, "cited field is not in the evidence pack")
-    for m in _FIELD_PATH.finditer(sentence or ""):
+    for m in _FIELD_PATH.finditer(normalise(sentence or "")):
         path = m.group(1)
         # Treat as a field reference only if it starts with a known root or has an
         # underscore, so abbreviations such as "e.g." are not mistaken for fields.
@@ -102,15 +113,22 @@ def _check_fields(sentence: str, allowed_fields: Iterable[str],
     return out
 
 
+# Separator between the words of a phrase: hyphens (ASCII and U+2010..U+2015) or spaces.
+_SEPARATOR = "[-" + chr(0x2010) + "-" + chr(0x2015) + r"\s]*"
+
+
 def _phrase_pattern(phrase: str) -> "re.Pattern[str]":
-    tokens = [re.escape(t) for t in re.split(r"[-\s]+", phrase.strip().lower()) if t]
-    return re.compile(r"\b" + r"[-‐-―\s]*".join(tokens) + r"\b", re.IGNORECASE)
+    # The phrase goes through the same normalisation as the sentence, so a banned
+    # phrase written with lookalike letters in the list still matches.
+    tokens = [re.escape(t) for t in re.split(r"[-\s]+", normalise(phrase.strip())) if t]
+    return re.compile(r"\b" + _SEPARATOR.join(tokens) + r"\b", re.IGNORECASE)
 
 
 def _check_banned(sentence: str, banned_phrases: Sequence[str]) -> List[Violation]:
     hits = []
+    normalised = normalise(sentence or "")
     for phrase in banned_phrases:
-        for m in _phrase_pattern(phrase).finditer(sentence or ""):
+        for m in _phrase_pattern(phrase).finditer(normalised):
             hits.append((m.start(), m.end(), m.group(0), phrase))
     # Longest match wins, and a span is reported once: "pre-approved" is one hit,
     # not two (it would otherwise also match "approved").

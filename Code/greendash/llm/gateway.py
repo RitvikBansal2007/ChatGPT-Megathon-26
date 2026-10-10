@@ -20,12 +20,14 @@ Scope notes:
 import json
 import logging
 import re
-import secrets
 from dataclasses import dataclass
 from typing import Any, Callable, Dict, List, Optional, Protocol, Sequence, Set, Tuple
 
 from greendash.llm.claimcheck import check_sentence
-from greendash.llm.guard import OUTPUT_SCHEMA_EXAMPLE, GuardRejection, guard_post, guard_pre
+from greendash.llm.guard import (  # noqa: F401  (generate_canary, CanaryError re-exported)
+    MIN_CANARY_CHARS, OUTPUT_SCHEMA_EXAMPLE, CanaryError, GuardRejection, generate_canary,
+    guard_post, guard_pre, validate_canary,
+)
 from greendash.llm.minimise import minimise
 
 log = logging.getLogger("greendash.llm.gateway")
@@ -183,7 +185,10 @@ class LLMGateway:
         self._provider = provider
         self._claim_checker = claim_checker
         self._custom_fallback = fallback
-        self._canary = canary or "CANARY-" + secrets.token_hex(8)
+        # Fail at construction, before any provider request is possible. A missing,
+        # empty, short or otherwise invalid canary raises CanaryError. It is never
+        # replaced or repaired; pass canary=generate_canary() to ask for a random one.
+        self._canary = validate_canary(canary)
         template = system_prompt if system_prompt is not None else DEFAULT_SYSTEM_PROMPT
         validate_system_prompt(template)
         self._system = template.replace("{canary}", self._canary)

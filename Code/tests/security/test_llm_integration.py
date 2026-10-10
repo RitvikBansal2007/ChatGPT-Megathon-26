@@ -129,8 +129,10 @@ def test_default_prompt_never_asks_for_the_canary():
 def test_prompts_that_conflict_with_the_gateway_are_refused_at_construction(template):
     with pytest.raises(ValueError):
         validate_system_prompt(template)
+    # A valid canary is supplied so the refusal below is about the prompt, not the canary.
     with pytest.raises(ValueError):
-        LLMGateway(GeminiProvider(lambda: FakeClient(), model_id="m"), system_prompt=template)
+        LLMGateway(GeminiProvider(lambda: FakeClient(), model_id="m"), system_prompt=template,
+                   canary=CANARY)
 
 
 def test_a_negated_canary_instruction_is_allowed():

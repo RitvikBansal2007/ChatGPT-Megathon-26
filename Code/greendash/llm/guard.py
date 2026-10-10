@@ -16,10 +16,12 @@ engine-produced fields are ever sent (see minimise.py).
 import json
 import math
 import re
+import secrets
 import unicodedata
 from typing import Any, List, Mapping, Tuple
 
 from greendash.carbon.units import SAFE as DISPLAY_SAFE
+from greendash.llm.textnorm import normalise as normalise_text
 from security.privacy import find_pii
 
 # Size and shape limits.
@@ -57,6 +59,75 @@ class GuardRejection(Exception):
         self.code = code
 
 
+# ---- canary ---------------------------------------------------------------
+# The canary is a secret token planted in the system prompt. If it ever shows up in
+# a reply, the prompt has leaked. A weak canary is worse than none: a one-letter
+# canary matches almost every reply (blocking all output) and protects nothing.
+#
+# A canary is measured two ways, and must pass both:
+#   - raw length: len(canary) in Unicode code points, as supplied;
+#   - effective length: length of its comparison form (normalised, letters and
+#     digits only: see canary_form), which is the form actually matched against replies.
+MIN_CANARY_CHARS = 16
+MIN_CANARY_DISTINCT = 6   # distinct characters in the comparison form
+
+CANARY_MISSING = "CANARY_MISSING"
+CANARY_TOO_SHORT = "CANARY_TOO_SHORT"
+CANARY_INVALID = "CANARY_INVALID"
+
+
+class CanaryError(ValueError):
+    """The canary configuration is unusable. Message is a fixed code, never the canary."""
+
+    def __init__(self, code: str):
+        super().__init__(code)
+        self.code = code
+
+
+def canary_form(text: str) -> str:
+    """The form in which canaries and replies are compared.
+
+    Normalised (see textnorm.py), then reduced to letters and digits only, so that
+    changing the separators in a leaked canary ("-" to "_" or a space, say) cannot
+    hide it. Letters from any script are kept; punctuation and whitespace are not.
+    """
+    return re.sub(r"[\W_]+", "", normalise_text(text))
+
+
+def validate_canary(canary: Any) -> str:
+    """Return the canary unchanged if it is usable, otherwise raise CanaryError.
+
+    Never repairs, pads, trims or replaces a bad value.
+    """
+    if canary is None:
+        raise CanaryError(CANARY_MISSING)
+    if not isinstance(canary, str):
+        raise CanaryError(CANARY_INVALID)
+    if not canary.strip():
+        raise CanaryError(CANARY_MISSING)
+    if any(ch.isspace() for ch in canary) or _has_hidden_chars(canary):
+        raise CanaryError(CANARY_INVALID)
+    if len(canary) < MIN_CANARY_CHARS:
+        raise CanaryError(CANARY_TOO_SHORT)
+    form = canary_form(canary)
+    if len(form) < MIN_CANARY_CHARS:
+        raise CanaryError(CANARY_TOO_SHORT)
+    if len(set(form)) < MIN_CANARY_DISTINCT:
+        raise CanaryError(CANARY_INVALID)
+    return canary
+
+
+def generate_canary() -> str:
+    """A fresh random canary (128 bits). Call this explicitly; nothing does it silently."""
+    for _ in range(8):
+        candidate = "CANARY-" + secrets.token_hex(16)
+        try:
+            return validate_canary(candidate)
+        except CanaryError:
+            continue
+    raise CanaryError(CANARY_INVALID)  # unreachable in practice
+
+
 # A string value may only use plain letters, digits and light punctuation. This
 # excludes quotes, angle brackets, braces, backticks and newlines, so a value cannot
 # break out of the <evidence_pack> delimiter or the JSON around it.
@@ -86,8 +157,9 @@ _INJECTION = [re.compile(p) for p in (
 
 
 def _normalise(text: str) -> str:
-    text = unicodedata.normalize("NFKC", text).lower()
-    return re.sub(r"[\s_]+", " ", text)
+    # Shared security normalisation (NFKC, confusable folding, case folding, no
+    # combining or invisible marks), then whitespace and underscores collapsed.
+    return re.sub(r"[\s_]+", " ", normalise_text(text))
 
 
 def _has_hidden_chars(text: str) -> bool:
@@ -154,11 +226,12 @@ def guard_post(raw: Any, *, canary: str) -> List[Tuple[str, Tuple[str, ...]]]:
     with no other keys, within the size limits, free of PII, URLs, markup and the
     canary token.
     """
+    validate_canary(canary)   # raises CanaryError; checking is never silently skipped
     if not isinstance(raw, str) or len(raw) > MAX_RAW_OUTPUT_CHARS:
         raise GuardRejection(OUTPUT_SCHEMA)
-    # Compare canary and text in the same normalised form (lower case, no spaces).
-    needle = _normalise(canary).replace(" ", "") if canary else ""
-    if needle and needle in _normalise(raw).replace(" ", ""):
+    # Compare canary and text in the same normalised form.
+    needle = canary_form(canary)
+    if needle in canary_form(raw):
         raise GuardRejection(OUTPUT_CANARY)
 
     try:
@@ -184,7 +257,7 @@ def guard_post(raw: Any, *, canary: str) -> List[Tuple[str, Tuple[str, ...]]]:
         if _has_hidden_chars(text) or re.search(r"[<>{}`]|https?:|www\.|\]\(", text, re.I):
             raise GuardRejection(OUTPUT_UNSAFE)
         # Re-check the decoded text: JSON escapes can hide a canary from the raw scan.
-        if needle and needle in _normalise(text).replace(" ", ""):
+        if needle in canary_form(text):
             raise GuardRejection(OUTPUT_CANARY)
         if find_pii(text):
             raise GuardRejection(OUTPUT_PII)
