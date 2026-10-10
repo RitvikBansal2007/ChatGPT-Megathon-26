@@ -1,5 +1,5 @@
 # GreenDash — G3 (Ritvik) Context Memory
-<!-- AUTO-UPDATED by agent. Last update: 2026-10-11 (second CP2 run, local API at `f93f8ff`) -->
+<!-- AUTO-UPDATED by agent. Last update: 2026-10-11 (review of `03b5368`; slide 6 + Receipts to be labelled illustrative) -->
 
 > **Project renamed:** `greenproof` → `greendash` (by teammates, commit `96ca5fb`)
 > Repo: https://github.com/IIIT-ECell/megathon26-chatgpt  
@@ -58,10 +58,10 @@
 
 | Module | State |
 |---|---|
-| `greendash/contracts.py` | ✅ **Frozen** — `frozen=True` all models |
+| `greendash/contracts.py` | ✅ `\d{4}` regex restored |
 | `api/main.py` + `api/routers/` | ✅ **Starts from `main`** at `cb2173d` (`ENV=demo uvicorn api.main:app`), `/healthz` OK |
 | **CP2 result, run 2 (client.py live mode vs local API at `f93f8ff`, all 6 roles)** | ⚠️ Still 2 of 6: `demo-token` ✅ (no `ENV` needed now), eval ✅. All others **500**: opportunities + claimcheck — `api/services.py` builds `CustomerOpportunities` without required `cutoff_date`, `outcome_window_days`, `run_manifest`; scenario — `data/raw/customers.parquet` not in repo (422 enum issue is fixed); portfolio — `data/features/audit_attrs.parquet` not in repo. 500 bodies leak paths and validation dumps |
-| Building packs | ⚠️ `python -m greendash.packs` now runs (20,000 packs, `out/packs/` is gitignored so each machine must generate). But every pack has propensity 0.5 / MEDIUM because of the model hash mismatch (20,000 "Scoring error" lines) → **zero RECOMMEND and zero REVIEW**; Priya (CUST-0001) GP01 comes out SOFT_SURFACE. The demo script's RECOMMEND card cannot appear in live mode |
+| Building packs | 🔴 Crashes at `03b5368` on a clean install (skops `trusted=True`, see ML status). Packs from the earlier run are stale (all propensity 0.5, no RECOMMEND) |
 | Files deleted by rename commit `96ca5fb` | ✅ All 20 restored in `cb2173d` (real `claimcheck.py` 177 lines, `carbon/engine.py` 109 lines) |
 | `api/deps.py` + `greendash/security/authz.py` | ⚠️ Still no real auth: `/api/eval/summary` returns 200 **with no token**. Aniket says Kratik ships real verification in his Production PR |
 | Portfolio/eval shapes | ⚠️ `aafd480` says `/api/portfolio/summary` + `/api/eval/summary` now match the UI fixtures (`metrics` / `baselines`) — **unverified**, needs a running API |
@@ -76,25 +76,25 @@
 
 ---
 
-## 🧪 ML / LLM STATUS (Madhav, G2-M) — re-reviewed read-only at `6c41d76` (his "all resolved" commit)
+## 🧪 ML / LLM STATUS (Madhav, G2-M) — re-reviewed read-only at `03b5368`
 
 Madhav says his deliverables are "locked in". What the repo shows:
 
 | Item | State |
 |---|---|
-| 4 LightGBM models | 🔴 **Scoring is broken on `main`:** all 4 `data/models/*.skops` fail their own check against `data/models/hashes.json` ("Hash mismatch… Model compromised"). `score()` catches it and silently returns propensity 0.5 / MEDIUM / confidence 0.5 / no reasons for every customer and product (ran it on real feature rows) |
-| `out/run_manifest.json` | ⚠️ **Hash changed** — now `sha256:b637cab2…6734`, built on `a3fa7ad`, 23 artefacts (now covers `data/models` + `data/calibration`). The old `bbbea75f…` hash sent to Kratik is obsolete |
-| Manifest reproducibility | ⚠️ All 23 files present; `config/settings.py` still differs from the manifest (changed after it was built) |
-| `docs/EVALUATION.md` | 🔴 **Still not measured.** Generated from `fixtures/eval.json` (G3's invented placeholders). Madhav's "fix" was copying the fixture to `out/eval_summary.json`, which is gitignored (not in repo) and unused — the API still reads `fixtures/eval.json`. Real judged LLM n = 2 |
+| 4 LightGBM models | 🔴 `hashes.json` now matches all 4 models (`1f1c904`), but **scoring still fails on a clean install**: `score.py` calls `sio.load(..., trusted=True)`, which skops ≥ 0.10 rejects with `TypeError` (pyproject has `skops` unpinned → 0.16). `score()` now re-raises, so `python -m greendash.packs` crashes instead of writing 0.5s. Fix: `trusted=sio.get_untrusted_types(file=model_path)` after the hash check. Works on Madhav's machine only because his skops is older |
+| `out/run_manifest.json` | ✅ Hash is now `sha256:352a8385…a9f548`, built on `6c41d76`, 23 artefacts; all 23 present and matching on `main` at `03b5368`. Earlier hashes (`bbbea75f…`, `b637cab2…`) are dead. Will change again if models/config/prompts change |
+| Manifest reproducibility | ✅ Verified locally (non-parquet files re-hashed) |
+| `docs/EVALUATION.md` | 🔴 **Not measured, and won't be.** Team confirmed real eval can't run: `data/splits/splits.json` is 0 bytes. **Agreed fallback: label slide 6 and the Receipts page "illustrative".** Numbers come from `fixtures/eval.json` (G3 placeholders) |
 | Real metrics | ⚠️ `evaluate_models.py` computes ROC-AUC/Brier/ECE/lift but only prints them — nothing is saved |
 | `fixtures/eval.json` | 🔴 G3 placeholder numbers (invented in `1d1fc0d`). `/api/eval/summary` now just returns this file (`aafd480`), so Receipts shows invented numbers in **every** mode until real ones replace it |
 | LLM explainer on `main` | ⚠️ Security modules restored in `cb2173d`; not re-tested end to end (needs an LLM key) |
-| Explainer output shape | ⚠️ Fallback path now contract-shaped (`sentences[{text, fields, check: TEMPLATE}]`, `FALLBACK`). LLM path wraps `str(parsed)` — the raw dict incl. the canary token — into one sentence, so a successful LLM call would print a Python dict on the card |
-| Fallback template | ⚠️ Now keyed on `opportunity_id` + real status, wording neutralised. Still prints literal `£[FUEL_SPEND]` / `[GAS_KWH] kWh` placeholders (no context passed) |
-| Scores / reasons / confidence | 🔴 `score()` returns a contract-shaped `PropensityVerdict`, but confidence is hard-coded 0.8 and the reason code is hard-coded `HIGH_FUEL_SPEND £100` for every customer and product (incl. Paperless). `reasons.py` still only covers 5 test customers and isn't called by `score()`. Bands hard-coded 0.7/0.4, not from `config/thresholds.yaml` |
+| Explainer output shape | ✅ Both paths contract-shaped; LLM path builds sentences from `explanation` + `metrics_summary`, canary dropped (read, not run — needs an LLM key) |
+| Fallback template | ✅ Keyed on `opportunity_id` + status; bracket placeholders removed |
+| Scores / reasons / confidence | ⚠️ Hard-coded `£100` reason removed (`reason_codes=[]`), so live cards show no evidence chips. Confidence still hard-coded 0.8. Bands hard-coded 0.7/0.4 |
 | `greendash/contracts.py` | ⚠️ No longer frozen in practice: Madhav edited `ScenarioRequest.customer_id` to `\d{4,5}` in `6c41d76` |
 
-**Rule for slides/README:** quote no metric from `EVALUATION.md` or `fixtures/eval.json` as real. Don't quote either manifest hash until scoring passes its own hash check.
+**Rule for slides/README:** every eval number is illustrative — say so on slide 6 and on Receipts. The manifest hash `352a8385…` may be quoted with its commit (`6c41d76`).
 
 ---
 
@@ -109,6 +109,10 @@ No frontend adapter planned: the API was adapted to the fixture shapes (`aafd480
 `test_all_five_statuses_covered` fails on `076bed7` too: `client.get_opportunities` de-dupes by
 `opportunity_id`, and all five `opps_*.json` fixtures are GP01, so only the primary status survives.
 Decide: one card per product (fix the test) or all five statuses (fix the de-dupe).
+
+### Label eval numbers as illustrative (G3, agreed with team)
+- `app/pages/3_Receipts.py`: add a visible "Illustrative figures — not measured results" note (icon + text)
+- Slide 6: same label; do not present AUC/F1/scenario numbers as results
 
 ### Step 5 — Slides (claude.ai)
 **Files ready to upload right now:**
@@ -210,4 +214,4 @@ MEMORY.md                        ✅ (this file)
 |---|---|
 | **Aniket** (now also covering Akshit's G1-A work) | `api/services.py`: pass `cutoff_date`, `outcome_window_days`, `run_manifest` to `CustomerOpportunities`; commit or generate `data/raw/customers.parquet` + `data/features/audit_attrs.parquet`; stop returning `str(exc)` in 500 bodies |
 | **Kratik (G1-K)** | Caddy CSP (`font-src 'self'`, `frame-ancestors 'none'`); proxy Streamlit only, not port 8000; keep branch `g1-kratik/claimcheck` until Claim-Check is restored on main |
-| **Madhav (G2-M)** | Sent second review of `6c41d76`. Blocking: regenerate `data/models/hashes.json` (scoring returns 0.5 for everyone); real measured metrics; remove hard-coded confidence + `£100` reason code |
+| **Madhav (G2-M)** | One-line fix in `score.py` (`trusted=` list, not `True`) or pin skops; then confirm RECOMMEND packs appear |
