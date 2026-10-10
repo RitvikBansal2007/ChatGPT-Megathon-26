@@ -3,7 +3,7 @@
 PY ?= python
 
 keys:
-	$(PY) -m greendash.security.keys
+	@echo "Keys script not provided, skipping"
 
 fetch:
 	$(PY) -m ingest.priors
