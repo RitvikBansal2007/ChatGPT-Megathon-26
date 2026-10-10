@@ -13,11 +13,11 @@ try:
     # pyrefly: ignore [missing-import]
     from greenproof.llm.claimcheck import check
 except ImportError:
-    # Dummy fallbacks until Kratik merges
+    # Fail-closed safe fallbacks: if security modules fail to load, ALWAYS reject LLM usage.
     def minimise(pack): return pack
-    def pre_check(payload): return True, "PASS"
-    def post_check(raw): return True, json.loads(raw)
-    class DummyResult: passed = True
+    def pre_check(payload): return False, "SECURITY_MODULE_UNAVAILABLE"
+    def post_check(raw): return False, {}
+    class DummyResult: passed = False
     def check(parsed, llm_in): return DummyResult()
 
 # Cost estimates for Gemini 1.5 Flash (as of mid-2024 pricing roughly)
