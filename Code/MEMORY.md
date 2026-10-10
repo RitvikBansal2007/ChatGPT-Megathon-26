@@ -1,9 +1,9 @@
 # GreenDash — G3 (Ritvik) Context Memory
-<!-- AUTO-UPDATED by agent. Last update: 2026-10-11 (review of `03b5368`; slide 6 + Receipts to be labelled illustrative) -->
+<!-- AUTO-UPDATED by agent. Last update: 2026-10-11 (third CP2 run, local API at `08f11fc`) -->
 
 > **Project renamed:** `greenproof` → `greendash` (by teammates, commit `96ca5fb`)
 > Repo: https://github.com/IIIT-ECell/megathon26-chatgpt  
-> Branch: `main` (backend state checked at `f93f8ff`) · Root: `megathon26-chatgpt/Code/`
+> Branch: `main` (backend state checked at `08f11fc`) · Root: `megathon26-chatgpt/Code/`
 > Ritvik owns: `app/`, `mobile/`, `slides/`, `docs/diagrams/`, `README.md`, `MEMORY.md`  
 > **NEVER TOUCH:** `greendash/`, `api/`, `data/`, `config/`, `eval/`, `tests/`
 > **Backend owner: Aniket** — as of 2026-10-11 Aniket has taken over all of Akshit's (G1-A) work. Send every backend/API ask to Aniket, not Akshit.
@@ -60,7 +60,8 @@
 |---|---|
 | `greendash/contracts.py` | ✅ `\d{4}` regex restored |
 | `api/main.py` + `api/routers/` | ✅ **Starts from `main`** at `cb2173d` (`ENV=demo uvicorn api.main:app`), `/healthz` OK |
-| **CP2 result, run 2 (client.py live mode vs local API at `f93f8ff`, all 6 roles)** | ⚠️ Still 2 of 6: `demo-token` ✅ (no `ENV` needed now), eval ✅. All others **500**: opportunities + claimcheck — `api/services.py` builds `CustomerOpportunities` without required `cutoff_date`, `outcome_window_days`, `run_manifest`; scenario — `data/raw/customers.parquet` not in repo (422 enum issue is fixed); portfolio — `data/features/audit_attrs.parquet` not in repo. 500 bodies leak paths and validation dumps |
+| **CP2 result, run 3 (client.py live mode vs local API at `08f11fc`, all 6 roles)** | ⚠️ Still 2 of 6 (`demo-token`, eval). 500 bodies are now generic (good); causes from the server log: **opportunities + claimcheck** — `api/services.py:19` builds the strict `CustomerOpportunities` from JSON dicts, so every enum/date string is rejected ("Input should be an instance of ProductId", 30 errors); needs `model_validate_json` / non-strict validation. **scenario** — `greendash/scenarios/run.py` reads `data/raw/energy.parquet`, generator writes `energy_usage.parquet`; then `features/build.py:18` compares string vs timestamp. **portfolio** — `data/features/audit_attrs.parquet` can't be built (below) |
+| `make data` / `make features` | 🔴 `make data` fails (`greendash.generator` has no `__main__`; `python -m greendash.generator.run` works). `make features` fails on missing `data/raw/energy.parquet`. **Warning: the generator overwrites 6 tracked files in `data/raw/` (`transactions.csv`, `vehicles.csv`, …)** — run `git checkout -- data/raw` afterwards or the manifest inputs drift |
 | Building packs | 🔴 Crashes at `03b5368` on a clean install (skops `trusted=True`, see ML status). Packs from the earlier run are stale (all propensity 0.5, no RECOMMEND) |
 | Files deleted by rename commit `96ca5fb` | ✅ All 20 restored in `cb2173d` (real `claimcheck.py` 177 lines, `carbon/engine.py` 109 lines) |
 | `api/deps.py` + `greendash/security/authz.py` | ⚠️ Still no real auth: `/api/eval/summary` returns 200 **with no token**. Aniket says Kratik ships real verification in his Production PR |
@@ -212,6 +213,6 @@ MEMORY.md                        ✅ (this file)
 ## 📨 Pending teammate requests
 | Who | Ask |
 |---|---|
-| **Aniket** (now also covering Akshit's G1-A work) | `api/services.py`: pass `cutoff_date`, `outcome_window_days`, `run_manifest` to `CustomerOpportunities`; commit or generate `data/raw/customers.parquet` + `data/features/audit_attrs.parquet`; stop returning `str(exc)` in 500 bodies |
+| **Aniket** (now also covering Akshit's G1-A work) | `api/services.py` strict-validation failure; `energy.parquet` vs `energy_usage.parquet` naming; `make data` entry point; generator overwriting tracked `data/raw` files |
 | **Kratik (G1-K)** | Caddy CSP (`font-src 'self'`, `frame-ancestors 'none'`); proxy Streamlit only, not port 8000; keep branch `g1-kratik/claimcheck` until Claim-Check is restored on main |
 | **Madhav (G2-M)** | One-line fix in `score.py` (`trusted=` list, not `True`) or pin skops; then confirm RECOMMEND packs appear |
