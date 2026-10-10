@@ -1,0 +1,12 @@
+{
+  "GP01": [
+    {
+      "input": "High mileage petrol, car finance ending",
+      "output": "RECOMMEND"
+    },
+    {
+      "input": "Low mileage BEV, no finance",
+      "output": "RULED_OUT"
+    }
+  ]
+}
