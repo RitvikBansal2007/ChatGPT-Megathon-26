@@ -2,7 +2,7 @@ import json
 from datetime import date
 import pandas as pd
 import pytest
-from greenproof.features.build import build_features
+from greendash.features.build import build_features
 
 CUT = date(2026, 6, 30)
 

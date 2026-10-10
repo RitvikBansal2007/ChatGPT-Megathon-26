@@ -1,6 +1,6 @@
 import pytest
-from greenproof.contracts import *
-from greenproof.orchestrator import decide_status
+from greendash.contracts import *
+from greendash.orchestrator import decide_status
 
 def prop(p=0.8, c=0.9):
     cp = ConfidenceParts(overall=c, completeness=c, recency=c, stability=c, in_distribution=c)

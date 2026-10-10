@@ -102,7 +102,7 @@ To turn everyday banking data into green next steps that customers can trust and
 | **NAMING PRINCIPLE 3** | Always written **lowercase, one word**: `greendash`. Never "GreenDash", "Green Dash" or "GREENDASH" in running copy. |
 | **ALTERNATIVES REJECTED** | *GreenScore* (implies the merged score we refuse to ship), *EcoTrack* (tracker, not next step), *Carbonly* (suffix-brand noise). |
 
-> **A note on feature names.** The working project documents use "GreenProof" and "Proof Card". Under the greendash brand, **Proof Card, Claim-Check, Confidence Ladder, Scenario Lab and Why not?** are retained as named features. "Proof" lives inside the product; **greendash** is the brand on the door.
+> **A note on feature names.** The working project documents use "GreenDash" and "Proof Card". Under the greendash brand, **Proof Card, Claim-Check, Confidence Ladder, Scenario Lab and Why not?** are retained as named features. "Proof" lives inside the product; **greendash** is the brand on the door.
 
 <div style="page-break-after: always;"></div>
 

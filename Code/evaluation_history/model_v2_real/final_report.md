@@ -1,7 +1,7 @@
-# GreenProof Final Evaluation Report
+# GreenDash Final Evaluation Report
 
 ## Executive Summary
-This report summarizes the performance, robustness, and safety of the GreenProof finance recommendation engine. The system integrates advanced machine learning models utilizing LightGBM with monotonic constraints to predict customer propensity, alongside an Isotonic Regression layer for precise calibration. Our confidence modeling effectively isolates high-quality predictions from uncertain or novel inputs, leveraging Isolation Forests and bootstrapped stability metrics.
+This report summarizes the performance, robustness, and safety of the GreenDash finance recommendation engine. The system integrates advanced machine learning models utilizing LightGBM with monotonic constraints to predict customer propensity, alongside an Isotonic Regression layer for precise calibration. Our confidence modeling effectively isolates high-quality predictions from uncertain or novel inputs, leveraging Isolation Forests and bootstrapped stability metrics.
 
 For transparency and user engagement, a Gemini-powered LLM Explainer converts SHAP-based feature importances into empathetic, clear, and faithful explanations. An extensive LLM-as-a-judge evaluation suite confirms that the generated text strictly adheres to the provided evidence pack, avoiding hallucinations or unauthorized claims. 
 

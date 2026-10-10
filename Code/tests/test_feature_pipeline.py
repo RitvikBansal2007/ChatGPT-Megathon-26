@@ -4,7 +4,7 @@ import pytest
 import json
 from tempfile import TemporaryDirectory
 from scripts.make_real_features import build_features
-from greenproof.models.split import create_splits
+from greendash.models.split import create_splits
 
 def test_temporal_leakage():
     with TemporaryDirectory() as tmp_dir:
@@ -76,7 +76,7 @@ def test_split_integrity(monkeypatch):
         })
         df.to_parquet(f'{features_dir}/features.parquet')
         
-        import greenproof.models.split as split_module
+        import greendash.models.split as split_module
         original_read_parquet = pd.read_parquet
         original_json_dump = json.dump
         

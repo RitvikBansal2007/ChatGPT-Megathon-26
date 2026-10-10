@@ -1,12 +1,12 @@
 import pandas as pd
 import pytest
 from datetime import date
-from greenproof.contracts import Mutation
-from greenproof.features.build import build_features
-from greenproof.packs import evaluate_customer
-from greenproof.carbon.engine import load_factors
-from greenproof.scenarios import run as lab
-from greenproof.scenarios.mutations import apply_mutations
+from greendash.contracts import Mutation
+from greendash.features.build import build_features
+from greendash.packs import evaluate_customer
+from greendash.carbon.engine import load_factors
+from greendash.scenarios import run as lab
+from greendash.scenarios.mutations import apply_mutations
 
 CUT = date(2026, 6, 30)
 

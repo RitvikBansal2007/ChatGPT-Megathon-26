@@ -1,5 +1,5 @@
 import sqlite3, pytest
-from greenproof.db import audit, migrate
+from greendash.db import audit, migrate
 from config.settings import settings
 
 def test_chain_ok_then_tamper_detected(tmp_path, monkeypatch):

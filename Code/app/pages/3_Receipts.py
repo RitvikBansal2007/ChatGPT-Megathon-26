@@ -12,7 +12,7 @@ import theme
 import client
 from components.chrome import banner, current_role
 
-st.set_page_config(page_title="GreenProof – Receipts", layout="wide")
+st.set_page_config(page_title="GreenDash – Receipts", layout="wide")
 st.markdown(theme.css(), unsafe_allow_html=True)
 
 banner()

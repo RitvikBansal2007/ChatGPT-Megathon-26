@@ -1,16 +1,16 @@
-"""GreenProof landing page: synthetic-data banner, demo role switcher, page links."""
+"""GreenDash landing page: synthetic-data banner, demo role switcher, page links."""
 
 import streamlit as st
 
 import theme
 from components.chrome import ROLES, banner, current_role
 
-st.set_page_config(page_title="GreenProof", layout="wide")
+st.set_page_config(page_title="GreenDash", layout="wide")
 st.markdown(theme.css(), unsafe_allow_html=True)  # the only unsafe_allow_html call
 
 banner()
 
-st.title("GreenProof")
+st.title("GreenDash")
 st.write(
     "Green-finance suggestions you can check: every recommendation comes with "
     "its evidence, its limits, and a clear reason when it is not for you."

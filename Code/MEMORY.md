@@ -1,10 +1,10 @@
-# GreenProof — G3 (Ritvik) Context Memory
+# GreenDash — G3 (Ritvik) Context Memory
 <!-- AUTO-UPDATED by Antigravity agent. Last update: 2026-10-11T02:25 IST -->
 
 > Repo: https://github.com/IIIT-ECell/megathon26-chatgpt  
 > Branch: `main` · Repo root: `megathon26-chatgpt/Code/`  
 > Ritvik owns: `app/`, `mobile/`, `slides/`, `docs/diagrams/`, `README.md`, `MEMORY.md`  
-> Rule: NEVER edit `greenproof/`, `api/`, `data/`, `config/`, `eval/`, `tests/` (backend)
+> Rule: NEVER edit `greendash/`, `api/`, `data/`, `config/`, `eval/`, `tests/` (backend)
 
 ---
 
@@ -132,4 +132,4 @@ MEMORY.md                        ✅ (this file)
 6. RULED_OUT: NO action button
 7. ABSTAIN: names exactly ONE missing input
 8. Synthetic-data banner on EVERY page
-9. Only `app/` files to be edited — NEVER touch `greenproof/`, `api/`, `data/`
+9. Only `app/` files to be edited — NEVER touch `greendash/`, `api/`, `data/`

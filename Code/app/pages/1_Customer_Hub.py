@@ -12,7 +12,7 @@ import client
 from components.chrome import banner, current_role
 from components import proof_card, scenario_lab
 
-st.set_page_config(page_title="GreenProof – Customer Hub", layout="wide")
+st.set_page_config(page_title="GreenDash – Customer Hub", layout="wide")
 st.markdown(theme.css(), unsafe_allow_html=True)
 
 banner()

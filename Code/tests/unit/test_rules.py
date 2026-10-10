@@ -1,6 +1,6 @@
 import pytest
-from greenproof.contracts import EligibilityResult as E
-from greenproof.rules.engine import evaluate
+from greendash.contracts import EligibilityResult as E
+from greendash.rules.engine import evaluate
 
 BASE = dict(vehicle_fuel_type="petrol", second_vehicle=False, has_vehicle_record=True, fuel_ev_conflict=False, vehicle_sold=False,
             home_owner=True, existing_solar=False, roof_suitability="suitable",
@@ -46,7 +46,7 @@ def test_paperless_rules():
     assert evaluate(f(accessibility_paper_need=True), "GP04").rules_fired == ["GP04-R2"]
 
 def test_every_product_has_a_plain_reason_for_every_rule():
-    from greenproof.rules.engine import _load
+    from greendash.rules.engine import _load
     for p in _load()["products"].values():
         for r in p["rules"]:
             assert r["plain"] and r["id"]

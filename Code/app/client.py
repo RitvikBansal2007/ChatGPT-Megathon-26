@@ -1,4 +1,4 @@
-"""The single data gateway for the GreenProof UI.
+"""The single data gateway for the GreenDash UI.
 
 Pages call these functions and nothing else for data. DEMO_MODE (env) picks
 the source:

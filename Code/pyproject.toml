@@ -3,7 +3,7 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "greenproof"
+name = "greendash"
 version = "0.1.0"
 description = "Green Customer Insights Platform"
 requires-python = ">=3.11"

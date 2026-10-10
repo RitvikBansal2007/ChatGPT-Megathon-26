@@ -3,24 +3,24 @@
 PY ?= python
 
 keys:
-	$(PY) -m greenproof.security.keys
+	$(PY) -m greendash.security.keys
 
 fetch:
 	$(PY) -m ingest.priors
 
 data:
-	$(PY) -m greenproof.generator
+	$(PY) -m greendash.generator
 
 features:
-	$(PY) -m greenproof.features
+	$(PY) -m greendash.features
 
 train:
-	$(PY) -m greenproof.categoriser.evaluate
-	$(PY) -m greenproof.models.train
+	$(PY) -m greendash.categoriser.evaluate
+	$(PY) -m greendash.models.train
 
 packs:
-	$(PY) -m greenproof.packs
-	$(PY) -m greenproof.cache
+	$(PY) -m greendash.packs
+	$(PY) -m greendash.cache
 
 eval:
 	$(PY) -m eval.report
@@ -29,7 +29,7 @@ test:
 	$(PY) -m pytest -q
 
 audit:
-	bandit -q -r greenproof api
+	bandit -q -r greendash api
 	pip-audit
 	gitleaks detect --no-banner
 
@@ -41,4 +41,4 @@ app:
 	streamlit run app/Home.py --server.address 127.0.0.1
 
 all: keys fetch data features train packs eval test
-	$(PY) -m greenproof.manifest
+	$(PY) -m greendash.manifest
