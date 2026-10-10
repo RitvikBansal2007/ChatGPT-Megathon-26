@@ -321,3 +321,62 @@ def test_normalise_is_idempotent_and_handles_empty():
         once = textnorm.normalise(text)
         assert textnorm.normalise(once) == once
     assert textnorm.normalise("") == "" and textnorm.normalise(None) == ""
+
+
+# ======================= canary lifecycle (gateway side) ===================
+# These lock the contract the explainer relies on: ONE canary per gateway, the same
+# value is placed in the prompt and used for leak detection, it is stable across
+# retries, and it is never returned or logged.
+
+import logging
+import re
+
+_HEX_CANARY = re.compile(r"CANARY-[0-9a-f]{32}")
+
+
+class RecordingProvider:
+    """Records each system prompt, and can reply with the canary found in it."""
+
+    def __init__(self, leak=False):
+        self.leak = leak
+        self.systems = []
+
+    def generate(self, *, system, user, max_tokens, timeout_s):
+        self.systems.append(system)
+        if self.leak:
+            return say("Reference " + _HEX_CANARY.search(system).group(0) + ".")
+        return GOOD
+
+
+def test_prompt_canary_is_the_one_used_for_leak_detection():
+    provider = RecordingProvider(leak=True)
+    result = LLMGateway(provider, canary=generate_canary()).explain(PACK)
+    assert result.source == SOURCE_FALLBACK and result.reason == guard.OUTPUT_CANARY
+    assert len(provider.systems) == 2                      # retried once, then fell back
+
+
+def test_canary_is_stable_across_retries_and_requests():
+    provider = RecordingProvider(leak=True)
+    gateway = LLMGateway(provider, canary=generate_canary())
+    gateway.explain(PACK)
+    gateway.explain(PACK)
+    found = [_HEX_CANARY.search(s).group(0) for s in provider.systems]
+    assert len(found) == 4 and len(set(found)) == 1        # 2 attempts x 2 requests, one value
+
+
+def test_each_gateway_has_its_own_canary():
+    a, b = RecordingProvider(), RecordingProvider()
+    LLMGateway(a, canary=generate_canary()).explain(PACK)
+    LLMGateway(b, canary=generate_canary()).explain(PACK)
+    assert _HEX_CANARY.search(a.systems[0]).group(0) != _HEX_CANARY.search(b.systems[0]).group(0)
+
+
+def test_canary_is_never_in_the_result_or_the_logs(caplog):
+    caplog.set_level(logging.DEBUG)
+    provider = RecordingProvider(leak=True)
+    result = LLMGateway(provider, canary=generate_canary()).explain(PACK)
+    canary = _HEX_CANARY.search(provider.systems[0]).group(0)
+    shown = repr(result) + json.dumps(result.to_legacy_dict())
+    logged = "\n".join(r.getMessage() for r in caplog.records)
+    assert canary not in shown and canary not in logged
+    assert "reason=OUTPUT_CANARY" in logged                # the code is logged, never the value
