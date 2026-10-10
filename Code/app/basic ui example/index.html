@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="en-GB" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>greendash · prototype hub</title>
+  <meta name="description" content="Clickable UI prototype for greendash: customer mobile app, customer web and business dashboard.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/glass.css">
+  <link rel="stylesheet" href="css/components.css">
+</head>
+<body data-surface="hub" data-persona="priya" data-pathway="GP01">
+  <a class="gd-skip" href="#main">Skip to content</a>
+
+  <header class="gd-webbar gd-glass-3">
+    <a class="gd-logo" href="index.html" aria-label="greendash prototype hub">
+      <img class="is-on-light" src="assets/greendash-logo-on-light-transparent.png" alt="greendash">
+      <img class="is-on-dark" src="assets/greendash-logo-dark-transparent.png" alt="greendash">
+    </a>
+    <nav aria-label="Hub sections">
+      <a href="#mobile">Mobile app</a>
+      <a href="#web">Customer web</a>
+      <a href="#business">Business dashboard</a>
+      <a href="#system">Design system</a>
+    </nav>
+    <div class="gd-webbar__end">
+      <button type="button" class="gd-btn gd-btn--ghost" data-gd-theme-toggle aria-pressed="false">
+        <svg class="gd-icon gd-icon--20" aria-hidden="true"><use href="#i-moon"></use></svg><span data-gd-theme-label>Dark</span>
+      </button>
+    </div>
+  </header>
+  <div class="gd-banner gd-banner--synthetic gd-banner--strip" role="note" data-gd-synthetic>Demo data. Every customer shown is synthetic.</div>
+
+  <main id="main" class="gd-container">
+    <section class="gd-hub-hero" aria-labelledby="hub-title">
+      <span class="gd-tag" style="align-self:flex-start">Prototype hub · Version 1.0 · Megathon X, Problem Statement 1</span>
+      <h1 class="t-display" id="hub-title">Green, with receipts.</h1>
+      <p class="t-body-l t-muted" style="max-width:720px">One evidence engine, two audiences. Customers get a next green step they can check. Relationship teams get a ranked pipeline they can defend. Every number has a source, every refusal is explained, and every AI-written sentence is checked before anyone sees it.</p>
+      <p class="gd-banner" style="align-self:flex-start"><svg class="gd-icon" aria-hidden="true"><use href="#i-shield-check"></use></svg><span data-gd-core-rule>ML predicts. Rules decide eligibility. The carbon engine calculates. The LLM only explains. Claim-Check verifies.</span></p>
+      <div class="gd-row gd-row--wrap">
+        <span class="gd-chip"><svg class="gd-icon" aria-hidden="true"><use href="#i-smartphone"></use></svg>21 mobile screens</span>
+        <span class="gd-chip"><svg class="gd-icon" aria-hidden="true"><use href="#i-monitor"></use></svg>5 customer web pages</span>
+        <span class="gd-chip"><svg class="gd-icon" aria-hidden="true"><use href="#i-briefcase"></use></svg>11 business pages</span>
+        <span class="gd-chip"><svg class="gd-icon" aria-hidden="true"><use href="#i-users"></use></svg>8 synthetic personas</span>
+      </div>
+    </section>
+
+    <section class="gd-hub-groups" aria-label="Screens by surface">
+      <!-- Customer mobile app -->
+      <article class="gd-hub-group gd-glass-1" id="mobile" aria-labelledby="g-mobile">
+        <div class="gd-row"><span class="gd-icon-tile gd-glass-1"><svg class="gd-icon" aria-hidden="true"><use href="#i-smartphone"></use></svg></span><div><h2 class="t-h3" id="g-mobile">Customer mobile app</h2><p class="t-label t-muted">Light by default · 390 × 844 frame</p></div></div>
+        <nav class="gd-hub-links" aria-label="Mobile screens">
+          <a href="mobile/splash.html"><span>Splash</span><small>Launch</small></a>
+          <a href="mobile/welcome-auth.html"><span>Welcome and sign in</span><small>Auth</small></a>
+          <a href="mobile/onboarding-consent.html"><span>Onboarding and data-use consent</span><small>Auth</small></a>
+          <a href="mobile/home.html?p=priya"><span>Home: insight feed and why-now</span><small>Priya</small></a>
+          <a href="mobile/pathways.html?p=priya"><span>Pathways: always four tiles</span><small>Priya</small></a>
+          <a href="mobile/proof-card-recommend.html?p=priya&amp;path=GP01"><span>Proof Card · RECOMMEND</span><small>Priya, EV</small></a>
+          <a href="mobile/evidence-sheet.html?p=priya&amp;path=GP01"><span>Evidence sheet</span><small>Sheet</small></a>
+          <a href="mobile/impact-sheet.html?p=priya&amp;path=GP01"><span>Impact calculation sheet</span><small>Sheet</small></a>
+          <a href="mobile/claim-check-sheet.html?p=priya&amp;path=GP01"><span>Claim-Check sheet</span><small>Sheet</small></a>
+          <a href="mobile/confidence-ladder-sheet.html?p=priya&amp;path=GP01"><span>Confidence Ladder sheet</span><small>Sheet</small></a>
+          <a href="mobile/proof-card-abstain.html?p=sam&amp;path=GP03"><span>Proof Card · ABSTAIN</span><small>Sam, Solar</small></a>
+          <a href="mobile/proof-card-review.html?p=marcus&amp;path=GP01"><span>Proof Card · REVIEW</span><small>Marcus, EV</small></a>
+          <a href="mobile/proof-card-ruled-out.html?p=aisha&amp;path=GP01"><span>Proof Card · RULED_OUT, Why not?</span><small>Aisha, EV</small></a>
+          <a href="mobile/proof-card-soft-surface.html?p=priya&amp;path=GP02"><span>Proof Card · SOFT_SURFACE</span><small>Priya, Home</small></a>
+          <a href="mobile/all-set.html?p=aisha"><span>You're all set</span><small>Aisha</small></a>
+          <a href="mobile/paperless-card.html?p=priya&amp;path=GP04"><span>Paperless card: separate metrics</span><small>Priya</small></a>
+          <a href="mobile/progress.html?p=priya"><span>Progress: never netted</span><small>Priya</small></a>
+          <a href="mobile/help.html?p=priya"><span>Help: talk to a person</span><small>Help</small></a>
+          <a href="mobile/profile-privacy.html?p=priya"><span>Profile and privacy</span><small>Profile</small></a>
+          <a href="mobile/feedback-sheet.html?p=priya&amp;path=GP01"><span>Feedback sheet</span><small>Sheet</small></a>
+          <a href="mobile/offline-state.html?p=priya"><span>Offline state</span><small>System</small></a>
+        </nav>
+      </article>
+
+      <!-- Customer web -->
+      <article class="gd-hub-group gd-glass-1" id="web" aria-labelledby="g-web">
+        <div class="gd-row"><span class="gd-icon-tile gd-glass-1"><svg class="gd-icon" aria-hidden="true"><use href="#i-monitor"></use></svg></span><div><h2 class="t-h3" id="g-web">Customer web</h2><p class="t-label t-muted">Light by default · fluid to 360 px</p></div></div>
+        <nav class="gd-hub-links" aria-label="Web pages">
+          <a href="web/landing.html"><span>Landing</span><small>Public</small></a>
+          <a href="web/how-it-works.html"><span>How it works</span><small>Public</small></a>
+          <a href="web/pathways.html"><span>Pathways overview</span><small>Public</small></a>
+          <a href="web/trust.html"><span>Trust: responsible AI and fairness</span><small>Public</small></a>
+          <a href="web/customer-hub.html?p=priya"><span>Customer Hub</span><small>Signed in</small></a>
+        </nav>
+        <div class="gd-stack gd-stack--2">
+          <h3 class="t-label t-muted">Personas to try</h3>
+          <div class="gd-row gd-row--wrap" style="gap:var(--s-2)">
+            <a class="gd-chip" href="mobile/home.html?p=priya">Priya</a>
+            <a class="gd-chip" href="mobile/home.html?p=marcus">Marcus</a>
+            <a class="gd-chip" href="mobile/home.html?p=aisha">Aisha</a>
+            <a class="gd-chip" href="mobile/home.html?p=tom">Tom</a>
+            <a class="gd-chip" href="mobile/home.html?p=dave">Dave</a>
+            <a class="gd-chip" href="mobile/home.html?p=sam">Sam</a>
+            <a class="gd-chip" href="mobile/home.html?p=jordan">Jordan</a>
+            <a class="gd-chip" href="mobile/home.html?p=eleanor">Eleanor</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Business dashboard -->
+      <article class="gd-hub-group gd-glass-1" id="business" aria-labelledby="g-business">
+        <div class="gd-row"><span class="gd-icon-tile gd-glass-1"><svg class="gd-icon" aria-hidden="true"><use href="#i-briefcase"></use></svg></span><div><h2 class="t-h3" id="g-business">Business dashboard</h2><p class="t-label t-muted">Dark by default · designed at 1440 wide</p></div></div>
+        <nav class="gd-hub-links" aria-label="Business pages">
+          <a href="business/login.html"><span>Login: demo role chooser</span><small>Auth</small></a>
+          <a href="business/portfolio.html"><span>Portfolio</span><small>Level 1</small></a>
+          <a href="business/opportunity-quadrant.html"><span>Opportunity quadrant</span><small>Level 2</small></a>
+          <a href="business/customer-list.html"><span>Customer list</span><small>RM book</small></a>
+          <a href="business/customer-360.html?p=priya"><span>Customer 360</span><small>Level 3</small></a>
+          <a href="business/evidence-impact.html?p=priya&amp;path=GP01"><span>Evidence and Impact</span><small>Level 4</small></a>
+          <a href="business/action-rm-brief.html?p=priya&amp;path=GP01"><span>Action: RM brief</span><small>Level 5</small></a>
+          <a href="business/governance.html"><span>Governance</span><small>Auditor</small></a>
+          <a href="business/scenario-lab.html?p=priya"><span>Scenario Lab</span><small>Evaluator</small></a>
+          <a href="business/claim-check-redteam.html"><span>Claim-Check red-team</span><small>Evaluator</small></a>
+          <a href="business/receipts.html"><span>Receipts</span><small>Evaluation</small></a>
+        </nav>
+      </article>
+    </section>
+
+    <!-- Design system sampler: proves the tokens and components before the screens -->
+    <section class="gd-section" id="system" aria-labelledby="sys-title">
+      <div class="gd-section-head">
+        <div>
+          <h2 class="t-h2" id="sys-title">Design system</h2>
+          <p class="t-muted">Tokens, glass tiers and the components every screen is built from. Toggle the theme to check both.</p>
+        </div>
+      </div>
+
+      <div class="gd-grid">
+        <!-- Colour -->
+        <article class="gd-widget gd-glass-1 gd-col-12" aria-labelledby="sys-colour">
+          <div class="gd-widget__head"><h3 class="t-h3" id="sys-colour">Colour: one green, every other colour earns its place</h3></div>
+          <div class="gd-swatches">
+            <div class="gd-swatch" style="--sw:var(--c-verdant)"><i></i><span>Verdant<br><code>#19C37D · action, CO₂e</code></span></div>
+            <div class="gd-swatch" style="--sw:var(--c-canopy)"><i></i><span>Canopy<br><code>#0F7A55 · green text</code></span></div>
+            <div class="gd-swatch" style="--sw:var(--c-deep-forest)"><i></i><span>Deep Forest<br><code>#0A3B2C</code></span></div>
+            <div class="gd-swatch" style="--sw:var(--c-mint)"><i></i><span>Mint Glow<br><code>#7BE5B5 · focus on dark</code></span></div>
+            <div class="gd-swatch" style="--sw:var(--c-amber)"><i></i><span>Solar Amber<br><code>#F5B53D · energy</code></span></div>
+            <div class="gd-swatch" style="--sw:var(--c-aqua)"><i></i><span>Aqua Signal<br><code>#22B8CF · paper</code></span></div>
+            <div class="gd-swatch" style="--sw:var(--c-iris)"><i></i><span>Iris<br><code>#8B7CF6 · digital</code></span></div>
+            <div class="gd-swatch" style="--sw:var(--c-slate-sage)"><i></i><span>Slate Sage<br><code>#8AA79A · neutral</code></span></div>
+            <div class="gd-swatch" style="--sw:var(--c-abyss)"><i></i><span>Abyss<br><code>#06110D · dark bg</code></span></div>
+            <div class="gd-swatch" style="--sw:var(--c-mist)"><i></i><span>Mist<br><code>#F1F8F4 · light bg</code></span></div>
+          </div>
+        </article>
+
+        <!-- Status + verdicts + buttons -->
+        <article class="gd-widget gd-glass-1 gd-col-6" aria-labelledby="sys-status">
+          <div class="gd-widget__head"><h3 class="t-h3" id="sys-status">The five card statuses</h3></div>
+          <div class="gd-stack gd-stack--3">
+            <div class="gd-row gd-row--wrap">
+              <span data-gd-render="status" data-status="RECOMMEND"></span>
+              <span data-gd-render="status" data-status="SOFT_SURFACE"></span>
+              <span data-gd-render="status" data-status="ABSTAIN"></span>
+              <span data-gd-render="status" data-status="REVIEW"></span>
+              <span data-gd-render="status" data-status="RULED_OUT"></span>
+            </div>
+            <p class="t-label t-muted">Every status carries an icon and a word. A low score changes prominence and wording, never presence.</p>
+            <hr>
+            <h4 class="t-label t-muted">Three verdicts, never merged (Priya, EV Finance)</h4>
+            <div data-gd-render="verdicts" data-persona="priya" data-pathway="GP01"></div>
+            <hr>
+            <h4 class="t-label t-muted">Buttons, chips and tags</h4>
+            <div class="gd-row gd-row--wrap">
+              <button type="button" class="gd-btn gd-btn--primary">Explore EV options</button>
+              <button type="button" class="gd-btn gd-btn--ghost">Start a suitability check</button>
+              <button type="button" class="gd-btn">Secondary</button>
+              <button type="button" class="gd-btn gd-btn--text">Talk to a person</button>
+            </div>
+            <div class="gd-row gd-row--wrap">
+              <span class="gd-chip gd-chip--why-now"><svg class="gd-icon" aria-hidden="true"><use href="#i-clock"></use></svg>Why now: your car finance ends in 90 days.</span>
+              <span class="gd-tag">Estimate</span>
+              <span class="gd-tag gd-tag--code">HIGH_FUEL_SPEND</span>
+              <span class="gd-tag gd-tag--code">GP01-R1</span>
+              <span class="gd-tag gd-tag--realised">Realised</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Glass tiers -->
+        <article class="gd-widget gd-glass-1 gd-col-6" aria-labelledby="sys-glass">
+          <div class="gd-widget__head"><h3 class="t-h3" id="sys-glass">Glass tiers</h3></div>
+          <div class="gd-stack gd-stack--3">
+            <div class="gd-card gd-glass-0"><p class="t-data">G0 · Flat</p><p class="t-label t-muted">Tables, forms, evidence, long text</p></div>
+            <div class="gd-card gd-glass-1"><p class="t-data">G1 · Soft glass</p><p class="t-label t-muted">16px blur · standard cards</p></div>
+            <div class="gd-card gd-glass-2"><p class="t-data">G2 · Raised glass</p><p class="t-label t-muted">24px blur · Proof Cards, KPI tiles</p></div>
+            <div class="gd-card gd-glass-3"><p class="t-data">G3 · Floating glass</p><p class="t-label t-muted">40px blur · sheets, bars, modals</p></div>
+          </div>
+        </article>
+
+        <!-- KPI tiles -->
+        <div class="gd-col-3" data-gd-render="kpi" data-kpi="co2"></div>
+        <div class="gd-col-3" data-gd-render="kpi" data-kpi="energy"></div>
+        <div class="gd-col-3" data-gd-render="kpi" data-kpi="paper"></div>
+        <div class="gd-col-3" data-gd-render="kpi" data-kpi="digital"></div>
+
+        <!-- Proof Card + previews -->
+        <div class="gd-col-6">
+          <h3 class="t-h3" style="margin-bottom:var(--s-3)">Proof Card (live from data.js)</h3>
+          <div style="max-width:390px" data-gd-render="proof-card" data-persona="priya" data-pathway="GP01" data-help-href="mobile/help.html"></div>
+        </div>
+        <div class="gd-col-6 gd-stack">
+          <h3 class="t-h3">Feed previews and pathway tiles</h3>
+          <div data-gd-render="preview" data-persona="marcus" data-pathway="GP01" data-href="mobile/proof-card-review.html?p=marcus&amp;path=GP01"></div>
+          <div data-gd-render="preview" data-persona="sam" data-pathway="GP03" data-href="mobile/proof-card-abstain.html?p=sam&amp;path=GP03"></div>
+          <div data-gd-render="preview" data-persona="aisha" data-pathway="GP01" data-href="mobile/proof-card-ruled-out.html?p=aisha&amp;path=GP01"></div>
+          <div data-gd-render="impact" data-persona="dave" data-pathway="GP02"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="gd-core-rule">
+    <span data-gd-core-rule>ML predicts. Rules decide eligibility. The carbon engine calculates. The LLM only explains. Claim-Check verifies.</span>
+    <span>Not a credit decision. All impact figures are estimates, not guarantees.</span>
+  </footer>
+
+  <!-- Sheets for the sample Proof Card above -->
+  <div data-gd-render="sheets" data-persona="priya" data-pathway="GP01"></div>
+
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

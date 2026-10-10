@@ -1,0 +1,187 @@
+/* ==========================================================================
+   greendash · Liquid Glass tiers (brand guidelines 8.1, 8.2)
+   G0 flat · G1 soft · G2 raised · G3 floating
+   Five ingredients: blur, tint, 1px directional edge, inner light, ambient shadow.
+   Rules: max two glass layers deep; no glass behind long text (use G0 inside);
+   verdicts and badges are never translucent.
+   ========================================================================== */
+
+.gd-glass-0,
+.gd-glass-1,
+.gd-glass-2,
+.gd-glass-3 {
+  position: relative;
+  isolation: isolate;
+}
+
+/* G0 · Flat: tables, forms, dense evidence, long text */
+.gd-glass-0 {
+  background: var(--g0-fill);
+  border: 1px solid var(--g0-border);
+}
+
+/* G1 · Soft glass: standard cards and widgets (elevation 1) */
+.gd-glass-1 {
+  background: linear-gradient(135deg, var(--g1-fill-hi), var(--g1-fill));
+  -webkit-backdrop-filter: var(--g1-filter);
+          backdrop-filter: var(--g1-filter);
+  box-shadow:
+    inset 0 1px 0 var(--inner-hi),
+    inset 0 -1px 0 var(--inner-lo),
+    0 0 0 1px var(--edge-ring),
+    var(--elev-1);
+}
+
+/* G2 · Raised glass: Proof Cards, hero KPI tiles, popovers (elevation 2) */
+.gd-glass-2 {
+  background:
+    linear-gradient(var(--tonal-2), var(--tonal-2)),
+    linear-gradient(135deg, var(--g2-fill-hi), var(--g2-fill));
+  -webkit-backdrop-filter: var(--g2-filter);
+          backdrop-filter: var(--g2-filter);
+  box-shadow:
+    inset 0 1px 0 var(--inner-hi),
+    inset 0 -1px 0 var(--inner-lo),
+    inset 0 0 24px var(--inner-glow),
+    0 0 0 1px var(--edge-ring),
+    var(--elev-2);
+}
+
+/* G3 · Floating glass: sheets, modals, tab bar, top app bar (elevation 4) */
+.gd-glass-3 {
+  background:
+    linear-gradient(var(--tonal-4), var(--tonal-4)),
+    linear-gradient(135deg, var(--g3-fill-hi), var(--g3-fill));
+  -webkit-backdrop-filter: var(--g3-filter);
+          backdrop-filter: var(--g3-filter);
+  box-shadow:
+    inset 0 1px 0 var(--inner-hi),
+    inset 0 -1px 0 var(--inner-lo),
+    inset 0 0 24px var(--inner-glow),
+    0 0 0 1px var(--edge-ring),
+    var(--elev-4);
+}
+
+/* Directional 1px edge: brightest top-left, fading to ~25% bottom-right */
+.gd-glass-1::before,
+.gd-glass-2::before,
+.gd-glass-3::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  pointer-events: none;
+  z-index: 2;
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+          mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+          mask-composite: exclude;
+}
+.gd-glass-1::before { background: linear-gradient(135deg, var(--edge-1), var(--edge-lo) 85%); }
+.gd-glass-2::before { background: linear-gradient(135deg, var(--edge-2), var(--edge-lo) 85%); }
+.gd-glass-3::before { background: linear-gradient(135deg, var(--edge-3), var(--edge-lo) 85%); }
+
+/* Dynamic elevation on interactive glass: rise one level, edge brightens */
+.gd-glass-1.is-interactive,
+.gd-glass-2.is-interactive {
+  transition:
+    box-shadow var(--dur-micro) var(--ease-std),
+    transform var(--dur-micro) var(--ease-std),
+    background var(--dur-micro) var(--ease-std);
+}
+.gd-glass-1.is-interactive:hover {
+  background: linear-gradient(135deg, var(--g2-fill-hi), var(--g2-fill));
+  box-shadow:
+    inset 0 1px 0 var(--inner-hi),
+    inset 0 -1px 0 var(--inner-lo),
+    0 0 0 1px var(--edge-ring),
+    var(--elev-2);
+}
+.gd-glass-2.is-interactive:hover {
+  box-shadow:
+    inset 0 1px 0 var(--inner-hi),
+    inset 0 -1px 0 var(--inner-lo),
+    inset 0 0 24px var(--inner-glow),
+    0 0 0 1px var(--edge-ring),
+    var(--elev-3);
+}
+.gd-glass-1.is-interactive:active,
+.gd-glass-2.is-interactive:active { transform: translateY(1px); }
+
+/* --------------------------------------------------------------------------
+   Opaque fallbacks (mandatory): no backdrop-filter support, reduced
+   transparency preference, or the manual data-transparency="reduce" switch.
+   The product stays fully usable and on-brand without blur.
+   -------------------------------------------------------------------------- */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .gd-glass-1 { background: var(--glass-fallback); }
+  .gd-glass-2,
+  .gd-glass-3 { background: var(--glass-fallback-strong); }
+}
+@media (prefers-reduced-transparency: reduce) {
+  .gd-glass-1,
+  .gd-glass-2,
+  .gd-glass-3 {
+    -webkit-backdrop-filter: none;
+            backdrop-filter: none;
+  }
+  .gd-glass-1 { background: var(--glass-fallback); }
+  .gd-glass-2,
+  .gd-glass-3 { background: var(--glass-fallback-strong); }
+}
+[data-transparency="reduce"] .gd-glass-1,
+[data-transparency="reduce"] .gd-glass-2,
+[data-transparency="reduce"] .gd-glass-3 {
+  -webkit-backdrop-filter: none;
+          backdrop-filter: none;
+}
+[data-transparency="reduce"] .gd-glass-1 { background: var(--glass-fallback); }
+[data-transparency="reduce"] .gd-glass-2,
+[data-transparency="reduce"] .gd-glass-3 { background: var(--glass-fallback-strong); }
+
+/* --------------------------------------------------------------------------
+   Ambient backdrop (8.1): base colour + three blurred aurora orbs + 2% grain.
+   Orbs drift at most 24px over 40s; frozen under reduced motion.
+   .gd-backdrop is fixed to the viewport; .gd-backdrop.is-local fills its
+   positioned parent (used inside the phone frame).
+   -------------------------------------------------------------------------- */
+.gd-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  background: var(--bg);
+  pointer-events: none;
+}
+.gd-backdrop.is-local {
+  position: absolute;
+  z-index: 0;
+}
+.gd-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(120px);
+  animation: gd-orb-drift var(--dur-ambient) var(--ease-std) infinite alternate;
+}
+.gd-orb--1 { width: 520px; height: 520px; background: var(--orb-1); top: -160px; left: -160px; --dx: 24px; --dy: 16px; }
+.gd-orb--2 { width: 380px; height: 380px; background: var(--orb-2); bottom: -120px; right: -100px; --dx: -20px; --dy: -24px; }
+.gd-orb--3 { width: 320px; height: 320px; background: var(--orb-3); top: 38%; right: -60px; --dx: -16px; --dy: 18px; }
+.gd-backdrop.is-local .gd-orb { filter: blur(90px); }
+.gd-backdrop.is-local .gd-orb--1 { width: 300px; height: 300px; top: -90px; left: auto; right: -90px; }
+.gd-backdrop.is-local .gd-orb--2 { width: 240px; height: 240px; bottom: 120px; right: auto; left: -110px; }
+.gd-backdrop.is-local .gd-orb--3 { width: 200px; height: 200px; top: 46%; right: -80px; }
+.gd-grain {
+  position: absolute;
+  inset: 0;
+  opacity: var(--grain-opacity);
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.5 0 0 0 0 0.5 0 0 0 0 0.5 0 0 0 1 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  mix-blend-mode: overlay;
+}
+@keyframes gd-orb-drift {
+  from { transform: translate(0, 0); }
+  to   { transform: translate(var(--dx), var(--dy)); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .gd-orb { animation: none; }
+}
