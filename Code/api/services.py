@@ -22,6 +22,6 @@ def load_customer_packs(key: str, display_id: str) -> CustomerOpportunities:
         "opportunities": [v for _, v in sorted(data.items())],
         "cutoff_date": cfg["cutoff_date"],
         "outcome_window_days": cfg["outcome_window_days"],
-        "run_manifest": "sha256:352a838558cb95f7961c2d94c4e862ca198bbdb59435c39ad21912452ca9f548"
+        "run_manifest": "sha256:abdbe3fa9b5f0ce1df58783e475227bfb6147f2c1bfbef297d609501b0c37e0b"
     }
     return CustomerOpportunities.model_validate_json(json.dumps(dict_data))
