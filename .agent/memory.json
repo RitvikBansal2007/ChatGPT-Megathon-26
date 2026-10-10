@@ -1,0 +1,25 @@
+{
+  "session_id": "session_001",
+  "current_phase": "Phase 1: Environment & Repository Baseline",
+  "current_subtask": "Initialize memory and organize readmes",
+  "completed_subtasks": [],
+  "pending_subtasks": [
+    "Verify/configure git remote",
+    "Pull latest remote changes, merge without conflicts, commit initial baseline",
+    "Phase 2: Datasets Procurement & Factor Curation",
+    "Phase 3: Merchant Template Generator",
+    "Phase 4: Ingestion Pipeline & Prior Extraction",
+    "Phase 5: Synthetic Customer Population & Labels",
+    "Phase 6: Deterministic Carbon Engine",
+    "Phase 7: Evaluation Set & Governance Documentation"
+  ],
+  "locked_decisions": {
+    "cutoff_date": "2026-06-30",
+    "outcome_window_days": 90,
+    "factor_vintage": "DESNZ 2024",
+    "random_seed": 42
+  },
+  "active_git_commit": "",
+  "last_sync_timestamp": "",
+  "blockers": []
+}
