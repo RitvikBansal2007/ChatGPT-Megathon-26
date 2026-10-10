@@ -17,7 +17,6 @@ FIXED_CLAIM = "Switching will save you 4,000 kg a year and you're pre-approved."
 
 def scenario_lab(customer_id: str) -> None:
     with st.container(key="gd-panel-lab"):
-        st.markdown("#### Scenario Lab")
         st.caption("Change one input and watch all three verdicts recompute. The Lab edits inputs only, never verdicts.")
         cat = client.mutation_catalogue()
         labels = {m["id"]: m["label"] for m in cat}
@@ -53,7 +52,6 @@ def scenario_lab(customer_id: str) -> None:
 
 def redteam(customer_id: str = "CUST-0001", opportunity_id: str = "GP01") -> None:
     with st.container(key="gd-panel-redteam"):
-        st.markdown("#### Red-team Claim-Check")
         st.caption("Inject a fake claim. The verifier checks it against the Evidence Pack before any customer could see it.")
         st.session_state.setdefault("blocked_total", client.portfolio(client.role())["governance"]["claims_blocked"])
         text = st.text_area("Sentence to check", FIXED_CLAIM, key="rt-text", height=80)

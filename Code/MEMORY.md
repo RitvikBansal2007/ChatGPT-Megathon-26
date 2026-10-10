@@ -1,5 +1,5 @@
 # GreenDash — G3 Context Memory
-<!-- AUTO-UPDATED by agent. Last update: 2026-10-11 ~06:00 IST (web app redesigned to the brand UI; auth ownership settled) -->
+<!-- AUTO-UPDATED by agent. Last update: 2026-10-11 ~06:25 IST (UI simplified into tabs; footer synthetic line + event tag removed on owner's instruction) -->
 
 > **Project renamed:** `greenproof` → `greendash` (by teammates, commit `96ca5fb`)
 > Repo: https://github.com/<org>/megathon26-chatgpt  
@@ -77,6 +77,15 @@ The app in `app/` was replaced with the brand-design Streamlit app from `Desktop
 - Needs `streamlit >= 1.50` (`width="stretch"`); `pyproject.toml` still pins `>=1.46` — ask G2-An to bump.
 - Offline stand-ins that remain in the UI: local Claim-Check (same rule families) and the mileage ladder (indicative factor, marked `shortcut:` in `client.py`).
 - UI tests: 26 of 26 (`app/tests/test_smoke.py`), incl. every persona × pathway, role gates, live-unreachable card.
+
+**Simplified at 06:25 (owner asked for a minimal, uncluttered layout)**
+- Removed on the owner's explicit instruction: the footer "Synthetic data." line and the event tag on Home. The footer now reads: core rule + "Not a credit decision. Every impact figure is an estimate, not a guarantee." Nothing on screen says the data is synthetic any more — say it out loud in the pitch.
+- Home: hero, core rule, three doors. Customer list removed (the sidebar picker has it).
+- Hub: right column is tabs (Your data / Scenario Lab / Claim-Check, by role). Proof Card: one "See the receipt" expander with tabs (why, how worked out, how sure, what backs each sentence); feedback is a "Not quite right?" popover; tile buttons say "Open".
+- Cockpit: four tabs (Overview / Segments and trend / Customers / Governance); four metric tiles, one caption line for the headline counts.
+- Receipts: four tabs (Models / Categoriser / Explanations / Scenarios and data quality). The "Illustrative figures" notice stays.
+- Not built: sign-in / account creation. The static portal in the design bundle has those screens on mock data only; the API has no account endpoints (`/api/auth/demo-token` only) and the `users` table holds a key and a role, no credentials.
+- Storage today is all local: SQLite file `greendash.db` (gitignored; tables users, claim_audit, scenario_runs, feedback, optouts), Parquet/CSV under `data/`, models under `data/models/`, packs under `out/`. No hosted database and no deployment config in the repo.
 
 **Auth ownership settled (G1-K, 06:00):** G2-An implements token validation + role enforcement with tests; G1-K reviews and verifies. Acceptance: missing token 401; malformed token 401; CUSTOMER token on evaluator-only route 403; authorised evaluator/RM allowed; cross-customer access rejected. API stays out of production until these pass.
 

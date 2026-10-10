@@ -21,7 +21,6 @@ LOGO_LIGHT = str(ASSETS / "greendash-logo-on-light-transparent.png")
 LOGO_DARK = str(ASSETS / "greendash-logo-dark-transparent.png")
 
 CORE_RULE = "ML predicts. Rules decide eligibility. The carbon engine calculates. The LLM only explains. Claim-Check verifies."
-SYNTHETIC = "Synthetic data."
 
 # Brand tokens (brand guidelines section 04). Plotly charts read these too.
 C = {
@@ -187,6 +186,7 @@ h1, h2, h3, h4 { font-family: var(--font-display) !important; letter-spacing:-.0
 .gd-tile__n{font-family:var(--font-display);font-weight:700;font-size:16px}
 
 .gd-kpi{position:relative;overflow:hidden;border-radius:28px;padding:18px 20px;background:rgba(255,255,255,.88);box-shadow:0 0 0 1px rgba(11,31,24,.06),var(--elev-2);height:100%}
+.gd-kpi{min-height:210px}  /* equal tile heights across the row */
 .gd-kpi::after{content:"";position:absolute;left:0;right:0;top:0;height:3px;background:var(--fam)}
 .gd-kpi.est::after{opacity:.55;background:repeating-linear-gradient(90deg,var(--fam) 0 8px,transparent 8px 12px)}
 .gd-kpi__v{font-family:var(--font-display);font-weight:800;font-size:26px;line-height:34px;margin-top:6px;font-feature-settings:"tnum" 1}
@@ -244,8 +244,7 @@ def setup(page_title: str, layout: str = "wide", dark: bool = False) -> None:
 
 
 def footer() -> None:
-    render(f'<div class="gd-core"><b>{esc(CORE_RULE)}</b><br>{esc(SYNTHETIC)} Not a credit decision. '
-           'Every impact figure is an estimate, not a guarantee.</div>')
+    render(f'<div class="gd-core"><b>{esc(CORE_RULE)}</b><br>Not a credit decision. Every impact figure is an estimate, not a guarantee.</div>')
 
 
 # Plotly colours for charts on the dark Cockpit (charts do not read CSS variables).

@@ -8,7 +8,6 @@ from components import shell
 T.setup("Home")
 persona = shell.sidebar()
 
-T.render('<span class="gd-tag">Megathon X · Problem Statement 1 · Lloyds</span>')
 st.title("Green, with receipts.")
 T.render('<p class="gd-muted" style="font-size:17px;max-width:760px">One evidence engine, two audiences. Customers get a next green step they can check. '
          'Relationship teams get a ranked pipeline they can defend. Every number has a source, every refusal is explained, '
@@ -29,11 +28,5 @@ with c3, st.container(key="gd-panel-home-receipts"):
     st.markdown("**Receipts**")
     st.caption("Baselines, calibration, confidence terciles, categoriser, LLM evaluation, scenario suite and data-quality gates.")
     st.page_link("pages/3_Receipts.py", label="Open Receipts", icon=":material/receipt_long:")
-
-st.subheader("Customers")
-st.caption("Pick one in the sidebar.")
-for p in client.personas():
-    T.render(f'<p style="margin:2px 0"><b>{T.esc(p["display_name"])}</b> <span class="gd-tag gd-tag--code">{T.esc(p["customer_id"])}</span> '
-             f'<span class="gd-muted">{T.esc(p["summary"])}</span></p>')
 
 T.footer()

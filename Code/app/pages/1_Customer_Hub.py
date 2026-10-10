@@ -31,7 +31,7 @@ cols = st.columns(4)
 for col, gp in zip(cols, ["GP01", "GP02", "GP03", "GP04"]):
     with col:
         T.render(T.tile(opps[gp], st.session_state[sel_key] == gp))
-        if st.button(f"Open {opps[gp]['opportunity_name']}", key=f"open-{gp}", width="stretch"):
+        if st.button("Open", key=f"open-{gp}", width="stretch", help=f"Open {opps[gp]['opportunity_name']}"):
             st.session_state[sel_key] = gp
             st.rerun()
 
@@ -43,18 +43,20 @@ with left:
         T.banner("Insights are off. Switch them back on in Your data whenever you like.", "info")
 
 with right:
-    with st.container(key="gd-panel-data"):
-        st.markdown("#### Your data")
+    names = ["Your data"] + (["Scenario Lab"] if shell.can("lab") else []) + (["Claim-Check"] if shell.can("redteam") else [])
+    tabs = dict(zip(names, st.tabs(names)))
+    with tabs["Your data"]:
         for f in doc.get("data_freshness", []):
             T.render(f'<p style="margin:4px 0;display:flex;justify-content:space-between;gap:8px"><span>{T.esc(f["source"])}</span>'
                      f'<span class="gd-date">{T.esc(f["asOf"]).upper()} · {"DECLARED" if f["kind"] == "declared" else "INFERRED"}</span></p>')
-        st.markdown("**What we used / what we didn't**")
-        st.caption("Used: spending categories, products, energy and digital usage. "
-                   "Not used to drive recommendations: age, income or fine-grained postcode.")
+        st.caption("We use spending categories, products, energy and digital usage. "
+                   "We do not use age, income or fine-grained postcode to drive recommendations.")
         st.toggle("Show me green insights", value=True, key="insights-on", help="Switching this off replaces every card with one placeholder.")
-    if shell.can("lab"):
-        scenario_lab(persona["customer_id"])
-    if shell.can("redteam"):
-        redteam()
+    if "Scenario Lab" in tabs:
+        with tabs["Scenario Lab"]:
+            scenario_lab(persona["customer_id"])
+    if "Claim-Check" in tabs:
+        with tabs["Claim-Check"]:
+            redteam()
 
 T.footer()

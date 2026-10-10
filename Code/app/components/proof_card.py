@@ -90,24 +90,26 @@ def render(doc: dict, opp: dict, key: str = "card") -> None:
                     with st.expander(opp["ladder"]["prompt"]):
                         _ladder(opp, key)
 
-            with st.expander("Why you're seeing this"):
-                T.render(T.evidence(opp))
-            im = opp["impact"]
-            if im["status"] == "ESTIMATED":
-                with st.expander("How we worked this out"):
-                    rows = [("Formula", im.get("formula")), ("Baseline", im.get("baseline")), ("Time horizon", im.get("horizon")),
-                            ("Factor source", ", ".join(im.get("factor_refs") or []))]
-                    T.render("".join(f'<p style="margin:4px 0"><span class="gd-muted">{k}:</span> <b>{T.esc(v)}</b></p>' for k, v in rows if v))
-                    T.banner("Estimate, not a guarantee. Calculated by the carbon engine, never by the AI. Avoided emissions are never netted against the bank's own footprint.")
-            with st.expander("How sure we are"):
-                T.render(_confidence_html(opp["confidence"]))
-                st.caption("Likelihood is not creditworthiness, and it is not a credit decision.")
-
             T.render(T.claim_stamp(opp))
-            with st.expander("See which data backs each sentence"):
-                for s in opp["explanation"]["sentences"]:
-                    tags = " ".join(f'<span class="gd-tag gd-tag--code">{T.esc(f)}</span>' for f in s["fields"])
-                    T.render(f'<div style="padding:8px 0;border-top:1px solid rgba(11,31,24,.08)">✓ {T.esc(s["text"])}<div style="margin-top:4px">{tags}</div></div>')
+            im = opp["impact"]
+            with st.expander("See the receipt"):
+                labels = ["Why you're seeing this"] + (["How we worked this out"] if im["status"] == "ESTIMATED" else []) + ["How sure we are", "What backs each sentence"]
+                parts = dict(zip(labels, st.tabs(labels)))
+                with parts["Why you're seeing this"]:
+                    T.render(T.evidence(opp))
+                if "How we worked this out" in parts:
+                    with parts["How we worked this out"]:
+                        rows = [("Formula", im.get("formula")), ("Baseline", im.get("baseline")), ("Time horizon", im.get("horizon")),
+                                ("Factor source", ", ".join(im.get("factor_refs") or []))]
+                        T.render("".join(f'<p style="margin:4px 0"><span class="gd-muted">{k}:</span> <b>{T.esc(v)}</b></p>' for k, v in rows if v))
+                        st.caption("Estimate, not a guarantee. Calculated by the carbon engine, never by the AI.")
+                with parts["How sure we are"]:
+                    T.render(_confidence_html(opp["confidence"]))
+                    st.caption("Likelihood is not creditworthiness, and it is not a credit decision.")
+                with parts["What backs each sentence"]:
+                    for sent in opp["explanation"]["sentences"]:
+                        tags = " ".join(f'<span class="gd-tag gd-tag--code">{T.esc(f)}</span>' for f in sent["fields"])
+                        T.render(f'<div style="padding:8px 0;border-top:1px solid var(--divider)">✓ {T.esc(sent["text"])}<div style="margin-top:4px">{tags}</div></div>')
 
             na = opp["next_action"]
             if status in ("RECOMMEND",) and na.get("label"):
@@ -117,11 +119,13 @@ def render(doc: dict, opp: dict, key: str = "card") -> None:
                     st.toast("Suitability check started: 3 to 5 questions.")
             elif status == "SOFT_SURFACE":
                 st.button("Learn more", key=f"{key}-learn", width="stretch")
-        if st.button("Talk to a person", key=f"{key}-human", type="tertiary", icon=":material/chat:"):
+        T.render('<p class="gd-disc" style="margin:8px 0 4px">Not a credit decision · Likelihood is not creditworthiness</p>')
+        c_help, c_fb = st.columns(2)
+        if c_help.button("Talk to a person", key=f"{key}-human", type="tertiary", icon=":material/chat:"):
             st.toast("A person will call you back. Pick a time on the Help page.")
-        T.render('<p class="gd-disc" style="margin:4px 0">Not a credit decision · Likelihood is not creditworthiness</p>')
         if status != "RULED_OUT":
-            f1, f2, f3 = st.columns(3)
-            for col, label, k in ((f1, "Not relevant", "nr"), (f2, "This is wrong", "wr"), (f3, "Remind me later", "rm")):
-                if col.button(label, key=f"{key}-fb-{k}", type="tertiary"):
-                    st.toast("Thanks. This changes when we show the card, never its numbers.")
+            with c_fb.popover("Not quite right?", width="stretch"):
+                st.caption("This changes when we show the card, never its numbers.")
+                for label, k in (("Not relevant", "nr"), ("This is wrong", "wr"), ("Remind me later", "rm")):
+                    if st.button(label, key=f"{key}-fb-{k}", width="stretch"):
+                        st.toast("Thanks. We've noted that.")
