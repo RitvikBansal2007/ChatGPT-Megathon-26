@@ -1,6 +1,6 @@
 import pandas as pd
-from greenproof.categoriser.rules import categorize_batch
-from greenproof.categoriser.model import predict_batch
+from greendash.categoriser.rules import categorize_batch
+from greendash.categoriser.model import predict_batch
 import os
 
 def save_examples():

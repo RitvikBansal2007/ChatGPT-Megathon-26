@@ -4,8 +4,8 @@ import shap
 import skops.io as sio
 import os
 import json
-from greenproof.models.utils import load_data, get_features_and_targets
-from greenproof.models.score import load_verified_model
+from greendash.models.utils import load_data, get_features_and_targets
+from greendash.models.score import load_verified_model
 
 def compute_reasons():
     train_df, _, test_df = load_data()

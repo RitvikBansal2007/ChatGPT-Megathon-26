@@ -2,8 +2,8 @@ import pandas as pd
 import numpy as np
 from sklearn.model_selection import GroupKFold
 from sklearn.metrics import f1_score
-from greenproof.categoriser.rules import categorize_batch
-from greenproof.categoriser.model import build_pipeline
+from greendash.categoriser.rules import categorize_batch
+from greendash.categoriser.model import build_pipeline
 import os
 
 def clean_for_grouping(text):

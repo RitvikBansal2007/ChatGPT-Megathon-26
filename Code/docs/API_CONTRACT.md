@@ -1,6 +1,6 @@
-# GreenProof Backend API Contracts
+# GreenDash Backend API Contracts
 
-This document outlines the expected request/response schemas and error-handling conventions for the GreenProof backend services (Scoring, Carbon Engine, and LLM Explainer). It is designed to help align the Claim-Check gateway and orchestrator integration.
+This document outlines the expected request/response schemas and error-handling conventions for the GreenDash backend services (Scoring, Carbon Engine, and LLM Explainer). It is designed to help align the Claim-Check gateway and orchestrator integration.
 
 ---
 

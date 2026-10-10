@@ -2,8 +2,8 @@ import json
 import shutil
 from pathlib import Path
 
-from greenproof.contracts import Mutation
-from greenproof.scenarios.run import run
+from greendash.contracts import Mutation
+from greendash.scenarios.run import run
 
 CACHE = Path("out/cache")
 

@@ -7,7 +7,7 @@ import pandas as pd
 import yaml
 
 ARTEFACTS = ["out/models", "out/packs", "out/test_predictions.csv", "out/splits.json", "out/scenario_results.json",
-             "data/features", "data/priors", "config", "greenproof/llm/prompts"]
+             "data/features", "data/priors", "config", "greendash/llm/prompts"]
 
 def sha(path: Path) -> str:
     if path.suffix == ".parquet":

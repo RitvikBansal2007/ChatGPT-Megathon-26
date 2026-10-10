@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends, Request
 
 from api.deps import require_role
 from api.routers.portfolio import rows, suppress
-from greenproof.db import audit, repo
+from greendash.db import audit, repo
 
 router = APIRouter(prefix="/api/governance", tags=["governance"])
 

@@ -7,11 +7,11 @@ from pathlib import Path
 import pandas as pd
 import yaml
 
-from greenproof.carbon.engine import load_factors
-from greenproof.contracts import (DiffRow, Mutation, Opportunity, ProductId, ScenarioResponse, StatusSnapshot)
-from greenproof.features.build import build_features
-from greenproof.packs import evaluate_customer
-from greenproof.scenarios.mutations import apply_mutations
+from greendash.carbon.engine import load_factors
+from greendash.contracts import (DiffRow, Mutation, Opportunity, ProductId, ScenarioResponse, StatusSnapshot)
+from greendash.features.build import build_features
+from greendash.packs import evaluate_customer
+from greendash.scenarios.mutations import apply_mutations
 
 RAW = Path("data/raw")
 TABLES = ["customers", "transactions", "products", "vehicles", "energy", "digital"]

@@ -4,7 +4,7 @@ import math
 
 import yaml
 
-from greenproof.contracts import EligibilityResult, EligibilityVerdict
+from greendash.contracts import EligibilityResult, EligibilityVerdict
 
 CONFIG = Path(__file__).resolve().parents[2] / "config" / "products.yaml"
 

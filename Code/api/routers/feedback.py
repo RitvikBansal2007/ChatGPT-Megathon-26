@@ -4,8 +4,8 @@ from fastapi import APIRouter, Depends
 from pydantic import BaseModel, ConfigDict, Field
 
 from api.deps import customer_key_for, require_role, require_subject
-from greenproof.db import repo
-from greenproof.security.authz import encrypt_feedback
+from greendash.db import repo
+from greendash.security.authz import encrypt_feedback
 
 router = APIRouter(prefix="/api/customers/{customer_id}", tags=["feedback"])
 

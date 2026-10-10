@@ -3,8 +3,8 @@ from __future__ import annotations
 from datetime import date
 import pandas as pd
 
-from greenproof.features.conflicts import conflict_flags
-from greenproof.features.freshness import CRITICAL, critical_missing, days_old, recency_score
+from greendash.features.conflicts import conflict_flags
+from greendash.features.freshness import CRITICAL, critical_missing, days_old, recency_score
 
 MODEL_EXCLUDED = {"age", "income_band", "region", "postcode"}
 

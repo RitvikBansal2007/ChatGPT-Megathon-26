@@ -1,4 +1,4 @@
-from greenproof.models.utils import load_data, get_features_and_targets
+from greendash.models.utils import load_data, get_features_and_targets
 from sklearn.isotonic import IsotonicRegression
 import skops.io as sio
 import pandas as pd

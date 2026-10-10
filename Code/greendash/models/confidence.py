@@ -4,8 +4,8 @@ from sklearn.ensemble import IsolationForest
 import skops.io as sio
 import os
 import json
-from greenproof.models.utils import load_data, get_features_and_targets
-from greenproof.models.score import load_verified_model
+from greendash.models.utils import load_data, get_features_and_targets
+from greendash.models.score import load_verified_model
 
 class ConfidenceCalculator:
     def __init__(self):

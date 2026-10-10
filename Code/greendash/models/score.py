@@ -4,8 +4,8 @@ import hashlib
 import json
 import skops.io as sio
 import os
-from greenproof.models.utils import load_data, get_features_and_targets
-from greenproof.models.evaluate_models import load_calibrator
+from greendash.models.utils import load_data, get_features_and_targets
+from greendash.models.evaluate_models import load_calibrator
 
 MODELS_DIR = os.path.join(os.path.dirname(__file__), '../../data/models')
 

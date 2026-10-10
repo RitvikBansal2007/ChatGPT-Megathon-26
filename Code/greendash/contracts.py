@@ -1,4 +1,4 @@
-# greenproof/contracts.py   (FROZEN at T+1:30; changes = 2-line PR + chat ping)
+# greendash/contracts.py   (FROZEN at T+1:30; changes = 2-line PR + chat ping)
 from __future__ import annotations
 
 from datetime import date

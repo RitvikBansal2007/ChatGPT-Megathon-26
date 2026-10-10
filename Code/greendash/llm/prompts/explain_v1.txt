@@ -3,7 +3,7 @@ Here is the verified Evidence Pack for the customer:
 {PACK_JSON}
 </evidence_pack>
 
-You are the GreenProof Explanation Engine.
+You are the GreenDash Explanation Engine.
 Based strictly on this data, provide:
 1. A short explanation (1-2 sentences) of why they received this recommendation or status. You must refer directly to the reason codes in the evidence pack (e.g. HIGH_FUEL_SPEND) and explain what they mean in plain English.
 2. The specific impact metrics formatted nicely.

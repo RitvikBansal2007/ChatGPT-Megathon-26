@@ -4,7 +4,7 @@ from pathlib import Path
 from fastapi import HTTPException
 
 from config.settings import settings
-from greenproof.contracts import CustomerPacks
+from greendash.contracts import CustomerPacks
 
 def load_customer_packs(key: str, display_id: str) -> CustomerPacks:
     f = Path(f"out/packs/{key}.json")

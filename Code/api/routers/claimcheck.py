@@ -2,8 +2,8 @@ from fastapi import APIRouter, Depends
 from pydantic import BaseModel, ConfigDict, Field
 
 from api.deps import customer_key_for, require_role
-from greenproof.db import audit, repo
-from greenproof.llm.claimcheck import check
+from greendash.db import audit, repo
+from greendash.llm.claimcheck import check
 from api.services import load_customer_packs
 
 router = APIRouter(prefix="/api", tags=["claimcheck"])

@@ -6,7 +6,7 @@ from datetime import date
 import numpy as np
 import pandas as pd
 
-from greenproof.contracts import Mutation
+from greendash.contracts import Mutation
 
 Rows = dict[str, pd.DataFrame]
 

@@ -5,10 +5,10 @@ from datetime import date
 
 import pandas as pd
 
-from greenproof.carbon.engine import load_factors
-from greenproof.contracts import Mutation
-from greenproof.packs import evaluate_customer
-from greenproof.scenarios.run import run
+from greendash.carbon.engine import load_factors
+from greendash.contracts import Mutation
+from greendash.packs import evaluate_customer
+from greendash.scenarios.run import run
 
 CUT = date(2026, 6, 30)
 

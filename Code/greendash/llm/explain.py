@@ -1,8 +1,8 @@
 import os
 import json
 import time
-from greenproof.llm.client import get_client
-from greenproof.llm.templates import get_template
+from greendash.llm.client import get_client
+from greendash.llm.templates import get_template
 
 # Security modules - wrapped in try/except so it doesn't break until merged
 try:

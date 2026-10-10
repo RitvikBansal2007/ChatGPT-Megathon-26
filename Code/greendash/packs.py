@@ -5,10 +5,10 @@ from pathlib import Path
 import pandas as pd
 import yaml
 
-from greenproof.carbon.engine import estimate, load_factors
-from greenproof.models.score import score
-from greenproof.orchestrator import build_pack
-from greenproof.rules.engine import evaluate
+from greendash.carbon.engine import estimate, load_factors
+from greendash.models.score import score
+from greendash.orchestrator import build_pack
+from greendash.rules.engine import evaluate
 
 PRODUCTS = ["GP01", "GP02", "GP03", "GP04"]
 OUT = Path("out/packs")

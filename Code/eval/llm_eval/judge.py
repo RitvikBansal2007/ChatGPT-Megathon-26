@@ -6,7 +6,7 @@ from google import genai
 from pydantic import BaseModel
 from dotenv import load_dotenv
 
-from greenproof.llm.explain import get_explanation
+from greendash.llm.explain import get_explanation
 
 # Load .env
 env_path = os.path.join(os.path.dirname(__file__), '../../../.env')
@@ -23,7 +23,7 @@ class JudgeEvaluation(BaseModel):
 
 def evaluate_explanation(pack, explanation_output):
     prompt = f"""
-    You are an LLM judge evaluating explanations for GreenProof, a green finance recommendation engine.
+    You are an LLM judge evaluating explanations for GreenDash, a green finance recommendation engine.
     
     Evidence Pack:
     {json.dumps(pack, indent=2)}

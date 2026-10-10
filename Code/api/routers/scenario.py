@@ -1,9 +1,9 @@
 from fastapi import APIRouter, Depends, HTTPException
 
 from api.deps import customer_key_for, require_role
-from greenproof.contracts import ScenarioRequest, ScenarioResponse
-from greenproof.db import repo
-from greenproof.scenarios.run import run
+from greendash.contracts import ScenarioRequest, ScenarioResponse
+from greendash.db import repo
+from greendash.scenarios.run import run
 import json
 from pathlib import Path
 from config.settings import settings

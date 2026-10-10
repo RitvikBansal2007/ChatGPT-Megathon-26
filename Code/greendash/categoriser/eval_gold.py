@@ -1,7 +1,7 @@
 import pandas as pd
 from sklearn.metrics import f1_score
-from greenproof.categoriser.rules import categorize_batch
-from greenproof.categoriser.model import predict_batch
+from greendash.categoriser.rules import categorize_batch
+from greendash.categoriser.model import predict_batch
 import os
 
 def evaluate_gold():

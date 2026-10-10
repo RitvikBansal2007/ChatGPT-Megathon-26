@@ -2,7 +2,7 @@ import hashlib
 import json
 from datetime import datetime, timezone
 
-from greenproof.db.repo import connect
+from greendash.db.repo import connect
 
 GENESIS = "0" * 64
 

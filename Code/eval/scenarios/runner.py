@@ -4,10 +4,10 @@ from pathlib import Path
 
 import yaml
 
-from greenproof.carbon.engine import load_factors
-from greenproof.contracts import Mutation
-from greenproof.scenarios.mutations import apply_mutations
-from greenproof.scenarios.run import load_customer_rows, run_on_rows
+from greendash.carbon.engine import load_factors
+from greendash.contracts import Mutation
+from greendash.scenarios.mutations import apply_mutations
+from greendash.scenarios.run import load_customer_rows, run_on_rows
 
 CUT = date(2026, 6, 30)
 CASES = Path(__file__).with_name("cases.yaml")

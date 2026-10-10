@@ -1,4 +1,4 @@
-from greenproof.models.utils import load_data, get_features_and_targets
+from greendash.models.utils import load_data, get_features_and_targets
 from sklearn.metrics import roc_auc_score, average_precision_score, brier_score_loss
 import skops.io as sio
 import numpy as np

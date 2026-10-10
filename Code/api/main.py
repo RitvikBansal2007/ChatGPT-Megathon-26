@@ -4,14 +4,14 @@ from fastapi import FastAPI
 from fastapi.responses import JSONResponse
 
 from api.routers import auth, claimcheck, eval, feedback, governance, opportunities, portfolio, scenario
-from greenproof.db import migrate
+from greendash.db import migrate
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     migrate.migrate()
     yield
 
-app = FastAPI(title="GreenProof API", version="1.0", lifespan=lifespan)
+app = FastAPI(title="GreenDash API", version="1.0", lifespan=lifespan)
 app.include_router(opportunities.router)
 app.include_router(feedback.router)
 app.include_router(scenario.router)

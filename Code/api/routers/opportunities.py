@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends
 
 from api.deps import customer_key_for, require_role, require_subject
 from api.services import load_customer_packs
-from greenproof.contracts import CustomerPacks
+from greendash.contracts import CustomerPacks
 
 router = APIRouter(prefix="/api/customers/{customer_id}", tags=["opportunities"])
 

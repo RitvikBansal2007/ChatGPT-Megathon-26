@@ -5,7 +5,7 @@ from pathlib import Path
 
 import yaml
 
-from greenproof.contracts import (
+from greendash.contracts import (
     DigitalAdoption, EligibilityResult, ImpactStatus, ImpactVerdict, MissingInput, NextAction,
     Opportunity, ProductId, PropensityVerdict, EligibilityVerdict, Status, WhyNow, Band
 )

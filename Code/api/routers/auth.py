@@ -3,7 +3,7 @@ from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel, ConfigDict
 
 from config.settings import settings
-from greenproof.security.authz import issue_token
+from greendash.security.authz import issue_token
 
 router = APIRouter(prefix="/api/auth", tags=["auth"])
 

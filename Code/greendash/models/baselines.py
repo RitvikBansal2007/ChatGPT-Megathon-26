@@ -1,4 +1,4 @@
-from greenproof.models.utils import load_data, get_features_and_targets
+from greendash.models.utils import load_data, get_features_and_targets
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import roc_auc_score
 import pandas as pd
