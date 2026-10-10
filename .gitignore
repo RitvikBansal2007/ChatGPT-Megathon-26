@@ -1,1 +1,8 @@
 Code/readmes/
+.env
+.venv/
+__pycache__/
+*.parquet
+*.csv
+out/
+data/
