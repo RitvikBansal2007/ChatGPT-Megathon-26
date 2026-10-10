@@ -81,7 +81,9 @@ In total, the pipeline achieves remarkable performance across all metrics, ensur
 *All system targets successfully met. Ready for production.*
 """
 
-    report_path = os.path.join(out_dir, 'final_report.md')
+    docs_dir = os.path.join(os.path.dirname(__file__), '../docs')
+    os.makedirs(docs_dir, exist_ok=True)
+    report_path = os.path.join(docs_dir, 'EVALUATION.md')
     with open(report_path, 'w') as f:
         f.write(report_md)
         
