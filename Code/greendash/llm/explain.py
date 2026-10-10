@@ -99,8 +99,12 @@ def get_explanation(evidence_pack, customer_key="dummy", canary_token="canary123
             result = check(parsed, llm_in)
             if result.passed:
                 # Need to map the raw parsed JSON list to Sentence objects shape if it isn't already
-                if isinstance(parsed, dict) and "sentences" in parsed:
-                    sents = parsed["sentences"]
+                sents = []
+                if isinstance(parsed, dict):
+                    if "explanation" in parsed:
+                        sents.append({"text": str(parsed["explanation"]), "fields": [], "check": "PASS"})
+                    if "metrics_summary" in parsed:
+                        sents.append({"text": str(parsed["metrics_summary"]), "fields": [], "check": "PASS"})
                 else:
                     sents = [{"text": str(parsed), "fields": [], "check": "PASS"}]
                 return {"sentences": sents, "source": "llm", "claimcheck_status": "PASS"}

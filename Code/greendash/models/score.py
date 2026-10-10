@@ -37,13 +37,11 @@ def score(features_row, pid):
             band = Band.LOW
             
         cp = ConfidenceParts(overall=0.8, completeness=0.8, recency=0.8, stability=0.8, in_distribution=0.8)
-        rc = ReasonCode(code="HIGH_FUEL_SPEND", phrase="High monthly fuel spend", metric="avg_monthly_fuel_gbp", value=100.0, display="£100", observed_at=date.today(), source="inferred_transactions")
         
-        return PropensityVerdict(propensity=float(calib_pred), likelihood_band=band, confidence=cp, reason_codes=[rc])
+        return PropensityVerdict(propensity=float(calib_pred), likelihood_band=band, confidence=cp, reason_codes=[])
     except Exception as e:
         print(f"Scoring error: {e}")
-        cp = ConfidenceParts(overall=0.5, completeness=0.5, recency=0.5, stability=0.5, in_distribution=0.5)
-        return PropensityVerdict(propensity=0.5, likelihood_band=Band.MEDIUM, confidence=cp, reason_codes=[])
+        raise e
 
 
 MODELS_DIR = os.path.join(os.path.dirname(__file__), '../../data/models')
