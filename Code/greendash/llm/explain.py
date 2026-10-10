@@ -134,10 +134,12 @@ _PLACEHOLDERS = {"fuel_spend": "[FUEL_SPEND]", "gas_kwh": "[GAS_KWH]", "elec_kwh
 
 # Where each template figure may come from. A figure is used only if a pack field or a
 # reason code's "metric" has exactly one of these names and a finite numeric value.
-# Nothing is derived, converted or defaulted. Note fuel_spend is a MONTHLY average
-# (avg_monthly_fuel_gbp); the template wording does not say "per month".
+# Nothing is derived, converted or defaulted. fuel_spend has NO source on purpose: the
+# only pack metric is avg_monthly_fuel_gbp (monthly) and the GP01 template text does not
+# say "per month", so using it would misstate the figure. Add "avg_monthly_fuel_gbp"
+# here once the template wording is confirmed. Until then GP01 RECOMMEND uses PENDING.
 _TEMPLATE_SOURCES = {
-    "fuel_spend": ("avg_monthly_fuel_gbp",),
+    "fuel_spend": (),
     "gas_kwh": ("gas_kwh_12m", "gas_kwh"),
     "elec_kwh": ("electricity_kwh_12m", "elec_kwh"),
 }

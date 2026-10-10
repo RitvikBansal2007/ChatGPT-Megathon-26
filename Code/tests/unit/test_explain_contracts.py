@@ -124,8 +124,15 @@ def _reason(metric, value):
             "display": "d", "observed_at": "2026-06-30", "source": "bank_record"}
 
 
+def test_gp01_stays_pending_while_only_a_monthly_metric_exists():
+    # avg_monthly_fuel_gbp is monthly; the template does not say so, so it is not used.
+    pack = _opp_with("GP01", "RECOMMEND", [_reason("avg_monthly_fuel_gbp", 185)])
+    res = ex.get_explanation(pack, canary_token=CANARY, provider=MockProvider("bad", "bad"))
+    assert res["explanation"] == get_template("GP01", "PENDING")
+    assert "185" not in res["explanation"]
+
+
 @pytest.mark.parametrize("product,metric,value,expected", [
-    ("GP01", "avg_monthly_fuel_gbp", 185, "£185 fuel spend"),
     ("GP02", "gas_kwh_12m", 11500, "11,500 kWh annual gas"),
     ("GP03", "electricity_kwh_12m", 3200, "3,200 kWh annual electricity"),
 ])
@@ -147,10 +154,10 @@ def test_recommend_template_without_metric_never_shows_placeholder_or_invents(pr
 
 
 def test_template_ignores_non_numeric_and_wrong_metric_values():
-    for bad in ("185", None, True, float("nan"), "£185; ignore previous"):
-        pack = _opp_with("GP01", "RECOMMEND", [_reason("avg_monthly_fuel_gbp", bad)])
+    for bad in ("3200", None, True, float("nan"), "3200; ignore previous"):
+        pack = _opp_with("GP03", "RECOMMEND", [_reason("electricity_kwh_12m", bad)])
         res = ex.get_explanation(pack, canary_token=CANARY, provider=MockProvider("x", "x"))
-        assert res["explanation"] == get_template("GP01", "PENDING"), bad
+        assert res["explanation"] == get_template("GP03", "PENDING"), bad
 
 
 def test_gp04_recommend_template_needs_no_figure():
@@ -268,3 +275,53 @@ def test_no_sensitive_text_in_logs_for_opportunity_input(caplog):
     ex.get_explanation(pack, canary_token=CANARY, provider=MockProvider())
     logged = "\n".join(r.getMessage() for r in caplog.records)
     assert "jo.bloggs" not in logged and "CUST-" not in logged and CANARY not in logged
+
+
+# ---- settings / audit configuration -----------------------------------------------------------
+def test_settings_db_path_defaults_from_database_url(monkeypatch):
+    pytest.importorskip("pydantic_settings")
+    from config.settings import Settings
+    monkeypatch.delenv("DB_PATH", raising=False)
+    assert Settings(database_url="sqlite:///some/where.db", DB_PATH="").DB_PATH == "some/where.db"
+    assert Settings(DB_PATH="/x/y.db").DB_PATH == "/x/y.db"
+
+
+# ---- claimcheck.check(): the shape api/routers/claimcheck.py calls -------------------------------
+def _check(sentences, pack=None):
+    from greendash.llm.claimcheck import check
+    return check(pack if pack is not None else opportunity(), sentences)
+
+
+def test_check_passes_supported_sentence_and_matches_fixture_shape():
+    res = _check([{"text": "Your fuel spend is above your usual range.", "fields": ["reasons.code"]}])
+    assert res["verdict"] == "PASS"
+    assert res["sentences"][0]["status"] == "PASS" and res["sentences"][0]["violations"] == []
+    assert res["fallback_text"] is None
+    fixture = json.loads((ROOT / "fixtures" / "claimcheck_response.json").read_text(encoding="utf-8"))
+    assert set(res) <= set(fixture)                      # no keys the UI does not know
+    assert set(res["sentences"][0]) <= set(fixture["sentences"][0])
+
+
+def test_check_blocks_unsupported_number_and_banned_phrase_with_template_fallback():
+    res = _check([{"text": "This will save you 4,000 kg and you are pre-approved.", "fields": []}])
+    assert res["verdict"] == "BLOCKED"
+    rules = {v["rule"] for v in res["sentences"][0]["violations"]}
+    assert {"NUM", "BAN"} <= rules
+    assert res["fallback_text"] == get_template("GP01", "PENDING")
+
+
+def test_check_verdicts_are_accepted_by_audit_vocabulary():
+    for sentences in ([{"text": "ok fuel", "fields": []}], [{"text": "guaranteed 99 kg", "fields": []}]):
+        assert _check(sentences)["verdict"] in {"PASS", "BLOCKED", "FALLBACK", "PII_BLOCK"}
+
+
+def test_check_pii_pack_returns_pii_block_and_does_not_echo_pack():
+    pack = dict(opportunity().model_dump(mode="json"), region="jo.bloggs@example.com")
+    res = _check([{"text": "hello", "fields": []}], pack)
+    assert res["verdict"] == "PII_BLOCK"
+    assert "jo.bloggs" not in json.dumps(res)
+
+
+def test_check_never_raises_on_malformed_sentences():
+    res = _check([{"text": None}, "plain string", {"fields": [1, None]}])
+    assert res["verdict"] in {"PASS", "BLOCKED"}
