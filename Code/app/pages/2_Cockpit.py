@@ -68,6 +68,10 @@ with t_over:
         st.markdown(f"#### Opportunity quadrant · {NAMES[product]}")
         st.caption(f"Propensity × estimated impact per customer, {P['customers_analysed']:,} customers. Circle size = cohort size, opacity = confidence, whisker = low to high range.")
         max_y = max((c.get("high") or c.get("central") or 1) for c in shown) * 1.15
+        # Calibrated take-up is rare (a few percent), so a fixed 0-1 axis would squeeze every
+        # real cohort against the left edge. Scale to the data; keep 0-1 for template data.
+        max_p = max((c["propensity"] for c in shown), default=1.0)
+        x_max = 1.0 if max_p > 0.5 else max(0.1, round(max_p * 1.4, 2))
         fig = go.Figure()
         for c in shown:
             low_conf = c["conf"] < 0.6
@@ -79,13 +83,13 @@ with t_over:
                             opacity=0.35 + 0.6 * c["conf"], line=dict(color=T.C["amber"] if low_conf else D["background"], width=3 if low_conf else 1)),
                 hovertemplate=f"<b>{c['name']}</b><br>{c['n']:,} customers<br>Propensity %{{x:.2f}}<br>Confidence {c['conf']:.2f}<br>"
                               + (f"Estimate {c['low']:,}–{c['high']:,} {unit}" if c.get("high") else "Impact not estimated") + "<extra></extra>"))
-        fig.add_vline(x=0.5, line_dash="dot", line_color=D["grid"])
+        fig.add_vline(x=x_max / 2, line_dash="dot", line_color=D["grid"])
         fig.add_hline(y=max_y / 2, line_dash="dot", line_color=D["grid"])
-        for x, y, txt, anchor in ((0.02, max_y * 0.97, "EDUCATE, NO HARD SELL", "left"), (0.98, max_y * 0.97, "RM CALL LIST", "right"),
-                                  (0.98, max_y * 0.04, "DIGITAL NUDGE", "right"), (0.02, max_y * 0.04, "LOW PRIORITY", "left")):
+        for x, y, txt, anchor in ((0.02 * x_max, max_y * 0.97, "EDUCATE, NO HARD SELL", "left"), (0.98 * x_max, max_y * 0.97, "RM CALL LIST", "right"),
+                                  (0.98 * x_max, max_y * 0.04, "DIGITAL NUDGE", "right"), (0.02 * x_max, max_y * 0.04, "LOW PRIORITY", "left")):
             fig.add_annotation(x=x, y=y, text=txt, showarrow=False, xanchor=anchor, font=dict(family="JetBrains Mono", size=10, color=D["muted"]))
         fig.update_layout(height=380, showlegend=False, margin=dict(l=64, r=10, t=10, b=48), plot_bgcolor=D["plot"], paper_bgcolor="rgba(0,0,0,0)",
-                          xaxis=dict(title="Propensity (low to high)", range=[0, 1], gridcolor=D["grid"], zeroline=False),
+                          xaxis=dict(title="Propensity (low to high)", range=[0, x_max], gridcolor=D["grid"], zeroline=False),
                           yaxis=dict(title=f"Estimated impact ({unit})", range=[0, max_y], gridcolor=D["grid"], zeroline=False),
                           font=dict(family="Inter", color=D["text"]))
         event = st.plotly_chart(fig, width="stretch", theme=None, on_select="rerun", selection_mode="points", key=f"quad-{product}", config={"displayModeBar": False})
@@ -117,14 +121,18 @@ with t_seg:
         table(reg)
 
     st.markdown(f"#### Trend · {NAMES[product]}")
-    tr = P["trends"]
-    fig = go.Figure()
-    fig.add_trace(go.Scatter(x=tr["months"], y=tr["surfaced"][product], name="Surfaced", line=dict(color=T.C["slate_sage"], width=2)))
-    fig.add_trace(go.Scatter(x=tr["months"], y=tr["takenUp"][product], name="Taken up", line=dict(color=fam_colour, width=2)))
-    fig.update_layout(height=260, margin=dict(l=48, r=8, t=10, b=32), plot_bgcolor=D["plot"], paper_bgcolor="rgba(0,0,0,0)",
-                      xaxis=dict(gridcolor=D["grid"]), yaxis=dict(gridcolor=D["grid"], zeroline=False),
-                      font=dict(family="Inter", color=D["text"]), legend=dict(orientation="h"))
-    st.plotly_chart(fig, width="stretch", theme=None, config={"displayModeBar": False})
+    tr = P.get("trends")
+    if not tr:
+        T.banner("Month-by-month trends need post-launch take-up data, which this run does not have. "
+                 "Nothing is shown rather than an invented series.", "info")
+    else:
+        fig = go.Figure()
+        fig.add_trace(go.Scatter(x=tr["months"], y=tr["surfaced"][product], name="Surfaced", line=dict(color=T.C["slate_sage"], width=2)))
+        fig.add_trace(go.Scatter(x=tr["months"], y=tr["takenUp"][product], name="Taken up", line=dict(color=fam_colour, width=2)))
+        fig.update_layout(height=260, margin=dict(l=48, r=8, t=10, b=32), plot_bgcolor=D["plot"], paper_bgcolor="rgba(0,0,0,0)",
+                          xaxis=dict(gridcolor=D["grid"]), yaxis=dict(gridcolor=D["grid"], zeroline=False),
+                          font=dict(family="Inter", color=D["text"]), legend=dict(orientation="h"))
+        st.plotly_chart(fig, width="stretch", theme=None, config={"displayModeBar": False})
 
 with t_cust:
     # ------------------------------------------------------------ Levels 3–5: customer drill-down

@@ -251,7 +251,7 @@ def score_customers(customer_ids):
     import yaml
     
     decisions_path = os.path.join(os.path.dirname(__file__), '../../config/decisions.yaml')
-    cutoff = date.fromisoformat(yaml.safe_load(open(decisions_path))["cutoff_date"])
+    cutoff = date.fromisoformat(yaml.safe_load(open(decisions_path, encoding="utf-8"))["cutoff_date"])
     factors = load_factors()
     
     rows = []

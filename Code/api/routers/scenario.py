@@ -16,7 +16,7 @@ def _cached(req: ScenarioRequest) -> ScenarioResponse | None:
     f = Path("out/cache/scenarios.json")
     if not f.exists():
         return None
-    hit = json.loads(f.read_text()).get(f"{req.customer_id}|{req.mutations[0].value}")
+    hit = json.loads(f.read_text(encoding="utf-8")).get(f"{req.customer_id}|{req.mutations[0].value}")
     return ScenarioResponse.model_validate_json(json.dumps(hit)) if hit else None
 
 @router.post("/scenario", response_model=ScenarioResponse, response_model_by_alias=True)

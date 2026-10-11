@@ -194,6 +194,13 @@ def evaluate(save_summary=True):
         with open(out_path, 'w') as f:
             json.dump(eval_summary, f, indent=2)
         print(f"\nSaved real evaluation summary to: {out_path}")
+        # The offline app and a test read fixtures/eval_summary.json; keep it identical so a
+        # fresh `make pipeline` does not leave the repository inconsistent.
+        fixture_path = os.path.join(os.path.dirname(__file__), '../../fixtures/eval_summary.json')
+        if os.path.isdir(os.path.dirname(fixture_path)):
+            with open(fixture_path, 'w') as f:
+                json.dump(eval_summary, f, indent=2)
+            print(f"Synced offline copy: {fixture_path}")
         
         try:
             from eval.report import generate_report

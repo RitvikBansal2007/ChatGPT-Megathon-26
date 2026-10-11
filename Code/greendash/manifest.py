@@ -34,7 +34,7 @@ def main() -> None:
         elif p.is_dir():
             files += [f for f in p.rglob("*") if f.is_file() and f.name not in (".gitkeep", "hashes.json")]
     entries = {str(f): sha(f) for f in sorted(files)}
-    dec = yaml.safe_load(open("config/decisions.yaml"))
+    dec = yaml.safe_load(open("config/decisions.yaml", encoding="utf-8"))
     git = subprocess.run(["git", "rev-parse", "HEAD"], capture_output=True, text=True).stdout.strip()
     body = {"seed": dec["seed"], "cutoff_date": dec["cutoff_date"], "outcome_window_days": dec["outcome_window_days"],
             "factor_vintage": dec["factor_vintage"], "rules_version": dec["rules_version"],

@@ -64,7 +64,7 @@ def generate_vehicles(customers, latent):
 def _lcl_profile():
     """Real household electricity levels and seasonality (ingest/lcl.py). None if not built."""
     path = ROOT / "data" / "priors" / "lcl_profile.json"
-    return json.loads(path.read_text()) if path.exists() else None
+    return json.loads(path.read_text(encoding="utf-8")) if path.exists() else None
 
 
 def generate_energy_usage(customers, latent):

@@ -12,7 +12,7 @@ def migrate() -> None:
     conn = sqlite3.connect(db)
     try:
         conn.execute("PRAGMA journal_mode=WAL")
-        conn.executescript(SCHEMA.read_text())
+        conn.executescript(SCHEMA.read_text(encoding="utf-8"))
         conn.commit()
     finally:
         conn.close()

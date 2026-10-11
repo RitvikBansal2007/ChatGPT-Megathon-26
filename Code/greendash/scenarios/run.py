@@ -50,7 +50,7 @@ def _cause(pid: str, b: Opportunity, a: Opportunity, fb: dict, fa: dict) -> str:
 
 def run(customer_id: str, mutations: list[Mutation], cutoff: date | None = None) -> ScenarioResponse:
     t0 = time.perf_counter()
-    cutoff = cutoff or date.fromisoformat(yaml.safe_load(open("config/decisions.yaml"))["cutoff_date"])
+    cutoff = cutoff or date.fromisoformat(yaml.safe_load(open("config/decisions.yaml", encoding="utf-8"))["cutoff_date"])
     factors = load_factors()
     rows = load_customer_rows(customer_id)
     fb, before = run_on_rows(rows, cutoff, factors)

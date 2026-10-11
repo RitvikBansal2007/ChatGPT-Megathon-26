@@ -10,7 +10,7 @@ CONFIG = Path(__file__).resolve().parents[2] / "config" / "products.yaml"
 
 @lru_cache(maxsize=1)
 def _load() -> dict:
-    return yaml.safe_load(CONFIG.read_text())
+    return yaml.safe_load(CONFIG.read_text(encoding="utf-8"))
 
 def _missing(v) -> bool:
     return v is None or (isinstance(v, float) and math.isnan(v))

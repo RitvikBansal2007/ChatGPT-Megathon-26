@@ -46,7 +46,7 @@ _LLM_DIR = Path(__file__).resolve().parents[1] / "greendash" / "llm"
 def _read_manifest() -> str:
     """The run manifest hash from out/run_manifest.json, or "unavailable"."""
     try:
-        value = json.loads(MANIFEST.read_text()).get("manifest_hash")
+        value = json.loads(MANIFEST.read_text(encoding="utf-8")).get("manifest_hash")
         if isinstance(value, str) and value:
             return value
     except Exception:
@@ -61,6 +61,28 @@ def _llm_configured() -> bool:
 def _template_explanation(pid: Optional[str], status: Optional[str]) -> Dict[str, Any]:
     text = get_template(pid, status)
     return {"sentences": [{"text": text, "fields": [], "check": "TEMPLATE"}],
+            "source": "template", "claimcheck_status": "FALLBACK"}
+
+
+def _evidence_explanation(opp: Dict[str, Any]) -> Optional[Dict[str, Any]]:
+    """Deterministic wording built only from the pack's own facts: the top reason's
+    catalogue phrase and the engine's central impact figure. No model is involved, so it
+    is always available. The caller still runs Claim-Check on it before use.
+
+    Returns None when there is nothing safe to say (ruled out, abstained, no estimate)."""
+    if opp.get("status") not in ("RECOMMEND", "SOFT_SURFACE"):
+        return None
+    impact = opp.get("impact") or {}
+    display = impact.get("display")
+    if impact.get("status") != "ESTIMATED" or not isinstance(display, str) or not display.strip():
+        return None
+    sentences = []
+    phrase = next((r.get("phrase") for r in (opp.get("reason_codes") or [])
+                   if isinstance(r, dict) and isinstance(r.get("phrase"), str) and r["phrase"].strip()), None)
+    if phrase:
+        sentences.append(phrase.strip().rstrip(".") + ".")
+    sentences.append(f"The engine's central estimate for the yearly impact is {display.strip()}.")
+    return {"sentences": [{"text": t, "fields": [], "check": "TEMPLATE"} for t in sentences],
             "source": "template", "claimcheck_status": "FALLBACK"}
 
 
@@ -138,12 +160,18 @@ def _enrich_explanation(opp: Dict[str, Any], customer_key: str, manifest_id: str
 
 def _enrich_core(opp: Dict[str, Any], customer_key: str, manifest_id: str) -> Dict[str, Any]:
     opp["explanation"] = _normalise_explanation(opp)
+    if opp["explanation"]["source"] == "template":
+        # Without a model the card can still say something specific: the reason and the
+        # figure, from the pack itself. Used only if it passes Claim-Check.
+        evidence = _evidence_explanation(opp)
+        if evidence is not None and _passes_claim_check(opp, evidence):
+            opp["explanation"] = evidence
     if not _llm_configured() or not _KEY_RE.match(customer_key):
         return opp
 
     path = _cache_path(customer_key, opp, manifest_id)
     try:
-        cached = json.loads(path.read_text()).get("contract_explanation")
+        cached = json.loads(path.read_text(encoding="utf-8")).get("contract_explanation")
         if _is_contract_explanation(cached) and cached["source"] == "llm" \
                 and _passes_claim_check(opp, cached):
             opp["explanation"] = cached
@@ -185,8 +213,8 @@ def load_customer_packs(key: str, display_id: str) -> CustomerOpportunities:
     f = _pack_file(key)
     if f is None:
         raise HTTPException(status_code=404, detail="Customer not found")
-    data = json.loads(f.read_text())
-    cfg = yaml.safe_load(DECISIONS.read_text())
+    data = json.loads(f.read_text(encoding="utf-8"))
+    cfg = yaml.safe_load(DECISIONS.read_text(encoding="utf-8"))
     manifest_id = _read_manifest()
     opportunities = [_enrich_explanation(v, key, manifest_id) for _, v in sorted(data.items())]
     return CustomerOpportunities.model_validate_json(json.dumps({

@@ -61,7 +61,7 @@ def evaluate_customer(features_row: dict, factors: dict, as_of: date) -> dict:
     return packs
 
 def main() -> None:
-    cutoff = date.fromisoformat(yaml.safe_load(open("config/decisions.yaml"))["cutoff_date"])
+    cutoff = date.fromisoformat(yaml.safe_load(open("config/decisions.yaml", encoding="utf-8"))["cutoff_date"])
     feats = pd.read_parquet("data/features/features.parquet")
     factors = load_factors()
     OUT.mkdir(parents=True, exist_ok=True)
@@ -75,7 +75,10 @@ def main() -> None:
                          "propensity": o.propensity, "confidence": o.confidence.overall,
                          "eligibility": o.eligibility.result.value, "impact_status": o.impact.status.value,
                          "impact_family": o.impact.metric_family.value if o.impact.metric_family else None,
-                         "impact_central": o.impact.central})
+                         "impact_central": o.impact.central,
+                         "impact_low": o.impact.low, "impact_high": o.impact.high,
+                         "impact_quality": o.impact.quality.value if o.impact.quality else None,
+                         "digital_share": rec.get("digital_share")})
     pd.DataFrame(rows).to_parquet(OUT / "portfolio_rows.parquet", index=False)
     print("packs:", len(rows))
 

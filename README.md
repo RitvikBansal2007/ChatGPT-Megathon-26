@@ -4,15 +4,16 @@ Setup and run instructions. The solution is described in `deliverables/final_rep
 
 ## Requirements
 
-- Python 3.11
-- macOS or Linux (Windows: use WSL, `make` is required)
+- Python 3.11 or newer (the code also runs on 3.10)
+- macOS, Linux or Windows. `make` is optional: every command below has a plain-Python form,
+  and `python scripts/demo.py` starts the demo on Windows without WSL or `make`.
 
 ## Setup
 
 ```bash
 cd Code
-python3.11 -m venv .venv
-source .venv/bin/activate
+python -m venv .venv
+source .venv/bin/activate          # Windows PowerShell: .venv\Scripts\Activate.ps1
 pip install -e . pytest httpx streamlit plotly
 ```
 
@@ -24,20 +25,32 @@ Runs data generation, feature building, model training and calibration, evidence
 make pipeline
 ```
 
+Without `make`:
+
+```bash
+python -m greendash.generator && python -m greendash.features
+python -m greendash.categoriser.evaluate && python -m greendash.models.train
+python -m greendash.models.calibrate && python -m greendash.models.generate_hashes
+python -m greendash.packs && python -m greendash.cache
+python -m greendash.models.score && python -m greendash.models.evaluate_models && python -m eval.report
+python -m greendash.manifest
+```
+
 ## Run the application
 
 Starts the API on `127.0.0.1:8000` and the web app on <http://127.0.0.1:8501>. Secrets for the run are generated on the fly and never written to disk.
 
 ```bash
-make demo
+make demo                  # or, on any platform:  python scripts/demo.py
 ```
 
-In the sidebar choose a role (Evaluator sees everything) and a customer.
+It checks the packs exist and the ports are free, waits for the API to be healthy, and stops
+both processes on Ctrl+C. In the sidebar choose a role (Evaluator sees everything) and a customer.
 
-The app also runs without the API, on bundled sample data:
+The app also runs without the API, on bundled sample data (no pipeline needed):
 
 ```bash
-DEMO_MODE=fixtures streamlit run app/Home.py --server.address 127.0.0.1
+make demo-offline          # or:  python scripts/demo.py --no-live
 ```
 
 ## Language model (optional)
@@ -52,8 +65,10 @@ make warm                 # pre-generates explanations for the 8 demo customers
 ## Tests
 
 ```bash
-make test
+make test                  # or:  python -m pytest -q app/tests tests/
 ```
+
+The first run builds the synthetic data the scenario and invariance tests read (about 20 seconds); later runs reuse it.
 
 ## Datasets and model weights
 

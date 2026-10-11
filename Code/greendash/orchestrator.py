@@ -13,8 +13,8 @@ from greendash.contracts import (
 from greendash.llm.templates import get_template
 
 ROOT = Path(__file__).resolve().parents[1]
-TH = yaml.safe_load((ROOT / "config" / "thresholds.yaml").read_text())
-CATALOGUE = yaml.safe_load((ROOT / "config" / "products.yaml").read_text())["products"]
+TH = yaml.safe_load((ROOT / "config" / "thresholds.yaml").read_text(encoding="utf-8"))
+CATALOGUE = yaml.safe_load((ROOT / "config" / "products.yaml").read_text(encoding="utf-8"))["products"]
 
 DISCLAIMER = "Not a credit decision. Estimate, not a guarantee."
 PRIMARY = {"GP01": "Explore EV options", "GP02": "Explore green home loans",

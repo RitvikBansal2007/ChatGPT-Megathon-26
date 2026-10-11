@@ -38,3 +38,7 @@ dev = [
 
 [tool.hatch.build.targets.wheel]
 packages = ["greendash", "api"]
+
+[tool.pytest.ini_options]
+# Lets `pytest` find config/, security/, eval/ without a PYTHONPATH prefix (works on Windows).
+pythonpath = ["."]

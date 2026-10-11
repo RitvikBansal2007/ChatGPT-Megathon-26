@@ -1,0 +1,45 @@
+Code/readmes/
+Code/data/raw/
+Code/data/public/
+Code/out/_raw_backup/
+.env
+*.key
+*.pem
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/
+*.parquet
+*.csv
+out/
+data/
+Code/dataset procured/
+scratch_inspect.py
+
+# SQLite database files and companions
+*.db
+*.db-wal
+*.db-shm
+*.sqlite
+*.sqlite-wal
+*.sqlite-shm
+*.sqlite3
+*.sqlite3-wal
+*.sqlite3-shm
+
+# Provided raw dataset (8 GB) and anything derived locally
+Code/dataset/
+# Local tooling, notes and OS files
+.DS_Store
+**/.DS_Store
+.claude/
+.agents/
+.agent/
+Code/team/
+Code/MEMORY.md
+Code/app/Architecture.md
+Code/app/PRD.md
+Code/app/GreenProof UI Build Playbook.md
+*.skops.tmp
+Code/app/CLAUDE.md
+Code/app/basic ui example/

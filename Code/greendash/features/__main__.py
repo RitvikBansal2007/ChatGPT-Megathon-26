@@ -5,7 +5,7 @@ from datetime import date
 from greendash.features.build import build_features
 
 RAW, OUT = Path("data/raw"), Path("data/features")
-cutoff = date.fromisoformat(yaml.safe_load(open("config/decisions.yaml"))["cutoff_date"])
+cutoff = date.fromisoformat(yaml.safe_load(open("config/decisions.yaml", encoding="utf-8"))["cutoff_date"])
 raw = {n: pd.read_parquet(RAW / f"{n}.parquet") for n in
        ["customers", "transactions", "products", "vehicles", "energy", "digital"]}
 feats, audit = build_features(raw, cutoff)
