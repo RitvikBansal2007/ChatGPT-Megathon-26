@@ -1,13 +1,16 @@
 """Customer Hub: four pathway tiles (always visible), the Proof Card, Scenario Lab and red-team."""
 import streamlit as st
 
+import importlib
 import client
 import theme as T
 from components import proof_card, shell
 from components.scenario_lab import redteam, scenario_lab
+importlib.reload(shell)
 
 T.setup("Customer Hub")
 persona = shell.sidebar()
+
 shell.gate("hub", "the Customer Hub")
 
 doc = client.opportunities(persona["customer_id"], client.role())

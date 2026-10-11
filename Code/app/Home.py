@@ -1,12 +1,15 @@
 """greendash · Home."""
 import streamlit as st
 
+import importlib
 import client
 import theme as T
 from components import shell
+importlib.reload(shell)
 
 T.setup("Home")
 persona = shell.sidebar()
+
 
 st.title("Green, with receipts.")
 T.render('<p class="gd-muted" style="font-size:17px;max-width:760px">One evidence engine, two audiences. Customers get a next green step they can check. '
