@@ -11,6 +11,14 @@
 
 ---
 
+## 🔤 FONT FIX at 08:40 — `fdd18df`
+
+- `app/static/fonts/PlusJakartaSans-Variable.woff2` was a saved 404 page (1.6 KB) since `536f3e9`; headings had been falling back to the system font. Reported by G1-K.
+- Replaced with the real variable WOFF2 (27 KB, OFL, wght 200–800, Latin subset, from Fontsource). Still self-hosted, so the proxy's `font-src 'self'` holds.
+- Checked in Chromium on Home: font loads and headings use it. Other pages and Safari not checked.
+- New test `test_self_hosted_fonts_are_real_woff2`; UI tests 27 of 27.
+- G1-K's proxy PR #4 (draft) reviewed twice, read-through only: approve; open item is a Safari/iOS test of Basic Auth over the WebSocket.
+
 ## 🔎 G3 RE-TEST at 08:00 — `main` at `cbcad26` (clean checkout, fresh venv). This section overrides any ✅ further down.
 
 The ✅ rows in "Backend state", "ML / LLM status" and "Remaining" were rewritten by G2-M in merge `c5acaa7`. They are his claims, not G3 test results. What G3 measured:
