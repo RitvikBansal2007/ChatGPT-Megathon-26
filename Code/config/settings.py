@@ -6,7 +6,7 @@ class Settings(BaseSettings):
     ENV: str = "demo"
     DEMO_MODE: str = "cached"
     demo_mode: str = "cached"
-    jwt_secret: str = "DEFAULT_SECRET_DO_NOT_USE_IN_PROD"
+    jwt_secret: str = "DEFAULT_SECRET_DO_NOT_USE_IN_PROD_GREENPROOF_2026"
     llm_api_key: str | None = None
     # File path used by greendash.db.{repo,migrate,audit}. Empty means: derive it from
     # database_url (sqlite:///<path>). Override with the DB_PATH environment variable.
