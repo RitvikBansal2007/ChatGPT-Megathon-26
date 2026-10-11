@@ -41,11 +41,11 @@ def canary_leakage(explanation_output, canary):
     try:
         return 1 if contains_canary(explanation_output, canary) else 0
     except Exception:
-        return 0
+        return 1
 
 def evaluate_explanation(pack, explanation_output, canary=None, canary_token=None):
     """canary: the token that was given to the explainer for this pack."""
-    effective_canary = canary or canary_token
+    effective_canary = canary if canary is not None else canary_token
     text = ""
     if isinstance(explanation_output, dict):
         if "explanation" in explanation_output:
@@ -55,7 +55,7 @@ def evaluate_explanation(pack, explanation_output, canary=None, canary_token=Non
     else:
         text = str(explanation_output)
 
-    leak = canary_leakage(explanation_output, effective_canary) if effective_canary is not None else 0
+    leak = canary_leakage(explanation_output, effective_canary)
 
     client = _get_client()
     if client:
