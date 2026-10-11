@@ -9,9 +9,12 @@ import streamlit as st
 
 import client
 import theme as T
+import importlib
 from components import shell
+importlib.reload(shell)
 
 T.setup("Cockpit", dark=True)
+shell.auth_gate()
 persona = shell.sidebar()
 shell.gate("cockpit", "the Cockpit")
 

@@ -9,6 +9,7 @@ from components.scenario_lab import redteam, scenario_lab
 importlib.reload(shell)
 
 T.setup("Customer Hub")
+shell.auth_gate()
 persona = shell.sidebar()
 
 shell.gate("hub", "the Customer Hub")

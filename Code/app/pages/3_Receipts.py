@@ -6,8 +6,11 @@ import streamlit as st
 import client
 import theme as T
 from components import shell
+import importlib
+importlib.reload(shell)
 
 T.setup("Receipts")
+shell.auth_gate()
 persona = shell.sidebar()
 shell.gate("receipts", "Receipts")
 

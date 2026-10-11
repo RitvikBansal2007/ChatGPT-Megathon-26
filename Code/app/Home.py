@@ -8,10 +8,15 @@ from components import shell
 importlib.reload(shell)
 
 T.setup("Home")
-persona = shell.sidebar()
+shell.auth_gate()
 
+persona = shell.sidebar()
+user = client.current_user()
 
 st.title("Green, with receipts.")
+if user:
+    T.render(f'<div class="gd-row" style="margin-bottom:12px"><span class="gd-chip">Signed in as {T.esc(user.get("display_name"))}</span><span class="gd-chip">{T.esc(client.ROLES.get(user.get("role"), user.get("role")))}</span></div>')
+
 T.render('<p class="gd-muted" style="font-size:17px;max-width:760px">One evidence engine, two audiences. Customers get a next green step they can check. '
          'Relationship teams get a ranked pipeline they can defend. Every number has a source, every refusal is explained, '
          'and every AI-written sentence is checked before anyone sees it.</p>')

@@ -142,3 +142,37 @@ def test_register_duplicate_email_fails():
     assert resp.status_code == 400
     assert "already exists" in resp.json()["detail"]
 
+def test_unauthenticated_landing_shows_auth_gate(monkeypatch):
+    from streamlit.testing.v1 import AppTest
+    from pathlib import Path
+    monkeypatch.delenv("PYTEST_CURRENT_TEST", raising=False)
+    app_path = Path(__file__).resolve().parents[2] / "app/Home.py"
+    at = AppTest.from_file(str(app_path), default_timeout=30)
+    at.run()
+    text = " ".join(str(e.value) for kind in ("markdown", "caption", "title", "subheader", "header") for e in getattr(at, kind))
+    assert "Sign In" in text
+    assert "GreenProof" in text
+    # Should be stopped by auth gate before showing main site title
+    assert "Green, with receipts." not in text
+
+def test_authenticated_user_enters_home(monkeypatch):
+    from streamlit.testing.v1 import AppTest
+    from pathlib import Path
+    monkeypatch.delenv("PYTEST_CURRENT_TEST", raising=False)
+    app_path = Path(__file__).resolve().parents[2] / "app/Home.py"
+    at = AppTest.from_file(str(app_path), default_timeout=30)
+    at.session_state["_auth_user"] = {
+        "user_key": "CUST-0001",
+        "display_name": "Priya Sharma",
+        "role": "CUSTOMER",
+        "customer_id": "CUST-0001",
+        "token": "valid_token",
+        "expiry": 9999999999,
+    }
+    at.session_state["role"] = "CUSTOMER"
+    at.session_state["persona_id"] = "CUST-0001"
+    at.run()
+    text = " ".join(str(e.value) for kind in ("markdown", "caption", "title", "subheader", "header") for e in getattr(at, kind))
+    assert "Green, with receipts." in text
+    assert "Signed in as Priya Sharma" in text
+
