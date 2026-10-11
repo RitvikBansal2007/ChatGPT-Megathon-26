@@ -11,6 +11,32 @@
 
 ---
 
+## 🔎 BACKEND RE-TEST at 07:15 — branch `aniket/backend-fixes` at `9029cf1` (clean checkout, fresh venv) — NOT merged to `main`
+
+Branch is 3 commits ahead of `main` and 28 behind (it predates the UI redesign). Supersedes the 04:00 backend state below where they differ.
+
+**Works**
+- API starts. Opportunities, portfolio, scenario respond 200.
+- Auth is real now: signed 15-minute tokens. No token 401; bad token 401; CUSTOMER on eval/portfolio 403; CUSTOMER reading another customer 403; RM and evaluator allowed.
+- All 7 scenario mutations work for CUST-0001 (`SET_VEHICLE_BEV`, `REMOVE_MILEAGE`, `REMOVE_ENERGY`, `ADD_CONFLICT_FUEL`, `MAKE_STALE`, `SET_RENTER`, `SELL_CAR`), invariance ok.
+- `make data` no longer changes tracked raw files. `make features`, `make train`, `python -m greendash.packs` run. 5,000 customers, 20,000 packs.
+- Golden personas reach their designed outcomes (Priya GP01 RECOMMEND, Marcus GP01 REVIEW, Aisha GP01/GP03/GP04 RULED_OUT, Tom GP04 RECOMMEND, Dave GP02 RECOMMEND, Sam GP03 ABSTAIN, renter GP04 RECOMMEND). The hard-coded 0.95 is gone.
+- Backend tests: 376 pass, 3 fail, 2 skipped. `make test` 46 of 46.
+- Web app in live mode: Home and Customer Hub load for every role and all 8 customers.
+
+**Broken**
+- `make all` fails: `make train` rewrites the four models but not `data/models/hashes.json`, so `greendash.packs` stops with "Hash mismatch". Calibration is not redone after training either.
+- `python -m greendash.cache` fails on a clean install: `google-genai` is imported but not in `pyproject.toml`. After installing it by hand the cache builds (8 packs, 56 scenarios).
+- **Claim-Check passes everything.** `greendash/llm/claimcheck.py::check()` is a stub ("just a stub wrapper that passes everything"). The demo sentence returns PASS with 0 violations. The real `check_sentence` exists above it but is not called.
+- `SET_HOME_SOLAR` and `SET_PAPERLESS_ON` do not exist (422). G1-A was told they work.
+- Cockpit and Receipts crash in live mode: the API returns the pre-redesign shapes (`metrics/scatter`, `baselines/llm_eval`); the UI reads `customers_analysed/tiles/quadrant/...` and `models/terciles/gates/...`. Hub is fine.
+- `GET /api/governance` is 404.
+- JWT secret is a string literal in `greendash/security/authz.py`, not `settings.jwt_secret`.
+- Explanations in the cache are the template fallback (no LLM key on the test machine). `reason_codes` are empty and confidence is 0.8 everywhere (G2-M items, unchanged).
+- Thresholds were lowered to 0.05 (GP01), 0.03 (GP02), 0.15 (GP04): 2,585 of 5,000 customers are RECOMMEND for GP01. Priya's shown propensity is 0.057. G2-M should confirm or replace.
+- 3 failing tests: `test_rule4_recommend_needs_both_thresholds`, `test_existing_bev_is_ruled_out`, and the privacy test (old `MEMORY.md` on that branch; fixed on `main`).
+- Manifest from this run: `sha256:dc3e7653…0dda5`, 5,025 files. Not for submission (not on `main`, models/hashes inconsistent after `make train`).
+
 ## 📌 FINAL STATUS AT BREAK (04:00 IST, work resumes 04:45) — `main` at `8fa8033`
 
 **Demo-ready today:** web app in `DEMO_MODE=fixtures`. **Not ready:** live mode (4 of 6 API calls fail), real metrics, final manifest, auth.
