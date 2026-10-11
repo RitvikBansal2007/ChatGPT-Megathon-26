@@ -251,7 +251,7 @@ The app in `app/` was replaced with the brand-design Streamlit app from `Desktop
 | GP03 (Solar) | 0.809 | 0.688 | 5.79× |
 | GP04 (Paperless) | 0.964 | 0.856 | 7.95× |
 
-**Why LightGBM over LR (one sentence for Akshit / Slide 6):** LightGBM captures monotone non-linear interactions (e.g. vehicle type × mileage → GP01; digital engagement score → GP04) that a plain LR cannot model, which is why it gains 14–20 AUC points over LR and achieves 6–8× Lift@10%.
+**Why LightGBM over LR (one sentence for G1-A / Slide 6):** LightGBM captures monotone non-linear interactions (e.g. vehicle type × mileage → GP01; digital engagement score → GP04) that a plain LR cannot model, which is why it gains 14–20 AUC points over LR and achieves 6–8× Lift@10%.
 
 | Item | State |
 |---|---|
