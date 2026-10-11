@@ -1,22 +1,22 @@
 {
   "take_up_GP01": {
-    "brier_high_confidence": 0.05174557933286215,
-    "brier_low_confidence": null,
-    "correlation_with_propensity": -0.35053613121196764
+    "brier_high_confidence": 0.05982297208113664,
+    "brier_low_confidence": 0.011473746439638024,
+    "correlation_with_propensity": 0.29663529354167667
   },
   "take_up_GP02": {
-    "brier_high_confidence": 0.04373324547129793,
-    "brier_low_confidence": null,
-    "correlation_with_propensity": -0.1151824326529849
+    "brier_high_confidence": 0.028367949196419807,
+    "brier_low_confidence": 0.014398964711258797,
+    "correlation_with_propensity": -0.02299230645396878
   },
   "take_up_GP03": {
-    "brier_high_confidence": 0.03727736372950824,
-    "brier_low_confidence": null,
-    "correlation_with_propensity": 0.056213040236516715
+    "brier_high_confidence": 0.015106156610828625,
+    "brier_low_confidence": 0.014066893200726882,
+    "correlation_with_propensity": 0.003956737327745504
   },
   "take_up_GP04": {
-    "brier_high_confidence": 0.10977563432922617,
-    "brier_low_confidence": null,
-    "correlation_with_propensity": -0.0833808719068212
+    "brier_high_confidence": 0.04908644064215423,
+    "brier_low_confidence": 0.059159271095615966,
+    "correlation_with_propensity": -0.0939332718276817
   }
 }

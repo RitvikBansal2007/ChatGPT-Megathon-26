@@ -1,6 +1,6 @@
 customer_id,customer_key,age,income_band,postcode,region,home_owner,digital_usage,sustainability_preference,is_persona,epc_band,roof_suitability,existing_solar,accessibility_paper_need
 CUST-0001,1,48,80k+,XX67 1XX,South West,True,0.43257925522639507,0.29938682374380043,True,C,suitable,False,False
-CUST-0002,2,23,20k-40k,XX61 2XX,South East,True,0.8181483907630005,0.2815020617527616,True,D,suitable,False,False
+CUST-0002,2,23,20k-40k,XX61 2XX,South East,True,0.8181483907630005,0.2815020617527616,True,,suitable,False,False
 CUST-0003,3,63,40k-60k,XX1 1XX,West Midlands,True,1.0,0.4486884559804874,True,D,suitable,True,False
 CUST-0004,4,66,40k-60k,XX65 4XX,South West,True,0.0,0.167685597444923,True,E,unknown,False,False
 CUST-0005,5,65,<20k,XX57 6XX,South West,True,0.43256048962614874,0.38061089086053534,True,D,suitable,False,False

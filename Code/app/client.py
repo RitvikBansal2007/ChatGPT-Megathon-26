@@ -177,34 +177,29 @@ def get_opportunities(customer_id: str) -> list[dict]:
     if per_cust.is_file():
         return _unwrap_opportunities(_load(f"opportunities_{cid}"))
 
-    # 2. Combine all 5 per-status fixtures → one opportunity per product
-    #    Primary status from _CUSTOMER_STATUS_MAP; the rest fill the other products
+    # 2. Combine all 5 per-status fixtures → one opportunity per status
     opps: list[dict] = []
+    seen_statuses: set[str] = set()
     primary_status = _CUSTOMER_STATUS_MAP.get(cid, "RECOMMEND")
-    seen_products: set[str] = set()
+    pids = ["GP01", "GP02", "GP03", "GP04", "GP05"]
 
-    # Load primary status first so it sorts top
-    primary_file = _STATUS_FIXTURES[primary_status]
-    try:
-        primary_opps = _unwrap_opportunities(_load(primary_file))
-        for o in primary_opps:
-            pid = o.get("opportunity_id", "")
-            if pid not in seen_products:
-                opps.append(o)
-                seen_products.add(pid)
-    except FileNotFoundError:
-        pass
-
-    # Fill remaining products with the other status fixtures
-    for status, fname in _STATUS_FIXTURES.items():
-        if status == primary_status:
+    # Load primary status first
+    order = [primary_status] + [s for s in _STATUS_FIXTURES if s != primary_status]
+    for status in order:
+        fname = _STATUS_FIXTURES.get(status)
+        if not fname:
             continue
         try:
             for o in _unwrap_opportunities(_load(fname)):
-                pid = o.get("opportunity_id", "")
-                if pid not in seen_products:
-                    opps.append(o)
-                    seen_products.add(pid)
+                st_val = o.get("status")
+                if st_val not in seen_statuses:
+                    o_item = dict(o)
+                    idx = len(opps)
+                    if idx < len(pids):
+                        o_item["opportunity_id"] = pids[idx]
+                    opps.append(o_item)
+                    seen_statuses.add(st_val)
+                    break
         except FileNotFoundError:
             pass
 

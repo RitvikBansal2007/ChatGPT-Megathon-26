@@ -1,4 +1,5 @@
 import csv
+import math
 from pathlib import Path
 from dataclasses import dataclass
 from typing import List, Optional
@@ -46,15 +47,14 @@ def estimate(features: dict, product_id: str, factors: dict, assumptions: dict =
     assumptions = assumptions if assumptions is not None else load_assumptions()
 
     if product_id == "GP01":
-        if features.get("annual_mileage") is None:
+        miles = features.get("annual_mileage")
+        if miles is None or (isinstance(miles, float) and math.isnan(miles)):
             return CarbonEstimate(status="INSUFFICIENT_DATA", missing_inputs=["annual_mileage"])
-        if features.get("annual_mileage", 0) <= 0 and features.get("fuel_spend_last_6m", 0) <= 0:
+        fuel_type = str(features.get("vehicle_fuel_type") or features.get("fuel_type") or "").lower()
+        if fuel_type == "bev":
             return CarbonEstimate(status="NOT_APPLICABLE")
-        if features.get("fuel_type") == "bev":
-            return CarbonEstimate(status="NOT_APPLICABLE")
-        ice_key = "car_diesel_average" if features.get("fuel_type") == "diesel" else "car_petrol_average"
-        miles = features["annual_mileage"]
-        # Uncertain input is annual miles: +/-15% when only one value exists.
+        ice_key = "car_diesel_average" if fuel_type == "diesel" else "car_petrol_average"
+        miles = float(miles)
         args = (factors[ice_key], _a(assumptions, "ev_kwh_per_mile"), factors["grid_electricity"])
         central, form = ev_switch(miles, *args)
         low, _ = ev_switch(miles * 0.85, *args)
@@ -64,11 +64,13 @@ def estimate(features: dict, product_id: str, factors: dict, assumptions: dict =
     if product_id == "GP02":
         if not features.get("home_owner"):
             return CarbonEstimate(status="NOT_APPLICABLE")
-        if features.get("gas_kwh") is None:
+        gas = features.get("gas_kwh_12m") if features.get("gas_kwh") is None else features.get("gas_kwh")
+        if gas is None or (isinstance(gas, float) and math.isnan(gas)):
             return CarbonEstimate(status="INSUFFICIENT_DATA", missing_inputs=["gas_kwh"])
         g = assumptions["gp02_reduction_fraction"]
-        gas = factors["natural_gas"]
-        res = [green_home_efficiency(features["gas_kwh"], float(g[k]), gas)
+        gas_factor = factors["natural_gas"]
+        gas_val = float(gas)
+        res = [green_home_efficiency(gas_val, float(g[k]), gas_factor)
                for k in ("value_low", "value_central", "value_high")]
         return _done(res[0][1], res[1][1], res[2][1], res[1][2], "kg")
 

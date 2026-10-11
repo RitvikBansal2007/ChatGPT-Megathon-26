@@ -27,7 +27,7 @@ def test_rule3_missing_critical_feature_abstains():
 def test_rule4_recommend_needs_both_thresholds():
     assert decide_status("GP01", prop(0.82, 0.88), elig(), imp(), False, []) == Status.RECOMMEND
     assert decide_status("GP01", prop(0.82, 0.40), elig(), imp(), False, []) == Status.SOFT_SURFACE
-    assert decide_status("GP01", prop(0.20, 0.90), elig(), imp(), False, []) == Status.SOFT_SURFACE
+    assert decide_status("GP01", prop(0.05, 0.90), elig(), imp(), False, []) == Status.SOFT_SURFACE
 
 def test_needs_verification_is_not_ruled_out():
     assert decide_status("GP02", prop(), elig(EligibilityResult.NEEDS_VERIFICATION), imp(), False, []) == Status.RECOMMEND

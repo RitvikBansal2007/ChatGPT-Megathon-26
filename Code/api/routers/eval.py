@@ -7,5 +7,7 @@ router = APIRouter(prefix="/api/eval", tags=["eval"])
 
 @router.get("/summary")
 def eval_summary(principal=Depends(require_role("EVALUATOR", "PORTFOLIO_ANALYST", "AUDITOR", "RELATIONSHIP_MANAGER"))):
-    p = Path("fixtures/eval.json")
+    p = Path("out/eval_summary.json")
+    if not p.exists():
+        p = Path("fixtures/eval.json")
     return json.loads(p.read_text()) if p.exists() else {"status": "not generated yet"}

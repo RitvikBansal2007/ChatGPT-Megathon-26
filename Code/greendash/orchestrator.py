@@ -69,7 +69,8 @@ def build_pack(pid: str, features: dict, prop: PropensityVerdict, elig: Eligibil
     else:
         crit_missing = list(crit_missing)
         
-    status = decide_status(pid, prop, elig, impact, bool(features.get("fuel_ev_conflict")),
+    has_conflict = bool(features.get("fuel_ev_conflict")) if pid == "GP01" else False
+    status = decide_status(pid, prop, elig, impact, has_conflict,
                            crit_missing)
     digital = None
     if pid == "GP04" and features.get("paper_statements_12m") is not None:

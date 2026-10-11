@@ -1,8 +1,7 @@
 customer_id,vehicle_type,fuel_type,vehicle_age,annual_mileage,status,updated_at
 CUST-0001,car,petrol,8,11500,owned,2026-06-20
-CUST-0002,car,bev,8,9000,owned,2026-06-20
-CUST-0003,car,bev,2,11165,owned,2026-06-20
-CUST-0004,car,diesel,7,8428,owned,2026-06-20
+CUST-0002,car,BEV,8,9000,owned,2026-06-20
+CUST-0003,car,BEV,2,11165,owned,2026-06-20
 CUST-0006,car,diesel,10,4524,owned,2026-06-20
 CUST-0008,car,diesel,12,9959,owned,2026-06-20
 CUST-0009,car,petrol,2,13599,owned,2026-06-20

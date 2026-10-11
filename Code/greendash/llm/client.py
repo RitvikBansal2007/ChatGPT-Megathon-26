@@ -1,11 +1,10 @@
 import os
 from dotenv import load_dotenv
-from google import genai
-
-env_path = os.path.join(os.path.dirname(__file__), '../../.env')
-load_dotenv(dotenv_path=env_path)
-
 def init_llm_client():
+    try:
+        from google import genai
+    except ImportError:
+        raise ValueError("google-genai package is not installed! Cannot initialize LLM client.")
     api_key = os.environ.get("GEMINI_API_KEY")
     if not api_key:
         raise ValueError("GEMINI_API_KEY is not set in .env! Cannot initialize LLM client.")

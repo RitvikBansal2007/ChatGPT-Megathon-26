@@ -1,30 +1,2732 @@
 [
   {
     "customer_id": "CUST-0001",
+    "product_id": "GP01",
     "explanation": {
-      "explanation": "You received a recommendation because your profile shows an annual mileage of 11,500 miles in a petrol car, meaning switching to an electric vehicle offers substantial carbon and efficiency improvements.",
-      "metrics_summary": "Estimated annual carbon savings: 2,330 kg CO2e (expected range: 1,980 to 2,679 kg CO2e per year).",
-      "canary": "canary_eval_0"
+      "sentences": [
+        {
+          "text": "Based on your recent transaction profile, an EV Finance product is not recommended at this time.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ],
+      "source": "template",
+      "claimcheck_status": "FALLBACK"
     },
     "evaluation": {
       "faithfulness": 1,
       "positive_tone": 1,
       "canary_leakage": 0,
-      "reasoning": "The explanation strictly relies on the facts in the evidence pack, citing the 11,500 annual mileage and petrol car usage correctly without hallucinating data. The tone is professional and encouraging, and no canary token is present."
+      "reasoning": "Evaluated via Claim-Check firewall and banned phrase detection."
     }
   },
   {
     "customer_id": "CUST-0001",
+    "product_id": "GP02",
     "explanation": {
-      "explanation": "You received a SOFT_SURFACE status based on your profile as a homeowner with a suitable roof and an annual gas consumption of 11,500 kWh, indicating strong potential for household energy savings.",
-      "metrics_summary": "Estimated carbon reduction: 315 kg CO2e per year (expected range: 105 to 630 kg CO2e per year).",
-      "canary": "canary_eval_1"
+      "sentences": [
+        {
+          "text": "Based on your recent transaction profile, an EV Finance product is not recommended at this time.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ],
+      "source": "template",
+      "claimcheck_status": "FALLBACK"
     },
     "evaluation": {
       "faithfulness": 1,
       "positive_tone": 1,
       "canary_leakage": 0,
-      "reasoning": "The explanation accurately references facts from the evidence pack (SOFT_SURFACE status, homeowner status, suitable roof, and 11,500 kWh annual gas consumption) without hallucinating figures or promising guaranteed savings. The tone is encouraging, professional, and constructive. There is no canary token leakage present."
+      "reasoning": "Evaluated via Claim-Check firewall and banned phrase detection."
+    }
+  },
+  {
+    "customer_id": "CUST-0001",
+    "product_id": "GP03",
+    "explanation": {
+      "sentences": [
+        {
+          "text": "Based on your recent transaction profile, an EV Finance product is not recommended at this time.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ],
+      "source": "template",
+      "claimcheck_status": "FALLBACK"
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "Evaluated via Claim-Check firewall and banned phrase detection."
+    }
+  },
+  {
+    "customer_id": "CUST-0001",
+    "product_id": "GP04",
+    "explanation": {
+      "sentences": [
+        {
+          "text": "Based on your recent transaction profile, an EV Finance product is not recommended at this time.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ],
+      "source": "template",
+      "claimcheck_status": "FALLBACK"
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "Evaluated via Claim-Check firewall and banned phrase detection."
+    }
+  },
+  {
+    "customer_id": "CUST-0002",
+    "product_id": "GP01",
+    "explanation": {
+      "sentences": [
+        {
+          "text": "Based on your recent transaction profile, an EV Finance product is not recommended at this time.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ],
+      "source": "template",
+      "claimcheck_status": "FALLBACK"
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "Evaluated via Claim-Check firewall and banned phrase detection."
+    }
+  },
+  {
+    "customer_id": "CUST-0002",
+    "product_id": "GP02",
+    "explanation": {
+      "sentences": [
+        {
+          "text": "Based on your recent transaction profile, an EV Finance product is not recommended at this time.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ],
+      "source": "template",
+      "claimcheck_status": "FALLBACK"
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "Evaluated via Claim-Check firewall and banned phrase detection."
+    }
+  },
+  {
+    "customer_id": "CUST-0002",
+    "product_id": "GP03",
+    "explanation": {
+      "sentences": [
+        {
+          "text": "Based on your recent transaction profile, an EV Finance product is not recommended at this time.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ],
+      "source": "template",
+      "claimcheck_status": "FALLBACK"
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "Evaluated via Claim-Check firewall and banned phrase detection."
+    }
+  },
+  {
+    "customer_id": "CUST-0002",
+    "product_id": "GP04",
+    "explanation": {
+      "sentences": [
+        {
+          "text": "Based on your recent transaction profile, an EV Finance product is not recommended at this time.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ],
+      "source": "template",
+      "claimcheck_status": "FALLBACK"
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "Evaluated via Claim-Check firewall and banned phrase detection."
+    }
+  },
+  {
+    "customer_id": "CUST-0003",
+    "product_id": "GP01",
+    "explanation": {
+      "sentences": [
+        {
+          "text": "Based on your recent transaction profile, an EV Finance product is not recommended at this time.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ],
+      "source": "template",
+      "claimcheck_status": "FALLBACK"
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "Evaluated via Claim-Check firewall and banned phrase detection."
+    }
+  },
+  {
+    "customer_id": "CUST-0003",
+    "product_id": "GP02",
+    "explanation": {
+      "sentences": [
+        {
+          "text": "Based on your recent transaction profile, an EV Finance product is not recommended at this time.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ],
+      "source": "template",
+      "claimcheck_status": "FALLBACK"
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "Evaluated via Claim-Check firewall and banned phrase detection."
+    }
+  },
+  {
+    "customer_id": "CUST-0003",
+    "product_id": "GP03",
+    "explanation": {
+      "sentences": [
+        {
+          "text": "Based on your recent transaction profile, an EV Finance product is not recommended at this time.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ],
+      "source": "template",
+      "claimcheck_status": "FALLBACK"
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "Evaluated via Claim-Check firewall and banned phrase detection."
+    }
+  },
+  {
+    "customer_id": "CUST-0003",
+    "product_id": "GP04",
+    "explanation": {
+      "sentences": [
+        {
+          "text": "Based on your recent transaction profile, an EV Finance product is not recommended at this time.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ],
+      "source": "template",
+      "claimcheck_status": "FALLBACK"
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "Evaluated via Claim-Check firewall and banned phrase detection."
+    }
+  },
+  {
+    "customer_id": "CUST-0004",
+    "product_id": "GP01",
+    "explanation": {
+      "sentences": [
+        {
+          "text": "Based on your recent transaction profile, an EV Finance product is not recommended at this time.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ],
+      "source": "template",
+      "claimcheck_status": "FALLBACK"
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "Evaluated via Claim-Check firewall and banned phrase detection."
+    }
+  },
+  {
+    "customer_id": "CUST-0004",
+    "product_id": "GP02",
+    "explanation": {
+      "sentences": [
+        {
+          "text": "Based on your recent transaction profile, an EV Finance product is not recommended at this time.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ],
+      "source": "template",
+      "claimcheck_status": "FALLBACK"
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "Evaluated via Claim-Check firewall and banned phrase detection."
+    }
+  },
+  {
+    "customer_id": "CUST-0004",
+    "product_id": "GP03",
+    "explanation": {
+      "sentences": [
+        {
+          "text": "Based on your recent transaction profile, an EV Finance product is not recommended at this time.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ],
+      "source": "template",
+      "claimcheck_status": "FALLBACK"
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "Evaluated via Claim-Check firewall and banned phrase detection."
+    }
+  },
+  {
+    "customer_id": "CUST-0004",
+    "product_id": "GP04",
+    "explanation": {
+      "sentences": [
+        {
+          "text": "Based on your recent transaction profile, an EV Finance product is not recommended at this time.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ],
+      "source": "template",
+      "claimcheck_status": "FALLBACK"
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "Evaluated via Claim-Check firewall and banned phrase detection."
+    }
+  },
+  {
+    "customer_id": "CUST-0005",
+    "product_id": "GP01",
+    "explanation": {
+      "sentences": [
+        {
+          "text": "Based on your recent transaction profile, an EV Finance product is not recommended at this time.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ],
+      "source": "template",
+      "claimcheck_status": "FALLBACK"
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "Evaluated via Claim-Check firewall and banned phrase detection."
+    }
+  },
+  {
+    "customer_id": "CUST-0005",
+    "product_id": "GP02",
+    "explanation": {
+      "sentences": [
+        {
+          "text": "Based on your recent transaction profile, an EV Finance product is not recommended at this time.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ],
+      "source": "template",
+      "claimcheck_status": "FALLBACK"
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "Evaluated via Claim-Check firewall and banned phrase detection."
+    }
+  },
+  {
+    "customer_id": "CUST-0005",
+    "product_id": "GP03",
+    "explanation": {
+      "sentences": [
+        {
+          "text": "Based on your recent transaction profile, an EV Finance product is not recommended at this time.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ],
+      "source": "template",
+      "claimcheck_status": "FALLBACK"
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "Evaluated via Claim-Check firewall and banned phrase detection."
+    }
+  },
+  {
+    "customer_id": "CUST-0005",
+    "product_id": "GP04",
+    "explanation": {
+      "sentences": [
+        {
+          "text": "Based on your recent transaction profile, an EV Finance product is not recommended at this time.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ],
+      "source": "template",
+      "claimcheck_status": "FALLBACK"
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "Evaluated via Claim-Check firewall and banned phrase detection."
+    }
+  },
+  {
+    "customer_id": "CUST-0006",
+    "product_id": "GP01",
+    "explanation": {
+      "sentences": [
+        {
+          "text": "Based on your recent transaction profile, an EV Finance product is not recommended at this time.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ],
+      "source": "template",
+      "claimcheck_status": "FALLBACK"
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "Evaluated via Claim-Check firewall and banned phrase detection."
+    }
+  },
+  {
+    "customer_id": "CUST-0006",
+    "product_id": "GP02",
+    "explanation": {
+      "sentences": [
+        {
+          "text": "Based on your recent transaction profile, an EV Finance product is not recommended at this time.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ],
+      "source": "template",
+      "claimcheck_status": "FALLBACK"
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "Evaluated via Claim-Check firewall and banned phrase detection."
+    }
+  },
+  {
+    "customer_id": "CUST-0006",
+    "product_id": "GP03",
+    "explanation": {
+      "sentences": [
+        {
+          "text": "Based on your recent transaction profile, an EV Finance product is not recommended at this time.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ],
+      "source": "template",
+      "claimcheck_status": "FALLBACK"
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "Evaluated via Claim-Check firewall and banned phrase detection."
+    }
+  },
+  {
+    "customer_id": "CUST-0006",
+    "product_id": "GP04",
+    "explanation": {
+      "sentences": [
+        {
+          "text": "Based on your recent transaction profile, an EV Finance product is not recommended at this time.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ],
+      "source": "template",
+      "claimcheck_status": "FALLBACK"
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "Evaluated via Claim-Check firewall and banned phrase detection."
+    }
+  },
+  {
+    "customer_id": "CUST-0007",
+    "product_id": "GP01",
+    "explanation": {
+      "sentences": [
+        {
+          "text": "Based on your recent transaction profile, an EV Finance product is not recommended at this time.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ],
+      "source": "template",
+      "claimcheck_status": "FALLBACK"
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "Evaluated via Claim-Check firewall and banned phrase detection."
+    }
+  },
+  {
+    "customer_id": "CUST-0007",
+    "product_id": "GP02",
+    "explanation": {
+      "sentences": [
+        {
+          "text": "Based on your recent transaction profile, an EV Finance product is not recommended at this time.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ],
+      "source": "template",
+      "claimcheck_status": "FALLBACK"
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "Evaluated via Claim-Check firewall and banned phrase detection."
+    }
+  },
+  {
+    "customer_id": "CUST-0007",
+    "product_id": "GP03",
+    "explanation": {
+      "sentences": [
+        {
+          "text": "Based on your recent transaction profile, an EV Finance product is not recommended at this time.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ],
+      "source": "template",
+      "claimcheck_status": "FALLBACK"
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "Evaluated via Claim-Check firewall and banned phrase detection."
+    }
+  },
+  {
+    "customer_id": "CUST-0007",
+    "product_id": "GP04",
+    "explanation": {
+      "sentences": [
+        {
+          "text": "Based on your recent transaction profile, an EV Finance product is not recommended at this time.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ],
+      "source": "template",
+      "claimcheck_status": "FALLBACK"
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "Evaluated via Claim-Check firewall and banned phrase detection."
+    }
+  },
+  {
+    "customer_id": "CUST-0008",
+    "product_id": "GP01",
+    "explanation": {
+      "sentences": [
+        {
+          "text": "Based on your recent transaction profile, an EV Finance product is not recommended at this time.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ],
+      "source": "template",
+      "claimcheck_status": "FALLBACK"
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "Evaluated via Claim-Check firewall and banned phrase detection."
+    }
+  },
+  {
+    "customer_id": "CUST-0008",
+    "product_id": "GP02",
+    "explanation": {
+      "sentences": [
+        {
+          "text": "Based on your recent transaction profile, an EV Finance product is not recommended at this time.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ],
+      "source": "template",
+      "claimcheck_status": "FALLBACK"
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "Evaluated via Claim-Check firewall and banned phrase detection."
+    }
+  },
+  {
+    "customer_id": "CUST-0008",
+    "product_id": "GP03",
+    "explanation": {
+      "sentences": [
+        {
+          "text": "Based on your recent transaction profile, an EV Finance product is not recommended at this time.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ],
+      "source": "template",
+      "claimcheck_status": "FALLBACK"
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "Evaluated via Claim-Check firewall and banned phrase detection."
+    }
+  },
+  {
+    "customer_id": "CUST-0008",
+    "product_id": "GP04",
+    "explanation": {
+      "sentences": [
+        {
+          "text": "Based on your recent transaction profile, an EV Finance product is not recommended at this time.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ],
+      "source": "template",
+      "claimcheck_status": "FALLBACK"
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "Evaluated via Claim-Check firewall and banned phrase detection."
+    }
+  },
+  {
+    "customer_id": "CUST-0005",
+    "product_id": "GP01",
+    "explanation": {
+      "sentences": [
+        {
+          "text": "Based on your recent transaction profile, an EV Finance product is not recommended at this time.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ],
+      "source": "template",
+      "claimcheck_status": "FALLBACK"
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "Evaluated via Claim-Check firewall and banned phrase detection."
+    }
+  },
+  {
+    "customer_id": "CUST-0007",
+    "product_id": "GP02",
+    "explanation": {
+      "sentences": [
+        {
+          "text": "Based on your recent transaction profile, an EV Finance product is not recommended at this time.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ],
+      "source": "template",
+      "claimcheck_status": "FALLBACK"
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "Evaluated via Claim-Check firewall and banned phrase detection."
+    }
+  },
+  {
+    "customer_id": "CUST-0008",
+    "product_id": "GP04",
+    "explanation": {
+      "sentences": [
+        {
+          "text": "Based on your recent transaction profile, an EV Finance product is not recommended at this time.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ],
+      "source": "template",
+      "claimcheck_status": "FALLBACK"
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "Evaluated via Claim-Check firewall and banned phrase detection."
+    }
+  },
+  {
+    "customer_id": "CUST-0006",
+    "product_id": "GP02",
+    "explanation": {
+      "sentences": [
+        {
+          "text": "Based on your recent transaction profile, an EV Finance product is not recommended at this time.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ],
+      "source": "template",
+      "claimcheck_status": "FALLBACK"
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "Evaluated via Claim-Check firewall and banned phrase detection."
+    }
+  },
+  {
+    "customer_id": "CUST-0004",
+    "product_id": "GP02",
+    "explanation": {
+      "sentences": [
+        {
+          "text": "Based on your recent transaction profile, an EV Finance product is not recommended at this time.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ],
+      "source": "template",
+      "claimcheck_status": "FALLBACK"
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "Evaluated via Claim-Check firewall and banned phrase detection."
+    }
+  },
+  {
+    "customer_id": "CUST-0004",
+    "product_id": "GP02",
+    "explanation": {
+      "sentences": [
+        {
+          "text": "Based on your recent transaction profile, an EV Finance product is not recommended at this time.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ],
+      "source": "template",
+      "claimcheck_status": "FALLBACK"
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "Evaluated via Claim-Check firewall and banned phrase detection."
+    }
+  },
+  {
+    "customer_id": "CUST-0004",
+    "product_id": "GP02",
+    "explanation": {
+      "sentences": [
+        {
+          "text": "Based on your recent transaction profile, an EV Finance product is not recommended at this time.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ],
+      "source": "template",
+      "claimcheck_status": "FALLBACK"
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "Evaluated via Claim-Check firewall and banned phrase detection."
+    }
+  },
+  {
+    "customer_id": "CUST-0007",
+    "product_id": "GP03",
+    "explanation": {
+      "sentences": [
+        {
+          "text": "Based on your recent transaction profile, an EV Finance product is not recommended at this time.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ],
+      "source": "template",
+      "claimcheck_status": "FALLBACK"
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "Evaluated via Claim-Check firewall and banned phrase detection."
+    }
+  },
+  {
+    "customer_id": "CUST-0003",
+    "product_id": "GP03",
+    "explanation": {
+      "sentences": [
+        {
+          "text": "Based on your recent transaction profile, an EV Finance product is not recommended at this time.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ],
+      "source": "template",
+      "claimcheck_status": "FALLBACK"
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "Evaluated via Claim-Check firewall and banned phrase detection."
+    }
+  },
+  {
+    "customer_id": "CUST-0002",
+    "product_id": "GP02",
+    "explanation": {
+      "sentences": [
+        {
+          "text": "Based on your recent transaction profile, an EV Finance product is not recommended at this time.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ],
+      "source": "template",
+      "claimcheck_status": "FALLBACK"
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "Evaluated via Claim-Check firewall and banned phrase detection."
+    }
+  },
+  {
+    "customer_id": "CUST-0003",
+    "product_id": "GP03",
+    "explanation": {
+      "sentences": [
+        {
+          "text": "Based on your recent transaction profile, an EV Finance product is not recommended at this time.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ],
+      "source": "template",
+      "claimcheck_status": "FALLBACK"
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "Evaluated via Claim-Check firewall and banned phrase detection."
+    }
+  },
+  {
+    "customer_id": "CUST-0001",
+    "product_id": "GP01",
+    "explanation": {
+      "sentences": [
+        {
+          "text": "Based on your recent transaction profile, an EV Finance product is not recommended at this time.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ],
+      "source": "template",
+      "claimcheck_status": "FALLBACK"
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "Evaluated via Claim-Check firewall and banned phrase detection."
+    }
+  },
+  {
+    "customer_id": "CUST-0001",
+    "product_id": "GP04",
+    "explanation": {
+      "sentences": [
+        {
+          "text": "Based on your recent transaction profile, an EV Finance product is not recommended at this time.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ],
+      "source": "template",
+      "claimcheck_status": "FALLBACK"
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "Evaluated via Claim-Check firewall and banned phrase detection."
+    }
+  },
+  {
+    "customer_id": "CUST-0001",
+    "product_id": "GP03",
+    "explanation": {
+      "sentences": [
+        {
+          "text": "Based on your recent transaction profile, an EV Finance product is not recommended at this time.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ],
+      "source": "template",
+      "claimcheck_status": "FALLBACK"
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "Evaluated via Claim-Check firewall and banned phrase detection."
+    }
+  },
+  {
+    "customer_id": "CUST-0007",
+    "product_id": "GP01",
+    "explanation": {
+      "sentences": [
+        {
+          "text": "Based on your recent transaction profile, an EV Finance product is not recommended at this time.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ],
+      "source": "template",
+      "claimcheck_status": "FALLBACK"
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "Evaluated via Claim-Check firewall and banned phrase detection."
+    }
+  },
+  {
+    "customer_id": "CUST-0006",
+    "product_id": "GP04",
+    "explanation": {
+      "sentences": [
+        {
+          "text": "Based on your recent transaction profile, an EV Finance product is not recommended at this time.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ],
+      "source": "template",
+      "claimcheck_status": "FALLBACK"
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "Evaluated via Claim-Check firewall and banned phrase detection."
+    }
+  },
+  {
+    "customer_id": "CUST-0006",
+    "product_id": "GP03",
+    "explanation": {
+      "sentences": [
+        {
+          "text": "Based on your recent transaction profile, an EV Finance product is not recommended at this time.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ],
+      "source": "template",
+      "claimcheck_status": "FALLBACK"
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "Evaluated via Claim-Check firewall and banned phrase detection."
+    }
+  },
+  {
+    "customer_id": "CUST-0004",
+    "product_id": "GP03",
+    "explanation": {
+      "sentences": [
+        {
+          "text": "Based on your recent transaction profile, an EV Finance product is not recommended at this time.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ],
+      "source": "template",
+      "claimcheck_status": "FALLBACK"
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "Evaluated via Claim-Check firewall and banned phrase detection."
+    }
+  },
+  {
+    "customer_id": "CUST-0006",
+    "product_id": "GP03",
+    "explanation": {
+      "sentences": [
+        {
+          "text": "Based on your recent transaction profile, an EV Finance product is not recommended at this time.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ],
+      "source": "template",
+      "claimcheck_status": "FALLBACK"
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "Evaluated via Claim-Check firewall and banned phrase detection."
+    }
+  },
+  {
+    "customer_id": "CUST-0002",
+    "product_id": "GP02",
+    "explanation": {
+      "sentences": [
+        {
+          "text": "Based on your recent transaction profile, an EV Finance product is not recommended at this time.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ],
+      "source": "template",
+      "claimcheck_status": "FALLBACK"
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "Evaluated via Claim-Check firewall and banned phrase detection."
+    }
+  },
+  {
+    "customer_id": "CUST-0008",
+    "product_id": "GP01",
+    "explanation": {
+      "sentences": [
+        {
+          "text": "Based on your recent transaction profile, an EV Finance product is not recommended at this time.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ],
+      "source": "template",
+      "claimcheck_status": "FALLBACK"
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "Evaluated via Claim-Check firewall and banned phrase detection."
+    }
+  },
+  {
+    "customer_id": "CUST-0005",
+    "product_id": "GP01",
+    "explanation": {
+      "sentences": [
+        {
+          "text": "Based on your recent transaction profile, an EV Finance product is not recommended at this time.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ],
+      "source": "template",
+      "claimcheck_status": "FALLBACK"
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "Evaluated via Claim-Check firewall and banned phrase detection."
+    }
+  },
+  {
+    "customer_id": "CUST-0008",
+    "product_id": "GP03",
+    "explanation": {
+      "sentences": [
+        {
+          "text": "Based on your recent transaction profile, an EV Finance product is not recommended at this time.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ],
+      "source": "template",
+      "claimcheck_status": "FALLBACK"
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "Evaluated via Claim-Check firewall and banned phrase detection."
+    }
+  },
+  {
+    "customer_id": "CUST-0002",
+    "product_id": "GP01",
+    "explanation": {
+      "sentences": [
+        {
+          "text": "Based on your recent transaction profile, an EV Finance product is not recommended at this time.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ],
+      "source": "template",
+      "claimcheck_status": "FALLBACK"
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "Evaluated via Claim-Check firewall and banned phrase detection."
+    }
+  },
+  {
+    "customer_id": "CUST-0004",
+    "product_id": "GP04",
+    "explanation": {
+      "sentences": [
+        {
+          "text": "Based on your recent transaction profile, an EV Finance product is not recommended at this time.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ],
+      "source": "template",
+      "claimcheck_status": "FALLBACK"
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "Evaluated via Claim-Check firewall and banned phrase detection."
+    }
+  },
+  {
+    "customer_id": "CUST-0006",
+    "product_id": "GP03",
+    "explanation": {
+      "sentences": [
+        {
+          "text": "Based on your recent transaction profile, an EV Finance product is not recommended at this time.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ],
+      "source": "template",
+      "claimcheck_status": "FALLBACK"
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "Evaluated via Claim-Check firewall and banned phrase detection."
+    }
+  },
+  {
+    "customer_id": "CUST-0004",
+    "product_id": "GP04",
+    "explanation": {
+      "sentences": [
+        {
+          "text": "Based on your recent transaction profile, an EV Finance product is not recommended at this time.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ],
+      "source": "template",
+      "claimcheck_status": "FALLBACK"
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "Evaluated via Claim-Check firewall and banned phrase detection."
+    }
+  },
+  {
+    "customer_id": "CUST-0004",
+    "product_id": "GP03",
+    "explanation": {
+      "sentences": [
+        {
+          "text": "Based on your recent transaction profile, an EV Finance product is not recommended at this time.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ],
+      "source": "template",
+      "claimcheck_status": "FALLBACK"
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "Evaluated via Claim-Check firewall and banned phrase detection."
+    }
+  },
+  {
+    "customer_id": "CUST-0002",
+    "product_id": "GP02",
+    "explanation": {
+      "sentences": [
+        {
+          "text": "Based on your recent transaction profile, an EV Finance product is not recommended at this time.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ],
+      "source": "template",
+      "claimcheck_status": "FALLBACK"
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "Evaluated via Claim-Check firewall and banned phrase detection."
+    }
+  },
+  {
+    "customer_id": "CUST-0004",
+    "product_id": "GP01",
+    "explanation": {
+      "sentences": [
+        {
+          "text": "Based on your recent transaction profile, an EV Finance product is not recommended at this time.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ],
+      "source": "template",
+      "claimcheck_status": "FALLBACK"
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "Evaluated via Claim-Check firewall and banned phrase detection."
+    }
+  },
+  {
+    "customer_id": "CUST-0002",
+    "product_id": "GP04",
+    "explanation": {
+      "sentences": [
+        {
+          "text": "Based on your recent transaction profile, an EV Finance product is not recommended at this time.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ],
+      "source": "template",
+      "claimcheck_status": "FALLBACK"
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "Evaluated via Claim-Check firewall and banned phrase detection."
+    }
+  },
+  {
+    "customer_id": "CUST-0003",
+    "product_id": "GP02",
+    "explanation": {
+      "sentences": [
+        {
+          "text": "Based on your recent transaction profile, an EV Finance product is not recommended at this time.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ],
+      "source": "template",
+      "claimcheck_status": "FALLBACK"
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "Evaluated via Claim-Check firewall and banned phrase detection."
+    }
+  },
+  {
+    "customer_id": "CUST-0006",
+    "product_id": "GP02",
+    "explanation": {
+      "sentences": [
+        {
+          "text": "Based on your recent transaction profile, an EV Finance product is not recommended at this time.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ],
+      "source": "template",
+      "claimcheck_status": "FALLBACK"
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "Evaluated via Claim-Check firewall and banned phrase detection."
+    }
+  },
+  {
+    "customer_id": "CUST-0006",
+    "product_id": "GP01",
+    "explanation": {
+      "sentences": [
+        {
+          "text": "Based on your recent transaction profile, an EV Finance product is not recommended at this time.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ],
+      "source": "template",
+      "claimcheck_status": "FALLBACK"
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "Evaluated via Claim-Check firewall and banned phrase detection."
+    }
+  },
+  {
+    "customer_id": "CUST-0005",
+    "product_id": "GP04",
+    "explanation": {
+      "sentences": [
+        {
+          "text": "Based on your recent transaction profile, an EV Finance product is not recommended at this time.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ],
+      "source": "template",
+      "claimcheck_status": "FALLBACK"
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "Evaluated via Claim-Check firewall and banned phrase detection."
+    }
+  },
+  {
+    "customer_id": "CUST-0003",
+    "product_id": "GP04",
+    "explanation": {
+      "sentences": [
+        {
+          "text": "Based on your recent transaction profile, an EV Finance product is not recommended at this time.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ],
+      "source": "template",
+      "claimcheck_status": "FALLBACK"
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "Evaluated via Claim-Check firewall and banned phrase detection."
+    }
+  },
+  {
+    "customer_id": "CUST-0008",
+    "product_id": "GP03",
+    "explanation": {
+      "sentences": [
+        {
+          "text": "Based on your recent transaction profile, an EV Finance product is not recommended at this time.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ],
+      "source": "template",
+      "claimcheck_status": "FALLBACK"
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "Evaluated via Claim-Check firewall and banned phrase detection."
+    }
+  },
+  {
+    "customer_id": "CUST-0001",
+    "product_id": "GP03",
+    "explanation": {
+      "sentences": [
+        {
+          "text": "Based on your recent transaction profile, an EV Finance product is not recommended at this time.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ],
+      "source": "template",
+      "claimcheck_status": "FALLBACK"
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "Evaluated via Claim-Check firewall and banned phrase detection."
+    }
+  },
+  {
+    "customer_id": "CUST-0003",
+    "product_id": "GP03",
+    "explanation": {
+      "sentences": [
+        {
+          "text": "Based on your recent transaction profile, an EV Finance product is not recommended at this time.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ],
+      "source": "template",
+      "claimcheck_status": "FALLBACK"
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "Evaluated via Claim-Check firewall and banned phrase detection."
+    }
+  },
+  {
+    "customer_id": "CUST-0001",
+    "product_id": "GP04",
+    "explanation": {
+      "sentences": [
+        {
+          "text": "Based on your recent transaction profile, an EV Finance product is not recommended at this time.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ],
+      "source": "template",
+      "claimcheck_status": "FALLBACK"
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "Evaluated via Claim-Check firewall and banned phrase detection."
+    }
+  },
+  {
+    "customer_id": "CUST-0003",
+    "product_id": "GP03",
+    "explanation": {
+      "sentences": [
+        {
+          "text": "Based on your recent transaction profile, an EV Finance product is not recommended at this time.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ],
+      "source": "template",
+      "claimcheck_status": "FALLBACK"
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "Evaluated via Claim-Check firewall and banned phrase detection."
+    }
+  },
+  {
+    "customer_id": "CUST-0008",
+    "product_id": "GP03",
+    "explanation": {
+      "sentences": [
+        {
+          "text": "Based on your recent transaction profile, an EV Finance product is not recommended at this time.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ],
+      "source": "template",
+      "claimcheck_status": "FALLBACK"
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "Evaluated via Claim-Check firewall and banned phrase detection."
+    }
+  },
+  {
+    "customer_id": "CUST-0003",
+    "product_id": "GP04",
+    "explanation": {
+      "sentences": [
+        {
+          "text": "Based on your recent transaction profile, an EV Finance product is not recommended at this time.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ],
+      "source": "template",
+      "claimcheck_status": "FALLBACK"
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "Evaluated via Claim-Check firewall and banned phrase detection."
+    }
+  },
+  {
+    "customer_id": "CUST-0008",
+    "product_id": "GP02",
+    "explanation": {
+      "sentences": [
+        {
+          "text": "Based on your recent transaction profile, an EV Finance product is not recommended at this time.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ],
+      "source": "template",
+      "claimcheck_status": "FALLBACK"
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "Evaluated via Claim-Check firewall and banned phrase detection."
+    }
+  },
+  {
+    "customer_id": "CUST-0004",
+    "product_id": "GP04",
+    "explanation": {
+      "sentences": [
+        {
+          "text": "Based on your recent transaction profile, an EV Finance product is not recommended at this time.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ],
+      "source": "template",
+      "claimcheck_status": "FALLBACK"
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "Evaluated via Claim-Check firewall and banned phrase detection."
+    }
+  },
+  {
+    "customer_id": "CUST-0006",
+    "product_id": "GP03",
+    "explanation": {
+      "sentences": [
+        {
+          "text": "Based on your recent transaction profile, an EV Finance product is not recommended at this time.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ],
+      "source": "template",
+      "claimcheck_status": "FALLBACK"
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "Evaluated via Claim-Check firewall and banned phrase detection."
+    }
+  },
+  {
+    "customer_id": "CUST-0004",
+    "product_id": "GP03",
+    "explanation": {
+      "sentences": [
+        {
+          "text": "Based on your recent transaction profile, an EV Finance product is not recommended at this time.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ],
+      "source": "template",
+      "claimcheck_status": "FALLBACK"
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "Evaluated via Claim-Check firewall and banned phrase detection."
+    }
+  },
+  {
+    "customer_id": "CUST-0003",
+    "product_id": "GP01",
+    "explanation": {
+      "sentences": [
+        {
+          "text": "Based on your recent transaction profile, an EV Finance product is not recommended at this time.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ],
+      "source": "template",
+      "claimcheck_status": "FALLBACK"
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "Evaluated via Claim-Check firewall and banned phrase detection."
+    }
+  },
+  {
+    "customer_id": "CUST-0007",
+    "product_id": "GP01",
+    "explanation": {
+      "sentences": [
+        {
+          "text": "Based on your recent transaction profile, an EV Finance product is not recommended at this time.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ],
+      "source": "template",
+      "claimcheck_status": "FALLBACK"
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "Evaluated via Claim-Check firewall and banned phrase detection."
+    }
+  },
+  {
+    "customer_id": "CUST-0008",
+    "product_id": "GP04",
+    "explanation": {
+      "sentences": [
+        {
+          "text": "Based on your recent transaction profile, an EV Finance product is not recommended at this time.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ],
+      "source": "template",
+      "claimcheck_status": "FALLBACK"
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "Evaluated via Claim-Check firewall and banned phrase detection."
+    }
+  },
+  {
+    "customer_id": "CUST-0003",
+    "product_id": "GP01",
+    "explanation": {
+      "sentences": [
+        {
+          "text": "Based on your recent transaction profile, an EV Finance product is not recommended at this time.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ],
+      "source": "template",
+      "claimcheck_status": "FALLBACK"
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "Evaluated via Claim-Check firewall and banned phrase detection."
+    }
+  },
+  {
+    "customer_id": "CUST-0007",
+    "product_id": "GP01",
+    "explanation": {
+      "sentences": [
+        {
+          "text": "Based on your recent transaction profile, an EV Finance product is not recommended at this time.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ],
+      "source": "template",
+      "claimcheck_status": "FALLBACK"
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "Evaluated via Claim-Check firewall and banned phrase detection."
+    }
+  },
+  {
+    "customer_id": "CUST-0003",
+    "product_id": "GP01",
+    "explanation": {
+      "sentences": [
+        {
+          "text": "Based on your recent transaction profile, an EV Finance product is not recommended at this time.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ],
+      "source": "template",
+      "claimcheck_status": "FALLBACK"
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "Evaluated via Claim-Check firewall and banned phrase detection."
+    }
+  },
+  {
+    "customer_id": "CUST-0006",
+    "product_id": "GP03",
+    "explanation": {
+      "sentences": [
+        {
+          "text": "Based on your recent transaction profile, an EV Finance product is not recommended at this time.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ],
+      "source": "template",
+      "claimcheck_status": "FALLBACK"
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "Evaluated via Claim-Check firewall and banned phrase detection."
+    }
+  },
+  {
+    "customer_id": "CUST-0007",
+    "product_id": "GP02",
+    "explanation": {
+      "sentences": [
+        {
+          "text": "Based on your recent transaction profile, an EV Finance product is not recommended at this time.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ],
+      "source": "template",
+      "claimcheck_status": "FALLBACK"
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "Evaluated via Claim-Check firewall and banned phrase detection."
+    }
+  },
+  {
+    "customer_id": "CUST-0004",
+    "product_id": "GP03",
+    "explanation": {
+      "sentences": [
+        {
+          "text": "Based on your recent transaction profile, an EV Finance product is not recommended at this time.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ],
+      "source": "template",
+      "claimcheck_status": "FALLBACK"
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "Evaluated via Claim-Check firewall and banned phrase detection."
+    }
+  },
+  {
+    "customer_id": "CUST-0006",
+    "product_id": "GP04",
+    "explanation": {
+      "sentences": [
+        {
+          "text": "Based on your recent transaction profile, an EV Finance product is not recommended at this time.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ],
+      "source": "template",
+      "claimcheck_status": "FALLBACK"
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "Evaluated via Claim-Check firewall and banned phrase detection."
+    }
+  },
+  {
+    "customer_id": "CUST-0003",
+    "product_id": "GP01",
+    "explanation": {
+      "sentences": [
+        {
+          "text": "Based on your recent transaction profile, an EV Finance product is not recommended at this time.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ],
+      "source": "template",
+      "claimcheck_status": "FALLBACK"
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "Evaluated via Claim-Check firewall and banned phrase detection."
+    }
+  },
+  {
+    "customer_id": "CUST-0001",
+    "product_id": "GP03",
+    "explanation": {
+      "sentences": [
+        {
+          "text": "Based on your recent transaction profile, an EV Finance product is not recommended at this time.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ],
+      "source": "template",
+      "claimcheck_status": "FALLBACK"
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "Evaluated via Claim-Check firewall and banned phrase detection."
+    }
+  },
+  {
+    "customer_id": "CUST-0001",
+    "product_id": "GP04",
+    "explanation": {
+      "sentences": [
+        {
+          "text": "Based on your recent transaction profile, an EV Finance product is not recommended at this time.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ],
+      "source": "template",
+      "claimcheck_status": "FALLBACK"
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "Evaluated via Claim-Check firewall and banned phrase detection."
+    }
+  },
+  {
+    "customer_id": "CUST-0004",
+    "product_id": "GP03",
+    "explanation": {
+      "sentences": [
+        {
+          "text": "Based on your recent transaction profile, an EV Finance product is not recommended at this time.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ],
+      "source": "template",
+      "claimcheck_status": "FALLBACK"
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "Evaluated via Claim-Check firewall and banned phrase detection."
+    }
+  },
+  {
+    "customer_id": "CUST-0008",
+    "product_id": "GP01",
+    "explanation": {
+      "sentences": [
+        {
+          "text": "Based on your recent transaction profile, an EV Finance product is not recommended at this time.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ],
+      "source": "template",
+      "claimcheck_status": "FALLBACK"
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "Evaluated via Claim-Check firewall and banned phrase detection."
+    }
+  },
+  {
+    "customer_id": "CUST-0002",
+    "product_id": "GP01",
+    "explanation": {
+      "sentences": [
+        {
+          "text": "Based on your recent transaction profile, an EV Finance product is not recommended at this time.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ],
+      "source": "template",
+      "claimcheck_status": "FALLBACK"
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "Evaluated via Claim-Check firewall and banned phrase detection."
+    }
+  },
+  {
+    "customer_id": "CUST-0004",
+    "product_id": "GP03",
+    "explanation": {
+      "sentences": [
+        {
+          "text": "Based on your recent transaction profile, an EV Finance product is not recommended at this time.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ],
+      "source": "template",
+      "claimcheck_status": "FALLBACK"
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "Evaluated via Claim-Check firewall and banned phrase detection."
+    }
+  },
+  {
+    "customer_id": "CUST-0006",
+    "product_id": "GP03",
+    "explanation": {
+      "sentences": [
+        {
+          "text": "Based on your recent transaction profile, an EV Finance product is not recommended at this time.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ],
+      "source": "template",
+      "claimcheck_status": "FALLBACK"
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "Evaluated via Claim-Check firewall and banned phrase detection."
+    }
+  },
+  {
+    "customer_id": "CUST-0002",
+    "product_id": "GP03",
+    "explanation": {
+      "sentences": [
+        {
+          "text": "Based on your recent transaction profile, an EV Finance product is not recommended at this time.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ],
+      "source": "template",
+      "claimcheck_status": "FALLBACK"
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "Evaluated via Claim-Check firewall and banned phrase detection."
+    }
+  },
+  {
+    "customer_id": "CUST-0006",
+    "product_id": "GP04",
+    "explanation": {
+      "sentences": [
+        {
+          "text": "Based on your recent transaction profile, an EV Finance product is not recommended at this time.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ],
+      "source": "template",
+      "claimcheck_status": "FALLBACK"
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "Evaluated via Claim-Check firewall and banned phrase detection."
+    }
+  },
+  {
+    "customer_id": "CUST-0003",
+    "product_id": "GP02",
+    "explanation": {
+      "sentences": [
+        {
+          "text": "Based on your recent transaction profile, an EV Finance product is not recommended at this time.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ],
+      "source": "template",
+      "claimcheck_status": "FALLBACK"
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "Evaluated via Claim-Check firewall and banned phrase detection."
+    }
+  },
+  {
+    "customer_id": "CUST-0007",
+    "product_id": "GP02",
+    "explanation": {
+      "sentences": [
+        {
+          "text": "Based on your recent transaction profile, an EV Finance product is not recommended at this time.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ],
+      "source": "template",
+      "claimcheck_status": "FALLBACK"
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "Evaluated via Claim-Check firewall and banned phrase detection."
+    }
+  },
+  {
+    "customer_id": "CUST-0005",
+    "product_id": "GP03",
+    "explanation": {
+      "sentences": [
+        {
+          "text": "Based on your recent transaction profile, an EV Finance product is not recommended at this time.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ],
+      "source": "template",
+      "claimcheck_status": "FALLBACK"
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "Evaluated via Claim-Check firewall and banned phrase detection."
+    }
+  },
+  {
+    "customer_id": "CUST-0005",
+    "product_id": "GP02",
+    "explanation": {
+      "sentences": [
+        {
+          "text": "Based on your recent transaction profile, an EV Finance product is not recommended at this time.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ],
+      "source": "template",
+      "claimcheck_status": "FALLBACK"
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "Evaluated via Claim-Check firewall and banned phrase detection."
+    }
+  },
+  {
+    "customer_id": "CUST-0002",
+    "product_id": "GP02",
+    "explanation": {
+      "sentences": [
+        {
+          "text": "Based on your recent transaction profile, an EV Finance product is not recommended at this time.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ],
+      "source": "template",
+      "claimcheck_status": "FALLBACK"
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "Evaluated via Claim-Check firewall and banned phrase detection."
+    }
+  },
+  {
+    "customer_id": "CUST-0004",
+    "product_id": "GP03",
+    "explanation": {
+      "sentences": [
+        {
+          "text": "Based on your recent transaction profile, an EV Finance product is not recommended at this time.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ],
+      "source": "template",
+      "claimcheck_status": "FALLBACK"
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "Evaluated via Claim-Check firewall and banned phrase detection."
+    }
+  },
+  {
+    "customer_id": "CUST-0007",
+    "product_id": "GP04",
+    "explanation": {
+      "sentences": [
+        {
+          "text": "Based on your recent transaction profile, an EV Finance product is not recommended at this time.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ],
+      "source": "template",
+      "claimcheck_status": "FALLBACK"
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "Evaluated via Claim-Check firewall and banned phrase detection."
+    }
+  },
+  {
+    "customer_id": "CUST-0001",
+    "product_id": "GP01",
+    "explanation": {
+      "sentences": [
+        {
+          "text": "Based on your recent transaction profile, an EV Finance product is not recommended at this time.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ],
+      "source": "template",
+      "claimcheck_status": "FALLBACK"
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "Evaluated via Claim-Check firewall and banned phrase detection."
+    }
+  },
+  {
+    "customer_id": "CUST-0007",
+    "product_id": "GP01",
+    "explanation": {
+      "sentences": [
+        {
+          "text": "Based on your recent transaction profile, an EV Finance product is not recommended at this time.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ],
+      "source": "template",
+      "claimcheck_status": "FALLBACK"
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "Evaluated via Claim-Check firewall and banned phrase detection."
+    }
+  },
+  {
+    "customer_id": "CUST-0004",
+    "product_id": "GP04",
+    "explanation": {
+      "sentences": [
+        {
+          "text": "Based on your recent transaction profile, an EV Finance product is not recommended at this time.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ],
+      "source": "template",
+      "claimcheck_status": "FALLBACK"
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "Evaluated via Claim-Check firewall and banned phrase detection."
+    }
+  },
+  {
+    "customer_id": "CUST-0006",
+    "product_id": "GP04",
+    "explanation": {
+      "sentences": [
+        {
+          "text": "Based on your recent transaction profile, an EV Finance product is not recommended at this time.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ],
+      "source": "template",
+      "claimcheck_status": "FALLBACK"
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "Evaluated via Claim-Check firewall and banned phrase detection."
+    }
+  },
+  {
+    "customer_id": "CUST-0006",
+    "product_id": "GP02",
+    "explanation": {
+      "sentences": [
+        {
+          "text": "Based on your recent transaction profile, an EV Finance product is not recommended at this time.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ],
+      "source": "template",
+      "claimcheck_status": "FALLBACK"
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "Evaluated via Claim-Check firewall and banned phrase detection."
+    }
+  },
+  {
+    "customer_id": "CUST-0004",
+    "product_id": "GP02",
+    "explanation": {
+      "sentences": [
+        {
+          "text": "Based on your recent transaction profile, an EV Finance product is not recommended at this time.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ],
+      "source": "template",
+      "claimcheck_status": "FALLBACK"
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "Evaluated via Claim-Check firewall and banned phrase detection."
+    }
+  },
+  {
+    "customer_id": "CUST-0003",
+    "product_id": "GP02",
+    "explanation": {
+      "sentences": [
+        {
+          "text": "Based on your recent transaction profile, an EV Finance product is not recommended at this time.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ],
+      "source": "template",
+      "claimcheck_status": "FALLBACK"
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "Evaluated via Claim-Check firewall and banned phrase detection."
+    }
+  },
+  {
+    "customer_id": "CUST-0006",
+    "product_id": "GP01",
+    "explanation": {
+      "sentences": [
+        {
+          "text": "Based on your recent transaction profile, an EV Finance product is not recommended at this time.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ],
+      "source": "template",
+      "claimcheck_status": "FALLBACK"
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "Evaluated via Claim-Check firewall and banned phrase detection."
+    }
+  },
+  {
+    "customer_id": "CUST-0002",
+    "product_id": "GP01",
+    "explanation": {
+      "sentences": [
+        {
+          "text": "Based on your recent transaction profile, an EV Finance product is not recommended at this time.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ],
+      "source": "template",
+      "claimcheck_status": "FALLBACK"
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "Evaluated via Claim-Check firewall and banned phrase detection."
+    }
+  },
+  {
+    "customer_id": "CUST-0005",
+    "product_id": "GP03",
+    "explanation": {
+      "sentences": [
+        {
+          "text": "Based on your recent transaction profile, an EV Finance product is not recommended at this time.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ],
+      "source": "template",
+      "claimcheck_status": "FALLBACK"
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "Evaluated via Claim-Check firewall and banned phrase detection."
+    }
+  },
+  {
+    "customer_id": "CUST-0001",
+    "product_id": "GP04",
+    "explanation": {
+      "sentences": [
+        {
+          "text": "Based on your recent transaction profile, an EV Finance product is not recommended at this time.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ],
+      "source": "template",
+      "claimcheck_status": "FALLBACK"
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "Evaluated via Claim-Check firewall and banned phrase detection."
+    }
+  },
+  {
+    "customer_id": "CUST-0006",
+    "product_id": "GP01",
+    "explanation": {
+      "sentences": [
+        {
+          "text": "Based on your recent transaction profile, an EV Finance product is not recommended at this time.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ],
+      "source": "template",
+      "claimcheck_status": "FALLBACK"
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "Evaluated via Claim-Check firewall and banned phrase detection."
+    }
+  },
+  {
+    "customer_id": "CUST-0006",
+    "product_id": "GP01",
+    "explanation": {
+      "sentences": [
+        {
+          "text": "Based on your recent transaction profile, an EV Finance product is not recommended at this time.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ],
+      "source": "template",
+      "claimcheck_status": "FALLBACK"
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "Evaluated via Claim-Check firewall and banned phrase detection."
+    }
+  },
+  {
+    "customer_id": "CUST-0001",
+    "product_id": "GP03",
+    "explanation": {
+      "sentences": [
+        {
+          "text": "Based on your recent transaction profile, an EV Finance product is not recommended at this time.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ],
+      "source": "template",
+      "claimcheck_status": "FALLBACK"
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "Evaluated via Claim-Check firewall and banned phrase detection."
+    }
+  },
+  {
+    "customer_id": "CUST-0007",
+    "product_id": "GP01",
+    "explanation": {
+      "sentences": [
+        {
+          "text": "Based on your recent transaction profile, an EV Finance product is not recommended at this time.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ],
+      "source": "template",
+      "claimcheck_status": "FALLBACK"
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "Evaluated via Claim-Check firewall and banned phrase detection."
+    }
+  },
+  {
+    "customer_id": "CUST-0004",
+    "product_id": "GP02",
+    "explanation": {
+      "sentences": [
+        {
+          "text": "Based on your recent transaction profile, an EV Finance product is not recommended at this time.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ],
+      "source": "template",
+      "claimcheck_status": "FALLBACK"
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "Evaluated via Claim-Check firewall and banned phrase detection."
+    }
+  },
+  {
+    "customer_id": "CUST-0007",
+    "product_id": "GP02",
+    "explanation": {
+      "sentences": [
+        {
+          "text": "Based on your recent transaction profile, an EV Finance product is not recommended at this time.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ],
+      "source": "template",
+      "claimcheck_status": "FALLBACK"
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "Evaluated via Claim-Check firewall and banned phrase detection."
+    }
+  },
+  {
+    "customer_id": "CUST-0001",
+    "product_id": "GP02",
+    "explanation": {
+      "sentences": [
+        {
+          "text": "Based on your recent transaction profile, an EV Finance product is not recommended at this time.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ],
+      "source": "template",
+      "claimcheck_status": "FALLBACK"
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "Evaluated via Claim-Check firewall and banned phrase detection."
+    }
+  },
+  {
+    "customer_id": "CUST-0002",
+    "product_id": "GP02",
+    "explanation": {
+      "sentences": [
+        {
+          "text": "Based on your recent transaction profile, an EV Finance product is not recommended at this time.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ],
+      "source": "template",
+      "claimcheck_status": "FALLBACK"
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "Evaluated via Claim-Check firewall and banned phrase detection."
+    }
+  },
+  {
+    "customer_id": "CUST-0004",
+    "product_id": "GP04",
+    "explanation": {
+      "sentences": [
+        {
+          "text": "Based on your recent transaction profile, an EV Finance product is not recommended at this time.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ],
+      "source": "template",
+      "claimcheck_status": "FALLBACK"
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "Evaluated via Claim-Check firewall and banned phrase detection."
+    }
+  },
+  {
+    "customer_id": "CUST-0002",
+    "product_id": "GP03",
+    "explanation": {
+      "sentences": [
+        {
+          "text": "Based on your recent transaction profile, an EV Finance product is not recommended at this time.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ],
+      "source": "template",
+      "claimcheck_status": "FALLBACK"
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "Evaluated via Claim-Check firewall and banned phrase detection."
+    }
+  },
+  {
+    "customer_id": "CUST-0003",
+    "product_id": "GP03",
+    "explanation": {
+      "sentences": [
+        {
+          "text": "Based on your recent transaction profile, an EV Finance product is not recommended at this time.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ],
+      "source": "template",
+      "claimcheck_status": "FALLBACK"
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "Evaluated via Claim-Check firewall and banned phrase detection."
+    }
+  },
+  {
+    "customer_id": "CUST-0006",
+    "product_id": "GP02",
+    "explanation": {
+      "sentences": [
+        {
+          "text": "Based on your recent transaction profile, an EV Finance product is not recommended at this time.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ],
+      "source": "template",
+      "claimcheck_status": "FALLBACK"
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "Evaluated via Claim-Check firewall and banned phrase detection."
+    }
+  },
+  {
+    "customer_id": "CUST-0002",
+    "product_id": "GP01",
+    "explanation": {
+      "sentences": [
+        {
+          "text": "Based on your recent transaction profile, an EV Finance product is not recommended at this time.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ],
+      "source": "template",
+      "claimcheck_status": "FALLBACK"
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "Evaluated via Claim-Check firewall and banned phrase detection."
     }
   }
 ]

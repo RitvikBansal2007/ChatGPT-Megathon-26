@@ -28,10 +28,17 @@ def build_features(raw: dict[str, pd.DataFrame], cutoff: date) -> tuple[pd.DataF
                 "sustainability_preference", "epc_band", "roof_suitability", "existing_solar",
                 "accessibility_paper_need"]].set_index("customer_id")
 
-    debit = tx[tx["debit_credit"] == "D"]
-    if "category" not in debit.columns:
-        debit = debit.assign(category="Other")
-    fuel = debit[debit["category"] == "Fuel"]
+    debit = tx[tx["debit_credit"] == "D"].copy()
+    if "category" in debit.columns and "true_category" in debit.columns:
+        cat_series = debit["category"].fillna(debit["true_category"])
+    elif "category" in debit.columns:
+        cat_series = debit["category"]
+    elif "true_category" in debit.columns:
+        cat_series = debit["true_category"]
+    else:
+        cat_series = pd.Series("Other", index=debit.index)
+    fuel = debit[cat_series.astype(str).str.upper() == "FUEL"]
+
     g = fuel.groupby("customer_id")
     out["avg_monthly_fuel_gbp"] = (g["amount"].sum() / 12).reindex(out.index)
     out["fuel_txn_count_90d"] = fuel[fuel["date"] >= start90].groupby("customer_id").size().reindex(out.index).fillna(0)
@@ -42,7 +49,7 @@ def build_features(raw: dict[str, pd.DataFrame], cutoff: date) -> tuple[pd.DataF
     first = owned.groupby("customer_id").first()
     out["has_vehicle_record"] = out.index.isin(veh["customer_id"])
     out["vehicle_sold"] = out.index.isin(veh[veh["status"] == "sold"]["customer_id"]) & ~out.index.isin(owned["customer_id"])
-    out["vehicle_fuel_type"] = first["fuel_type"].reindex(out.index)
+    out["vehicle_fuel_type"] = first["fuel_type"].str.upper().reindex(out.index)
     out["vehicle_age"] = first["vehicle_age"].reindex(out.index)
     out["annual_mileage"] = first["annual_mileage"].reindex(out.index)
     out["second_vehicle"] = (owned.groupby("customer_id").size().reindex(out.index).fillna(0) > 1)
