@@ -140,3 +140,10 @@ def test_live_pack_without_presentation_fields_is_completed():
     o = doc["opportunities"][0]
     assert doc["display_name"] == "Priya" and o["headline"] == "EV Finance"
     assert o["explanation"]["sentences"] == [] and o["next_action"] == {}
+
+
+def test_self_hosted_fonts_are_real_woff2():
+    fonts = list((APP_DIR / "static" / "fonts").glob("*.woff2"))
+    assert len(fonts) == 3
+    for f in fonts:
+        assert f.read_bytes()[:4] == b"wOF2", f"{f.name} is not a WOFF2 font"
