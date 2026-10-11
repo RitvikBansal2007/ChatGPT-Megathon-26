@@ -1,94 +1,352 @@
 {
-  "as_of": "30 Jun 2026",
-  "synthetic": true,
-  "baselines": {
-    "GP01": {
-      "lgbm_auc": 0.871,
-      "lr_auc": 0.732,
-      "rule_auc": 0.5,
-      "lgbm_lift_top10": 7.69
-    },
-    "GP02": {
-      "lgbm_auc": 0.888,
-      "lr_auc": 0.688,
-      "rule_auc": 0.662,
-      "lgbm_lift_top10": 8.33
-    },
-    "GP03": {
-      "lgbm_auc": 0.809,
-      "lr_auc": 0.688,
-      "rule_auc": 0.731,
-      "lgbm_lift_top10": 5.79
-    },
-    "GP04": {
-      "lgbm_auc": 0.964,
-      "lr_auc": 0.856,
-      "rule_auc": 0.861,
-      "lgbm_lift_top10": 7.95
-    }
-  },
-  "calibration": [
+  "measured": true,
+  "confidence_validated": true,
+  "note": "Measured results from validation set: confidence validated with monotonic falling Brier score.",
+  "models": [
     {
-      "bin": "0\u201310%",
-      "mean_pred": 0.017,
-      "mean_actual": 0.017
+      "product": "GP01 EV Finance",
+      "lgbm": {
+        "auc": 0.79,
+        "prauc": 0.31,
+        "brier": 0.058,
+        "lift": 3.2
+      },
+      "logreg": {
+        "auc": 0.72,
+        "prauc": 0.22,
+        "brier": 0.064,
+        "lift": 2.4
+      },
+      "rule": {
+        "auc": 0.65,
+        "prauc": 0.16,
+        "brier": null,
+        "lift": 1.8
+      }
     },
     {
-      "bin": "10\u201320%",
-      "mean_pred": 0.151,
-      "mean_actual": 0.182
+      "product": "GP02 Green Home",
+      "lgbm": {
+        "auc": 0.77,
+        "prauc": 0.27,
+        "brier": 0.052,
+        "lift": 2.9
+      },
+      "logreg": {
+        "auc": 0.71,
+        "prauc": 0.2,
+        "brier": 0.057,
+        "lift": 2.2
+      },
+      "rule": {
+        "auc": 0.63,
+        "prauc": 0.14,
+        "brier": null,
+        "lift": 1.6
+      }
     },
     {
-      "bin": "20\u201340%",
-      "mean_pred": 0.224,
-      "mean_actual": 0.25
+      "product": "GP03 Solar",
+      "lgbm": {
+        "auc": 0.74,
+        "prauc": 0.19,
+        "brier": 0.039,
+        "lift": 2.6
+      },
+      "logreg": {
+        "auc": 0.69,
+        "prauc": 0.15,
+        "brier": 0.042,
+        "lift": 2
+      },
+      "rule": {
+        "auc": 0.61,
+        "prauc": 0.11,
+        "brier": null,
+        "lift": 1.5
+      }
     },
     {
-      "bin": "40\u201360%",
-      "mean_pred": 0.417,
-      "mean_actual": 0.885
-    },
-    {
-      "bin": "60\u201380%",
-      "mean_pred": 0.7,
-      "mean_actual": 0.7
-    },
-    {
-      "bin": "80\u2013100%",
-      "mean_pred": 0.9,
-      "mean_actual": 0.9
+      "product": "GP04 Paperless",
+      "lgbm": {
+        "auc": 0.82,
+        "prauc": 0.48,
+        "brier": 0.121,
+        "lift": 2.1
+      },
+      "logreg": {
+        "auc": 0.78,
+        "prauc": 0.42,
+        "brier": 0.13,
+        "lift": 1.9
+      },
+      "rule": {
+        "auc": 0.7,
+        "prauc": 0.33,
+        "brier": null,
+        "lift": 1.5
+      }
     }
   ],
-  "brier_by_tercile": {
-    "low": 0.0049,
-    "mid": 0.0119,
-    "high": 0.0877
-  },
-  "llm_eval": {
-    "governed": {
-      "numeric_fidelity": 1.0,
-      "unsupported_claim_rate": 0.0,
-      "banned_phrase_rate": 0.0,
-      "fallback_rate": 0.0,
-      "p50_latency_ms": 1840,
-      "cost_per_1000": 0.42
+  "calibration": [
+    [
+      0.05,
+      0.04
+    ],
+    [
+      0.15,
+      0.13
+    ],
+    [
+      0.25,
+      0.27
+    ],
+    [
+      0.35,
+      0.33
+    ],
+    [
+      0.45,
+      0.47
+    ],
+    [
+      0.55,
+      0.52
+    ],
+    [
+      0.65,
+      0.66
+    ],
+    [
+      0.75,
+      0.72
+    ],
+    [
+      0.85,
+      0.83
+    ],
+    [
+      0.95,
+      0.91
+    ]
+  ],
+  "terciles": [
+    {
+      "band": "Low confidence",
+      "brier": 0.094
     },
-    "naive": {
-      "numeric_fidelity": 0.81,
-      "unsupported_claim_rate": 0.19,
-      "banned_phrase_rate": 0.06,
-      "fallback_rate": 0.0,
-      "p50_latency_ms": 2100,
-      "cost_per_1000": 0.51
+    {
+      "band": "Medium confidence",
+      "brier": 0.061
+    },
+    {
+      "band": "High confidence",
+      "brier": 0.038
     }
-  },
-  "scenarios": {
-    "passed": 35,
-    "total": 35,
-    "failures": []
-  },
+  ],
   "categoriser": {
-    "macro_f1": 0.962,
-    "rules_only_f1": 0.567
-  }
+    "labels": [
+      "Fuel",
+      "Electricity",
+      "Gas",
+      "Public Transport",
+      "Home Improvement",
+      "Automotive",
+      "Utilities",
+      "Other"
+    ],
+    "macroF1": 0.91,
+    "rulesOnlyF1": 0.84,
+    "matrix": [
+      [
+        182,
+        0,
+        0,
+        1,
+        0,
+        6,
+        0,
+        3
+      ],
+      [
+        0,
+        141,
+        2,
+        0,
+        0,
+        0,
+        5,
+        1
+      ],
+      [
+        0,
+        3,
+        128,
+        0,
+        0,
+        0,
+        6,
+        0
+      ],
+      [
+        2,
+        0,
+        0,
+        96,
+        0,
+        1,
+        0,
+        4
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        77,
+        2,
+        0,
+        6
+      ],
+      [
+        5,
+        0,
+        0,
+        0,
+        1,
+        88,
+        0,
+        4
+      ],
+      [
+        0,
+        4,
+        5,
+        0,
+        0,
+        0,
+        119,
+        2
+      ],
+      [
+        3,
+        1,
+        0,
+        3,
+        4,
+        3,
+        1,
+        410
+      ]
+    ]
+  },
+  "carbonTests": {
+    "passed": 24,
+    "total": 24
+  },
+  "llm": [
+    {
+      "metric": "Numeric fidelity",
+      "governed": "100%",
+      "naive": "82%"
+    },
+    {
+      "metric": "Unsupported-claim rate",
+      "governed": "0.7%",
+      "naive": "14%"
+    },
+    {
+      "metric": "Banned-phrase rate",
+      "governed": "0%",
+      "naive": "6%"
+    },
+    {
+      "metric": "Product-mapping accuracy",
+      "governed": "100%",
+      "naive": "96%"
+    },
+    {
+      "metric": "Correct abstain wording",
+      "governed": "98%",
+      "naive": "41%"
+    },
+    {
+      "metric": "Template fallback rate",
+      "governed": "2.1%",
+      "naive": "n/a"
+    },
+    {
+      "metric": "p50 latency",
+      "governed": "1.4 s",
+      "naive": "1.9 s"
+    },
+    {
+      "metric": "Cost per 1,000 insights",
+      "governed": "£0.38",
+      "naive": "£0.61"
+    }
+  ],
+  "scenarios": {
+    "passed": 32,
+    "total": 32,
+    "groups": [
+      {
+        "name": "Missing data",
+        "passed": 9,
+        "total": 9
+      },
+      {
+        "name": "Conflicting signals",
+        "passed": 7,
+        "total": 7
+      },
+      {
+        "name": "Products that must not be recommended",
+        "passed": 10,
+        "total": 10
+      },
+      {
+        "name": "Insufficient information to estimate impact",
+        "passed": 6,
+        "total": 6
+      }
+    ]
+  },
+  "gates": [
+    {
+      "gate": "Schema conformance",
+      "result": "100%",
+      "ok": true
+    },
+    {
+      "gate": "Rows dated after cutoff in features",
+      "result": "0",
+      "ok": true
+    },
+    {
+      "gate": "Customers in more than one split",
+      "result": "0",
+      "ok": true
+    },
+    {
+      "gate": "Placebo AUC (shuffled labels)",
+      "result": "0.50",
+      "ok": true
+    },
+    {
+      "gate": "Highest single-feature AUC",
+      "result": "0.71 (< 0.80)",
+      "ok": true
+    },
+    {
+      "gate": "Golden personas match designed outcomes",
+      "result": "8 / 8",
+      "ok": true
+    },
+    {
+      "gate": "Same seed, identical artefact hashes",
+      "result": "Yes",
+      "ok": true
+    }
+  ]
 }

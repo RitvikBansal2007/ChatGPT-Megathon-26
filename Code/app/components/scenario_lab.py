@@ -20,10 +20,9 @@ def scenario_lab(customer_id: str) -> None:
         st.caption("Change one input and watch all three verdicts recompute. The Lab edits inputs only, never verdicts.")
         cat = client.mutation_catalogue()
         labels = {m["id"]: m["label"] for m in cat}
-        multi = client.mode() != "fixtures"
         picked = st.pills("Mutation", list(labels), format_func=lambda i: labels[i],
-                          selection_mode="multi" if multi else "single", key=f"lab-{customer_id}")
-        ids = (picked or []) if multi else ([picked] if picked else [])
+                          selection_mode="multi", default=[], key=f"lab-{customer_id}")
+        ids = picked or []
         if not ids:
             st.caption("Pick a mutation, for example Set vehicle to EV.")
             return

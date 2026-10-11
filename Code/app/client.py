@@ -72,17 +72,62 @@ def _http(method: str, path: str, body=None, token: str | None = None, timeout: 
 
 
 def _token() -> str:
-    """Bearer token from /api/auth/demo-token, cached per role and customer until 60 s before expiry."""
+    """Bearer token from login session or /api/auth/demo-token."""
+    auth_user = st.session_state.get("_auth_user")
+    if auth_user and auth_user.get("token") and time.time() <= auth_user.get("expiry", 0) - 60:
+        return auth_user["token"]
+
     ident = {"role": role()}
     if role() == "CUSTOMER":
         ident["customer_id"] = st.session_state.get("persona_id", "CUST-0001")
     cached = st.session_state.get("_api_token")
-    if cached and cached["ident"] == ident and time.time() <= cached["expiry"] - 60:
+    if cached and cached.get("ident") == ident and time.time() <= cached.get("expiry", 0) - 60:
         return cached["token"]
     data = _http("POST", "/api/auth/demo-token", ident)
     st.session_state["_api_token"] = {"token": data["access_token"], "ident": ident,
                                       "expiry": time.time() + float(data.get("expires_in", 900))}
     return data["access_token"]
+
+
+def login(username: str, password: str) -> dict:
+    """Authenticate against FastAPI backend and store JWT session in Streamlit state."""
+    data = _http("POST", "/api/auth/login", {"username": username, "password": password})
+    user = data["user"]
+    token = data["access_token"]
+    st.session_state["_auth_user"] = {
+        "user_key": user["user_key"],
+        "display_name": user.get("display_name", username),
+        "role": user["role"],
+        "email": user.get("email"),
+        "customer_id": user.get("customer_id"),
+        "token": token,
+        "expiry": time.time() + float(data.get("expires_in", 7200)),
+    }
+    st.session_state["role"] = user["role"]
+    if user.get("customer_id"):
+        st.session_state["persona_id"] = user["customer_id"]
+    return user
+
+
+def logout() -> None:
+    """Clear authenticated session from Streamlit state."""
+    st.session_state.pop("_auth_user", None)
+    st.session_state.pop("_api_token", None)
+
+
+def current_user() -> dict | None:
+    """Return currently authenticated user or None."""
+    return st.session_state.get("_auth_user")
+
+
+def backend_online() -> bool:
+    """Check whether FastAPI backend is responsive."""
+    try:
+        res = _http("GET", "/healthz", timeout=1.5)
+        return True
+    except Exception:
+        return False
+
 
 
 def _api(method: str, path: str, body=None):
@@ -174,6 +219,34 @@ def portfolio(_role: str = "") -> dict:
 @st.cache_data(show_spinner=False, ttl=60)
 def eval_summary(_role: str = "") -> dict:
     return _call(lambda: _api("GET", "/api/eval/summary"), lambda: _fixture("eval_summary.json"))
+
+
+def get_customer_memory(customer_id: str) -> list[dict]:
+    """Retrieve customer memory items from API with offline fallback."""
+    def fx():
+        return [
+            {"id": 1, "ts": "2026-06-28T14:30:00", "key": "driveway_parking", "value": "Customer confirmed off-street driveway parking suitable for home 7kW charger", "category": "declared_fact", "source": "customer_declared"},
+            {"id": 2, "ts": "2026-06-29T10:15:00", "key": "green_interest", "value": "Interested in reducing vehicle operating emissions and monthly fuel spend", "category": "preference", "source": "customer_declared"},
+        ] if customer_id == "CUST-0001" else []
+    data = _call(lambda: _api("GET", f"/api/customers/{customer_id}/memory"), fx)
+    return data.get("items", []) if isinstance(data, dict) else (data if isinstance(data, list) else [])
+
+
+def add_customer_memory(customer_id: str, key: str, value: str,
+                        category: str = "preference", source: str = "customer_declared") -> dict:
+    """Store a persistent memory item for the customer."""
+    def fx():
+        return {"status": "created", "item": {"id": 99, "ts": "2026-06-30T12:00:00", "key": key, "value": value, "category": category, "source": source}}
+    return _call(lambda: _api("POST", f"/api/customers/{customer_id}/memory",
+                              {"key": key, "value": value, "category": category, "source": source}), fx)
+
+
+def delete_customer_memory(customer_id: str, memory_id: int) -> dict:
+    """Delete a customer memory item."""
+    def fx():
+        return {"status": "deleted", "id": memory_id}
+    return _call(lambda: _api("DELETE", f"/api/customers/{customer_id}/memory/{memory_id}"), fx)
+
 
 
 # ------------------------------------------------------------------ offline stand-ins

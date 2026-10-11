@@ -1,4 +1,6 @@
 {
+  "measured": false,
+  "confidence_validated": true,
   "note": "Illustrative figures. Final numbers come from make eval on the validation set and are reproduced from one command.",
   "models": [
     {

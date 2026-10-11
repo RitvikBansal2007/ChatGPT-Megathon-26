@@ -1,10 +1,13 @@
 PRAGMA foreign_keys = ON;
 
 CREATE TABLE IF NOT EXISTS users (
-  user_key   TEXT PRIMARY KEY,
-  role       TEXT NOT NULL CHECK (role IN
-             ('CUSTOMER','RELATIONSHIP_MANAGER','PORTFOLIO_ANALYST','AUDITOR','EVALUATOR','SERVICE')),
-  created_at TEXT NOT NULL
+  user_key      TEXT PRIMARY KEY,
+  role          TEXT NOT NULL CHECK (role IN
+                ('CUSTOMER','RELATIONSHIP_MANAGER','PORTFOLIO_ANALYST','AUDITOR','EVALUATOR','SERVICE')),
+  email         TEXT,
+  display_name  TEXT,
+  password_hash TEXT,
+  created_at    TEXT NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS claim_audit (
@@ -54,3 +57,16 @@ CREATE TABLE IF NOT EXISTS optouts (
 
 CREATE INDEX IF NOT EXISTS idx_audit_customer ON claim_audit(customer_key);
 CREATE INDEX IF NOT EXISTS idx_feedback_customer ON feedback(customer_key);
+
+CREATE TABLE IF NOT EXISTS customer_memory (
+  id            INTEGER PRIMARY KEY AUTOINCREMENT,
+  ts            TEXT NOT NULL,
+  customer_key  TEXT NOT NULL,
+  key           TEXT NOT NULL,
+  value         TEXT NOT NULL,
+  category      TEXT NOT NULL CHECK (category IN ('preference','declared_fact','interaction','goal','agent_note')),
+  source        TEXT NOT NULL CHECK (source IN ('customer_declared','rm_note','feedback','system_inferred'))
+);
+
+CREATE INDEX IF NOT EXISTS idx_memory_customer ON customer_memory(customer_key);
+

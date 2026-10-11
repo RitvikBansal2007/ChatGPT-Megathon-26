@@ -1,58 +1,50 @@
 [
   {
-    "raw_score": 0.014761356433729653,
+    "raw_score": 0.002460364129571717,
     "calibrated_prob": 0.0
   },
   {
-    "raw_score": 0.021988720007861014,
+    "raw_score": 0.022536518341184208,
     "calibrated_prob": 0.0
   },
   {
-    "raw_score": 0.022143047528933646,
-    "calibrated_prob": 0.022222222222222223
+    "raw_score": 0.022625946611721723,
+    "calibrated_prob": 0.0410958904109589
   },
   {
-    "raw_score": 0.02571117415694324,
-    "calibrated_prob": 0.022222222222222223
+    "raw_score": 0.04364924706566169,
+    "calibrated_prob": 0.0410958904109589
   },
   {
-    "raw_score": 0.025715352504383095,
-    "calibrated_prob": 0.031609195402298854
+    "raw_score": 0.0449165172196015,
+    "calibrated_prob": 0.044444444444444446
   },
   {
-    "raw_score": 0.06081307500407928,
-    "calibrated_prob": 0.031609195402298854
+    "raw_score": 0.06210693209254504,
+    "calibrated_prob": 0.044444444444444446
   },
   {
-    "raw_score": 0.060934720313086076,
-    "calibrated_prob": 0.03571428571428571
+    "raw_score": 0.06251500823663751,
+    "calibrated_prob": 0.12307692307692308
   },
   {
-    "raw_score": 0.07251660808753402,
-    "calibrated_prob": 0.03571428571428571
+    "raw_score": 0.16682868593778655,
+    "calibrated_prob": 0.12307692307692308
   },
   {
-    "raw_score": 0.07282503519885927,
-    "calibrated_prob": 0.06666666666666667
+    "raw_score": 0.17207798524436502,
+    "calibrated_prob": 0.1875
   },
   {
-    "raw_score": 0.07669640215925272,
-    "calibrated_prob": 0.06666666666666667
+    "raw_score": 0.27169430173544606,
+    "calibrated_prob": 0.1875
   },
   {
-    "raw_score": 0.07686730788084867,
-    "calibrated_prob": 0.08333333333333333
+    "raw_score": 0.2856795227557346,
+    "calibrated_prob": 0.2
   },
   {
-    "raw_score": 0.08249612925156369,
-    "calibrated_prob": 0.08333333333333333
-  },
-  {
-    "raw_score": 0.08258076954085272,
-    "calibrated_prob": 0.09803921568627451
-  },
-  {
-    "raw_score": 0.21020189470847295,
-    "calibrated_prob": 0.09803921568627451
+    "raw_score": 0.4523767370606948,
+    "calibrated_prob": 0.2
   }
 ]

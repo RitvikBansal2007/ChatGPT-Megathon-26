@@ -1,22 +1,22 @@
 {
   "as_of": "30 Jun 2026",
   "customers_analysed": 5000,
-  "complete_data_share": 0.82,
-  "abstained_share": 0.112,
+  "complete_data_share": 0.86,
+  "abstained_share": 0.119,
   "tiles": {
     "co2": {
       "family": "co2",
-      "name": "Estimated CO₂e",
+      "name": "Estimated CO\u2082e",
       "status": "estimate",
-      "low": 1840,
-      "central": 2460,
-      "high": 3120,
-      "unit": "t CO₂e a year",
+      "low": 3120,
+      "central": 4010,
+      "high": 5010,
+      "unit": "t CO\u2082e a year",
       "note": "Avoided emissions if surfaced opportunities are taken up. Never netted against the bank's own footprint."
     },
     "co2Realised": {
       "family": "co2",
-      "name": "Realised CO₂e",
+      "name": "Realised CO\u2082e",
       "status": "pending",
       "note": "Needs post-adoption data. Shown separately when it exists (Promise vs. Proof, documented design)."
     },
@@ -24,9 +24,9 @@
       "family": "energy",
       "name": "Energy",
       "status": "estimate",
-      "low": 4.1,
-      "central": 5.3,
-      "high": 6.8,
+      "low": 0.0,
+      "central": 0.0,
+      "high": 0.0,
       "unit": "GWh a year",
       "note": "Green Home and Solar Finance only."
     },
@@ -34,7 +34,7 @@
       "family": "paper",
       "name": "Paper sheets avoided",
       "status": "estimate",
-      "central": 212400,
+      "central": 12600,
       "unit": "sheets a year",
       "note": "Paperless only. No carbon claim."
     },
@@ -42,837 +42,851 @@
       "family": "digital",
       "name": "Digital adoption",
       "status": "realised",
-      "central": 0.68,
-      "unit": "of statements digital",
-      "note": "Not a carbon reduction."
+      "central": 69,
+      "unit": "% of customers",
+      "note": "Paperless only. Digital statements active."
     }
   },
   "funnel": {
     "GP01": [
       [
         "Identified",
-        1420
+        5000
       ],
       [
         "Eligible",
-        1180
+        4912
+      ],
+      [
+        "Recommended",
+        1629
       ],
       [
         "Surfaced",
-        860
-      ],
-      [
-        "Engaged",
-        312
-      ],
-      [
-        "Taken up",
-        74
+        3907
       ]
     ],
     "GP02": [
       [
         "Identified",
-        1610
+        5000
       ],
       [
         "Eligible",
-        1290
+        3532
+      ],
+      [
+        "Recommended",
+        1699
       ],
       [
         "Surfaced",
-        940
-      ],
-      [
-        "Engaged",
-        288
-      ],
-      [
-        "Taken up",
-        61
+        3530
       ]
     ],
     "GP03": [
       [
         "Identified",
-        980
+        5000
       ],
       [
         "Eligible",
-        720
+        2708
+      ],
+      [
+        "Recommended",
+        1015
       ],
       [
         "Surfaced",
-        410
-      ],
-      [
-        "Engaged",
-        126
-      ],
-      [
-        "Taken up",
-        22
+        1333
       ]
     ],
     "GP04": [
       [
         "Identified",
-        2240
+        5000
       ],
       [
         "Eligible",
-        2010
+        1498
+      ],
+      [
+        "Recommended",
+        1404
       ],
       [
         "Surfaced",
-        1880
-      ],
-      [
-        "Engaged",
-        1102
-      ],
-      [
-        "Taken up",
-        618
+        1498
       ]
     ]
   },
   "quadrant": {
     "GP01": [
       {
-        "id": "c01",
-        "name": "Commuter homeowners",
-        "n": 412,
-        "propensity": 0.78,
-        "conf": 0.84,
-        "low": 1150,
-        "central": 1450,
-        "high": 1750,
-        "status": "RECOMMEND",
-        "eligPass": 0.78,
-        "eligNeeds": 0.22,
-        "quality": "MEDIUM",
-        "reasons": [
-          "HIGH_FUEL_SPEND",
-          "EXISTING_VEHICLE",
-          "FINANCE_ENDING"
-        ]
-      },
-      {
-        "id": "c02",
-        "name": "High-mileage diesel drivers",
-        "n": 186,
-        "propensity": 0.71,
-        "conf": 0.52,
-        "low": 1500,
-        "central": 1980,
-        "high": 2460,
-        "status": "RECOMMEND",
-        "eligPass": 0.64,
-        "eligNeeds": 0.36,
-        "quality": "LOW",
-        "reasons": [
-          "HIGH_FUEL_SPEND",
-          "HIGH_ANNUAL_MILEAGE"
-        ]
-      },
-      {
-        "id": "c03",
-        "name": "Low-mileage urban drivers",
-        "n": 344,
-        "propensity": 0.62,
-        "conf": 0.8,
-        "low": 260,
-        "central": 340,
-        "high": 420,
+        "id": "GP01-HIGH-01",
+        "name": "High mileage, off-street parking",
+        "n": 881,
+        "propensity": 0.09,
+        "conf": 0.96,
         "status": "SOFT_SURFACE",
-        "eligPass": 0.86,
-        "eligNeeds": 0.14,
+        "central": 2637,
+        "low": 2084,
+        "high": 3191,
+        "eligPass": 0.98,
+        "eligNeeds": 0.0,
         "quality": "HIGH",
         "reasons": [
-          "EXISTING_VEHICLE"
-        ]
+          "High mileage",
+          "Homeowner",
+          "Charger ready"
+        ],
+        "suppressed": false
       },
       {
-        "id": "c04",
-        "name": "Older-car rural households",
-        "n": 228,
-        "propensity": 0.29,
-        "conf": 0.76,
-        "low": 1350,
-        "central": 1720,
-        "high": 2090,
-        "status": "SOFT_SURFACE",
-        "eligPass": 0.81,
-        "eligNeeds": 0.19,
-        "quality": "MEDIUM",
-        "reasons": [
-          "HIGH_ANNUAL_MILEAGE",
-          "OLDER_VEHICLE"
-        ]
-      },
-      {
-        "id": "c05",
-        "name": "Occasional drivers",
-        "n": 301,
-        "propensity": 0.18,
-        "conf": 0.82,
-        "low": 140,
-        "central": 190,
-        "high": 240,
-        "status": "SOFT_SURFACE",
-        "eligPass": 0.9,
-        "eligNeeds": 0.1,
+        "id": "GP01-MID-02",
+        "name": "Suburban commuters (medium mileage)",
+        "n": 753,
+        "propensity": 0.1,
+        "conf": 0.95,
+        "status": "RECOMMEND",
+        "central": 1882,
+        "low": 1487,
+        "high": 2278,
+        "eligPass": 0.98,
+        "eligNeeds": 0.0,
         "quality": "HIGH",
-        "reasons": []
+        "reasons": [
+          "Commuter pattern",
+          "Eligible"
+        ],
+        "suppressed": false
       },
       {
-        "id": "c06",
-        "name": "Mixed-signal EV records",
-        "n": 58,
-        "propensity": 0.55,
-        "conf": 0.38,
-        "low": 0,
+        "id": "GP01-LOW-03",
+        "name": "Low mileage urban drivers",
+        "n": 1659,
+        "propensity": 0.08,
+        "conf": 0.96,
+        "status": "SOFT_SURFACE",
+        "central": 966,
+        "low": 763,
+        "high": 1169,
+        "eligPass": 1.0,
+        "eligNeeds": 0.0,
+        "quality": "HIGH",
+        "reasons": [
+          "Urban driving",
+          "Public charging"
+        ],
+        "suppressed": false
+      },
+      {
+        "id": "GP01-RENT-04",
+        "name": "Renter drivers (on-street charging)",
+        "n": 1446,
+        "propensity": 0.03,
+        "conf": 0.83,
+        "status": "SOFT_SURFACE",
+        "central": 1714,
+        "low": 1354,
+        "high": 2074,
+        "eligPass": 0.79,
+        "eligNeeds": 0.21,
+        "quality": "HIGH",
+        "reasons": [
+          "On-street charging",
+          "Verification needed"
+        ],
+        "suppressed": false
+      },
+      {
+        "id": "GP01-RULE-05",
+        "name": "Existing EV or vehicle sold",
+        "n": 88,
+        "propensity": 0.09,
+        "conf": 0.96,
+        "status": "RULED_OUT",
         "central": 0,
+        "low": 0,
         "high": 0,
-        "status": "REVIEW",
-        "eligPass": 0.7,
-        "eligNeeds": 0.3,
-        "quality": null,
+        "eligPass": 0.0,
+        "eligNeeds": 0.0,
+        "quality": "HIGH",
         "reasons": [
-          "VEHICLE_BEV_ON_RECORD",
-          "FUEL_SPEND_CONTINUES"
-        ]
-      },
-      {
-        "id": "c07",
-        "name": "Company-car drivers",
-        "n": 7,
-        "suppressed": true
+          "Already zero-emission",
+          "No active vehicle"
+        ],
+        "suppressed": false
       }
     ],
     "GP02": [
       {
-        "id": "h01",
-        "name": "Pre-1970 homes, high winter gas",
-        "n": 366,
-        "propensity": 0.76,
-        "conf": 0.81,
-        "low": 500,
-        "central": 650,
-        "high": 830,
-        "status": "RECOMMEND",
-        "eligPass": 0.83,
-        "eligNeeds": 0.17,
-        "quality": "HIGH",
-        "reasons": [
-          "HIGH_WINTER_GAS",
-          "OLDER_HOME"
-        ]
-      },
-      {
-        "id": "h02",
-        "name": "Homes without an EPC",
-        "n": 248,
-        "propensity": 0.58,
-        "conf": 0.41,
-        "low": 420,
-        "central": 610,
-        "high": 800,
-        "status": "ABSTAIN",
-        "eligPass": 0.8,
-        "eligNeeds": 0.2,
-        "quality": "LOW",
-        "reasons": [
-          "HIGH_WINTER_GAS",
-          "EPC_MISSING"
-        ]
-      },
-      {
-        "id": "h03",
-        "name": "Recently moved homeowners",
-        "n": 190,
-        "propensity": 0.66,
-        "conf": 0.72,
-        "low": 300,
-        "central": 400,
-        "high": 500,
-        "status": "RECOMMEND",
-        "eligPass": 0.75,
-        "eligNeeds": 0.25,
-        "quality": "MEDIUM",
-        "reasons": [
-          "MORTGAGE_STARTED"
-        ]
-      },
-      {
-        "id": "h04",
-        "name": "Newer homes, typical gas",
-        "n": 512,
-        "propensity": 0.24,
-        "conf": 0.85,
-        "low": 150,
-        "central": 210,
-        "high": 270,
+        "id": "GP02-EFF-01",
+        "name": "EPC D\u2013F homeowners (retrofit priority)",
+        "n": 1425,
+        "propensity": 0.04,
+        "conf": 0.96,
         "status": "SOFT_SURFACE",
-        "eligPass": 0.92,
-        "eligNeeds": 0.08,
+        "central": 284,
+        "low": 224,
+        "high": 344,
+        "eligPass": 1.0,
+        "eligNeeds": 0.0,
         "quality": "HIGH",
-        "reasons": []
+        "reasons": [
+          "Insulation priority",
+          "Eligible homeowner"
+        ],
+        "suppressed": false
+      },
+      {
+        "id": "GP02-HIGH-02",
+        "name": "EPC C+ homeowners (heat pump ready)",
+        "n": 2106,
+        "propensity": 0.04,
+        "conf": 0.96,
+        "status": "SOFT_SURFACE",
+        "central": 284,
+        "low": 224,
+        "high": 343,
+        "eligPass": 1.0,
+        "eligNeeds": 0.0,
+        "quality": "HIGH",
+        "reasons": [
+          "Heat pump ready",
+          "EPC C or better"
+        ],
+        "suppressed": false
+      },
+      {
+        "id": "GP02-GAS-03",
+        "name": "High gas heating consumption",
+        "n": 1,
+        "propensity": 0.04,
+        "conf": 0.96,
+        "status": "RECOMMEND",
+        "central": 502,
+        "low": 396,
+        "high": 607,
+        "eligPass": 1.0,
+        "eligNeeds": 0.0,
+        "quality": "HIGH",
+        "reasons": [
+          "High winter consumption",
+          "Significant savings"
+        ],
+        "suppressed": true
+      },
+      {
+        "id": "GP02-RENT-04",
+        "name": "Renters (landlord responsible)",
+        "n": 1468,
+        "propensity": 0.0,
+        "conf": 0.96,
+        "status": "RULED_OUT",
+        "central": 0,
+        "low": 0,
+        "high": 0,
+        "eligPass": 0.0,
+        "eligNeeds": 0.0,
+        "quality": "HIGH",
+        "reasons": [
+          "Tenant occupancy",
+          "Landlord consent required"
+        ],
+        "suppressed": false
       }
     ],
     "GP03": [
+      null,
+      null,
       {
-        "id": "s01",
-        "name": "High-electricity homeowners",
-        "n": 214,
-        "propensity": 0.69,
-        "conf": 0.47,
-        "low": 500,
-        "central": 580,
-        "high": 660,
+        "id": "GP03-DATA-03",
+        "name": "Missing roof orientation (need survey)",
+        "n": 1375,
+        "propensity": 0.04,
+        "conf": 0.96,
         "status": "ABSTAIN",
-        "eligPass": 0.71,
-        "eligNeeds": 0.29,
-        "quality": "LOW",
-        "reasons": [
-          "HIGH_ELEC_USE",
-          "ROOF_UNKNOWN"
-        ]
-      },
-      {
-        "id": "s02",
-        "name": "South-facing roofs on record",
-        "n": 133,
-        "propensity": 0.64,
-        "conf": 0.79,
-        "low": 520,
-        "central": 610,
-        "high": 700,
-        "status": "RECOMMEND",
-        "eligPass": 0.88,
-        "eligNeeds": 0.12,
+        "central": 787,
+        "low": 622,
+        "high": 952,
+        "eligPass": 1.0,
+        "eligNeeds": 0.0,
         "quality": "HIGH",
         "reasons": [
-          "HIGH_ELEC_USE",
-          "ROOF_SUITABLE"
-        ]
+          "Missing roof survey",
+          "Abstained"
+        ],
+        "suppressed": false
       },
       {
-        "id": "s03",
-        "name": "Average-use homeowners",
-        "n": 402,
-        "propensity": 0.31,
-        "conf": 0.8,
-        "low": 360,
-        "central": 440,
-        "high": 520,
-        "status": "SOFT_SURFACE",
-        "eligPass": 0.9,
-        "eligNeeds": 0.1,
-        "quality": "MEDIUM",
-        "reasons": []
+        "id": "GP03-EXIST-04",
+        "name": "Already equipped with Solar PV",
+        "n": 2292,
+        "propensity": 0.02,
+        "conf": 0.96,
+        "status": "RULED_OUT",
+        "central": 0,
+        "low": 0,
+        "high": 0,
+        "eligPass": 0.0,
+        "eligNeeds": 0.0,
+        "quality": "HIGH",
+        "reasons": [
+          "Solar already active",
+          "Ruled out"
+        ],
+        "suppressed": false
       }
     ],
     "GP04": [
+      null,
+      null,
       {
-        "id": "p01",
-        "name": "App-first, paper statements",
-        "n": 1240,
-        "propensity": 0.81,
-        "conf": 0.86,
-        "low": 40,
-        "central": 48,
-        "high": 48,
+        "id": "GP04-REC-03",
+        "name": "All eligible paper-receiving customers",
+        "n": 1404,
+        "propensity": 0.23,
+        "conf": 0.96,
         "status": "RECOMMEND",
-        "eligPass": 0.97,
-        "eligNeeds": 0.03,
+        "central": 9,
+        "low": 7,
+        "high": 11,
+        "eligPass": 1.0,
+        "eligNeeds": 0.0,
         "quality": "HIGH",
         "reasons": [
-          "PAPER_STATEMENTS",
-          "HIGH_DIGITAL_ACTIVITY"
+          "Paperless candidate",
+          "Passed"
         ],
-        "unit": "sheets a year"
+        "suppressed": false
       },
       {
-        "id": "p02",
-        "name": "Mixed paper and digital",
-        "n": 860,
-        "propensity": 0.57,
-        "conf": 0.8,
-        "low": 8,
-        "central": 16,
-        "high": 24,
-        "status": "RECOMMEND",
-        "eligPass": 0.95,
-        "eligNeeds": 0.05,
+        "id": "GP04-RULE-04",
+        "name": "Accessibility paper preference",
+        "n": 3502,
+        "propensity": 0.0,
+        "conf": 0.96,
+        "status": "RULED_OUT",
+        "central": 0,
+        "low": 0,
+        "high": 0,
+        "eligPass": 0.0,
+        "eligNeeds": 0.0,
         "quality": "HIGH",
         "reasons": [
-          "PAPER_STATEMENTS"
+          "Accessibility need",
+          "Preserve paper"
         ],
-        "unit": "sheets a year"
-      },
-      {
-        "id": "p03",
-        "name": "Low app use, paper statements",
-        "n": 420,
-        "propensity": 0.22,
-        "conf": 0.74,
-        "low": 40,
-        "central": 48,
-        "high": 48,
-        "status": "SOFT_SURFACE",
-        "eligPass": 0.9,
-        "eligNeeds": 0.1,
-        "quality": "HIGH",
-        "reasons": [
-          "PAPER_STATEMENTS"
-        ],
-        "unit": "sheets a year"
+        "suppressed": false
       }
     ]
   },
   "segments": [
     {
-      "name": "Commuter homeowners",
-      "customers": 412,
-      "recommend": 0.61,
-      "abstain": 0.06,
-      "impact": "1,150–1,750 kg"
+      "name": "Suburban commuters",
+      "customers": 1535,
+      "recommend": 0.29,
+      "abstain": 0.07,
+      "impact": "High (central 2.4 t)",
+      "suppressed": false
     },
     {
-      "name": "Pre-1970 homes, high winter gas",
-      "customers": 366,
-      "recommend": 0.58,
-      "abstain": 0.09,
-      "impact": "500–830 kg"
+      "name": "Rural homeowners",
+      "customers": 3532,
+      "recommend": 0.37,
+      "abstain": 0.15,
+      "impact": "High (central 3.1 t)",
+      "suppressed": false
     },
     {
-      "name": "Homes without an EPC",
-      "customers": 248,
-      "recommend": 0.12,
-      "abstain": 0.71,
-      "impact": "Not estimated"
+      "name": "Urban renters",
+      "customers": 1468,
+      "recommend": 0.1,
+      "abstain": 0.05,
+      "impact": "Moderate (central 320 sheets)",
+      "suppressed": false
     },
     {
-      "name": "High-electricity homeowners",
-      "customers": 214,
-      "recommend": 0.21,
-      "abstain": 0.62,
-      "impact": "Not estimated"
-    },
-    {
-      "name": "App-first, paper statements",
-      "customers": 1240,
-      "recommend": 0.74,
-      "abstain": 0.01,
-      "impact": "48 sheets"
-    },
-    {
-      "name": "Company-car drivers",
-      "customers": 7,
+      "name": "Eco-engaged households",
+      "customers": 2,
+      "recommend": 0.5,
+      "abstain": 0.12,
+      "impact": "High (central 2.8 t)",
       "suppressed": true
+    },
+    {
+      "name": "Digital-first customers",
+      "customers": 3474,
+      "recommend": 0.22,
+      "abstain": 0.12,
+      "impact": "Moderate (central 210 sheets)",
+      "suppressed": false
     }
   ],
   "regions": [
     {
-      "name": "London",
-      "customers": 742,
-      "recommend": 0.31,
-      "abstain": 0.13
-    },
-    {
-      "name": "South East",
-      "customers": 806,
-      "recommend": 0.36,
-      "abstain": 0.1
-    },
-    {
       "name": "South West",
-      "customers": 498,
-      "recommend": 0.33,
-      "abstain": 0.12
-    },
-    {
-      "name": "East of England",
-      "customers": 455,
-      "recommend": 0.34,
+      "customers": 1037,
+      "recommend": 0.29,
       "abstain": 0.11
     },
     {
-      "name": "West Midlands",
-      "customers": 431,
-      "recommend": 0.32,
-      "abstain": 0.1
-    },
-    {
-      "name": "East Midlands",
-      "customers": 372,
-      "recommend": 0.35,
-      "abstain": 0.09
-    },
-    {
       "name": "North West",
-      "customers": 560,
-      "recommend": 0.3,
+      "customers": 1016,
+      "recommend": 0.28,
       "abstain": 0.12
     },
     {
-      "name": "North East",
-      "customers": 214,
+      "name": "London",
+      "customers": 990,
+      "recommend": 0.29,
+      "abstain": 0.12
+    },
+    {
+      "name": "West Midlands",
+      "customers": 981,
       "recommend": 0.29,
       "abstain": 0.13
     },
     {
-      "name": "Yorkshire and The Humber",
-      "customers": 418,
-      "recommend": 0.31,
-      "abstain": 0.11
-    },
-    {
-      "name": "Wales",
-      "customers": 236,
-      "recommend": 0.3,
-      "abstain": 0.12
-    },
-    {
-      "name": "Scotland",
-      "customers": 268,
+      "name": "South East",
+      "customers": 976,
       "recommend": 0.28,
-      "abstain": 0.14
+      "abstain": 0.12
     }
   ],
   "trends": {
     "months": [
-      "Jan",
-      "Feb",
-      "Mar",
-      "Apr",
-      "May",
-      "Jun"
+      "Jul 25",
+      "Aug 25",
+      "Sep 25",
+      "Oct 25",
+      "Nov 25",
+      "Dec 25",
+      "Jan 26",
+      "Feb 26",
+      "Mar 26",
+      "Apr 26",
+      "May 26",
+      "Jun 26"
     ],
     "surfaced": {
       "GP01": [
-        610,
-        655,
-        702,
-        760,
-        818,
-        860
+        120,
+        145,
+        180,
+        210,
+        250,
+        290,
+        310,
+        340,
+        365,
+        385,
+        400,
+        412
       ],
       "GP02": [
-        980,
-        960,
-        930,
-        905,
-        920,
-        940
+        80,
+        95,
+        120,
+        160,
+        205,
+        240,
+        275,
+        305,
+        330,
+        350,
+        370,
+        395
       ],
       "GP03": [
-        290,
-        320,
-        352,
-        380,
-        398,
-        410
+        40,
+        55,
+        70,
+        90,
+        110,
+        130,
+        150,
+        175,
+        190,
+        210,
+        225,
+        245
       ],
       "GP04": [
-        1420,
-        1510,
-        1600,
-        1690,
-        1790,
-        1880
+        210,
+        240,
+        280,
+        310,
+        360,
+        420,
+        480,
+        520,
+        570,
+        610,
+        640,
+        680
       ]
     },
     "takenUp": {
       "GP01": [
-        41,
-        48,
-        52,
-        60,
+        12,
+        18,
+        26,
+        34,
+        45,
+        58,
         67,
-        74
+        78,
+        89,
+        97,
+        108,
+        119
       ],
       "GP02": [
-        72,
-        70,
+        6,
+        11,
+        16,
+        22,
+        31,
+        39,
+        47,
+        56,
         64,
-        58,
-        60,
-        61
+        73,
+        81,
+        90
       ],
       "GP03": [
-        9,
-        11,
-        14,
+        3,
+        5,
+        8,
+        12,
         17,
-        20,
-        22
+        23,
+        28,
+        35,
+        41,
+        48,
+        54,
+        62
       ],
       "GP04": [
-        402,
-        440,
-        488,
-        530,
-        578,
-        618
+        45,
+        62,
+        85,
+        110,
+        142,
+        180,
+        215,
+        255,
+        290,
+        325,
+        360,
+        402
       ]
     }
   },
   "rm_book": [
     {
-      "persona": "priya",
-      "key": "cust_7f3a9c",
-      "name": "Priya",
-      "region": "South East",
+      "name": "Priya Sharma",
+      "key": "CUST-0001",
+      "region": "South West",
       "product": "GP01",
       "status": "RECOMMEND",
       "likelihood": "HIGH",
-      "eligibility": "NEEDS_VERIFICATION",
-      "quality": "MEDIUM",
-      "fresh": "30 Jun 2026",
-      "next": "Call within 14 days"
-    },
-    {
-      "persona": "dave",
-      "key": "cust_5e0c33",
-      "name": "Dave",
-      "region": "East Midlands",
-      "product": "GP02",
-      "status": "RECOMMEND",
-      "likelihood": "HIGH",
-      "eligibility": "PASSED",
+      "eligibility": "Passed",
       "quality": "HIGH",
-      "fresh": "30 Jun 2026",
-      "next": "Send first-step guide"
+      "next": "Review EV savings and charger grant with customer",
+      "persona": "priya"
     },
     {
-      "persona": "marcus",
-      "key": "cust_2b81e4",
-      "name": "Marcus",
-      "region": "North West",
+      "name": "Marcus Chen",
+      "key": "CUST-0002",
+      "region": "South East",
       "product": "GP01",
       "status": "REVIEW",
       "likelihood": "MEDIUM",
-      "eligibility": "PASSED",
-      "quality": null,
-      "fresh": "30 Jun 2026",
-      "next": "Resolve vehicle record"
+      "eligibility": "Passed",
+      "quality": "MEDIUM",
+      "next": "Discuss vehicle renewal timeline and home charging",
+      "persona": "marcus"
     },
     {
-      "persona": "sam",
-      "key": "cust_ab4410",
-      "name": "Sam",
-      "region": "South West",
-      "product": "GP03",
-      "status": "ABSTAIN",
-      "likelihood": "MEDIUM",
-      "eligibility": "PASSED",
+      "name": "Aisha Patel",
+      "key": "CUST-0003",
+      "region": "West Midlands",
+      "product": "GP04",
+      "status": "RULED_OUT",
+      "likelihood": "LOW",
+      "eligibility": "Not eligible",
       "quality": "LOW",
-      "fresh": "30 Jun 2026",
-      "next": "Data enrichment: roof"
+      "next": "No action: customer uses public transport",
+      "persona": "aisha"
     },
     {
-      "persona": "tom",
-      "key": "cust_91aa20",
-      "name": "Tom",
-      "region": "Yorkshire and The Humber",
+      "name": "Tom Wilson",
+      "key": "CUST-0004",
+      "region": "South West",
       "product": "GP04",
       "status": "RECOMMEND",
       "likelihood": "HIGH",
-      "eligibility": "PASSED",
+      "eligibility": "Passed",
       "quality": "HIGH",
-      "fresh": "30 Jun 2026",
-      "next": "Digital nudge"
+      "next": "Send 1-tap digital statement switch link",
+      "persona": "tom"
     },
     {
-      "persona": "jordan",
-      "key": "cust_6d2f98",
-      "name": "Jordan",
+      "name": "Dave Evans",
+      "key": "CUST-0005",
+      "region": "South West",
+      "product": "GP02",
+      "status": "RECOMMEND",
+      "likelihood": "HIGH",
+      "eligibility": "Passed",
+      "quality": "HIGH",
+      "next": "Discuss Green Home loan for insulation retrofit",
+      "persona": "dave"
+    },
+    {
+      "name": "Sam Taylor",
+      "key": "CUST-0006",
+      "region": "North West",
+      "product": "GP03",
+      "status": "ABSTAIN",
+      "likelihood": "LOW",
+      "eligibility": "Needs verification",
+      "quality": "MEDIUM",
+      "next": "Request aerial roof survey confirmation",
+      "persona": "sam"
+    },
+    {
+      "name": "Jordan Smith",
+      "key": "CUST-0007",
       "region": "London",
       "product": "GP04",
       "status": "RECOMMEND",
       "likelihood": "HIGH",
-      "eligibility": "PASSED",
+      "eligibility": "Passed",
       "quality": "HIGH",
-      "fresh": "30 Jun 2026",
-      "next": "Digital nudge"
+      "next": "Invite to paperless digital banking switch",
+      "persona": "jordan"
     },
     {
-      "persona": "aisha",
-      "key": "cust_c0d517",
-      "name": "Aisha",
-      "region": "West Midlands",
-      "product": "GP01",
-      "status": "RULED_OUT",
-      "likelihood": "LOW",
-      "eligibility": "NOT_ELIGIBLE",
-      "quality": null,
-      "fresh": "30 Jun 2026",
-      "next": "None: all set"
-    },
-    {
-      "persona": "eleanor",
-      "key": "cust_e93b07",
-      "name": "Eleanor",
-      "region": "Wales",
-      "product": "GP04",
-      "status": "RULED_OUT",
-      "likelihood": "MEDIUM",
-      "eligibility": "NOT_ELIGIBLE",
-      "quality": null,
-      "fresh": "30 Jun 2026",
-      "next": "None: paper need respected"
-    },
-    {
-      "persona": null,
-      "key": "cust_4c19d2",
-      "name": "Customer 4c19",
+      "name": "Eleanor Vance",
+      "key": "CUST-0008",
       "region": "South East",
       "product": "GP02",
-      "status": "SOFT_SURFACE",
+      "status": "REVIEW",
       "likelihood": "MEDIUM",
-      "eligibility": "PASSED",
+      "eligibility": "Needs verification",
       "quality": "MEDIUM",
-      "fresh": "30 Jun 2026",
-      "next": "Education content"
+      "next": "Verify home ownership before proceeding",
+      "persona": "eleanor"
     },
     {
-      "persona": null,
-      "key": "cust_88e0f1",
-      "name": "Customer 88e0",
-      "region": "East of England",
+      "name": "Client #9",
+      "key": "CUST-0009",
+      "region": "South West",
       "product": "GP01",
       "status": "RECOMMEND",
-      "likelihood": "HIGH",
-      "eligibility": "PASSED",
-      "quality": "HIGH",
-      "fresh": "30 Jun 2026",
-      "next": "Call within 14 days"
-    },
-    {
-      "persona": null,
-      "key": "cust_0a7b6e",
-      "name": "Customer 0a7b",
-      "region": "Scotland",
-      "product": "GP03",
-      "status": "ABSTAIN",
       "likelihood": "MEDIUM",
-      "eligibility": "PASSED",
-      "quality": "LOW",
-      "fresh": "2 Jan 2026",
-      "next": "Is this still right? check",
-      "stale": true
+      "eligibility": "Passed",
+      "quality": "HIGH",
+      "next": "Review evidence pack and present qualified green option",
+      "persona": null
     },
     {
-      "persona": null,
-      "key": "cust_d35c40",
-      "name": "Customer d35c",
-      "region": "North East",
-      "product": "GP01",
-      "status": "SOFT_SURFACE",
-      "likelihood": "LOW",
-      "eligibility": "PASSED",
+      "name": "Client #10",
+      "key": "CUST-0010",
+      "region": "South West",
+      "product": "GP04",
+      "status": "RECOMMEND",
+      "likelihood": "MEDIUM",
+      "eligibility": "Passed",
       "quality": "HIGH",
-      "fresh": "30 Jun 2026",
-      "next": "Education content"
+      "next": "Review evidence pack and present qualified green option",
+      "persona": null
+    },
+    {
+      "name": "Client #11",
+      "key": "CUST-0011",
+      "region": "South East",
+      "product": "GP01",
+      "status": "RECOMMEND",
+      "likelihood": "MEDIUM",
+      "eligibility": "Passed",
+      "quality": "HIGH",
+      "next": "Review evidence pack and present qualified green option",
+      "persona": null
+    },
+    {
+      "name": "Client #12",
+      "key": "CUST-0012",
+      "region": "South East",
+      "product": "GP01",
+      "status": "RECOMMEND",
+      "likelihood": "MEDIUM",
+      "eligibility": "Passed",
+      "quality": "HIGH",
+      "next": "Review evidence pack and present qualified green option",
+      "persona": null
+    },
+    {
+      "name": "Client #13",
+      "key": "CUST-0013",
+      "region": "North West",
+      "product": "GP01",
+      "status": "RECOMMEND",
+      "likelihood": "MEDIUM",
+      "eligibility": "Passed",
+      "quality": "HIGH",
+      "next": "Review evidence pack and present qualified green option",
+      "persona": null
+    },
+    {
+      "name": "Client #15",
+      "key": "CUST-0015",
+      "region": "West Midlands",
+      "product": "GP02",
+      "status": "RECOMMEND",
+      "likelihood": "MEDIUM",
+      "eligibility": "Passed",
+      "quality": "HIGH",
+      "next": "Review evidence pack and present qualified green option",
+      "persona": null
+    },
+    {
+      "name": "Client #17",
+      "key": "CUST-0017",
+      "region": "South West",
+      "product": "GP02",
+      "status": "RECOMMEND",
+      "likelihood": "MEDIUM",
+      "eligibility": "Passed",
+      "quality": "HIGH",
+      "next": "Review evidence pack and present qualified green option",
+      "persona": null
+    },
+    {
+      "name": "Client #18",
+      "key": "CUST-0018",
+      "region": "West Midlands",
+      "product": "GP01",
+      "status": "RECOMMEND",
+      "likelihood": "MEDIUM",
+      "eligibility": "Passed",
+      "quality": "HIGH",
+      "next": "Review evidence pack and present qualified green option",
+      "persona": null
+    },
+    {
+      "name": "Client #19",
+      "key": "CUST-0019",
+      "region": "South East",
+      "product": "GP01",
+      "status": "RECOMMEND",
+      "likelihood": "MEDIUM",
+      "eligibility": "Passed",
+      "quality": "HIGH",
+      "next": "Review evidence pack and present qualified green option",
+      "persona": null
+    },
+    {
+      "name": "Client #20",
+      "key": "CUST-0020",
+      "region": "South West",
+      "product": "GP04",
+      "status": "RECOMMEND",
+      "likelihood": "MEDIUM",
+      "eligibility": "Passed",
+      "quality": "HIGH",
+      "next": "Review evidence pack and present qualified green option",
+      "persona": null
+    },
+    {
+      "name": "Client #21",
+      "key": "CUST-0021",
+      "region": "West Midlands",
+      "product": "GP01",
+      "status": "RECOMMEND",
+      "likelihood": "MEDIUM",
+      "eligibility": "Passed",
+      "quality": "HIGH",
+      "next": "Review evidence pack and present qualified green option",
+      "persona": null
+    },
+    {
+      "name": "Client #22",
+      "key": "CUST-0022",
+      "region": "West Midlands",
+      "product": "GP01",
+      "status": "RECOMMEND",
+      "likelihood": "MEDIUM",
+      "eligibility": "Passed",
+      "quality": "HIGH",
+      "next": "Review evidence pack and present qualified green option",
+      "persona": null
     }
   ],
   "governance": {
-    "claims_verified": 1284,
-    "claims_blocked": 7,
-    "template_rate": 0.021,
-    "abstention_rate": 0.112,
+    "abstention_rate": 0.119,
+    "claims_verified": 5840,
+    "claims_blocked": 14,
     "chain": {
       "status": "ok",
-      "rows": 1291,
-      "lastVerified": "30 Jun 2026, 18:02",
-      "head": "sha256:9c1e…4b7a"
+      "rows": 5840,
+      "head": "sha256:7b42a91ec830492e8fa6d01c"
     },
     "fairness": {
       "income": [
         {
-          "band": "Lower income",
-          "customers": 1240,
-          "recommend": 0.33,
+          "band": "Low (<\u00a330k)",
+          "customers": 0,
+          "recommend": 0.41,
           "abstain": 0.12,
-          "brier": 0.064
+          "brier": 0.054
         },
         {
-          "band": "Lower-middle income",
-          "customers": 1310,
-          "recommend": 0.34,
-          "abstain": 0.11,
-          "brier": 0.061
-        },
-        {
-          "band": "Upper-middle income",
-          "customers": 1280,
-          "recommend": 0.32,
+          "band": "Mid (\u00a330k\u2013\u00a370k)",
+          "customers": 0,
+          "recommend": 0.44,
           "abstain": 0.1,
-          "brier": 0.06
+          "brier": 0.049
         },
         {
-          "band": "Higher income",
-          "customers": 1170,
-          "recommend": 0.35,
-          "abstain": 0.11,
-          "brier": 0.062
+          "band": "High (>\u00a370k)",
+          "customers": 0,
+          "recommend": 0.46,
+          "abstain": 0.09,
+          "brier": 0.046
         }
       ],
       "age": [
         {
-          "band": "18 to 34",
-          "customers": 1460,
-          "recommend": 0.3,
-          "abstain": 0.15,
-          "brier": 0.066
+          "band": "18\u201335",
+          "customers": 1475,
+          "recommend": 0.45,
+          "abstain": 0.11,
+          "brier": 0.051
         },
         {
-          "band": "35 to 54",
-          "customers": 1980,
-          "recommend": 0.36,
-          "abstain": 0.09,
-          "brier": 0.059
-        },
-        {
-          "band": "55 and over",
-          "customers": 1560,
-          "recommend": 0.33,
+          "band": "36\u201355",
+          "customers": 1609,
+          "recommend": 0.43,
           "abstain": 0.1,
-          "brier": 0.061
+          "brier": 0.048
+        },
+        {
+          "band": "56+",
+          "customers": 1916,
+          "recommend": 0.41,
+          "abstain": 0.11,
+          "brier": 0.052
         }
       ]
-    },
-    "calibration": [
-      {
-        "segment": "All customers",
-        "ece": 0.018
-      },
-      {
-        "segment": "Commuter homeowners",
-        "ece": 0.021
-      },
-      {
-        "segment": "Pre-1970 homes",
-        "ece": 0.024
-      },
-      {
-        "segment": "New customers (under 8 weeks)",
-        "ece": 0.047,
-        "flag": true
-      },
-      {
-        "segment": "Renters",
-        "ece": 0.019
-      }
-    ],
-    "limitations": [
-      "All customers and labels are synthetic. Metrics show the pipeline is honest, not real-world accuracy.",
-      "Impact figures are modelled estimates with illustrative factor labels in this prototype.",
-      "Realised CO₂e needs post-adoption data and is not shown as a number.",
-      "New customers (under 8 weeks) calibrate less well; they are routed to ABSTAIN more often by design."
-    ]
+    }
   }
 }

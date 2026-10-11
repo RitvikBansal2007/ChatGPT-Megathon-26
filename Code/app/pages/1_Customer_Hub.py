@@ -43,7 +43,7 @@ with left:
         T.banner("Insights are off. Switch them back on in Your data whenever you like.", "info")
 
 with right:
-    names = ["Your data"] + (["Scenario Lab"] if shell.can("lab") else []) + (["Claim-Check"] if shell.can("redteam") else [])
+    names = ["Your data", "Customer Memory"] + (["Scenario Lab"] if shell.can("lab") else []) + (["Claim-Check"] if shell.can("redteam") else [])
     tabs = dict(zip(names, st.tabs(names)))
     with tabs["Your data"]:
         for f in doc.get("data_freshness", []):
@@ -52,6 +52,28 @@ with right:
         st.caption("We use spending categories, products, energy and digital usage. "
                    "We do not use age, income or fine-grained postcode to drive recommendations.")
         st.toggle("Show me green insights", value=True, key="insights-on", help="Switching this off replaces every card with one placeholder.")
+    with tabs["Customer Memory"]:
+        st.caption("Persistent preferences and declared facts remembered for this customer.")
+        m_items = client.get_customer_memory(persona["customer_id"])
+        if m_items:
+            for item in m_items:
+                cat_tag = item.get("category", "preference").replace("_", " ").title()
+                src_tag = item.get("source", "declared").replace("_", " ").title()
+                T.render(f'<div class="gd-card gd-card--flat" style="padding:10px;margin-bottom:8px">'
+                         f'<div class="gd-row" style="margin-bottom:4px"><span class="gd-tag">{T.esc(cat_tag)}</span>'
+                         f'<span class="gd-date">{T.esc(src_tag)}</span></div>'
+                         f'<p style="margin:0;font-size:13px">{T.esc(item.get("value", ""))}</p></div>')
+        else:
+            T.banner("No memory items recorded yet for this customer.", "info")
+
+        with st.expander("Add preference or declared fact", expanded=False):
+            m_text = st.text_input("Fact / Preference", placeholder="e.g. Planning to install heat pump in autumn", key=f"mem-txt-{persona['customer_id']}")
+            m_cat = st.selectbox("Category", ["preference", "declared_fact", "goal", "agent_note"], format_func=lambda s: s.replace("_", " ").title(), key=f"mem-cat-{persona['customer_id']}")
+            if st.button("Save to Memory", key=f"mem-save-{persona['customer_id']}", type="primary"):
+                if m_text.strip():
+                    client.add_customer_memory(persona["customer_id"], "note", m_text.strip(), m_cat, "customer_declared")
+                    st.success("Saved to customer memory.")
+                    st.rerun()
     if "Scenario Lab" in tabs:
         with tabs["Scenario Lab"]:
             scenario_lab(persona["customer_id"])

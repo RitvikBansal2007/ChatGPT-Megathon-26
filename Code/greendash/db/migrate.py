@@ -13,6 +13,11 @@ def migrate() -> None:
     try:
         conn.execute("PRAGMA journal_mode=WAL")
         conn.executescript(SCHEMA.read_text())
+        # Add columns if users table was created previously without them
+        cols = {r[1] for r in conn.execute("PRAGMA table_info(users)").fetchall()}
+        for col in ["email", "display_name", "password_hash"]:
+            if col not in cols:
+                conn.execute(f"ALTER TABLE users ADD COLUMN {col} TEXT")
         conn.commit()
     finally:
         conn.close()

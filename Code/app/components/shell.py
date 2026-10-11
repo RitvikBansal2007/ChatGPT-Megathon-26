@@ -29,12 +29,34 @@ def sidebar() -> dict:
     ids = [p["customer_id"] for p in people]
     st.session_state.setdefault("persona_id", ids[0])
     with st.sidebar:
+        user = client.current_user()
+        if user:
+            st.markdown(f"**Signed in:** {T.esc(user.get('display_name', user.get('user_key')))}")
+            st.caption(f"Role: {client.ROLES.get(user.get('role'), user.get('role'))} · Live JWT")
+            if st.button("Sign Out", key="sb-logout"):
+                client.logout()
+                st.rerun()
+            st.divider()
+        else:
+            with st.expander("Sign In · Backend Account", expanded=False):
+                u_in = st.text_input("Username or Email", value="priya@greenproof.bank", key="sb-login-u")
+                p_in = st.text_input("Password", value="password123", type="password", key="sb-login-p")
+                if st.button("Sign In", key="sb-login-btn", type="primary"):
+                    try:
+                        u = client.login(u_in, p_in)
+                        st.success(f"Welcome, {u.get('display_name')}!")
+                        st.rerun()
+                    except Exception as exc:
+                        st.error("Authentication failed: check credentials or server.")
+            st.divider()
+
         st.selectbox("Role", list(client.ROLES), format_func=lambda r: client.ROLES[r], key="role")
         label = "Signed in as" if st.session_state["role"] == "CUSTOMER" else "Customer"
         st.selectbox(label, ids, key="persona_id",
                      format_func=lambda i: next(f'{p["display_name"]} · {i}' for p in people if p["customer_id"] == i))
         st.caption(T.CORE_RULE)
     return next(p for p in people if p["customer_id"] == st.session_state["persona_id"])
+
 
 
 def gate(area: str, what: str) -> None:
