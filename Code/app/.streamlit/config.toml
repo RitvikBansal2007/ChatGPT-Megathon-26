@@ -1,0 +1,48 @@
+# greendash — Streamlit configuration
+# Light theme = customer default (brand guidelines §4.3). Cockpit dark mode is
+# handled in app/theme.py (dark scope in CSS), not here.
+
+[theme]
+base = "light"
+# Canopy, not Verdant: Streamlit draws WHITE text on primaryColor (st.button
+# type="primary", form submit). White on Verdant #19C37D is 2.30:1 (fails);
+# white on Canopy #0F7A55 is 5.34:1. css() restyles primary buttons to the
+# brand CTA (Verdant fill + Abyss text, 8.36:1).
+primaryColor = "#0F7A55"
+backgroundColor = "#F1F8F4"            # Mist
+secondaryBackgroundColor = "#E3EFE9"   # Fog (inset wells, sidebar, inputs)
+textColor = "#0B1F18"                  # Ink (15.9:1 on Mist)
+
+# Brand type system (§5.1). Family lists need Streamlit >= 1.46; on older
+# versions replace these three lines with: font = "sans serif"
+font = "Inter, 'SF Pro Text', Roboto, system-ui, sans-serif"
+headingFont = "'Plus Jakarta Sans', 'SF Pro Display', system-ui, sans-serif"
+codeFont = "'JetBrains Mono', 'SF Mono', 'Roboto Mono', ui-monospace, monospace"
+
+# Self-hosted fonts (OFL), served from app/static/fonts/. No call to Google
+# Fonts, so the Caddy CSP can stay font-src 'self'.
+[[theme.fontFaces]]
+family = "Inter"
+url = "app/static/fonts/InterVariable.woff2"
+weight = "100 900"
+
+[[theme.fontFaces]]
+family = "Plus Jakarta Sans"
+url = "app/static/fonts/PlusJakartaSans-Variable.woff2"
+weight = "200 800"
+
+[[theme.fontFaces]]
+family = "JetBrains Mono"
+url = "app/static/fonts/JetBrainsMono-Variable.woff2"
+weight = "100 800"
+
+[client]
+toolbarMode = "minimal"
+showErrorDetails = false
+
+[server]
+enableXsrfProtection = true
+enableStaticServing = true   # needed only for the self-hosted fonts above
+
+[browser]
+gatherUsageStats = false

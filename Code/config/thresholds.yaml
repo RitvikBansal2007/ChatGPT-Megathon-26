@@ -1,0 +1,18 @@
+# RECOMMEND rule: the calibrated likelihood is at least the product's average take-up rate in the
+# training split (GP01 5.2%, GP02 3.6%, GP03 3.0%, GP04 5.5%) and confidence is at least 0.6.
+# Anything lower that is still eligible is SOFT_SURFACE. Take-up is rare, so 0.5 is never reached.
+status:
+  default: {propensity_min: 0.5, confidence_min: 0.6}
+  per_product:
+    GP01: {propensity_min: 0.05, confidence_min: 0.6}
+    GP02: {propensity_min: 0.035, confidence_min: 0.6}
+    GP03: {propensity_min: 0.03, confidence_min: 0.6}
+    GP04: {propensity_min: 0.055, confidence_min: 0.6}
+freshness: {fresh_days: 60, stale_days: 365}
+why_now:
+  car_finance_ending_days: 90
+  mortgage_started_days: 180
+k_anonymity: 10
+reason_code_min:
+  HIGH_FUEL_SPEND: {metric: avg_monthly_fuel_gbp, min: 120}
+  HIGH_ANNUAL_MILEAGE: {metric: annual_mileage, min: 9000}

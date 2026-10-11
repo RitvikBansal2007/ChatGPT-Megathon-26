@@ -1,0 +1,140 @@
+{
+  "customer_id": "CUST-0001",
+  "persona": "Fixture persona",
+  "cutoff_date": "2026-06-30",
+  "outcome_window_days": 90,
+  "run_manifest": "sha256:fixture",
+  "opportunities": [
+    {
+      "opportunity_id": "GP01",
+      "opportunity_name": "EV Finance",
+      "status": "RECOMMEND",
+      "propensity": 0.82,
+      "likelihood_band": "HIGH",
+      "confidence": {
+        "overall": 0.88,
+        "completeness": 0.95,
+        "recency": 0.92,
+        "stability": 0.86,
+        "in_distribution": 0.81
+      },
+      "eligibility": {
+        "result": "ELIGIBLE",
+        "rules_fired": [],
+        "rules_version": "rules-1.0",
+        "plain_reasons": []
+      },
+      "reason_codes": [
+        {
+          "code": "HIGH_FUEL_SPEND",
+          "phrase": "Fuel spend above your usual range",
+          "metric": "avg_monthly_fuel_gbp",
+          "value": 185,
+          "display": "185 GBP per month",
+          "observed_at": "2026-06-30",
+          "source": "inferred_transactions"
+        },
+        {
+          "code": "HIGH_ANNUAL_MILEAGE",
+          "phrase": "High annual mileage",
+          "metric": "annual_mileage",
+          "value": 11200,
+          "display": "11,200 miles per year",
+          "observed_at": "2026-05-14",
+          "source": "customer_declared"
+        }
+      ],
+      "why_now": {
+        "trigger": "CAR_FINANCE_ENDING",
+        "display": "Car finance ends in 74 days",
+        "observed_at": "2026-06-30"
+      },
+      "impact": {
+        "status": "ESTIMATED",
+        "metric_family": "emissions",
+        "unit": "kgCO2e/year",
+        "low": 1000.0,
+        "central": 1500.0,
+        "high": 2000.0,
+        "display": "1,000 to 2,000 kg CO2e per year (modelled estimate)",
+        "formula": "annual miles x petrol factor - annual miles x kWh per mile x grid factor",
+        "baseline": "current petrol car, same mileage",
+        "horizon": "year 1",
+        "factor_refs": [
+          "FIXTURE_petrol_car",
+          "FIXTURE_grid_electricity"
+        ],
+        "quality": "HIGH",
+        "missing_inputs": []
+      },
+      "digital_adoption": null,
+      "explanation": {
+        "sentences": [
+          {
+            "text": "Your fuel spend has been above your usual range, so an EV may be worth exploring.",
+            "fields": [
+              "reason_codes.0"
+            ],
+            "check": "PASS"
+          }
+        ],
+        "source": "template",
+        "claimcheck_status": "PASS"
+      },
+      "next_action": {
+        "label": "Explore EV options",
+        "secondary": "2-minute suitability check",
+        "disclaimer": "Not a credit decision. Estimate, not a guarantee."
+      },
+      "data_as_of": "2026-06-30"
+    },
+    {
+      "opportunity_id": "GP04",
+      "opportunity_name": "Paperless Banking",
+      "status": "RECOMMEND",
+      "propensity": 0.62,
+      "likelihood_band": "MEDIUM",
+      "confidence": {
+        "overall": 0.88,
+        "completeness": 0.95,
+        "recency": 0.92,
+        "stability": 0.86,
+        "in_distribution": 0.81
+      },
+      "eligibility": {
+        "result": "ELIGIBLE",
+        "rules_fired": [],
+        "rules_version": "rules-1.0",
+        "plain_reasons": []
+      },
+      "reason_codes": [],
+      "why_now": null,
+      "impact": {
+        "status": "ESTIMATED",
+        "metric_family": "paper",
+        "unit": "sheets/year",
+        "low": 70.0,
+        "central": 84.0,
+        "high": 96.0,
+        "display": "84 sheets of paper per year",
+        "formula": "paper statements per year x sheets per statement",
+        "baseline": "current paper statements",
+        "horizon": "year 1",
+        "factor_refs": [],
+        "quality": "HIGH",
+        "missing_inputs": []
+      },
+      "digital_adoption": {
+        "paper_statements_12m": 12,
+        "digital_share": 0.7
+      },
+      "explanation": null,
+      "next_action": {
+        "label": "Go paperless",
+        "secondary": null,
+        "disclaimer": "Not a credit decision. Estimate, not a guarantee."
+      },
+      "data_as_of": "2026-06-30"
+    }
+  ]
+}

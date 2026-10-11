@@ -1,0 +1,352 @@
+{
+  "customer_id": "CUST-0005",
+  "customer_key": "cust_5e0c33",
+  "persona": "Dave — 1960s semi, high winter gas, EPC D, homeowner.",
+  "display_name": "Dave",
+  "region": "East Midlands",
+  "tags": [
+    "Homeowner",
+    "1960s semi",
+    "High winter gas"
+  ],
+  "cutoff_date": "2026-06-30",
+  "outcome_window_days": 90,
+  "run_manifest": "sha256:fixture-draft",
+  "data_freshness": [
+    {
+      "source": "Transactions",
+      "asOf": "30 Jun 2026",
+      "kind": "inferred"
+    },
+    {
+      "source": "Energy usage",
+      "asOf": "31 May 2026",
+      "kind": "inferred"
+    },
+    {
+      "source": "Energy rating (EPC)",
+      "asOf": "3 Feb 2023",
+      "kind": "declared"
+    }
+  ],
+  "products_held": [
+    {
+      "name": "Current account",
+      "since": "Oct 2009",
+      "status": "Active"
+    },
+    {
+      "name": "Mortgage (fixed rate)",
+      "since": "Dec 2021",
+      "status": "Fixed rate ends Nov 2026"
+    }
+  ],
+  "opportunities": [
+    {
+      "opportunity_id": "GP01",
+      "opportunity_name": "EV Finance",
+      "product": "GP01 EV Finance",
+      "status": "SOFT_SURFACE",
+      "headline": "Running a car costs more each year. Here's how an EV compares for drivers like you.",
+      "propensity": 0.32,
+      "likelihood_band": "LOW",
+      "confidence": {
+        "overall": 0.86,
+        "completeness": 0.88,
+        "recency": 0.9,
+        "stability": 0.83,
+        "in_distribution": 0.82
+      },
+      "eligibility": {
+        "result": "ELIGIBLE",
+        "rules_fired": [],
+        "rule_text": null,
+        "rules_version": "rules-1.0"
+      },
+      "reason_codes": [],
+      "why_now": null,
+      "impact": {
+        "status": "NOT_APPLICABLE",
+        "metric_family": null,
+        "unit": null,
+        "low": null,
+        "central": null,
+        "high": null,
+        "bills": null,
+        "formula": null,
+        "baseline": null,
+        "horizon": null,
+        "factor_refs": [],
+        "quality": "MEDIUM",
+        "missing_inputs": [],
+        "first_step": null,
+        "secondary": null,
+        "paper": null,
+        "digital_adoption": null
+      },
+      "ladder": null,
+      "ladder_result": null,
+      "review": null,
+      "why_not": null,
+      "explanation": {
+        "source": "template",
+        "claimcheck_status": "PASS",
+        "sentences": [
+          {
+            "text": "Running a car costs more each year. Here's how an EV compares for drivers like you.",
+            "fields": [
+              "catalogue.education"
+            ],
+            "check": "PASS"
+          }
+        ]
+      },
+      "next_action": {
+        "label": "Learn more",
+        "secondary": null,
+        "disclaimer": "Not a credit decision. Estimate, not a guarantee."
+      }
+    },
+    {
+      "opportunity_id": "GP02",
+      "opportunity_name": "Green Home",
+      "product": "GP02 Green Home Loan",
+      "status": "RECOMMEND",
+      "headline": "Your winter gas spend runs well above similar homes. A loft and cavity insulation first step could be worth exploring.",
+      "propensity": 0.79,
+      "likelihood_band": "HIGH",
+      "confidence": {
+        "overall": 0.86,
+        "completeness": 0.88,
+        "recency": 0.9,
+        "stability": 0.83,
+        "in_distribution": 0.82
+      },
+      "eligibility": {
+        "result": "ELIGIBLE",
+        "rules_fired": [],
+        "rule_text": null,
+        "rules_version": "rules-1.0"
+      },
+      "reason_codes": [
+        {
+          "code": "HIGH_WINTER_GAS",
+          "display": "Winter gas: about 18,500 kWh a year, above similar homes",
+          "observed_at": "31 May 2026",
+          "source": "inferred_transactions"
+        },
+        {
+          "code": "OLDER_HOME",
+          "display": "Semi-detached home built in the 1960s",
+          "observed_at": "3 Feb 2023",
+          "source": "customer_declared"
+        },
+        {
+          "code": "EPC_D",
+          "display": "Home energy rating: D",
+          "observed_at": "3 Feb 2023",
+          "source": "customer_declared"
+        }
+      ],
+      "why_now": {
+        "trigger": "MORTGAGE_RATE_ENDING",
+        "display": "Your fixed-rate mortgage ends in 5 months.",
+        "observed_at": "30 Jun 2026"
+      },
+      "impact": {
+        "status": "ESTIMATED",
+        "metric_family": "emissions",
+        "unit": "kg CO₂e a year",
+        "low": 500,
+        "central": 650,
+        "high": 830,
+        "bills": "About £260 a year less on heating, central estimate.",
+        "formula": "Yearly gas kWh × expected saving share of the first step × gas factor",
+        "baseline": "Your home as it is today, same heating habits",
+        "horizon": "12 months",
+        "factor_refs": [
+          "DESNZ 2025 · conversion factors (illustrative)"
+        ],
+        "quality": "HIGH",
+        "missing_inputs": [],
+        "first_step": "Start with a loft insulation top-up and a cavity wall check, before any bigger upgrade.",
+        "secondary": {
+          "metric_family": "energy",
+          "unit": "kWh a year",
+          "low": 2800,
+          "central": 3700,
+          "high": 4600
+        },
+        "paper": null,
+        "digital_adoption": null
+      },
+      "ladder": null,
+      "ladder_result": null,
+      "review": null,
+      "why_not": null,
+      "explanation": {
+        "source": "llm",
+        "claimcheck_status": "PASS",
+        "sentences": [
+          {
+            "text": "Your winter gas spend runs well above similar homes.",
+            "fields": [
+              "evidence.HIGH_WINTER_GAS"
+            ],
+            "check": "PASS"
+          },
+          {
+            "text": "A loft and cavity insulation first step could cut an estimated 500 to 830 kg CO₂e a year.",
+            "fields": [
+              "impact.low",
+              "impact.high"
+            ],
+            "check": "PASS"
+          },
+          {
+            "text": "Your fixed-rate mortgage ends in 5 months, which can be a good time to review home upgrades.",
+            "fields": [
+              "why_now.MORTGAGE_RATE_ENDING"
+            ],
+            "check": "PASS"
+          }
+        ]
+      },
+      "next_action": {
+        "label": "Explore home upgrades",
+        "secondary": "See the cheapest first step",
+        "disclaimer": "Not a credit decision. Estimate, not a guarantee."
+      }
+    },
+    {
+      "opportunity_id": "GP03",
+      "opportunity_name": "Solar Finance",
+      "product": "GP03 Solar Finance",
+      "status": "SOFT_SURFACE",
+      "headline": "Your electricity use is around average. Solar may still be worth a look later.",
+      "propensity": 0.41,
+      "likelihood_band": "MEDIUM",
+      "confidence": {
+        "overall": 0.86,
+        "completeness": 0.88,
+        "recency": 0.9,
+        "stability": 0.83,
+        "in_distribution": 0.82
+      },
+      "eligibility": {
+        "result": "ELIGIBLE",
+        "rules_fired": [],
+        "rule_text": null,
+        "rules_version": "rules-1.0"
+      },
+      "reason_codes": [],
+      "why_now": null,
+      "impact": {
+        "status": "NOT_APPLICABLE",
+        "metric_family": null,
+        "unit": null,
+        "low": null,
+        "central": null,
+        "high": null,
+        "bills": null,
+        "formula": null,
+        "baseline": null,
+        "horizon": null,
+        "factor_refs": [],
+        "quality": "MEDIUM",
+        "missing_inputs": [],
+        "first_step": null,
+        "secondary": null,
+        "paper": null,
+        "digital_adoption": null
+      },
+      "ladder": null,
+      "ladder_result": null,
+      "review": null,
+      "why_not": null,
+      "explanation": {
+        "source": "template",
+        "claimcheck_status": "PASS",
+        "sentences": [
+          {
+            "text": "Your electricity use is around average. Solar may still be worth a look later.",
+            "fields": [
+              "catalogue.education"
+            ],
+            "check": "PASS"
+          }
+        ]
+      },
+      "next_action": {
+        "label": "Learn more",
+        "secondary": null,
+        "disclaimer": "Not a credit decision. Estimate, not a guarantee."
+      }
+    },
+    {
+      "opportunity_id": "GP04",
+      "opportunity_name": "Paperless",
+      "product": "GP04 Paperless Banking",
+      "status": "SOFT_SURFACE",
+      "headline": "Paper statements are optional. Here's how digital statements work.",
+      "propensity": 0.28,
+      "likelihood_band": "LOW",
+      "confidence": {
+        "overall": 0.86,
+        "completeness": 0.88,
+        "recency": 0.9,
+        "stability": 0.83,
+        "in_distribution": 0.82
+      },
+      "eligibility": {
+        "result": "ELIGIBLE",
+        "rules_fired": [],
+        "rule_text": null,
+        "rules_version": "rules-1.0"
+      },
+      "reason_codes": [],
+      "why_now": null,
+      "impact": {
+        "status": "NOT_APPLICABLE",
+        "metric_family": null,
+        "unit": null,
+        "low": null,
+        "central": null,
+        "high": null,
+        "bills": null,
+        "formula": null,
+        "baseline": null,
+        "horizon": null,
+        "factor_refs": [],
+        "quality": "MEDIUM",
+        "missing_inputs": [],
+        "first_step": null,
+        "secondary": null,
+        "paper": null,
+        "digital_adoption": null
+      },
+      "ladder": null,
+      "ladder_result": null,
+      "review": null,
+      "why_not": null,
+      "explanation": {
+        "source": "template",
+        "claimcheck_status": "PASS",
+        "sentences": [
+          {
+            "text": "Paper statements are optional. Here's how digital statements work.",
+            "fields": [
+              "catalogue.education"
+            ],
+            "check": "PASS"
+          }
+        ]
+      },
+      "next_action": {
+        "label": "Learn more",
+        "secondary": null,
+        "disclaimer": "Not a credit decision. Estimate, not a guarantee."
+      }
+    }
+  ]
+}

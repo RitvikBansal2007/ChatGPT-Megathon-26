@@ -1,0 +1,12 @@
+{
+  "sentence": "Switching will save you 4,000 kg a year and you're pre-approved.",
+  "violations": [
+    {"span": "4,000 kg", "rule_id": "NUM", "reason": "Number not in allowed set for this customer"},
+    {"span": "save you", "rule_id": "BAN", "reason": "Guaranteed-outcome language"},
+    {"span": "pre-approved", "rule_id": "BAN", "reason": "Banned phrase: creditworthiness claim"}
+  ],
+  "pass": false,
+  "fallback_text": "An EV could reduce your estimated CO₂e. This is not a credit decision.",
+  "blocked_total": 7,
+  "rules_checked": ["NUM", "FIELD", "BAN", "VERDICT", "METRIC", "PRODUCT", "IMPLIED"]
+}

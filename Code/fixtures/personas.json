@@ -1,0 +1,50 @@
+[
+  {
+    "customer_id": "CUST-0001",
+    "persona_key": "priya",
+    "display_name": "Priya",
+    "summary": "Commuter and homeowner. Eight-year-old petrol car, car finance ending soon."
+  },
+  {
+    "customer_id": "CUST-0002",
+    "persona_key": "marcus",
+    "display_name": "Marcus",
+    "summary": "Vehicle record says electric, but fuel spend continues. Home efficiency data missing."
+  },
+  {
+    "customer_id": "CUST-0003",
+    "persona_key": "aisha",
+    "display_name": "Aisha",
+    "summary": "Owns an EV, has solar and a Green Home Loan, already fully paperless."
+  },
+  {
+    "customer_id": "CUST-0004",
+    "persona_key": "tom",
+    "display_name": "Tom",
+    "summary": "New customer, 6 weeks of history, paper statements, high app use."
+  },
+  {
+    "customer_id": "CUST-0005",
+    "persona_key": "dave",
+    "display_name": "Dave",
+    "summary": "1960s semi, high winter gas, EPC D, homeowner."
+  },
+  {
+    "customer_id": "CUST-0006",
+    "persona_key": "sam",
+    "display_name": "Sam",
+    "summary": "Homeowner with high electricity use; roof suitability unknown."
+  },
+  {
+    "customer_id": "CUST-0007",
+    "persona_key": "jordan",
+    "display_name": "Jordan",
+    "summary": "Rents a flat, high app use, paper statements."
+  },
+  {
+    "customer_id": "CUST-0008",
+    "persona_key": "eleanor",
+    "display_name": "Eleanor",
+    "summary": "Accessibility paper need flagged. Paperless is never suggested."
+  }
+]

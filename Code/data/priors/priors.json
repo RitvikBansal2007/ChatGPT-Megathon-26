@@ -1,0 +1,82 @@
+{
+  "annual_elec_kwh_quantiles": {
+    "q": {
+      "25": 1800,
+      "5": 1500,
+      "50": 2700,
+      "75": 4100,
+      "95": 6000
+    },
+    "source": "ofgem_tdcv_fallback"
+  },
+  "annual_gas_kwh_quantiles": {
+    "q": {
+      "25": 7500,
+      "5": 5000,
+      "50": 11500,
+      "75": 17000,
+      "95": 22000
+    },
+    "source": "ofgem_tdcv_fallback"
+  },
+  "annual_mileage_quantiles": {
+    "q": {
+      "25": 4000,
+      "5": 1000,
+      "50": 7000,
+      "75": 10000,
+      "95": 18000
+    },
+    "source": "dft_nts_mileage_fallback"
+  },
+  "monthly_elec_seasonality": {
+    "source": "ukpn_smartmeter_fallback",
+    "values": [
+      1.318,
+      1.362,
+      1.263,
+      1.056,
+      0.841,
+      0.761,
+      0.678,
+      0.654,
+      0.788,
+      0.898,
+      1.123,
+      1.259
+    ]
+  },
+  "regions": {
+    "names": [
+      "London",
+      "South East",
+      "North West",
+      "East of England",
+      "West Midlands",
+      "South West",
+      "Yorkshire and The Humber",
+      "East Midlands",
+      "North East"
+    ],
+    "source": "ons_regions_fallback"
+  },
+  "solar_kwh_per_kwp": {
+    "by_region": {
+      "Fallback": 900.0,
+      "London": 950.0,
+      "North": 850.0,
+      "South": 1000.0
+    },
+    "source": "jrc_pvgis_fallback"
+  },
+  "vehicle_fuel_share": {
+    "source": "dft_veh_fuel_share_fallback",
+    "values": {
+      "bev": 0.02,
+      "diesel": 0.35,
+      "hybrid": 0.05,
+      "other": 0.0,
+      "petrol": 0.58
+    }
+  }
+}

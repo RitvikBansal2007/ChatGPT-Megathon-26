@@ -1,0 +1,38 @@
+sequenceDiagram
+  autonumber
+  participant U as User (browser / phone)
+  participant UI as Streamlit app
+  participant API as FastAPI
+  participant AZ as authz
+  participant O as orchestrator
+  participant E as engines (ML / rules / carbon)
+  participant G as LLM gateway
+  participant P as LLM provider
+  participant DB as SQLite audit
+
+  U->>UI: pick persona / open EV card
+  UI->>API: GET /api/customers/{id}/opportunities (Bearer JWT)
+  API->>AZ: verify JWT, role, subject == id (or RM scope)
+  AZ-->>API: allow (or 403, logged)
+  API->>O: build_packs(customer_key)
+  O->>E: score(), evaluate(), estimate() on same feature row
+  E-->>O: three frozen verdicts
+  O->>O: status rules (RULED_OUT > REVIEW > ABSTAIN > RECOMMEND > SOFT_SURFACE)
+  O->>G: Evidence Pack
+  G->>G: minimise to LLMInput, PII scan, cache lookup
+  alt cache hit
+    G-->>O: cached checked sentences
+  else cache miss
+    G->>P: system prompt + JSON pack (no PII, no free text)
+    P-->>G: JSON sentences + cited fields
+    G->>G: schema, PII, canary, Claim-Check
+    opt fails
+      G->>P: retry once
+      G->>G: still fails, use template
+    end
+  end
+  G->>DB: claim_audit row (hash-chained)
+  G-->>O: explanation + check status
+  O-->>API: EvidencePack
+  API-->>UI: role-filtered JSON
+  UI-->>U: Proof Card: 3 badges, evidence + dates, impact range, Claim-Check stamp, action

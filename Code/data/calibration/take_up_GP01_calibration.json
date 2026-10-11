@@ -1,0 +1,74 @@
+[
+  {
+    "raw_score": 0.009691209825978491,
+    "calibrated_prob": 0.0
+  },
+  {
+    "raw_score": 0.017416319175964742,
+    "calibrated_prob": 0.0
+  },
+  {
+    "raw_score": 0.017443805497660385,
+    "calibrated_prob": 0.027624309392265192
+  },
+  {
+    "raw_score": 0.031593938109084965,
+    "calibrated_prob": 0.027624309392265192
+  },
+  {
+    "raw_score": 0.03170779501897627,
+    "calibrated_prob": 0.043478260869565216
+  },
+  {
+    "raw_score": 0.03760492158539618,
+    "calibrated_prob": 0.043478260869565216
+  },
+  {
+    "raw_score": 0.037624559048801305,
+    "calibrated_prob": 0.06504065040650407
+  },
+  {
+    "raw_score": 0.06506362294953118,
+    "calibrated_prob": 0.06504065040650407
+  },
+  {
+    "raw_score": 0.06550667150488557,
+    "calibrated_prob": 0.08333333333333333
+  },
+  {
+    "raw_score": 0.06779593743298487,
+    "calibrated_prob": 0.08333333333333333
+  },
+  {
+    "raw_score": 0.0678876733010697,
+    "calibrated_prob": 0.13725490196078433
+  },
+  {
+    "raw_score": 0.08650245044855906,
+    "calibrated_prob": 0.13725490196078433
+  },
+  {
+    "raw_score": 0.08748004915067178,
+    "calibrated_prob": 0.14018691588785046
+  },
+  {
+    "raw_score": 0.18151202179220807,
+    "calibrated_prob": 0.14018691588785046
+  },
+  {
+    "raw_score": 0.1826633538740348,
+    "calibrated_prob": 0.16
+  },
+  {
+    "raw_score": 0.39674989855545334,
+    "calibrated_prob": 0.16
+  },
+  {
+    "raw_score": 0.40960496632552496,
+    "calibrated_prob": 0.5
+  },
+  {
+    "raw_score": 0.4660065805267284,
+    "calibrated_prob": 0.5
+  }
+]

@@ -1,0 +1,37 @@
+{
+  "as_of": "30 Jun 2026",
+  "synthetic": true,
+  "metrics": {
+    "co2e_kg": {"value": 184200, "label": "CO₂e", "unit": "kg CO₂e", "note": "Estimated"},
+    "energy_kwh": {"value": 412000, "label": "Energy", "unit": "kWh", "note": "Estimated"},
+    "paper_sheets": {"value": 28400, "label": "Paper sheets avoided", "unit": "sheets", "note": "Estimated"},
+    "digital_pct": {"value": 72, "label": "Digital adoption", "unit": "%", "note": "Realised"}
+  },
+  "funnel": [
+    {"stage": "Identified",  "count": 5000},
+    {"stage": "Eligible",    "count": 3120},
+    {"stage": "Surfaced",    "count": 2480},
+    {"stage": "Engaged",     "count": 890},
+    {"stage": "Taken up",    "count": 214}
+  ],
+  "scatter": [
+    {"customer_key": "cohort_A", "propensity": 0.82, "impact": 1450, "confidence": 0.88, "product": "GP01", "size": 412, "status": "RECOMMEND"},
+    {"customer_key": "cohort_B", "propensity": 0.71, "impact": 920,  "confidence": 0.76, "product": "GP02", "size": 318, "status": "RECOMMEND"},
+    {"customer_key": "cohort_C", "propensity": 0.44, "impact": 1100, "confidence": 0.51, "product": "GP01", "size": 280, "status": "SOFT_SURFACE"},
+    {"customer_key": "cohort_D", "propensity": 0.28, "impact": 780,  "confidence": 0.42, "product": "GP03", "size": 195, "status": "ABSTAIN"},
+    {"customer_key": "cohort_E", "propensity": 0.65, "impact": 310,  "confidence": 0.82, "product": "GP04", "size": 520, "status": "RECOMMEND"}
+  ],
+  "segments": [
+    {"region": "London",       "GP01": 412, "GP02": 188, "GP03": 94,   "GP04": 320},
+    {"region": "South East",   "GP01": 318, "GP02": 220, "GP03": 110,  "GP04": 280},
+    {"region": "North West",   "GP01": 280, "GP02": 195, "GP03": "<10","GP04": 240},
+    {"region": "West Midlands","GP01": 195, "GP02": 160, "GP03": 88,   "GP04": 190},
+    {"region": "Other",        "GP01": 310, "GP02": 140, "GP03": "<10","GP04": 260}
+  ],
+  "governance": {
+    "abstention_rate": 0.18,
+    "claims_blocked": 7,
+    "audit_chain_ok": true,
+    "recommendation_rate": {"all": 0.43, "by_income": {"low": 0.41, "mid": 0.44, "high": 0.45}, "by_age": {"18_35": 0.48, "36_55": 0.42, "56_plus": 0.38}}
+  }
+}

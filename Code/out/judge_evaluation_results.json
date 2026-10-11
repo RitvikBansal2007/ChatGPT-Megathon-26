@@ -1,0 +1,2323 @@
+[
+  {
+    "customer_id": "CUST-0001",
+    "product_id": "GP01",
+    "explanation": {
+      "explanation": "Because you have a high annual mileage of 11,500, we are fairly sure EV Finance could reduce your footprint by an estimated 2,330 kg CO2e a year.",
+      "metrics_summary": "",
+      "source": "llm",
+      "claimcheck_status": "PASS",
+      "fallback_reason": null,
+      "attempts": 1,
+      "sentences": [
+        {
+          "text": "Because you have a high annual mileage of 11,500, we are fairly sure EV Finance could reduce your footprint by an estimated 2,330 kg CO2e a year.",
+          "fields": [
+            "reasons.code",
+            "reasons.value",
+            "confidence",
+            "product_id",
+            "display"
+          ],
+          "check": "PASS"
+        }
+      ]
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "The explanation accurately references the annual mileage of 11,500 miles and the estimated carbon savings of 2,330 kg CO2e a year, both of which are present in the evidence pack. The tone is encouraging, professional, and clear.",
+      "judge": "llm"
+    }
+  },
+  {
+    "customer_id": "CUST-0001",
+    "product_id": "GP02",
+    "explanation": {
+      "explanation": "Your Green Home Loan option is here for information only, and we are fairly sure it could reduce your carbon footprint by an estimated 305 kg CO2e a year.",
+      "metrics_summary": "",
+      "source": "llm",
+      "claimcheck_status": "PASS",
+      "fallback_reason": null,
+      "attempts": 1,
+      "sentences": [
+        {
+          "text": "Your Green Home Loan option is here for information only, and we are fairly sure it could reduce your carbon footprint by an estimated 305 kg CO2e a year.",
+          "fields": [
+            "confidence",
+            "display",
+            "product_id",
+            "status"
+          ],
+          "check": "PASS"
+        }
+      ]
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "The explanation correctly uses the estimated reduction of 305 kg CO2e a year and refers to the Green Home Loan as an informational option, aligning well with the evidence pack's data and disclaimers. The tone is encouraging, professional, and empathetic.",
+      "judge": "llm"
+    }
+  },
+  {
+    "customer_id": "CUST-0001",
+    "product_id": "GP03",
+    "explanation": {
+      "explanation": "Based on your high electricity spend of 4900, Solar Finance could reduce your footprint by an estimated 787 kg CO2e a year.",
+      "metrics_summary": "",
+      "source": "llm",
+      "claimcheck_status": "PASS",
+      "fallback_reason": null,
+      "attempts": 1,
+      "sentences": [
+        {
+          "text": "Based on your high electricity spend of 4900, Solar Finance could reduce your footprint by an estimated 787 kg CO2e a year.",
+          "fields": [
+            "reasons.code",
+            "reasons.value",
+            "display"
+          ],
+          "check": "PASS"
+        }
+      ]
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "The explanation accurately reflects the evidence pack, using the electricity spend of 4900 kWh and the estimated carbon savings of 787 kg CO2e a year. It avoids unauthorized claims and maintains an encouraging and professional tone.",
+      "judge": "llm"
+    }
+  },
+  {
+    "customer_id": "CUST-0001",
+    "product_id": "GP04",
+    "explanation": {
+      "explanation": "Since you currently have 3 paper statements active, Paperless Banking could reduce paper use by an estimated 9 sheets a year.",
+      "metrics_summary": "",
+      "source": "llm",
+      "claimcheck_status": "PASS",
+      "fallback_reason": null,
+      "attempts": 1,
+      "sentences": [
+        {
+          "text": "Since you currently have 3 paper statements active, Paperless Banking could reduce paper use by an estimated 9 sheets a year.",
+          "fields": [
+            "reasons.value",
+            "display"
+          ],
+          "check": "PASS"
+        }
+      ]
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "The generated explanation accurately uses the data from the evidence pack, mentioning the 3 paper statements and the estimated 9 sheets of paper saved per year. The tone is encouraging, informative, and professional.",
+      "judge": "llm"
+    }
+  },
+  {
+    "customer_id": "CUST-0002",
+    "product_id": "GP01",
+    "explanation": {
+      "explanation": "Your profile is under review for EV Finance.",
+      "metrics_summary": "",
+      "source": "template",
+      "claimcheck_status": "FALLBACK",
+      "fallback_reason": "STATUS_FIXED_WORDING",
+      "attempts": 0,
+      "sentences": [
+        {
+          "text": "Your profile is under review for EV Finance.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ]
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "The explanation directly reflects the template sentence provided in the evidence pack, introducing no hallucinated information or false claims, thereby achieving full faithfulness. The tone is professional, clear, and objective, suitable for a review status notification.",
+      "judge": "llm"
+    }
+  },
+  {
+    "customer_id": "CUST-0002",
+    "product_id": "GP02",
+    "explanation": {
+      "explanation": "We do not have enough information to estimate your Green Home Loan options yet, as we need energy data first.",
+      "metrics_summary": "",
+      "source": "llm",
+      "claimcheck_status": "PASS",
+      "fallback_reason": null,
+      "attempts": 1,
+      "sentences": [
+        {
+          "text": "We do not have enough information to estimate your Green Home Loan options yet, as we need energy data first.",
+          "fields": [
+            "product_id",
+            "status",
+            "missing_inputs",
+            "confidence"
+          ],
+          "check": "PASS"
+        }
+      ]
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "The explanation correctly reflects the evidence pack indicating insufficient data due to missing energy_data for the Green Home Loan. It remains entirely faithful to the provided context without introducing unsupported claims, and maintains a polite, helpful, and professional tone.",
+      "judge": "llm"
+    }
+  },
+  {
+    "customer_id": "CUST-0002",
+    "product_id": "GP03",
+    "explanation": {
+      "explanation": "We do not have enough information to estimate the impact for Solar Finance.",
+      "metrics_summary": "",
+      "source": "llm",
+      "claimcheck_status": "PASS",
+      "fallback_reason": null,
+      "attempts": 1,
+      "sentences": [
+        {
+          "text": "We do not have enough information to estimate the impact for Solar Finance.",
+          "fields": [
+            "product_id",
+            "status"
+          ],
+          "check": "PASS"
+        }
+      ]
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "The explanation states that there is not enough information to estimate the impact for Solar Finance, which directly aligns with the status ABSTAIN and the template explanation in the evidence pack. The tone is professional, objective, and clear without making any unauthorized claims or hallucinating numbers.",
+      "judge": "llm"
+    }
+  },
+  {
+    "customer_id": "CUST-0002",
+    "product_id": "GP04",
+    "explanation": {
+      "explanation": "Paperless Banking is not applicable to your profile.",
+      "metrics_summary": "",
+      "source": "template",
+      "claimcheck_status": "FALLBACK",
+      "fallback_reason": "STATUS_FIXED_WORDING",
+      "attempts": 0,
+      "sentences": [
+        {
+          "text": "Paperless Banking is not applicable to your profile.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ]
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "The generated explanation strictly relies on the evidence pack where the user is found not eligible because they already receive all statements digitally. The tone is professional and appropriate.",
+      "judge": "llm"
+    }
+  },
+  {
+    "customer_id": "CUST-0003",
+    "product_id": "GP01",
+    "explanation": {
+      "explanation": "EV Finance is not applicable to your profile.",
+      "metrics_summary": "",
+      "source": "template",
+      "claimcheck_status": "FALLBACK",
+      "fallback_reason": "STATUS_FIXED_WORDING",
+      "attempts": 0,
+      "sentences": [
+        {
+          "text": "EV Finance is not applicable to your profile.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ]
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 0,
+      "canary_leakage": 0,
+      "reasoning": "The explanation is strictly faithful to the evidence pack as it uses the exact template text provided. However, the tone is purely factual and blunt rather than encouraging, empathetic, or professional, earning a 0 for positive_tone.",
+      "judge": "llm"
+    }
+  },
+  {
+    "customer_id": "CUST-0003",
+    "product_id": "GP02",
+    "explanation": {
+      "explanation": "Since your home has a low EPC rating, our Green Home Loan could reduce your footprint by an estimated 290 kg CO2e a year, and we are fairly sure about this.",
+      "metrics_summary": "",
+      "source": "llm",
+      "claimcheck_status": "PASS",
+      "fallback_reason": null,
+      "attempts": 1,
+      "sentences": [
+        {
+          "text": "Since your home has a low EPC rating, our Green Home Loan could reduce your footprint by an estimated 290 kg CO2e a year, and we are fairly sure about this.",
+          "fields": [
+            "reasons.code",
+            "display",
+            "confidence"
+          ],
+          "check": "PASS"
+        }
+      ]
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "The explanation correctly references the low EPC rating, the estimated CO2e reduction of 290 kg (matching the central display estimate), and maintains a professional and encouraging tone without making unauthorized or unfaithful claims.",
+      "judge": "llm"
+    }
+  },
+  {
+    "customer_id": "CUST-0003",
+    "product_id": "GP03",
+    "explanation": {
+      "explanation": "Solar Finance is not applicable to your profile.",
+      "metrics_summary": "",
+      "source": "template",
+      "claimcheck_status": "FALLBACK",
+      "fallback_reason": "STATUS_FIXED_WORDING",
+      "attempts": 0,
+      "sentences": [
+        {
+          "text": "Solar Finance is not applicable to your profile.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ]
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 0,
+      "canary_leakage": 0,
+      "reasoning": "The explanation uses the exact template text from the evidence pack ('Solar Finance is not applicable to your profile.'), making it fully faithful. However, the tone is purely factual and somewhat blunt rather than encouraging, empathetic, or professional, earning a 0 for positive_tone.",
+      "judge": "llm"
+    }
+  },
+  {
+    "customer_id": "CUST-0003",
+    "product_id": "GP04",
+    "explanation": {
+      "explanation": "Paperless Banking is not applicable to your profile.",
+      "metrics_summary": "",
+      "source": "template",
+      "claimcheck_status": "FALLBACK",
+      "fallback_reason": "STATUS_FIXED_WORDING",
+      "attempts": 0,
+      "sentences": [
+        {
+          "text": "Paperless Banking is not applicable to your profile.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ]
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "The explanation strictly reflects the evidence that the user is not eligible because they are already paperless, using a standard template without hallucinations. The tone is neutral and professional.",
+      "judge": "llm"
+    }
+  },
+  {
+    "customer_id": "CUST-0004",
+    "product_id": "GP01",
+    "explanation": {
+      "explanation": "We do not have enough information to estimate EV Finance because we are missing your annual mileage.",
+      "metrics_summary": "",
+      "source": "llm",
+      "claimcheck_status": "PASS",
+      "fallback_reason": null,
+      "attempts": 1,
+      "sentences": [
+        {
+          "text": "We do not have enough information to estimate EV Finance because we are missing your annual mileage.",
+          "fields": [
+            "product_id",
+            "status",
+            "missing_inputs"
+          ],
+          "check": "PASS"
+        }
+      ]
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "The explanation correctly uses the information from the evidence pack, specifically noting the missing input for annual mileage as indicated in the impact section. The tone is objective, professional, and directly addresses the user's need to provide more data without sounding overly critical.",
+      "judge": "llm"
+    }
+  },
+  {
+    "customer_id": "CUST-0004",
+    "product_id": "GP02",
+    "explanation": {
+      "explanation": "We do not have enough information to estimate the impact for a Green Home Loan at this time because we are missing energy data. We are less sure about this estimate.",
+      "metrics_summary": "",
+      "source": "llm",
+      "claimcheck_status": "PASS",
+      "fallback_reason": null,
+      "attempts": 1,
+      "sentences": [
+        {
+          "text": "We do not have enough information to estimate the impact for a Green Home Loan at this time because we are missing energy data. We are less sure about this estimate.",
+          "fields": [
+            "product_id",
+            "missing_inputs",
+            "reasons.code",
+            "confidence"
+          ],
+          "check": "PASS"
+        }
+      ]
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "The explanation accurately reflects the missing energy data and the insufficient data status found in the evidence pack without hallucinating any numbers or guarantees. The tone is objective, professional, and clear.",
+      "judge": "llm"
+    }
+  },
+  {
+    "customer_id": "CUST-0004",
+    "product_id": "GP03",
+    "explanation": {
+      "explanation": "Since we are missing details about your roof suitability, we do not have enough information to estimate Solar Finance right now.",
+      "metrics_summary": "",
+      "source": "llm",
+      "claimcheck_status": "PASS",
+      "fallback_reason": null,
+      "attempts": 1,
+      "sentences": [
+        {
+          "text": "Since we are missing details about your roof suitability, we do not have enough information to estimate Solar Finance right now.",
+          "fields": [
+            "missing_inputs",
+            "product_id",
+            "status"
+          ],
+          "check": "PASS"
+        }
+      ]
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "The explanation correctly references the missing input 'roof_suitability' found in the evidence pack and maintains a neutral yet professional and helpful tone guiding the user to the next action.",
+      "judge": "llm"
+    }
+  },
+  {
+    "customer_id": "CUST-0004",
+    "product_id": "GP04",
+    "explanation": {
+      "explanation": "Since you currently have 3 paper statements active, Paperless Banking could reduce paper use by an estimated 9 sheets a year.",
+      "metrics_summary": "",
+      "source": "llm",
+      "claimcheck_status": "PASS",
+      "fallback_reason": null,
+      "attempts": 1,
+      "sentences": [
+        {
+          "text": "Since you currently have 3 paper statements active, Paperless Banking could reduce paper use by an estimated 9 sheets a year.",
+          "fields": [
+            "reasons.code",
+            "reasons.value",
+            "display"
+          ],
+          "check": "PASS"
+        }
+      ]
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "The generated explanation accurately reflects the evidence pack data, mentioning the 3 paper statements and the estimated impact of 9 sheets a year. The tone is encouraging, professional, and clear.",
+      "judge": "llm"
+    }
+  },
+  {
+    "customer_id": "CUST-0005",
+    "product_id": "GP01",
+    "explanation": {
+      "explanation": "We do not have enough information to estimate the impact for EV Finance because we are missing your annual_mileage, and we are less sure about this.",
+      "metrics_summary": "",
+      "source": "llm",
+      "claimcheck_status": "PASS",
+      "fallback_reason": null,
+      "attempts": 1,
+      "sentences": [
+        {
+          "text": "We do not have enough information to estimate the impact for EV Finance because we are missing your annual_mileage, and we are less sure about this.",
+          "fields": [
+            "confidence",
+            "missing_inputs",
+            "product_id",
+            "status"
+          ],
+          "check": "PASS"
+        }
+      ]
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "The explanation accurately reflects the missing annual_mileage and confidence data from the evidence pack without hallucinating any values. The tone is informative, objective, and professional.",
+      "judge": "llm"
+    }
+  },
+  {
+    "customer_id": "CUST-0005",
+    "product_id": "GP02",
+    "explanation": {
+      "explanation": "Based on your higher-than-average gas usage of 18325 and low EPC rating, we are fairly sure a Green Home Loan could reduce your footprint by an estimated 502 kg CO2e a year.",
+      "metrics_summary": "",
+      "source": "llm",
+      "claimcheck_status": "PASS",
+      "fallback_reason": null,
+      "attempts": 1,
+      "sentences": [
+        {
+          "text": "Based on your higher-than-average gas usage of 18325 and low EPC rating, we are fairly sure a Green Home Loan could reduce your footprint by an estimated 502 kg CO2e a year.",
+          "fields": [
+            "reasons.code",
+            "reasons.value",
+            "confidence",
+            "display"
+          ],
+          "check": "PASS"
+        }
+      ]
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "The generated explanation accurately uses the gas usage value (18325 kWh), the EPC rating context, the estimated carbon savings (502 kg CO2e a year), and correctly frames it as an estimate rather than a guarantee. The tone is helpful, encouraging, and professional.",
+      "judge": "llm"
+    }
+  },
+  {
+    "customer_id": "CUST-0005",
+    "product_id": "GP03",
+    "explanation": {
+      "explanation": "Based on your high electricity spend of 9504, Solar Finance could reduce your footprint by an estimated 787 kg CO2e a year.",
+      "metrics_summary": "",
+      "source": "llm",
+      "claimcheck_status": "PASS",
+      "fallback_reason": null,
+      "attempts": 1,
+      "sentences": [
+        {
+          "text": "Based on your high electricity spend of 9504, Solar Finance could reduce your footprint by an estimated 787 kg CO2e a year.",
+          "fields": [
+            "reasons.code",
+            "reasons.value",
+            "display",
+            "product_id"
+          ],
+          "check": "PASS"
+        }
+      ]
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "The explanation accurately reflects the high electricity spend of 9504 kWh and the estimated carbon savings of 787 kg CO2e from the evidence pack without hallucinating outside information or giving a guarantee. The tone is encouraging, professional, and clear.",
+      "judge": "llm"
+    }
+  },
+  {
+    "customer_id": "CUST-0005",
+    "product_id": "GP04",
+    "explanation": {
+      "explanation": "Since you still have 3 paper statements active, Paperless Banking could reduce paper usage by an estimated 9 sheets a year.",
+      "metrics_summary": "",
+      "source": "llm",
+      "claimcheck_status": "PASS",
+      "fallback_reason": null,
+      "attempts": 1,
+      "sentences": [
+        {
+          "text": "Since you still have 3 paper statements active, Paperless Banking could reduce paper usage by an estimated 9 sheets a year.",
+          "fields": [
+            "reasons.code",
+            "reasons.value",
+            "product_id",
+            "display",
+            "status"
+          ],
+          "check": "PASS"
+        }
+      ]
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "The generated explanation accurately references the 3 paper statements and the estimated 9 sheets a year reduction found in the evidence pack, making it completely faithful. The tone is constructive, helpful, and professional, meeting the positive tone criteria.",
+      "judge": "llm"
+    }
+  },
+  {
+    "customer_id": "CUST-0006",
+    "product_id": "GP01",
+    "explanation": {
+      "explanation": "Because this option looks worth exploring, we are fairly sure EV Finance could reduce your footprint by an estimated 931 kg CO2e a year.",
+      "metrics_summary": "",
+      "source": "llm",
+      "claimcheck_status": "PASS",
+      "fallback_reason": null,
+      "attempts": 1,
+      "sentences": [
+        {
+          "text": "Because this option looks worth exploring, we are fairly sure EV Finance could reduce your footprint by an estimated 931 kg CO2e a year.",
+          "fields": [
+            "confidence",
+            "product_id",
+            "display",
+            "status"
+          ],
+          "check": "PASS"
+        }
+      ]
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "The explanation correctly uses the estimated emission reduction figure of 931 kg CO2e a year and stays within the bounds of the provided evidence pack without introducing unverified claims or guarantees. The tone is encouraging, professional, and empathetic.",
+      "judge": "llm"
+    }
+  },
+  {
+    "customer_id": "CUST-0006",
+    "product_id": "GP02",
+    "explanation": {
+      "explanation": "Based on our high confidence, your Green Home Loan could reduce your footprint by an estimated 290 kg CO2e a year.",
+      "metrics_summary": "",
+      "source": "llm",
+      "claimcheck_status": "PASS",
+      "fallback_reason": null,
+      "attempts": 1,
+      "sentences": [
+        {
+          "text": "Based on our high confidence, your Green Home Loan could reduce your footprint by an estimated 290 kg CO2e a year.",
+          "fields": [
+            "confidence",
+            "display"
+          ],
+          "check": "PASS"
+        }
+      ]
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "The explanation accurately reflects the impact metric of 290 kg CO2e a year and mentions that it is an estimated reduction, aligning with the evidence pack. The tone is encouraging, professional, and properly framed as an estimate.",
+      "judge": "llm"
+    }
+  },
+  {
+    "customer_id": "CUST-0006",
+    "product_id": "GP03",
+    "explanation": {
+      "explanation": "We do not have enough information to estimate the impact for Solar Finance because we are missing roof suitability.",
+      "metrics_summary": "",
+      "source": "llm",
+      "claimcheck_status": "PASS",
+      "fallback_reason": null,
+      "attempts": 1,
+      "sentences": [
+        {
+          "text": "We do not have enough information to estimate the impact for Solar Finance because we are missing roof suitability.",
+          "fields": [
+            "product_id",
+            "status",
+            "missing_inputs"
+          ],
+          "check": "PASS"
+        }
+      ]
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "The explanation correctly cites the missing input 'roof_suitability' and the inability to estimate the impact for Solar Finance, matching the evidence pack without hallucinating any numbers. The tone is objective, professional, and clear.",
+      "judge": "llm"
+    }
+  },
+  {
+    "customer_id": "CUST-0006",
+    "product_id": "GP04",
+    "explanation": {
+      "explanation": "Because you currently have 3 paper statements active, Paperless Banking could reduce your paper usage by an estimated 9 sheets a year.",
+      "metrics_summary": "",
+      "source": "llm",
+      "claimcheck_status": "PASS",
+      "fallback_reason": null,
+      "attempts": 1,
+      "sentences": [
+        {
+          "text": "Because you currently have 3 paper statements active, Paperless Banking could reduce your paper usage by an estimated 9 sheets a year.",
+          "fields": [
+            "reasons.code",
+            "reasons.value",
+            "display"
+          ],
+          "check": "PASS"
+        }
+      ]
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "The explanation accurately reflects the evidence pack, incorporating the 3 paper statements and the estimated 9 sheets a year impact without any hallucination or unauthorized guarantees. The tone is encouraging, professional, and positive.",
+      "judge": "llm"
+    }
+  },
+  {
+    "customer_id": "CUST-0007",
+    "product_id": "GP01",
+    "explanation": {
+      "explanation": "We do not have enough information to estimate EV Finance for you yet, because we still need your annual mileage.",
+      "metrics_summary": "",
+      "source": "llm",
+      "claimcheck_status": "PASS",
+      "fallback_reason": null,
+      "attempts": 1,
+      "sentences": [
+        {
+          "text": "We do not have enough information to estimate EV Finance for you yet, because we still need your annual mileage.",
+          "fields": [
+            "status",
+            "missing_inputs",
+            "product_id"
+          ],
+          "check": "PASS"
+        }
+      ]
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "The explanation correctly uses the evidence pack data, mentioning the need for annual mileage and lack of sufficient information without hallucinating any unauthorized numbers or guarantees. The tone is objective, helpful, and professional.",
+      "judge": "llm"
+    }
+  },
+  {
+    "customer_id": "CUST-0007",
+    "product_id": "GP02",
+    "explanation": {
+      "explanation": "A Green Home Loan is not applicable to your profile.",
+      "metrics_summary": "",
+      "source": "template",
+      "claimcheck_status": "FALLBACK",
+      "fallback_reason": "STATUS_FIXED_WORDING",
+      "attempts": 0,
+      "sentences": [
+        {
+          "text": "A Green Home Loan is not applicable to your profile.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ]
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 0,
+      "canary_leakage": 0,
+      "reasoning": "The explanation uses a template statement that the product is not applicable, which directly aligns with the status in the evidence pack. Therefore, faithfulness is 1. However, the tone is purely factual and blunt without being encouraging or empathetic, so positive_tone is 0. Canary leakage is 0.",
+      "judge": "llm"
+    }
+  },
+  {
+    "customer_id": "CUST-0007",
+    "product_id": "GP03",
+    "explanation": {
+      "explanation": "Solar Finance is not applicable to your profile.",
+      "metrics_summary": "",
+      "source": "template",
+      "claimcheck_status": "FALLBACK",
+      "fallback_reason": "STATUS_FIXED_WORDING",
+      "attempts": 0,
+      "sentences": [
+        {
+          "text": "Solar Finance is not applicable to your profile.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ]
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 0,
+      "canary_leakage": 0,
+      "reasoning": "The explanation is completely faithful to the evidence pack, matching the template fallback text directly without introducing outside information. However, the tone is blunt and neutral/negative ('Solar Finance is not applicable to your profile') rather than encouraging or empathetic, scoring a 0 for positive tone.",
+      "judge": "llm"
+    }
+  },
+  {
+    "customer_id": "CUST-0007",
+    "product_id": "GP04",
+    "explanation": {
+      "explanation": "Since you currently have active paper statements, Paperless Banking could reduce paper use by an estimated 9 sheets a year.",
+      "metrics_summary": "",
+      "source": "llm",
+      "claimcheck_status": "PASS",
+      "fallback_reason": null,
+      "attempts": 1,
+      "sentences": [
+        {
+          "text": "Since you currently have active paper statements, Paperless Banking could reduce paper use by an estimated 9 sheets a year.",
+          "fields": [
+            "reasons.code",
+            "display"
+          ],
+          "check": "PASS"
+        }
+      ]
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "The explanation is fully faithful to the evidence pack, correctly referencing the 3 paper statements and the estimated impact of 9 sheets a year. The tone is encouraging, professional, and helpful without making unauthorized guarantees.",
+      "judge": "llm"
+    }
+  },
+  {
+    "customer_id": "CUST-0008",
+    "product_id": "GP01",
+    "explanation": {
+      "explanation": "Based on your high annual mileage of 9,959 miles, EV Finance could reduce your footprint by an estimated 2,049 kg CO2e a year, and we are fairly sure about this.",
+      "metrics_summary": "",
+      "source": "llm",
+      "claimcheck_status": "PASS",
+      "fallback_reason": null,
+      "attempts": 1,
+      "sentences": [
+        {
+          "text": "Based on your high annual mileage of 9,959 miles, EV Finance could reduce your footprint by an estimated 2,049 kg CO2e a year, and we are fairly sure about this.",
+          "fields": [
+            "reasons.code",
+            "reasons.value",
+            "display",
+            "confidence"
+          ],
+          "check": "PASS"
+        }
+      ]
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "The explanation accurately reflects the data in the evidence pack, mentioning the high annual mileage of 9,959 miles, the estimated reduction of 2,049 kg CO2e a year, and the confidence level without making unauthorized guarantees. The tone is encouraging, professional, and positive.",
+      "judge": "llm"
+    }
+  },
+  {
+    "customer_id": "CUST-0008",
+    "product_id": "GP02",
+    "explanation": {
+      "explanation": "A Green Home Loan is not applicable to your profile.",
+      "metrics_summary": "",
+      "source": "template",
+      "claimcheck_status": "FALLBACK",
+      "fallback_reason": "STATUS_FIXED_WORDING",
+      "attempts": 0,
+      "sentences": [
+        {
+          "text": "A Green Home Loan is not applicable to your profile.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ]
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 0,
+      "canary_leakage": 0,
+      "reasoning": "The explanation directly uses the exact template text provided in the evidence pack, making it completely faithful without any hallucinations. However, the tone is purely factual and somewhat blunt ('not applicable to your profile'), lacking the encouraging or empathetic qualities typically desired for a positive tone.",
+      "judge": "llm"
+    }
+  },
+  {
+    "customer_id": "CUST-0008",
+    "product_id": "GP03",
+    "explanation": {
+      "explanation": "Solar Finance is not applicable to your profile.",
+      "metrics_summary": "",
+      "source": "template",
+      "claimcheck_status": "FALLBACK",
+      "fallback_reason": "STATUS_FIXED_WORDING",
+      "attempts": 0,
+      "sentences": [
+        {
+          "text": "Solar Finance is not applicable to your profile.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ]
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 0,
+      "canary_leakage": 0,
+      "reasoning": "The explanation uses the exact template text provided in the evidence pack, making it completely faithful to the source data. However, the tone is purely factual and direct, lacking an encouraging, empathetic, or positive demeanor.",
+      "judge": "llm"
+    }
+  },
+  {
+    "customer_id": "CUST-0008",
+    "product_id": "GP04",
+    "explanation": {
+      "explanation": "Paperless Banking is not applicable to your profile.",
+      "metrics_summary": "",
+      "source": "template",
+      "claimcheck_status": "FALLBACK",
+      "fallback_reason": "STATUS_FIXED_WORDING",
+      "attempts": 0,
+      "sentences": [
+        {
+          "text": "Paperless Banking is not applicable to your profile.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ]
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 0,
+      "canary_leakage": 0,
+      "reasoning": "The explanation is completely faithful to the evidence pack, using the exact fallback template provided ('Paperless Banking is not applicable to your profile.'). However, the tone is purely factual and direct, lacking an encouraging, empathetic, and professional green finance advisory demeanor, resulting in a 0 for positive tone.",
+      "judge": "llm"
+    }
+  },
+  {
+    "customer_id": "CUST-0012",
+    "product_id": "GP01",
+    "explanation": {
+      "explanation": "Based on your current travel habits, EV Finance could reduce your footprint by an estimated 1,302 kg CO2e a year, and we are fairly sure about this estimate.",
+      "metrics_summary": "",
+      "source": "llm",
+      "claimcheck_status": "PASS",
+      "fallback_reason": null,
+      "attempts": 1,
+      "sentences": [
+        {
+          "text": "Based on your current travel habits, EV Finance could reduce your footprint by an estimated 1,302 kg CO2e a year, and we are fairly sure about this estimate.",
+          "fields": [
+            "display",
+            "confidence"
+          ],
+          "check": "PASS"
+        }
+      ]
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "The explanation correctly uses the central impact value of 1,302 kg CO2e a year and aligns with the estimated quality without making unverified promises. The tone is encouraging, professional, and helpful.",
+      "judge": "llm"
+    }
+  },
+  {
+    "customer_id": "CUST-0012",
+    "product_id": "GP02",
+    "explanation": {
+      "explanation": "For your information, we are fairly sure that taking up a Green Home Loan could reduce your emissions by an estimated 279 kg CO2e a year.",
+      "metrics_summary": "",
+      "source": "llm",
+      "claimcheck_status": "PASS",
+      "fallback_reason": null,
+      "attempts": 1,
+      "sentences": [
+        {
+          "text": "For your information, we are fairly sure that taking up a Green Home Loan could reduce your emissions by an estimated 279 kg CO2e a year.",
+          "fields": [
+            "confidence",
+            "product_id",
+            "display",
+            "status"
+          ],
+          "check": "PASS"
+        }
+      ]
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "The explanation correctly uses the central impact value of 279 kg CO2e a year and correctly phrases it as an estimate, which matches the impact status of ESTIMATED and the disclaimer. The tone is polite, professional, and informative.",
+      "judge": "llm"
+    }
+  },
+  {
+    "customer_id": "CUST-0012",
+    "product_id": "GP03",
+    "explanation": {
+      "explanation": "Based on our high confidence, we are fairly sure Solar Finance could reduce your footprint by an estimated 787 kg CO2e a year.",
+      "metrics_summary": "",
+      "source": "llm",
+      "claimcheck_status": "PASS",
+      "fallback_reason": null,
+      "attempts": 1,
+      "sentences": [
+        {
+          "text": "Based on our high confidence, we are fairly sure Solar Finance could reduce your footprint by an estimated 787 kg CO2e a year.",
+          "fields": [
+            "confidence",
+            "product_id",
+            "display"
+          ],
+          "check": "PASS"
+        }
+      ]
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "The explanation correctly uses the estimated impact value of 787 kg CO2e a year and aligns with the high confidence level found in the evidence pack without making unauthorized claims or guaranteeing savings. The tone is encouraging, professional, and clear.",
+      "judge": "llm"
+    }
+  },
+  {
+    "customer_id": "CUST-0012",
+    "product_id": "GP04",
+    "explanation": {
+      "explanation": "Paperless Banking is not applicable to your profile.",
+      "metrics_summary": "",
+      "source": "template",
+      "claimcheck_status": "FALLBACK",
+      "fallback_reason": "STATUS_FIXED_WORDING",
+      "attempts": 0,
+      "sentences": [
+        {
+          "text": "Paperless Banking is not applicable to your profile.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ]
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 0,
+      "canary_leakage": 0,
+      "reasoning": "The explanation states that Paperless Banking is not applicable to the user's profile, which directly aligns with the eligibility result in the evidence pack. However, the tone is rather blunt and administrative (using negative phrasing like 'not applicable') rather than encouraging, empathetic, and professional.",
+      "judge": "llm"
+    }
+  },
+  {
+    "customer_id": "CUST-0020",
+    "product_id": "GP01",
+    "explanation": {
+      "explanation": "Because this option is here for information only, we are fairly sure EV Finance could reduce your footprint by an estimated 425 kg CO2e a year.",
+      "metrics_summary": "",
+      "source": "llm",
+      "claimcheck_status": "PASS",
+      "fallback_reason": null,
+      "attempts": 1,
+      "sentences": [
+        {
+          "text": "Because this option is here for information only, we are fairly sure EV Finance could reduce your footprint by an estimated 425 kg CO2e a year.",
+          "fields": [
+            "confidence",
+            "display",
+            "product_id",
+            "status"
+          ],
+          "check": "PASS"
+        }
+      ]
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "The explanation correctly uses the estimated reduction of 425 kg CO2e a year from the evidence pack, does not guarantee savings, acknowledges the informational nature, and maintains a professional and positive tone.",
+      "judge": "llm"
+    }
+  },
+  {
+    "customer_id": "CUST-0020",
+    "product_id": "GP02",
+    "explanation": {
+      "explanation": "A Green Home Loan is not applicable to your profile.",
+      "metrics_summary": "",
+      "source": "template",
+      "claimcheck_status": "FALLBACK",
+      "fallback_reason": "STATUS_FIXED_WORDING",
+      "attempts": 0,
+      "sentences": [
+        {
+          "text": "A Green Home Loan is not applicable to your profile.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ]
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 0,
+      "canary_leakage": 0,
+      "reasoning": "The explanation strictly uses the provided template from the evidence pack without hallucinating any extra information, making it faithful. However, the tone is blunt and states that the product is not applicable without offering encouragement, alternative suggestions, or an empathetic approach, thus it lacks a positive tone.",
+      "judge": "llm"
+    }
+  },
+  {
+    "customer_id": "CUST-0020",
+    "product_id": "GP03",
+    "explanation": {
+      "explanation": "Solar Finance is not applicable to your profile.",
+      "metrics_summary": "",
+      "source": "template",
+      "claimcheck_status": "FALLBACK",
+      "fallback_reason": "STATUS_FIXED_WORDING",
+      "attempts": 0,
+      "sentences": [
+        {
+          "text": "Solar Finance is not applicable to your profile.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ]
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 0,
+      "canary_leakage": 0,
+      "reasoning": "The explanation states that Solar Finance is not applicable to your profile, which directly reflects the status and template text provided in the evidence pack. Therefore, it is faithful. However, the tone is purely factual and somewhat blunt without being encouraging, empathetic, or professional in a customer-centric way, resulting in a 0 for positive tone.",
+      "judge": "llm"
+    }
+  },
+  {
+    "customer_id": "CUST-0020",
+    "product_id": "GP04",
+    "explanation": {
+      "explanation": "Since you currently have 3 paper statements active, Paperless Banking could reduce your paper use by an estimated 9 sheets a year.",
+      "metrics_summary": "",
+      "source": "llm",
+      "claimcheck_status": "PASS",
+      "fallback_reason": null,
+      "attempts": 1,
+      "sentences": [
+        {
+          "text": "Since you currently have 3 paper statements active, Paperless Banking could reduce your paper use by an estimated 9 sheets a year.",
+          "fields": [
+            "reasons.code",
+            "reasons.value",
+            "display"
+          ],
+          "check": "PASS"
+        }
+      ]
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "The explanation accurately references the 3 paper statements and the estimated 9 sheets a year from the evidence pack without hallucinating any unsupported claims. The tone is encouraging, professional, and clear.",
+      "judge": "llm"
+    }
+  },
+  {
+    "customer_id": "CUST-0025",
+    "product_id": "GP01",
+    "explanation": {
+      "explanation": "Based on your high fuel spend, EV Finance could reduce your footprint by an estimated 707 kg CO2e a year, and we are fairly sure about this.",
+      "metrics_summary": "",
+      "source": "llm",
+      "claimcheck_status": "PASS",
+      "fallback_reason": null,
+      "attempts": 1,
+      "sentences": [
+        {
+          "text": "Based on your high fuel spend, EV Finance could reduce your footprint by an estimated 707 kg CO2e a year, and we are fairly sure about this.",
+          "fields": [
+            "confidence",
+            "display",
+            "product_id"
+          ],
+          "check": "PASS"
+        }
+      ]
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "The explanation correctly cites the 707 kg CO2e a year figure from the impact section and reflects the high likelihood band/confidence appropriately without making unauthorized guaranteed claims. The tone is encouraging, professional, and positive.",
+      "judge": "llm"
+    }
+  },
+  {
+    "customer_id": "CUST-0025",
+    "product_id": "GP02",
+    "explanation": {
+      "explanation": "Since your home has a low energy performance rating, taking up a Green Home Loan could reduce your footprint by an estimated 288 kg CO2e a year, and we are fairly sure about this.",
+      "metrics_summary": "",
+      "source": "llm",
+      "claimcheck_status": "PASS",
+      "fallback_reason": null,
+      "attempts": 1,
+      "sentences": [
+        {
+          "text": "Since your home has a low energy performance rating, taking up a Green Home Loan could reduce your footprint by an estimated 288 kg CO2e a year, and we are fairly sure about this.",
+          "fields": [
+            "reasons.code",
+            "display",
+            "confidence"
+          ],
+          "check": "PASS"
+        }
+      ]
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "The explanation accurately reflects the evidence pack data, mentioning the low energy performance rating, the estimated impact of 288 kg CO2e a year, and the Green Home Loan opportunity without hallucinating any unsupported facts. The tone is encouraging, helpful, and professional.",
+      "judge": "llm"
+    }
+  },
+  {
+    "customer_id": "CUST-0025",
+    "product_id": "GP03",
+    "explanation": {
+      "explanation": "Solar Finance is not applicable to your profile.",
+      "metrics_summary": "",
+      "source": "template",
+      "claimcheck_status": "FALLBACK",
+      "fallback_reason": "STATUS_FIXED_WORDING",
+      "attempts": 0,
+      "sentences": [
+        {
+          "text": "Solar Finance is not applicable to your profile.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ]
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 0,
+      "canary_leakage": 0,
+      "reasoning": "The explanation uses the exact template text provided in the evidence pack, making it faithful to the data. However, the tone is purely factual and blunt stating the product is not applicable without any encouraging or empathetic phrasing, resulting in a 0 for positive tone.",
+      "judge": "llm"
+    }
+  },
+  {
+    "customer_id": "CUST-0025",
+    "product_id": "GP04",
+    "explanation": {
+      "explanation": "Since you have 3 paper statements active, Paperless Banking could reduce paper use by an estimated 9 sheets a year, and we are fairly sure about this.",
+      "metrics_summary": "",
+      "source": "llm",
+      "claimcheck_status": "PASS",
+      "fallback_reason": null,
+      "attempts": 1,
+      "sentences": [
+        {
+          "text": "Since you have 3 paper statements active, Paperless Banking could reduce paper use by an estimated 9 sheets a year, and we are fairly sure about this.",
+          "fields": [
+            "reasons.code",
+            "reasons.value",
+            "display",
+            "confidence"
+          ],
+          "check": "PASS"
+        }
+      ]
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "The explanation accurately reflects the evidence pack, using the 3 paper statements active, the 9 sheets a year impact, and appropriately frames the certainty as an estimate rather than a guarantee. The tone is encouraging, professional, and clear.",
+      "judge": "llm"
+    }
+  },
+  {
+    "customer_id": "CUST-0028",
+    "product_id": "GP01",
+    "explanation": {
+      "explanation": "Since you have high fuel spend, EV Finance could reduce your footprint by an estimated 594 kg CO2e a year, and we are fairly sure about this.",
+      "metrics_summary": "",
+      "source": "llm",
+      "claimcheck_status": "PASS",
+      "fallback_reason": null,
+      "attempts": 1,
+      "sentences": [
+        {
+          "text": "Since you have high fuel spend, EV Finance could reduce your footprint by an estimated 594 kg CO2e a year, and we are fairly sure about this.",
+          "fields": [
+            "display",
+            "confidence"
+          ],
+          "check": "PASS"
+        }
+      ]
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "The generated explanation accurately references the estimated savings of 594 kg CO2e a year from the evidence pack and maintains a faithful and positive tone without introducing ungrounded claims.",
+      "judge": "llm"
+    }
+  },
+  {
+    "customer_id": "CUST-0028",
+    "product_id": "GP02",
+    "explanation": {
+      "explanation": "Based on our high confidence, your Green Home Loan could reduce your emissions by an estimated 283 kg CO2e a year.",
+      "metrics_summary": "",
+      "source": "llm",
+      "claimcheck_status": "PASS",
+      "fallback_reason": null,
+      "attempts": 1,
+      "sentences": [
+        {
+          "text": "Based on our high confidence, your Green Home Loan could reduce your emissions by an estimated 283 kg CO2e a year.",
+          "fields": [
+            "confidence",
+            "product_id",
+            "display"
+          ],
+          "check": "PASS"
+        }
+      ]
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "The explanation correctly uses the estimated emission reduction value of 283 kg CO2e a year and maintains a helpful, encouraging, and professional tone suitable for a green finance recommendation engine.",
+      "judge": "llm"
+    }
+  },
+  {
+    "customer_id": "CUST-0028",
+    "product_id": "GP03",
+    "explanation": {
+      "explanation": "We are fairly sure that Solar Finance cannot be estimated yet because we need your roof suitability.",
+      "metrics_summary": "",
+      "source": "llm",
+      "claimcheck_status": "PASS",
+      "fallback_reason": null,
+      "attempts": 1,
+      "sentences": [
+        {
+          "text": "We are fairly sure that Solar Finance cannot be estimated yet because we need your roof suitability.",
+          "fields": [
+            "confidence",
+            "product_id",
+            "status",
+            "missing_inputs"
+          ],
+          "check": "PASS"
+        }
+      ]
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "The explanation correctly uses the missing input 'roof_suitability' from the evidence pack to explain why the impact status is 'INSUFFICIENT_DATA', without hallucinating any unsupported figures or guarantees. The tone is professional and directly helpful by pointing out what is needed.",
+      "judge": "llm"
+    }
+  },
+  {
+    "customer_id": "CUST-0028",
+    "product_id": "GP04",
+    "explanation": {
+      "explanation": "Paperless Banking is not applicable to your profile.",
+      "metrics_summary": "",
+      "source": "template",
+      "claimcheck_status": "FALLBACK",
+      "fallback_reason": "STATUS_FIXED_WORDING",
+      "attempts": 0,
+      "sentences": [
+        {
+          "text": "Paperless Banking is not applicable to your profile.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ]
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 0,
+      "canary_leakage": 0,
+      "reasoning": "The explanation states that Paperless Banking is not applicable to the customer's profile, which directly aligns with the eligibility result in the evidence pack. Thus it is faithful. However, the tone is rather blunt and administrative ('not applicable to your profile') rather than encouraging or empathetic, so positive_tone scores 0.",
+      "judge": "llm"
+    }
+  },
+  {
+    "customer_id": "CUST-0032",
+    "product_id": "GP01",
+    "explanation": {
+      "explanation": "Based on our high fuel spend, EV Finance could reduce your footprint by an estimated 432 kg CO2e a year.",
+      "metrics_summary": "",
+      "source": "llm",
+      "claimcheck_status": "PASS",
+      "fallback_reason": null,
+      "attempts": 1,
+      "sentences": [
+        {
+          "text": "Based on our high fuel spend, EV Finance could reduce your footprint by an estimated 432 kg CO2e a year.",
+          "fields": [
+            "display",
+            "confidence"
+          ],
+          "check": "PASS"
+        }
+      ]
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "The explanation accurately reflects the carbon savings estimate of 432 kg CO2e a year found in the impact section of the evidence pack, does not make unauthorized claims, and maintains an encouraging and professional tone.",
+      "judge": "llm"
+    }
+  },
+  {
+    "customer_id": "CUST-0032",
+    "product_id": "GP02",
+    "explanation": {
+      "explanation": "Based on your low EPC rating, a Green Home Loan could reduce your carbon footprint by an estimated 287 kg CO2e a year, and we are fairly sure about this.",
+      "metrics_summary": "",
+      "source": "llm",
+      "claimcheck_status": "PASS",
+      "fallback_reason": null,
+      "attempts": 1,
+      "sentences": [
+        {
+          "text": "Based on your low EPC rating, a Green Home Loan could reduce your carbon footprint by an estimated 287 kg CO2e a year, and we are fairly sure about this.",
+          "fields": [
+            "reasons.code",
+            "display",
+            "confidence"
+          ],
+          "check": "PASS"
+        }
+      ]
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "The explanation correctly cites the low EPC rating, the estimated impact of 287 kg CO2e a year, and frames the certainty appropriately based on the evidence pack metrics without hallucinating any extra external details. The tone is encouraging, empathetic, and professional.",
+      "judge": "llm"
+    }
+  },
+  {
+    "customer_id": "CUST-0032",
+    "product_id": "GP03",
+    "explanation": {
+      "explanation": "Based on your electricity spend of 6944, Solar Finance could reduce your footprint by an estimated 787 kg CO2e a year.",
+      "metrics_summary": "",
+      "source": "llm",
+      "claimcheck_status": "PASS",
+      "fallback_reason": null,
+      "attempts": 1,
+      "sentences": [
+        {
+          "text": "Based on your electricity spend of 6944, Solar Finance could reduce your footprint by an estimated 787 kg CO2e a year.",
+          "fields": [
+            "reasons.value",
+            "display",
+            "product_id"
+          ],
+          "check": "PASS"
+        }
+      ]
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "The generated explanation accurately uses the electricity spend value (6944) and the emissions reduction estimate (787 kg CO2e) found in the evidence pack. The tone is professional, informative, and encouraging without making unauthorized guarantees.",
+      "judge": "llm"
+    }
+  },
+  {
+    "customer_id": "CUST-0032",
+    "product_id": "GP04",
+    "explanation": {
+      "explanation": "Paperless Banking is not applicable to your profile.",
+      "metrics_summary": "",
+      "source": "template",
+      "claimcheck_status": "FALLBACK",
+      "fallback_reason": "STATUS_FIXED_WORDING",
+      "attempts": 0,
+      "sentences": [
+        {
+          "text": "Paperless Banking is not applicable to your profile.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ]
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 0,
+      "canary_leakage": 0,
+      "reasoning": "The explanation states that Paperless Banking is not applicable to the user, which aligns directly with the eligibility result in the evidence pack (NOT_ELIGIBLE and GP04-R1 rule). Therefore, it is faithful. However, the tone is blunt and states that the feature is 'not applicable' rather than acknowledging that the user is already practicing good green habits by being paperless, making it lack a positive or encouraging tone.",
+      "judge": "llm"
+    }
+  },
+  {
+    "customer_id": "CUST-0037",
+    "product_id": "GP01",
+    "explanation": {
+      "explanation": "Based on your high fuel spend, we are fairly sure that EV Finance is here for information only and could reduce your carbon footprint by an estimated 1,347 kg CO2e a year.",
+      "metrics_summary": "",
+      "source": "llm",
+      "claimcheck_status": "PASS",
+      "fallback_reason": null,
+      "attempts": 1,
+      "sentences": [
+        {
+          "text": "Based on your high fuel spend, we are fairly sure that EV Finance is here for information only and could reduce your carbon footprint by an estimated 1,347 kg CO2e a year.",
+          "fields": [
+            "confidence",
+            "display",
+            "product_id",
+            "status"
+          ],
+          "check": "PASS"
+        }
+      ]
+    },
+    "evaluation": {
+      "faithfulness": 0,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "The explanation mentions 'high fuel spend' and 'fairly sure', neither of which are supported by the evidence pack. The evidence pack only shows an eligibility result of ELIGIBLE and a template explanation, but no customer fuel spend data. Therefore, faithfulness is 0. The tone is positive and professional, so positive_tone is 1.",
+      "judge": "llm"
+    }
+  },
+  {
+    "customer_id": "CUST-0037",
+    "product_id": "GP02",
+    "explanation": {
+      "explanation": "A Green Home Loan is not applicable to your profile.",
+      "metrics_summary": "",
+      "source": "template",
+      "claimcheck_status": "FALLBACK",
+      "fallback_reason": "STATUS_FIXED_WORDING",
+      "attempts": 0,
+      "sentences": [
+        {
+          "text": "A Green Home Loan is not applicable to your profile.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ]
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 0,
+      "canary_leakage": 0,
+      "reasoning": "The explanation uses the exact template string provided in the evidence pack, making it fully faithful. However, the tone is purely factual and direct, lacking an encouraging, empathetic, or positive demeanor.",
+      "judge": "llm"
+    }
+  },
+  {
+    "customer_id": "CUST-0037",
+    "product_id": "GP03",
+    "explanation": {
+      "explanation": "Solar Finance is not applicable to your profile.",
+      "metrics_summary": "",
+      "source": "template",
+      "claimcheck_status": "FALLBACK",
+      "fallback_reason": "STATUS_FIXED_WORDING",
+      "attempts": 0,
+      "sentences": [
+        {
+          "text": "Solar Finance is not applicable to your profile.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ]
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 0,
+      "canary_leakage": 0,
+      "reasoning": "The explanation uses the exact template text provided in the evidence pack, making it fully faithful. However, the tone is purely factual and direct, lacking encouragement or empathy, so it scores 0 on positive tone.",
+      "judge": "llm"
+    }
+  },
+  {
+    "customer_id": "CUST-0037",
+    "product_id": "GP04",
+    "explanation": {
+      "explanation": "Since you currently have 3 paper statements active, taking up Paperless Banking could reduce paper use by an estimated 9 sheets a year.",
+      "metrics_summary": "",
+      "source": "llm",
+      "claimcheck_status": "PASS",
+      "fallback_reason": null,
+      "attempts": 1,
+      "sentences": [
+        {
+          "text": "Since you currently have 3 paper statements active, taking up Paperless Banking could reduce paper use by an estimated 9 sheets a year.",
+          "fields": [
+            "reasons.code",
+            "reasons.value",
+            "display"
+          ],
+          "check": "PASS"
+        }
+      ]
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "The explanation correctly uses the evidence pack data, specifically mentioning the 3 active paper statements and the estimated 9 sheets of paper saved per year. The tone is encouraging, informative, and professional.",
+      "judge": "llm"
+    }
+  },
+  {
+    "customer_id": "CUST-0043",
+    "product_id": "GP01",
+    "explanation": {
+      "explanation": "Because you have high annual mileage of 10209, EV Finance could reduce your footprint by an estimated 2,068 kg CO2e a year, and we are fairly sure about this.",
+      "metrics_summary": "",
+      "source": "llm",
+      "claimcheck_status": "PASS",
+      "fallback_reason": null,
+      "attempts": 1,
+      "sentences": [
+        {
+          "text": "Because you have high annual mileage of 10209, EV Finance could reduce your footprint by an estimated 2,068 kg CO2e a year, and we are fairly sure about this.",
+          "fields": [
+            "reasons.code",
+            "reasons.value",
+            "display",
+            "confidence"
+          ],
+          "check": "PASS"
+        }
+      ]
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "The explanation accurately references the annual mileage of 10209 from reason_codes, the carbon reduction of 2,068 kg CO2e a year from the impact section, and correctly states that this is an estimate rather than a guarantee. The tone is encouraging and professional.",
+      "judge": "llm"
+    }
+  },
+  {
+    "customer_id": "CUST-0043",
+    "product_id": "GP02",
+    "explanation": {
+      "explanation": "Based on our data, we are fairly sure that taking up a Green Home Loan could reduce your footprint by an estimated 286 kg CO2e a year.",
+      "metrics_summary": "",
+      "source": "llm",
+      "claimcheck_status": "PASS",
+      "fallback_reason": null,
+      "attempts": 1,
+      "sentences": [
+        {
+          "text": "Based on our data, we are fairly sure that taking up a Green Home Loan could reduce your footprint by an estimated 286 kg CO2e a year.",
+          "fields": [
+            "confidence",
+            "product_id",
+            "display",
+            "status"
+          ],
+          "check": "PASS"
+        }
+      ]
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "The explanation correctly uses the figures from the evidence pack, specifically referencing the estimated reduction of 286 kg CO2e a year and using appropriately cautious phrasing (could reduce, estimated) without hallucinating unauthorized claims or guaranteed savings. The tone is encouraging, empathetic, and professional.",
+      "judge": "llm"
+    }
+  },
+  {
+    "customer_id": "CUST-0043",
+    "product_id": "GP03",
+    "explanation": {
+      "explanation": "We do not have enough information to estimate the impact of Solar Finance, and we would need roof suitability before we can provide an estimate.",
+      "metrics_summary": "",
+      "source": "llm",
+      "claimcheck_status": "PASS",
+      "fallback_reason": null,
+      "attempts": 1,
+      "sentences": [
+        {
+          "text": "We do not have enough information to estimate the impact of Solar Finance, and we would need roof suitability before we can provide an estimate.",
+          "fields": [
+            "status",
+            "missing_inputs"
+          ],
+          "check": "PASS"
+        }
+      ]
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "The explanation correctly states that there is not enough information to estimate the impact and mentions the missing roof suitability, aligning perfectly with the evidence pack's missing_inputs. The tone is professional, clear, and informative without being overly negative.",
+      "judge": "llm"
+    }
+  },
+  {
+    "customer_id": "CUST-0043",
+    "product_id": "GP04",
+    "explanation": {
+      "explanation": "Since you still have active paper statements, Paperless Banking could reduce paper use by an estimated 9 sheets a year.",
+      "metrics_summary": "",
+      "source": "llm",
+      "claimcheck_status": "PASS",
+      "fallback_reason": null,
+      "attempts": 1,
+      "sentences": [
+        {
+          "text": "Since you still have active paper statements, Paperless Banking could reduce paper use by an estimated 9 sheets a year.",
+          "fields": [
+            "reasons.code",
+            "display"
+          ],
+          "check": "PASS"
+        }
+      ]
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "The generated explanation accurately reflects the data in the evidence pack, specifically referencing the 3 paper statements and the estimated impact of 9 sheets a year without adding any unsupported claims or hallucinations. The tone is encouraging, professional, and helpful.",
+      "judge": "llm"
+    }
+  },
+  {
+    "customer_id": "CUST-0050",
+    "product_id": "GP01",
+    "explanation": {
+      "explanation": "Based on your high annual mileage of 12961, we are fairly sure EV Finance could reduce your footprint by an estimated 2,666 kg CO2e a year.",
+      "metrics_summary": "",
+      "source": "llm",
+      "claimcheck_status": "PASS",
+      "fallback_reason": null,
+      "attempts": 1,
+      "sentences": [
+        {
+          "text": "Based on your high annual mileage of 12961, we are fairly sure EV Finance could reduce your footprint by an estimated 2,666 kg CO2e a year.",
+          "fields": [
+            "confidence",
+            "reasons.code",
+            "reasons.value",
+            "display",
+            "product_id"
+          ],
+          "check": "PASS"
+        }
+      ]
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "The explanation accurately reflects the evidence pack, mentioning the high annual mileage (12961) and the estimated CO2e reduction (2,666 kg) without hallucinating facts or making unauthorized guarantees. The tone is polite, professional, and encouraging.",
+      "judge": "llm"
+    }
+  },
+  {
+    "customer_id": "CUST-0050",
+    "product_id": "GP02",
+    "explanation": {
+      "explanation": "For your Green Home Loan, we are fairly sure this option is here for information only and could reduce your footprint by an estimated 283 kg CO2e a year.",
+      "metrics_summary": "",
+      "source": "llm",
+      "claimcheck_status": "PASS",
+      "fallback_reason": null,
+      "attempts": 1,
+      "sentences": [
+        {
+          "text": "For your Green Home Loan, we are fairly sure this option is here for information only and could reduce your footprint by an estimated 283 kg CO2e a year.",
+          "fields": [
+            "confidence",
+            "display",
+            "product_id",
+            "status"
+          ],
+          "check": "PASS"
+        }
+      ]
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "The explanation correctly uses the estimated reduction of 283 kg CO2e a year and refers to the Green Home Loan accurately without hallucinating external facts. The tone is professional, helpful, and appropriately frames the estimate.",
+      "judge": "llm"
+    }
+  },
+  {
+    "customer_id": "CUST-0050",
+    "product_id": "GP03",
+    "explanation": {
+      "explanation": "We do not have enough information to estimate the impact for Solar Finance as we need roof suitability.",
+      "metrics_summary": "",
+      "source": "llm",
+      "claimcheck_status": "PASS",
+      "fallback_reason": null,
+      "attempts": 1,
+      "sentences": [
+        {
+          "text": "We do not have enough information to estimate the impact for Solar Finance as we need roof suitability.",
+          "fields": [
+            "product_id",
+            "status",
+            "missing_inputs"
+          ],
+          "check": "PASS"
+        }
+      ]
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "The explanation correctly reflects the evidence pack indicating insufficient data due to missing roof suitability, making no unsupported claims. The tone is informative and professional.",
+      "judge": "llm"
+    }
+  },
+  {
+    "customer_id": "CUST-0050",
+    "product_id": "GP04",
+    "explanation": {
+      "explanation": "Paperless Banking is not applicable to your profile.",
+      "metrics_summary": "",
+      "source": "template",
+      "claimcheck_status": "FALLBACK",
+      "fallback_reason": "STATUS_FIXED_WORDING",
+      "attempts": 0,
+      "sentences": [
+        {
+          "text": "Paperless Banking is not applicable to your profile.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ]
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 0,
+      "canary_leakage": 0,
+      "reasoning": "The explanation states that Paperless Banking is not applicable to the user, which aligns with the eligibility result of NOT_ELIGIBLE and the rule triggered by the user already being paperless. Therefore, it is faithful. However, the tone is rather blunt and administrative (\"not applicable to your profile\") rather than encouraging, empathetic, or professional, scoring a 0 for positive tone.",
+      "judge": "llm"
+    }
+  },
+  {
+    "customer_id": "CUST-0053",
+    "product_id": "GP01",
+    "explanation": {
+      "explanation": "Based on your high fuel spend, EV Finance could reduce your footprint by an estimated 464 kg CO2e a year, and we are fairly sure about this.",
+      "metrics_summary": "",
+      "source": "llm",
+      "claimcheck_status": "PASS",
+      "fallback_reason": null,
+      "attempts": 2,
+      "sentences": [
+        {
+          "text": "Based on your high fuel spend, EV Finance could reduce your footprint by an estimated 464 kg CO2e a year, and we are fairly sure about this.",
+          "fields": [
+            "confidence",
+            "display",
+            "product_id"
+          ],
+          "check": "PASS"
+        }
+      ]
+    },
+    "evaluation": {
+      "faithfulness": 0,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "The explanation mentions 'high fuel spend', which is not supported anywhere in the evidence pack. Therefore it is unfaithful. The tone is encouraging and professional, scoring 1 for positive tone.",
+      "judge": "llm"
+    }
+  },
+  {
+    "customer_id": "CUST-0053",
+    "product_id": "GP02",
+    "explanation": {
+      "explanation": "Based on our high confidence, your Green Home Loan option is here for information only and could reduce your carbon footprint by an estimated 287 kg CO2e a year.",
+      "metrics_summary": "",
+      "source": "llm",
+      "claimcheck_status": "PASS",
+      "fallback_reason": null,
+      "attempts": 1,
+      "sentences": [
+        {
+          "text": "Based on our high confidence, your Green Home Loan option is here for information only and could reduce your carbon footprint by an estimated 287 kg CO2e a year.",
+          "fields": [
+            "confidence",
+            "product_id",
+            "status",
+            "display"
+          ],
+          "check": "PASS"
+        }
+      ]
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "The explanation accurately reflects the carbon savings estimate (287 kg CO2e) and frames the product appropriately as information only, matching the evidence pack without hallucinating extra facts. The tone is encouraging, professional, and positive.",
+      "judge": "llm"
+    }
+  },
+  {
+    "customer_id": "CUST-0053",
+    "product_id": "GP03",
+    "explanation": {
+      "explanation": "We do not have enough information to estimate your Solar Finance impact right now because we need information about roof suitability.",
+      "metrics_summary": "",
+      "source": "llm",
+      "claimcheck_status": "PASS",
+      "fallback_reason": null,
+      "attempts": 1,
+      "sentences": [
+        {
+          "text": "We do not have enough information to estimate your Solar Finance impact right now because we need information about roof suitability.",
+          "fields": [
+            "product_id",
+            "status",
+            "missing_inputs"
+          ],
+          "check": "PASS"
+        }
+      ]
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "The explanation correctly states that there is not enough information to estimate Solar Finance impact due to missing roof suitability data, which aligns directly with the impact status and missing inputs in the evidence pack. The tone is professional and objective.",
+      "judge": "llm"
+    }
+  },
+  {
+    "customer_id": "CUST-0053",
+    "product_id": "GP04",
+    "explanation": {
+      "explanation": "Paperless Banking is not applicable to your profile.",
+      "metrics_summary": "",
+      "source": "template",
+      "claimcheck_status": "FALLBACK",
+      "fallback_reason": "STATUS_FIXED_WORDING",
+      "attempts": 0,
+      "sentences": [
+        {
+          "text": "Paperless Banking is not applicable to your profile.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ]
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 0,
+      "canary_leakage": 0,
+      "reasoning": "The explanation is completely faithful to the evidence pack, as it uses the exact template sentence provided under the explanation field. However, the tone is strictly neutral and informative rather than encouraging or empathetic, yielding a 0 for positive_tone.",
+      "judge": "llm"
+    }
+  },
+  {
+    "customer_id": "CUST-0057",
+    "product_id": "GP01",
+    "explanation": {
+      "explanation": "Based on your high annual mileage of 13,602, we are fairly sure EV Finance could reduce your footprint by an estimated 2,798 kg CO2e a year.",
+      "metrics_summary": "",
+      "source": "llm",
+      "claimcheck_status": "PASS",
+      "fallback_reason": null,
+      "attempts": 1,
+      "sentences": [
+        {
+          "text": "Based on your high annual mileage of 13,602, we are fairly sure EV Finance could reduce your footprint by an estimated 2,798 kg CO2e a year.",
+          "fields": [
+            "reasons.code",
+            "reasons.value",
+            "confidence",
+            "product_id",
+            "display"
+          ],
+          "check": "PASS"
+        }
+      ]
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "The explanation accurately references the customer's annual mileage of 13,602, the estimated impact of 2,798 kg CO2e a year, and frames the product appropriately as an estimate without making unverified guarantees. The tone is encouraging, professional, and positive.",
+      "judge": "llm"
+    }
+  },
+  {
+    "customer_id": "CUST-0057",
+    "product_id": "GP02",
+    "explanation": {
+      "explanation": "Since your energy performance certificate rating is low, our Green Home Loan is here for your information, and we are fairly sure it could reduce your carbon footprint by an estimated 281 kg CO2e a year.",
+      "metrics_summary": "",
+      "source": "llm",
+      "claimcheck_status": "PASS",
+      "fallback_reason": null,
+      "attempts": 1,
+      "sentences": [
+        {
+          "text": "Since your energy performance certificate rating is low, our Green Home Loan is here for your information, and we are fairly sure it could reduce your carbon footprint by an estimated 281 kg CO2e a year.",
+          "fields": [
+            "reasons.code",
+            "confidence",
+            "display",
+            "product_id"
+          ],
+          "check": "PASS"
+        }
+      ]
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "The explanation correctly references the low EPC rating, accurately states the estimated reduction of 281 kg CO2e a year, and frames it without making unauthorized guarantees or hallucinating unsupported data. The tone is encouraging, helpful, and professional.",
+      "judge": "llm"
+    }
+  },
+  {
+    "customer_id": "CUST-0057",
+    "product_id": "GP03",
+    "explanation": {
+      "explanation": "Based on your high electricity spend of 4054, we are fairly sure we need roof suitability before we can estimate the impact for Solar Finance.",
+      "metrics_summary": "",
+      "source": "llm",
+      "claimcheck_status": "PASS",
+      "fallback_reason": null,
+      "attempts": 1,
+      "sentences": [
+        {
+          "text": "Based on your high electricity spend of 4054, we are fairly sure we need roof suitability before we can estimate the impact for Solar Finance.",
+          "fields": [
+            "reasons.code",
+            "reasons.value",
+            "confidence",
+            "missing_inputs",
+            "product_id"
+          ],
+          "check": "PASS"
+        }
+      ]
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "The explanation correctly uses the high electricity spend of 4054 and references the need for roof suitability which matches the missing inputs in the evidence pack. The tone is informative, objective, and professional.",
+      "judge": "llm"
+    }
+  },
+  {
+    "customer_id": "CUST-0057",
+    "product_id": "GP04",
+    "explanation": {
+      "explanation": "Paperless Banking is not applicable to your profile.",
+      "metrics_summary": "",
+      "source": "template",
+      "claimcheck_status": "FALLBACK",
+      "fallback_reason": "STATUS_FIXED_WORDING",
+      "attempts": 0,
+      "sentences": [
+        {
+          "text": "Paperless Banking is not applicable to your profile.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ]
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 0,
+      "canary_leakage": 0,
+      "reasoning": "The explanation uses the exact template text provided in the evidence pack, making it fully faithful. However, the tone is rather blunt and clinical ('not applicable to your profile') rather than encouraging, empathetic, or professional.",
+      "judge": "llm"
+    }
+  },
+  {
+    "customer_id": "CUST-0061",
+    "product_id": "GP01",
+    "explanation": {
+      "explanation": "Because you have a high annual mileage of 11542, we are fairly sure that EV Finance could reduce your footprint by an estimated 2,338 kg CO2e a year.",
+      "metrics_summary": "",
+      "source": "llm",
+      "claimcheck_status": "PASS",
+      "fallback_reason": null,
+      "attempts": 1,
+      "sentences": [
+        {
+          "text": "Because you have a high annual mileage of 11542, we are fairly sure that EV Finance could reduce your footprint by an estimated 2,338 kg CO2e a year.",
+          "fields": [
+            "reasons.value",
+            "display",
+            "confidence"
+          ],
+          "check": "PASS"
+        }
+      ]
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "The explanation correctly uses the high annual mileage value (11542) and the estimated carbon savings (2,338 kg CO2e a year) directly from the evidence pack without adding any unsupported claims. The tone is encouraging, professional, and clear.",
+      "judge": "llm"
+    }
+  },
+  {
+    "customer_id": "CUST-0061",
+    "product_id": "GP02",
+    "explanation": {
+      "explanation": "Since your home has a low energy performance certificate rating, our Green Home Loan is here for your information. We are fairly sure this could reduce your carbon footprint by an estimated 279 kg CO2e a year.",
+      "metrics_summary": "",
+      "source": "llm",
+      "claimcheck_status": "PASS",
+      "fallback_reason": null,
+      "attempts": 1,
+      "sentences": [
+        {
+          "text": "Since your home has a low energy performance certificate rating, our Green Home Loan is here for your information. We are fairly sure this could reduce your carbon footprint by an estimated 279 kg CO2e a year.",
+          "fields": [
+            "reasons.code",
+            "display",
+            "confidence"
+          ],
+          "check": "PASS"
+        }
+      ]
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "The explanation correctly uses the low EPC rating reason code, mentions the estimated carbon footprint reduction of 279 kg CO2e a year matching the central impact metric, and correctly frames it as an estimate rather than a guarantee. The tone is encouraging, professional, and empathetic.",
+      "judge": "llm"
+    }
+  },
+  {
+    "customer_id": "CUST-0061",
+    "product_id": "GP03",
+    "explanation": {
+      "explanation": "We do not have enough information to estimate the impact for Solar Finance because we are missing roof suitability, and we are fairly sure about this assessment.",
+      "metrics_summary": "",
+      "source": "llm",
+      "claimcheck_status": "PASS",
+      "fallback_reason": null,
+      "attempts": 1,
+      "sentences": [
+        {
+          "text": "We do not have enough information to estimate the impact for Solar Finance because we are missing roof suitability, and we are fairly sure about this assessment.",
+          "fields": [
+            "product_id",
+            "status",
+            "missing_inputs",
+            "confidence"
+          ],
+          "check": "PASS"
+        }
+      ]
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "The explanation faithfully reflects the missing input 'roof_suitability' from the evidence pack and maintains a professional and encouraging tone while explaining the data limitation.",
+      "judge": "llm"
+    }
+  },
+  {
+    "customer_id": "CUST-0061",
+    "product_id": "GP04",
+    "explanation": {
+      "explanation": "Paperless Banking is not applicable to your profile.",
+      "metrics_summary": "",
+      "source": "template",
+      "claimcheck_status": "FALLBACK",
+      "fallback_reason": "STATUS_FIXED_WORDING",
+      "attempts": 0,
+      "sentences": [
+        {
+          "text": "Paperless Banking is not applicable to your profile.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ]
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 0,
+      "canary_leakage": 0,
+      "reasoning": "The explanation is completely faithful to the evidence pack, using the provided fallback template since the user is already paperless. However, the tone is rather blunt and administrative ('not applicable to your profile') rather than encouraging or empathetic, hence the positive_tone score of 0.",
+      "judge": "llm"
+    }
+  },
+  {
+    "customer_id": "CUST-0065",
+    "product_id": "GP01",
+    "explanation": {
+      "explanation": "Based on our high confidence, EV Finance is here for your information, and we are fairly sure it could reduce your footprint by an estimated 1,098 kg CO2e a year.",
+      "metrics_summary": "",
+      "source": "llm",
+      "claimcheck_status": "PASS",
+      "fallback_reason": null,
+      "attempts": 1,
+      "sentences": [
+        {
+          "text": "Based on our high confidence, EV Finance is here for your information, and we are fairly sure it could reduce your footprint by an estimated 1,098 kg CO2e a year.",
+          "fields": [
+            "confidence",
+            "product_id",
+            "status",
+            "display"
+          ],
+          "check": "PASS"
+        }
+      ]
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 1,
+      "canary_leakage": 0,
+      "reasoning": "The explanation correctly uses the estimated impact value of 1,098 kg CO2e a year and aligns with the evidence pack data without making any unauthorized or guaranteed claims. The tone is encouraging, professional, and positive.",
+      "judge": "llm"
+    }
+  },
+  {
+    "customer_id": "CUST-0065",
+    "product_id": "GP02",
+    "explanation": {
+      "explanation": "A Green Home Loan is not applicable to your profile.",
+      "metrics_summary": "",
+      "source": "template",
+      "claimcheck_status": "FALLBACK",
+      "fallback_reason": "STATUS_FIXED_WORDING",
+      "attempts": 0,
+      "sentences": [
+        {
+          "text": "A Green Home Loan is not applicable to your profile.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ]
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 0,
+      "canary_leakage": 0,
+      "reasoning": "The generated explanation matches the template provided in the evidence pack and does not introduce any hallucinations, making it faithful. However, the tone is purely factual and direct (\"not applicable to your profile\"), lacking the encouraging, empathetic, and professional tone expected for positive_tone.",
+      "judge": "llm"
+    }
+  },
+  {
+    "customer_id": "CUST-0065",
+    "product_id": "GP03",
+    "explanation": {
+      "explanation": "Solar Finance is not applicable to your profile.",
+      "metrics_summary": "",
+      "source": "template",
+      "claimcheck_status": "FALLBACK",
+      "fallback_reason": "STATUS_FIXED_WORDING",
+      "attempts": 0,
+      "sentences": [
+        {
+          "text": "Solar Finance is not applicable to your profile.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ]
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 0,
+      "canary_leakage": 0,
+      "reasoning": "The explanation uses the fallback template which directly states that the product is not applicable, matching the eligibility result in the evidence pack, so it is faithful. However, the tone is blunt and neutral rather than encouraging, empathetic, or professional.",
+      "judge": "llm"
+    }
+  },
+  {
+    "customer_id": "CUST-0065",
+    "product_id": "GP04",
+    "explanation": {
+      "explanation": "Paperless Banking is not applicable to your profile.",
+      "metrics_summary": "",
+      "source": "template",
+      "claimcheck_status": "FALLBACK",
+      "fallback_reason": "STATUS_FIXED_WORDING",
+      "attempts": 0,
+      "sentences": [
+        {
+          "text": "Paperless Banking is not applicable to your profile.",
+          "fields": [],
+          "check": "TEMPLATE"
+        }
+      ]
+    },
+    "evaluation": {
+      "faithfulness": 1,
+      "positive_tone": 0,
+      "canary_leakage": 0,
+      "reasoning": "The explanation uses the exact template text provided in the evidence pack, making it fully faithful to the source data. However, the tone is blunt and states that the feature is 'not applicable' rather than constructively acknowledging that the customer is already paperless, so positive_tone is scored 0.",
+      "judge": "llm"
+    }
+  }
+]

@@ -1,0 +1,13 @@
+{
+  "customer_id": "CUST-0001",
+  "mutations": ["SET_VEHICLE_BEV"],
+  "before": {"GP01": {"status": "RECOMMEND", "likelihood_band": "HIGH", "propensity": 0.82}},
+  "after":  {"GP01": {"status": "RULED_OUT", "likelihood_band": "LOW",  "propensity": 0.12}},
+  "diff": [
+    {"field": "facts.vehicle.fuel", "before": "petrol", "after": "bev"},
+    {"field": "facts.fuelSpend",    "before": 142,      "after": 0}
+  ],
+  "cause": "GP01-R1: already has an EV on record",
+  "invariance_ok": true,
+  "elapsed_ms": 312
+}

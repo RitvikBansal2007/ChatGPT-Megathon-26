@@ -1,0 +1,396 @@
+{
+  "customer_id": "CUST-0004",
+  "customer_key": "cust_91aa20",
+  "persona": "Tom — New customer, 6 weeks of history, paper statements, high app use.",
+  "display_name": "Tom",
+  "region": "Yorkshire and The Humber",
+  "tags": [
+    "New customer",
+    "6 weeks of history",
+    "Paper statements"
+  ],
+  "cutoff_date": "2026-06-30",
+  "outcome_window_days": 90,
+  "run_manifest": "sha256:fixture-draft",
+  "data_freshness": [
+    {
+      "source": "Transactions",
+      "asOf": "30 Jun 2026 (6 weeks)",
+      "kind": "inferred"
+    },
+    {
+      "source": "Digital usage",
+      "asOf": "30 Jun 2026",
+      "kind": "inferred"
+    }
+  ],
+  "products_held": [
+    {
+      "name": "Current account",
+      "since": "18 May 2026",
+      "status": "Active"
+    }
+  ],
+  "opportunities": [
+    {
+      "opportunity_id": "GP01",
+      "opportunity_name": "EV Finance",
+      "product": "GP01 EV Finance",
+      "status": "ABSTAIN",
+      "headline": "Not enough information to estimate this one yet.",
+      "propensity": 0.47,
+      "likelihood_band": "MEDIUM",
+      "confidence": {
+        "overall": 0.56,
+        "completeness": 0.42,
+        "recency": 0.98,
+        "stability": 0.55,
+        "in_distribution": 0.6
+      },
+      "eligibility": {
+        "result": "ELIGIBLE",
+        "rules_fired": [],
+        "rule_text": null,
+        "rules_version": "rules-1.0"
+      },
+      "reason_codes": [
+        {
+          "code": "SHORT_HISTORY",
+          "display": "6 weeks of account history so far",
+          "observed_at": "30 Jun 2026",
+          "source": "inferred_transactions"
+        },
+        {
+          "code": "EXISTING_VEHICLE",
+          "display": "Petrol car, 6 years old",
+          "observed_at": "18 May 2026",
+          "source": "customer_declared"
+        }
+      ],
+      "why_now": null,
+      "impact": {
+        "status": "INSUFFICIENT_DATA",
+        "metric_family": "emissions",
+        "unit": null,
+        "low": null,
+        "central": null,
+        "high": null,
+        "bills": null,
+        "formula": null,
+        "baseline": null,
+        "horizon": null,
+        "factor_refs": [],
+        "quality": "LOW",
+        "missing_inputs": [
+          "annual_mileage"
+        ],
+        "first_step": null,
+        "secondary": null,
+        "paper": null,
+        "digital_adoption": null
+      },
+      "ladder": {
+        "field": "annual_mileage",
+        "prompt": "Add your yearly mileage and we can give you a range. It takes about 20 seconds.",
+        "cta": "Add mileage",
+        "question": null,
+        "input": {
+          "type": "number",
+          "unit": "miles a year",
+          "min": 0,
+          "max": 100000,
+          "step": 100,
+          "placeholder": "e.g. 8,000"
+        }
+      },
+      "ladder_result": null,
+      "review": null,
+      "why_not": null,
+      "explanation": {
+        "source": "template",
+        "claimcheck_status": "PASS",
+        "sentences": [
+          {
+            "text": "Not enough information to estimate this one yet.",
+            "fields": [
+              "impact.status"
+            ],
+            "check": "PASS"
+          },
+          {
+            "text": "Add your yearly mileage and we can give you a range.",
+            "fields": [
+              "impact.missing.annual_mileage"
+            ],
+            "check": "PASS"
+          }
+        ]
+      },
+      "next_action": {
+        "label": "Add mileage",
+        "secondary": null,
+        "disclaimer": "Not a credit decision. Estimate, not a guarantee."
+      }
+    },
+    {
+      "opportunity_id": "GP02",
+      "opportunity_name": "Green Home",
+      "product": "GP02 Green Home Loan",
+      "status": "ABSTAIN",
+      "headline": "We're still getting to know your account.",
+      "propensity": 0.41,
+      "likelihood_band": "MEDIUM",
+      "confidence": {
+        "overall": 0.56,
+        "completeness": 0.42,
+        "recency": 0.98,
+        "stability": 0.55,
+        "in_distribution": 0.6
+      },
+      "eligibility": {
+        "result": "ELIGIBLE",
+        "rules_fired": [],
+        "rule_text": null,
+        "rules_version": "rules-1.0"
+      },
+      "reason_codes": [
+        {
+          "code": "SHORT_HISTORY",
+          "display": "6 weeks of account history so far",
+          "observed_at": "30 Jun 2026",
+          "source": "inferred_transactions"
+        }
+      ],
+      "why_now": null,
+      "impact": {
+        "status": "INSUFFICIENT_DATA",
+        "metric_family": "emissions",
+        "unit": null,
+        "low": null,
+        "central": null,
+        "high": null,
+        "bills": null,
+        "formula": null,
+        "baseline": null,
+        "horizon": null,
+        "factor_refs": [],
+        "quality": "LOW",
+        "missing_inputs": [
+          "gas_kwh"
+        ],
+        "first_step": null,
+        "secondary": null,
+        "paper": null,
+        "digital_adoption": null
+      },
+      "ladder": {
+        "field": "gas_kwh",
+        "prompt": "Upload a recent energy bill and we can estimate this. Or check back in about 6 weeks.",
+        "cta": "Upload a bill",
+        "question": null,
+        "input": {
+          "type": "upload"
+        }
+      },
+      "ladder_result": null,
+      "review": null,
+      "why_not": null,
+      "explanation": {
+        "source": "template",
+        "claimcheck_status": "PASS",
+        "sentences": [
+          {
+            "text": "We're still getting to know your account.",
+            "fields": [
+              "evidence.SHORT_HISTORY"
+            ],
+            "check": "PASS"
+          }
+        ]
+      },
+      "next_action": {
+        "label": "Upload a bill",
+        "secondary": null,
+        "disclaimer": "Not a credit decision. Estimate, not a guarantee."
+      }
+    },
+    {
+      "opportunity_id": "GP03",
+      "opportunity_name": "Solar Finance",
+      "product": "GP03 Solar Finance",
+      "status": "ABSTAIN",
+      "headline": "We're still getting to know your account.",
+      "propensity": 0.33,
+      "likelihood_band": "LOW",
+      "confidence": {
+        "overall": 0.56,
+        "completeness": 0.42,
+        "recency": 0.98,
+        "stability": 0.55,
+        "in_distribution": 0.6
+      },
+      "eligibility": {
+        "result": "ELIGIBLE",
+        "rules_fired": [],
+        "rule_text": null,
+        "rules_version": "rules-1.0"
+      },
+      "reason_codes": [
+        {
+          "code": "SHORT_HISTORY",
+          "display": "6 weeks of account history so far",
+          "observed_at": "30 Jun 2026",
+          "source": "inferred_transactions"
+        }
+      ],
+      "why_now": null,
+      "impact": {
+        "status": "INSUFFICIENT_DATA",
+        "metric_family": "emissions",
+        "unit": null,
+        "low": null,
+        "central": null,
+        "high": null,
+        "bills": null,
+        "formula": null,
+        "baseline": null,
+        "horizon": null,
+        "factor_refs": [],
+        "quality": "LOW",
+        "missing_inputs": [
+          "electricity_kwh",
+          "roof_suitability"
+        ],
+        "first_step": null,
+        "secondary": null,
+        "paper": null,
+        "digital_adoption": null
+      },
+      "ladder": {
+        "field": "electricity_kwh",
+        "prompt": "Upload a recent electricity bill and we can estimate this.",
+        "cta": "Upload a bill",
+        "question": null,
+        "input": {
+          "type": "upload"
+        }
+      },
+      "ladder_result": null,
+      "review": null,
+      "why_not": null,
+      "explanation": {
+        "source": "template",
+        "claimcheck_status": "PASS",
+        "sentences": [
+          {
+            "text": "We're still getting to know your account.",
+            "fields": [
+              "evidence.SHORT_HISTORY"
+            ],
+            "check": "PASS"
+          }
+        ]
+      },
+      "next_action": {
+        "label": "Upload a bill",
+        "secondary": null,
+        "disclaimer": "Not a credit decision. Estimate, not a guarantee."
+      }
+    },
+    {
+      "opportunity_id": "GP04",
+      "opportunity_name": "Paperless",
+      "product": "GP04 Paperless Banking",
+      "status": "RECOMMEND",
+      "headline": "Your statements arrive on paper, but you use the app most days. Going paperless takes about a minute.",
+      "propensity": 0.76,
+      "likelihood_band": "HIGH",
+      "confidence": {
+        "overall": 0.79,
+        "completeness": 0.8,
+        "recency": 0.95,
+        "stability": 0.78,
+        "in_distribution": 0.7
+      },
+      "eligibility": {
+        "result": "ELIGIBLE",
+        "rules_fired": [],
+        "rule_text": null,
+        "rules_version": "rules-1.0"
+      },
+      "reason_codes": [
+        {
+          "code": "PAPER_STATEMENTS",
+          "display": "Paper statements: all of them so far",
+          "observed_at": "30 Jun 2026",
+          "source": "inferred_transactions"
+        },
+        {
+          "code": "HIGH_DIGITAL_ACTIVITY",
+          "display": "You open the app most days",
+          "observed_at": "30 Jun 2026",
+          "source": "inferred_transactions"
+        }
+      ],
+      "why_now": null,
+      "impact": {
+        "status": "ESTIMATED",
+        "metric_family": "paper",
+        "unit": null,
+        "low": null,
+        "central": null,
+        "high": null,
+        "bills": null,
+        "formula": "Paper statements a year × sheets per statement",
+        "baseline": "Your current statement settings",
+        "horizon": "12 months",
+        "factor_refs": [
+          "Statement page counts (internal, illustrative)"
+        ],
+        "quality": "HIGH",
+        "missing_inputs": [],
+        "first_step": null,
+        "secondary": null,
+        "paper": {
+          "sheets_per_year": 48,
+          "note": "12 statements, about 4 sheets each"
+        },
+        "digital_adoption": {
+          "display": "0%",
+          "unit": "of your statements are digital",
+          "note": "0 of 12 statements"
+        }
+      },
+      "ladder": null,
+      "ladder_result": null,
+      "review": null,
+      "why_not": null,
+      "explanation": {
+        "source": "llm",
+        "claimcheck_status": "PASS",
+        "sentences": [
+          {
+            "text": "Your statements arrive on paper, but you use the app most days.",
+            "fields": [
+              "evidence.PAPER_STATEMENTS",
+              "evidence.HIGH_DIGITAL_ACTIVITY"
+            ],
+            "check": "PASS"
+          },
+          {
+            "text": "Going paperless would avoid about 48 sheets of paper a year.",
+            "fields": [
+              "impact.paper"
+            ],
+            "check": "PASS"
+          }
+        ]
+      },
+      "next_action": {
+        "label": "Go paperless",
+        "secondary": "Choose which statements go digital",
+        "disclaimer": "Not a credit decision. Estimate, not a guarantee."
+      }
+    }
+  ]
+}

@@ -1,0 +1,116 @@
+{
+  "as_of": "30 Jun 2026",
+  "synthetic": true,
+  "measured": true,
+  "split": {
+    "personas": 8,
+    "test": 749,
+    "train": 3494,
+    "val": 749
+  },
+  "baselines": {
+    "GP01": {
+      "lgbm_auc": 0.706,
+      "lgbm_pr_auc": 0.114,
+      "lgbm_brier": 0.042,
+      "lgbm_ece": 0.014,
+      "lgbm_lift_top10": 2.38,
+      "base_rate": 0.0454,
+      "lr_auc": 0.701,
+      "lr_pr_auc": 0.12,
+      "lr_brier": 0.0425,
+      "lr_lift_top10": 2.98,
+      "rule_auc": 0.5
+    },
+    "GP02": {
+      "lgbm_auc": 0.766,
+      "lgbm_pr_auc": 0.078,
+      "lgbm_brier": 0.0296,
+      "lgbm_ece": 0.0116,
+      "lgbm_lift_top10": 4.4,
+      "base_rate": 0.0307,
+      "lr_auc": 0.771,
+      "lr_pr_auc": 0.092,
+      "lr_brier": 0.0295,
+      "lr_lift_top10": 3.08,
+      "rule_auc": 0.638
+    },
+    "GP03": {
+      "lgbm_auc": 0.673,
+      "lgbm_pr_auc": 0.027,
+      "lgbm_brier": 0.0163,
+      "lgbm_ece": 0.0146,
+      "lgbm_lift_top10": 2.53,
+      "base_rate": 0.016,
+      "lr_auc": 0.705,
+      "lr_pr_auc": 0.047,
+      "lr_brier": 0.0165,
+      "lr_lift_top10": 1.69,
+      "rule_auc": 0.79
+    },
+    "GP04": {
+      "lgbm_auc": 0.895,
+      "lgbm_pr_auc": 0.233,
+      "lgbm_brier": 0.0471,
+      "lgbm_ece": 0.0037,
+      "lgbm_lift_top10": 3.37,
+      "base_rate": 0.0601,
+      "lr_auc": 0.882,
+      "lr_pr_auc": 0.225,
+      "lr_brier": 0.0492,
+      "lr_lift_top10": 4.27,
+      "rule_auc": 0.874
+    }
+  },
+  "calibration": [
+    {
+      "bin": "0\u201310%",
+      "n": 2550,
+      "mean_pred": 0.019,
+      "mean_actual": 0.018
+    },
+    {
+      "bin": "10\u201320%",
+      "n": 341,
+      "mean_pred": 0.146,
+      "mean_actual": 0.123
+    },
+    {
+      "bin": "20\u201340%",
+      "n": 104,
+      "mean_pred": 0.241,
+      "mean_actual": 0.231
+    },
+    {
+      "bin": "40\u201360%",
+      "n": 1,
+      "mean_pred": 0.5,
+      "mean_actual": 1.0
+    }
+  ],
+  "brier_by_tercile": {
+    "low": 0.0036,
+    "mid": 0.0218,
+    "high": 0.0788
+  },
+  "llm_eval": {
+    "evaluated": 80,
+    "template_fallback_rate": 0.312,
+    "judged_by_model": 80,
+    "written_by_model": 55,
+    "fallback_reasons": {
+      "STATUS_FIXED_WORDING": 25
+    },
+    "faithfulness": 0.975,
+    "canary_leakage_rate": 0.0
+  },
+  "scenarios": {
+    "passed": 35,
+    "total": 35,
+    "failures": []
+  },
+  "categoriser": {
+    "macro_f1": 1.0,
+    "rules_only_f1": 0.605
+  }
+}

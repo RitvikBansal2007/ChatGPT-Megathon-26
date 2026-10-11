@@ -1,0 +1,69 @@
+- id: desnz_ghg_factors
+  publisher: DESNZ / Defra
+  url: https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/1166982/ghg-conversion-factors-2024-flat-file.xlsx
+  licence: OGL-UK-3.0
+  licence_url: https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/
+  attribution: "Contains public sector information licensed under the Open Government Licence v3.0."
+  sha256: null
+  retrieved_at: null
+  used_for: [emission_factors]
+
+- id: dft_veh_fuel_share
+  publisher: Department for Transport
+  url: https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/1155982/veh0101.xlsx
+  licence: OGL-UK-3.0
+  licence_url: https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/
+  attribution: "Contains public sector information licensed under the Open Government Licence v3.0."
+  sha256: null
+  retrieved_at: null
+  used_for: [vehicle_fuel_type_prior, vehicle_age_prior]
+
+- id: dft_nts_mileage
+  publisher: Department for Transport
+  url: https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/1102982/nts0901.xlsx
+  licence: OGL-UK-3.0
+  licence_url: https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/
+  attribution: "Contains public sector information licensed under the Open Government Licence v3.0."
+  sha256: null
+  retrieved_at: null
+  used_for: [annual_mileage_prior]
+
+- id: ofgem_tdcv
+  publisher: Ofgem
+  url: https://www.ofgem.gov.uk/sites/default/files/docs/2020/01/tdcv_2020_0.xlsx
+  licence: OGL-UK-3.0
+  licence_url: https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/
+  attribution: "Contains public sector information licensed under the Open Government Licence v3.0."
+  sha256: null
+  retrieved_at: null
+  used_for: [annual_elec_kwh_prior, annual_gas_kwh_prior]
+
+- id: ukpn_smartmeter_daily
+  publisher: UK Power Networks via London Datastore
+  url: https://data.london.gov.uk/download/smartmeter-energy-use-data-in-london-households/39ea4474-3375-43b5-901b-53c44234ea72/hhblock_dataset_daily.csv
+  licence: OGL-UK-3.0
+  licence_url: https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/
+  attribution: "Contains public sector information licensed under the Open Government Licence v3.0."
+  sha256: null
+  retrieved_at: null
+  used_for: [monthly_elec_seasonality]
+
+- id: jrc_pvgis
+  publisher: European Commission JRC
+  url: https://re.jrc.ec.europa.eu/api/seriescalc?lat=51.5&lon=-0.1&raddatabase=PVGIS-SARAH&browser=1&outputformat=csv
+  licence: CC-BY-4.0
+  licence_url: https://creativecommons.org/licenses/by/4.0/
+  attribution: "Contains data from PVGIS European Commission JRC."
+  sha256: null
+  retrieved_at: null
+  used_for: [solar_kwh_per_kwp]
+
+- id: ons_regions
+  publisher: Office for National Statistics
+  url: https://www.ons.gov.uk/file?uri=/peoplepopulationandcommunity/populationandmigration/populationestimates/datasets/populationestimatesforukenglandandwalesscotlandandnorthernireland/mid2021/ukpopestimatesmid2021on2021geography.xls
+  licence: OGL-UK-3.0
+  licence_url: https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/
+  attribution: "Contains public sector information licensed under the Open Government Licence v3.0."
+  sha256: null
+  retrieved_at: null
+  used_for: [region_labels]

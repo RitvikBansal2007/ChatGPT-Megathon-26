@@ -1,0 +1,10 @@
+{
+  "verdict": "BLOCKED",
+  "sentences": [{"text": "…", "status": "BLOCKED", "violations": [
+    {"rule": "NUM", "span": "4,000 kg", "detail": "not in Evidence Pack allow-list"},
+    {"rule": "BAN", "span": "will save"},
+    {"rule": "BAN", "span": "pre-approved"}
+  ]}],
+  "fallback_text": "Your fuel spend has been above your usual range, so an EV may be worth exploring. Eligibility has not been confirmed.",
+  "blocked_total": 17
+}

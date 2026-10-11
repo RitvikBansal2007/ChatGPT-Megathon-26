@@ -1,0 +1,381 @@
+{
+  "customer_id": "CUST-0002",
+  "customer_key": "cust_2b81e4",
+  "persona": "Marcus — Vehicle record says electric, but fuel spend continues. Home efficiency data missing.",
+  "display_name": "Marcus",
+  "region": "North West",
+  "tags": [
+    "Mixed signals",
+    "Homeowner",
+    "Stale EPC"
+  ],
+  "cutoff_date": "2026-06-30",
+  "outcome_window_days": 90,
+  "run_manifest": "sha256:fixture-draft",
+  "data_freshness": [
+    {
+      "source": "Transactions",
+      "asOf": "30 Jun 2026",
+      "kind": "inferred"
+    },
+    {
+      "source": "Vehicle record",
+      "asOf": "2 Mar 2026",
+      "kind": "declared"
+    },
+    {
+      "source": "Energy rating (EPC)",
+      "asOf": "Not on record",
+      "kind": "declared"
+    }
+  ],
+  "products_held": [
+    {
+      "name": "Current account",
+      "since": "Jan 2017",
+      "status": "Active"
+    },
+    {
+      "name": "Mortgage",
+      "since": "Aug 2020",
+      "status": "Active"
+    }
+  ],
+  "opportunities": [
+    {
+      "opportunity_id": "GP01",
+      "opportunity_name": "EV Finance",
+      "product": "GP01 EV Finance",
+      "status": "REVIEW",
+      "headline": "We're seeing mixed signals about your car.",
+      "propensity": 0.58,
+      "likelihood_band": "MEDIUM",
+      "confidence": {
+        "overall": 0.78,
+        "completeness": 0.74,
+        "recency": 0.88,
+        "stability": 0.8,
+        "in_distribution": 0.77
+      },
+      "eligibility": {
+        "result": "ELIGIBLE",
+        "rules_fired": [],
+        "rule_text": null,
+        "rules_version": "rules-1.0"
+      },
+      "reason_codes": [
+        {
+          "code": "VEHICLE_BEV_ON_RECORD",
+          "display": "Vehicle record: battery electric",
+          "observed_at": "2 Mar 2026",
+          "source": "customer_declared"
+        },
+        {
+          "code": "FUEL_SPEND_CONTINUES",
+          "display": "Fuel spend: £96 a month on average, last 3 months",
+          "observed_at": "30 Jun 2026",
+          "source": "inferred_transactions"
+        }
+      ],
+      "why_now": null,
+      "impact": {
+        "status": "HIDDEN",
+        "metric_family": null,
+        "unit": null,
+        "low": null,
+        "central": null,
+        "high": null,
+        "bills": null,
+        "formula": null,
+        "baseline": null,
+        "horizon": null,
+        "factor_refs": [],
+        "quality": null,
+        "missing_inputs": [],
+        "first_step": null,
+        "secondary": null,
+        "paper": null,
+        "digital_adoption": null
+      },
+      "ladder": null,
+      "ladder_result": null,
+      "review": {
+        "message": "We're seeing mixed signals: your vehicle record says electric, but you still spend on fuel.",
+        "question": "Is there a second car in the household?",
+        "options": [
+          "Yes, we have a second car",
+          "No, it's a plug-in hybrid",
+          "No, the vehicle record is wrong",
+          "Not sure"
+        ]
+      },
+      "why_not": null,
+      "explanation": {
+        "source": "template",
+        "claimcheck_status": "PASS",
+        "sentences": [
+          {
+            "text": "We're seeing mixed signals: your vehicle record says electric, but you still spend on fuel.",
+            "fields": [
+              "evidence.VEHICLE_BEV_ON_RECORD",
+              "evidence.FUEL_SPEND_CONTINUES"
+            ],
+            "check": "PASS"
+          },
+          {
+            "text": "We've hidden the impact estimate until this is cleared up.",
+            "fields": [
+              "impact.status"
+            ],
+            "check": "PASS"
+          }
+        ]
+      },
+      "next_action": {
+        "label": "Answer one question",
+        "secondary": null,
+        "disclaimer": "Not a credit decision. Estimate, not a guarantee."
+      }
+    },
+    {
+      "opportunity_id": "GP02",
+      "opportunity_name": "Green Home",
+      "product": "GP02 Green Home Loan",
+      "status": "ABSTAIN",
+      "headline": "Not enough information to estimate this one yet.",
+      "propensity": 0.55,
+      "likelihood_band": "MEDIUM",
+      "confidence": {
+        "overall": 0.78,
+        "completeness": 0.74,
+        "recency": 0.88,
+        "stability": 0.8,
+        "in_distribution": 0.77
+      },
+      "eligibility": {
+        "result": "ELIGIBLE",
+        "rules_fired": [],
+        "rule_text": null,
+        "rules_version": "rules-1.0"
+      },
+      "reason_codes": [
+        {
+          "code": "HIGH_WINTER_GAS",
+          "display": "Winter gas spend above similar homes, last 2 winters",
+          "observed_at": "30 Jun 2026",
+          "source": "inferred_transactions"
+        },
+        {
+          "code": "EPC_MISSING",
+          "display": "Home energy rating: not on record",
+          "observed_at": "Not on record",
+          "source": "customer_declared"
+        }
+      ],
+      "why_now": null,
+      "impact": {
+        "status": "INSUFFICIENT_DATA",
+        "metric_family": "emissions",
+        "unit": null,
+        "low": null,
+        "central": null,
+        "high": null,
+        "bills": null,
+        "formula": null,
+        "baseline": null,
+        "horizon": null,
+        "factor_refs": [],
+        "quality": "LOW",
+        "missing_inputs": [
+          "epc_rating"
+        ],
+        "first_step": null,
+        "secondary": null,
+        "paper": null,
+        "digital_adoption": null
+      },
+      "ladder": {
+        "field": "epc_rating",
+        "prompt": "Add your home's energy rating, or upload a recent energy bill, and we can give you a range.",
+        "cta": "Add energy rating",
+        "question": null,
+        "input": {
+          "type": "choice",
+          "options": [
+            "A or B",
+            "C",
+            "D",
+            "E",
+            "F or G",
+            "I don't know: upload a bill instead"
+          ]
+        }
+      },
+      "ladder_result": null,
+      "review": null,
+      "why_not": null,
+      "explanation": {
+        "source": "template",
+        "claimcheck_status": "PASS",
+        "sentences": [
+          {
+            "text": "Not enough information to estimate this one yet.",
+            "fields": [
+              "impact.status"
+            ],
+            "check": "PASS"
+          },
+          {
+            "text": "Add your home's energy rating and we can give you a range.",
+            "fields": [
+              "impact.missing.epc_rating"
+            ],
+            "check": "PASS"
+          }
+        ]
+      },
+      "next_action": {
+        "label": "Add energy rating",
+        "secondary": null,
+        "disclaimer": "Not a credit decision. Estimate, not a guarantee."
+      }
+    },
+    {
+      "opportunity_id": "GP03",
+      "opportunity_name": "Solar Finance",
+      "product": "GP03 Solar Finance",
+      "status": "SOFT_SURFACE",
+      "headline": "Your electricity use is around average. Solar may still be worth a look later.",
+      "propensity": 0.32,
+      "likelihood_band": "LOW",
+      "confidence": {
+        "overall": 0.78,
+        "completeness": 0.74,
+        "recency": 0.88,
+        "stability": 0.8,
+        "in_distribution": 0.77
+      },
+      "eligibility": {
+        "result": "ELIGIBLE",
+        "rules_fired": [],
+        "rule_text": null,
+        "rules_version": "rules-1.0"
+      },
+      "reason_codes": [],
+      "why_now": null,
+      "impact": {
+        "status": "NOT_APPLICABLE",
+        "metric_family": null,
+        "unit": null,
+        "low": null,
+        "central": null,
+        "high": null,
+        "bills": null,
+        "formula": null,
+        "baseline": null,
+        "horizon": null,
+        "factor_refs": [],
+        "quality": "MEDIUM",
+        "missing_inputs": [],
+        "first_step": null,
+        "secondary": null,
+        "paper": null,
+        "digital_adoption": null
+      },
+      "ladder": null,
+      "ladder_result": null,
+      "review": null,
+      "why_not": null,
+      "explanation": {
+        "source": "template",
+        "claimcheck_status": "PASS",
+        "sentences": [
+          {
+            "text": "Your electricity use is around average. Solar may still be worth a look later.",
+            "fields": [
+              "catalogue.education"
+            ],
+            "check": "PASS"
+          }
+        ]
+      },
+      "next_action": {
+        "label": "Learn more",
+        "secondary": null,
+        "disclaimer": "Not a credit decision. Estimate, not a guarantee."
+      }
+    },
+    {
+      "opportunity_id": "GP04",
+      "opportunity_name": "Paperless",
+      "product": "GP04 Paperless Banking",
+      "status": "SOFT_SURFACE",
+      "headline": "Paper statements are optional. Here's how digital statements work.",
+      "propensity": 0.44,
+      "likelihood_band": "MEDIUM",
+      "confidence": {
+        "overall": 0.78,
+        "completeness": 0.74,
+        "recency": 0.88,
+        "stability": 0.8,
+        "in_distribution": 0.77
+      },
+      "eligibility": {
+        "result": "ELIGIBLE",
+        "rules_fired": [],
+        "rule_text": null,
+        "rules_version": "rules-1.0"
+      },
+      "reason_codes": [
+        {
+          "code": "PAPER_STATEMENTS",
+          "display": "Paper statements: 6 of 12 in the last year",
+          "observed_at": "30 Jun 2026",
+          "source": "inferred_transactions"
+        }
+      ],
+      "why_now": null,
+      "impact": {
+        "status": "NOT_APPLICABLE",
+        "metric_family": null,
+        "unit": null,
+        "low": null,
+        "central": null,
+        "high": null,
+        "bills": null,
+        "formula": null,
+        "baseline": null,
+        "horizon": null,
+        "factor_refs": [],
+        "quality": "MEDIUM",
+        "missing_inputs": [],
+        "first_step": null,
+        "secondary": null,
+        "paper": null,
+        "digital_adoption": null
+      },
+      "ladder": null,
+      "ladder_result": null,
+      "review": null,
+      "why_not": null,
+      "explanation": {
+        "source": "template",
+        "claimcheck_status": "PASS",
+        "sentences": [
+          {
+            "text": "Paper statements are optional. Here's how digital statements work.",
+            "fields": [
+              "catalogue.education"
+            ],
+            "check": "PASS"
+          }
+        ]
+      },
+      "next_action": {
+        "label": "Learn more",
+        "secondary": null,
+        "disclaimer": "Not a credit decision. Estimate, not a guarantee."
+      }
+    }
+  ]
+}

@@ -1,0 +1,335 @@
+{
+  "customer_id": "CUST-0003",
+  "customer_key": "cust_c0d517",
+  "persona": "Aisha — Owns an EV, has solar and a Green Home Loan, already fully paperless.",
+  "display_name": "Aisha",
+  "region": "West Midlands",
+  "tags": [
+    "All set",
+    "Homeowner",
+    "EV owner"
+  ],
+  "cutoff_date": "2026-06-30",
+  "outcome_window_days": 90,
+  "run_manifest": "sha256:fixture-draft",
+  "data_freshness": [
+    {
+      "source": "Transactions",
+      "asOf": "30 Jun 2026",
+      "kind": "inferred"
+    },
+    {
+      "source": "Vehicle record",
+      "asOf": "9 Jan 2026",
+      "kind": "declared"
+    },
+    {
+      "source": "Solar installation",
+      "asOf": "12 Apr 2025",
+      "kind": "declared"
+    }
+  ],
+  "products_held": [
+    {
+      "name": "Current account",
+      "since": "Jun 2012",
+      "status": "Active"
+    },
+    {
+      "name": "Green Home Loan",
+      "since": "Feb 2024",
+      "status": "Active"
+    },
+    {
+      "name": "Mortgage",
+      "since": "May 2016",
+      "status": "Active"
+    }
+  ],
+  "opportunities": [
+    {
+      "opportunity_id": "GP01",
+      "opportunity_name": "EV Finance",
+      "product": "GP01 EV Finance",
+      "status": "RULED_OUT",
+      "headline": "Not for you right now.",
+      "propensity": 0.12,
+      "likelihood_band": "LOW",
+      "confidence": {
+        "overall": 0.91,
+        "completeness": 0.93,
+        "recency": 0.95,
+        "stability": 0.9,
+        "in_distribution": 0.86
+      },
+      "eligibility": {
+        "result": "NOT_ELIGIBLE",
+        "rules_fired": [
+          "GP01-R1"
+        ],
+        "rule_text": "You already have an electric vehicle and no replacement need on record.",
+        "rules_version": "rules-1.0"
+      },
+      "reason_codes": [],
+      "why_now": null,
+      "impact": {
+        "status": "NOT_APPLICABLE",
+        "metric_family": null,
+        "unit": null,
+        "low": null,
+        "central": null,
+        "high": null,
+        "bills": null,
+        "formula": null,
+        "baseline": null,
+        "horizon": null,
+        "factor_refs": [],
+        "quality": null,
+        "missing_inputs": [],
+        "first_step": null,
+        "secondary": null,
+        "paper": null,
+        "digital_adoption": null
+      },
+      "ladder": null,
+      "ladder_result": null,
+      "review": null,
+      "why_not": {
+        "text": "You already have an electric vehicle and no replacement need on record.",
+        "rule": "GP01-R1",
+        "change": "If you add a second car or your EV needs replacing, we'll re-check."
+      },
+      "explanation": {
+        "source": "template",
+        "claimcheck_status": "PASS",
+        "sentences": [
+          {
+            "text": "Not for you right now. You already have an electric vehicle and no replacement need on record.",
+            "fields": [
+              "eligibility.rule"
+            ],
+            "check": "PASS"
+          }
+        ]
+      },
+      "next_action": {
+        "label": null,
+        "secondary": null,
+        "disclaimer": "Not a credit decision. Estimate, not a guarantee."
+      }
+    },
+    {
+      "opportunity_id": "GP02",
+      "opportunity_name": "Green Home",
+      "product": "GP02 Green Home Loan",
+      "status": "RULED_OUT",
+      "headline": "Not for you right now.",
+      "propensity": 0.2,
+      "likelihood_band": "LOW",
+      "confidence": {
+        "overall": 0.91,
+        "completeness": 0.93,
+        "recency": 0.95,
+        "stability": 0.9,
+        "in_distribution": 0.86
+      },
+      "eligibility": {
+        "result": "NOT_ELIGIBLE",
+        "rules_fired": [
+          "GP02-R2"
+        ],
+        "rule_text": "You already have a Green Home Loan with us.",
+        "rules_version": "rules-1.0"
+      },
+      "reason_codes": [],
+      "why_now": null,
+      "impact": {
+        "status": "NOT_APPLICABLE",
+        "metric_family": null,
+        "unit": null,
+        "low": null,
+        "central": null,
+        "high": null,
+        "bills": null,
+        "formula": null,
+        "baseline": null,
+        "horizon": null,
+        "factor_refs": [],
+        "quality": null,
+        "missing_inputs": [],
+        "first_step": null,
+        "secondary": null,
+        "paper": null,
+        "digital_adoption": null
+      },
+      "ladder": null,
+      "ladder_result": null,
+      "review": null,
+      "why_not": {
+        "text": "You already have a Green Home Loan with us.",
+        "rule": "GP02-R2",
+        "change": "We'll re-check when that loan is repaid."
+      },
+      "explanation": {
+        "source": "template",
+        "claimcheck_status": "PASS",
+        "sentences": [
+          {
+            "text": "Not for you right now. You already have a Green Home Loan with us.",
+            "fields": [
+              "eligibility.rule"
+            ],
+            "check": "PASS"
+          }
+        ]
+      },
+      "next_action": {
+        "label": null,
+        "secondary": null,
+        "disclaimer": "Not a credit decision. Estimate, not a guarantee."
+      }
+    },
+    {
+      "opportunity_id": "GP03",
+      "opportunity_name": "Solar Finance",
+      "product": "GP03 Solar Finance",
+      "status": "RULED_OUT",
+      "headline": "Not for you right now.",
+      "propensity": 0.08,
+      "likelihood_band": "LOW",
+      "confidence": {
+        "overall": 0.91,
+        "completeness": 0.93,
+        "recency": 0.95,
+        "stability": 0.9,
+        "in_distribution": 0.86
+      },
+      "eligibility": {
+        "result": "NOT_ELIGIBLE",
+        "rules_fired": [
+          "GP03-R2"
+        ],
+        "rule_text": "Your home already has solar panels on record.",
+        "rules_version": "rules-1.0"
+      },
+      "reason_codes": [],
+      "why_now": null,
+      "impact": {
+        "status": "NOT_APPLICABLE",
+        "metric_family": null,
+        "unit": null,
+        "low": null,
+        "central": null,
+        "high": null,
+        "bills": null,
+        "formula": null,
+        "baseline": null,
+        "horizon": null,
+        "factor_refs": [],
+        "quality": null,
+        "missing_inputs": [],
+        "first_step": null,
+        "secondary": null,
+        "paper": null,
+        "digital_adoption": null
+      },
+      "ladder": null,
+      "ladder_result": null,
+      "review": null,
+      "why_not": {
+        "text": "Your home already has solar panels on record.",
+        "rule": "GP03-R2",
+        "change": "If that record is wrong, tell us and we'll re-check."
+      },
+      "explanation": {
+        "source": "template",
+        "claimcheck_status": "PASS",
+        "sentences": [
+          {
+            "text": "Not for you right now. Your home already has solar panels on record.",
+            "fields": [
+              "eligibility.rule"
+            ],
+            "check": "PASS"
+          }
+        ]
+      },
+      "next_action": {
+        "label": null,
+        "secondary": null,
+        "disclaimer": "Not a credit decision. Estimate, not a guarantee."
+      }
+    },
+    {
+      "opportunity_id": "GP04",
+      "opportunity_name": "Paperless",
+      "product": "GP04 Paperless Banking",
+      "status": "RULED_OUT",
+      "headline": "Not for you right now.",
+      "propensity": 0.05,
+      "likelihood_band": "LOW",
+      "confidence": {
+        "overall": 0.91,
+        "completeness": 0.93,
+        "recency": 0.95,
+        "stability": 0.9,
+        "in_distribution": 0.86
+      },
+      "eligibility": {
+        "result": "NOT_ELIGIBLE",
+        "rules_fired": [
+          "GP04-R1"
+        ],
+        "rule_text": "You already receive all your statements digitally.",
+        "rules_version": "rules-1.0"
+      },
+      "reason_codes": [],
+      "why_now": null,
+      "impact": {
+        "status": "NOT_APPLICABLE",
+        "metric_family": null,
+        "unit": null,
+        "low": null,
+        "central": null,
+        "high": null,
+        "bills": null,
+        "formula": null,
+        "baseline": null,
+        "horizon": null,
+        "factor_refs": [],
+        "quality": null,
+        "missing_inputs": [],
+        "first_step": null,
+        "secondary": null,
+        "paper": null,
+        "digital_adoption": null
+      },
+      "ladder": null,
+      "ladder_result": null,
+      "review": null,
+      "why_not": {
+        "text": "You already receive all your statements digitally.",
+        "rule": "GP04-R1",
+        "change": "Nothing to change. Your paper and digital figures are on the Progress tab."
+      },
+      "explanation": {
+        "source": "template",
+        "claimcheck_status": "PASS",
+        "sentences": [
+          {
+            "text": "Not for you right now. You already receive all your statements digitally.",
+            "fields": [
+              "eligibility.rule"
+            ],
+            "check": "PASS"
+          }
+        ]
+      },
+      "next_action": {
+        "label": null,
+        "secondary": null,
+        "disclaimer": "Not a credit decision. Estimate, not a guarantee."
+      }
+    }
+  ]
+}

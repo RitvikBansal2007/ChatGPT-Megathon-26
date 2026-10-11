@@ -1,0 +1,112 @@
+[
+  {
+    "id": "GP01", "product": "EV Finance", "product_id": "GP01",
+    "status": "RECOMMEND",
+    "likelihood_band": "HIGH", "propensity": 0.82,
+    "why_now": {"display": "Your car finance ends in 90 days."},
+    "headline": "Your fuel spend has run above your usual level for 4 months. An EV could be worth exploring.",
+    "reason_codes": [
+      {"code": "HIGH_FUEL_SPEND", "display": "Fuel spend: £142 a month on average, last 12 months", "observed_at": "30 Jun 2026", "source": "inferred"},
+      {"code": "CAR_FINANCE_ENDING", "display": "Your car finance ends in 3 months", "observed_at": "30 Jun 2026", "source": "customer_declared"},
+      {"code": "HIGH_MILEAGE", "display": "Annual mileage: 14,200 miles (declared)", "observed_at": "30 Jun 2026", "source": "customer_declared"}
+    ],
+    "eligibility": {"result": "NEEDS_VERIFICATION", "rules_version": "rules-1.0", "rules_fired": ["GP01-V1"], "rules_passed": ["GP01-R1", "GP01-R2"]},
+    "impact": {
+      "quality": "MEDIUM", "family": "co2",
+      "display": "1,150 to 1,750 kg CO₂e a year",
+      "bills": "About £620 a year less on fuel and servicing, central estimate.",
+      "formula": "Your annual mileage × (petrol CO₂e factor − EV CO₂e factor) per km",
+      "baseline": "Your current petrol car", "horizon": "12 months",
+      "factor_refs": "DESNZ 2025 · conversion factors (illustrative)",
+      "missing_inputs": [], "status": "ESTIMATED"
+    },
+    "explanation": {
+      "source": "llm",
+      "sentences": [
+        {"text": "Your fuel spend has been above your usual level for four months.", "fields": ["reason_codes.0"]},
+        {"text": "An EV could cut your annual CO₂e by between 1,150 and 1,750 kg.", "fields": ["impact.display"]},
+        {"text": "Your car finance ends in about 90 days, which is a natural switching point.", "fields": ["reason_codes.1"]}
+      ],
+      "verified": 3, "total": 3, "blocked": 0
+    },
+    "actions": {"primary": "Explore EV options", "secondary": "Start with a 2-minute suitability check"}
+  },
+  {
+    "id": "GP02", "product": "Green Home Loan", "product_id": "GP02",
+    "status": "SOFT_SURFACE",
+    "likelihood_band": "MEDIUM", "propensity": 0.44,
+    "why_now": null,
+    "headline": "Some customers with similar homes see meaningful savings on heating. Worth knowing about.",
+    "reason_codes": [
+      {"code": "ABOVE_AVG_GAS", "display": "Winter gas spend: above similar homes", "observed_at": "30 Jun 2026", "source": "inferred"}
+    ],
+    "eligibility": {"result": "ELIGIBLE", "rules_version": "rules-1.0", "rules_fired": [], "rules_passed": ["GP02-R1", "GP02-R2"]},
+    "impact": {
+      "quality": "LOW", "family": "co2",
+      "display": "200 to 900 kg CO₂e a year (wide range)",
+      "bills": "Varies by home type and insulation level.",
+      "formula": "Estimated heating reduction × gas CO₂e factor",
+      "baseline": "Your current gas usage", "horizon": "12 months",
+      "factor_refs": "DESNZ 2025 · conversion factors (illustrative)",
+      "missing_inputs": ["epc_rating"], "status": "ESTIMATED"
+    },
+    "explanation": {
+      "source": "template",
+      "sentences": [
+        {"text": "Some customers with homes like yours see meaningful savings on heating bills.", "fields": ["reason_codes.0"]},
+        {"text": "Adding your home's energy rating would let us give you a tighter estimate.", "fields": ["impact.missing_inputs"]}
+      ],
+      "verified": 2, "total": 2, "blocked": 0
+    },
+    "actions": {"primary": "Learn more", "secondary": null}
+  },
+  {
+    "id": "GP03", "product": "Solar Finance", "product_id": "GP03",
+    "status": "ABSTAIN",
+    "likelihood_band": "MEDIUM", "propensity": 0.51,
+    "why_now": null,
+    "headline": "Not enough information to estimate this one yet.",
+    "reason_codes": [
+      {"code": "HIGH_ELEC_SPEND", "display": "Electricity spend above similar homes", "observed_at": "30 Jun 2026", "source": "inferred"}
+    ],
+    "eligibility": {"result": "ELIGIBLE", "rules_version": "rules-1.0", "rules_fired": [], "rules_passed": ["GP03-R1", "GP03-R2"]},
+    "impact": {
+      "quality": "LOW", "family": "co2",
+      "display": null,
+      "bills": null,
+      "formula": "Expected solar kWh used at home × grid electricity factor",
+      "baseline": "All your electricity bought from the grid", "horizon": "12 months",
+      "factor_refs": "DESNZ 2025 · conversion factors (illustrative)",
+      "missing_inputs": ["roof_orientation"], "status": "INSUFFICIENT_DATA"
+    },
+    "explanation": {
+      "source": "template",
+      "sentences": [
+        {"text": "Not enough information to estimate this one yet.", "fields": ["impact.status"]},
+        {"text": "Tell us your roof's direction and we can give you a range.", "fields": ["impact.missing_inputs"]}
+      ],
+      "verified": 2, "total": 2, "blocked": 0
+    },
+    "actions": {"primary": "Add roof details", "secondary": null}
+  },
+  {
+    "id": "GP04", "product": "Paperless Banking", "product_id": "GP04",
+    "status": "RULED_OUT",
+    "likelihood_band": "LOW", "propensity": 0.18,
+    "why_now": null,
+    "headline": "You're already fully paperless — nothing to do here.",
+    "reason_codes": [
+      {"code": "ALREADY_PAPERLESS", "display": "All 12 statements are already digital", "observed_at": "30 Jun 2026", "source": "inferred"}
+    ],
+    "eligibility": {"result": "NOT_ELIGIBLE", "rules_version": "rules-1.0", "rules_fired": ["GP04-R1"], "rules_passed": []},
+    "impact": {"quality": null, "family": "paper", "display": null, "status": "NOT_APPLICABLE", "missing_inputs": []},
+    "explanation": {
+      "source": "template",
+      "sentences": [
+        {"text": "You're already fully paperless — all 12 of your statements are digital.", "fields": ["reason_codes.0"]}
+      ],
+      "verified": 1, "total": 1, "blocked": 0
+    },
+    "actions": {"primary": null, "secondary": null}
+  }
+]

@@ -1,0 +1,42 @@
+[
+  {
+    "raw_score": 0.003702248111730261,
+    "calibrated_prob": 0.0
+  },
+  {
+    "raw_score": 0.043320338584855934,
+    "calibrated_prob": 0.0
+  },
+  {
+    "raw_score": 0.04459413193145046,
+    "calibrated_prob": 0.07692307692307693
+  },
+  {
+    "raw_score": 0.06006309333365146,
+    "calibrated_prob": 0.07692307692307693
+  },
+  {
+    "raw_score": 0.06046556344018186,
+    "calibrated_prob": 0.1826086956521739
+  },
+  {
+    "raw_score": 0.14866596211414365,
+    "calibrated_prob": 0.1826086956521739
+  },
+  {
+    "raw_score": 0.14905296739100676,
+    "calibrated_prob": 0.2
+  },
+  {
+    "raw_score": 0.15242068774067577,
+    "calibrated_prob": 0.2
+  },
+  {
+    "raw_score": 0.15407304484969786,
+    "calibrated_prob": 0.2375
+  },
+  {
+    "raw_score": 0.7164814902731044,
+    "calibrated_prob": 0.2375
+  }
+]
