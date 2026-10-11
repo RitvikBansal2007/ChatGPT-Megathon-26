@@ -1,0 +1,94 @@
+{
+  "as_of": "30 Jun 2026",
+  "synthetic": true,
+  "baselines": {
+    "GP01": {
+      "lgbm_auc": 0.871,
+      "lr_auc": 0.732,
+      "rule_auc": 0.5,
+      "lgbm_lift_top10": 7.69
+    },
+    "GP02": {
+      "lgbm_auc": 0.888,
+      "lr_auc": 0.688,
+      "rule_auc": 0.662,
+      "lgbm_lift_top10": 8.33
+    },
+    "GP03": {
+      "lgbm_auc": 0.809,
+      "lr_auc": 0.688,
+      "rule_auc": 0.731,
+      "lgbm_lift_top10": 5.79
+    },
+    "GP04": {
+      "lgbm_auc": 0.964,
+      "lr_auc": 0.856,
+      "rule_auc": 0.861,
+      "lgbm_lift_top10": 7.95
+    }
+  },
+  "calibration": [
+    {
+      "bin": "0\u201310%",
+      "mean_pred": 0.017,
+      "mean_actual": 0.017
+    },
+    {
+      "bin": "10\u201320%",
+      "mean_pred": 0.151,
+      "mean_actual": 0.182
+    },
+    {
+      "bin": "20\u201340%",
+      "mean_pred": 0.224,
+      "mean_actual": 0.25
+    },
+    {
+      "bin": "40\u201360%",
+      "mean_pred": 0.417,
+      "mean_actual": 0.885
+    },
+    {
+      "bin": "60\u201380%",
+      "mean_pred": 0.7,
+      "mean_actual": 0.7
+    },
+    {
+      "bin": "80\u2013100%",
+      "mean_pred": 0.9,
+      "mean_actual": 0.9
+    }
+  ],
+  "brier_by_tercile": {
+    "low": 0.0049,
+    "mid": 0.0119,
+    "high": 0.0877
+  },
+  "llm_eval": {
+    "governed": {
+      "numeric_fidelity": 1.0,
+      "unsupported_claim_rate": 0.0,
+      "banned_phrase_rate": 0.0,
+      "fallback_rate": 0.0,
+      "p50_latency_ms": 1840,
+      "cost_per_1000": 0.42
+    },
+    "naive": {
+      "numeric_fidelity": 0.81,
+      "unsupported_claim_rate": 0.19,
+      "banned_phrase_rate": 0.06,
+      "fallback_rate": 0.0,
+      "p50_latency_ms": 2100,
+      "cost_per_1000": 0.51
+    }
+  },
+  "scenarios": {
+    "passed": 35,
+    "total": 35,
+    "failures": []
+  },
+  "categoriser": {
+    "macro_f1": 0.962,
+    "rules_only_f1": 0.567
+  }
+}
