@@ -11,6 +11,30 @@
 
 ---
 
+## 🔎 G3 RE-TEST at 08:00 — `main` at `cbcad26` (clean checkout, fresh venv). This section overrides any ✅ further down.
+
+The ✅ rows in "Backend state", "ML / LLM status" and "Remaining" were rewritten by G2-M in merge `c5acaa7`. They are his claims, not G3 test results. What G3 measured:
+
+**Works**
+- Scoring: real confidence (4 parts, varies 0.36–0.96), real reason codes with formatted display, likelihood bands. No hard-coded persona score.
+- Thresholds GP01 0.08, GP02 0.03, GP03 0.025, GP04 0.10. Packs: 5,000 customers; RECOMMEND 1,030 / 1,476 / 248 / 1,460 for GP01–GP04.
+- Golden personas: Priya GP01 RECOMMEND (0.10), Marcus GP01 REVIEW, Aisha GP01/GP03/GP04 RULED_OUT, Tom GP04 RECOMMEND, Dave GP02 RECOMMEND, Sam GP03 ABSTAIN, renter GP04 RECOMMEND.
+- Claim-Check is real on `main`: the demo sentence returns BLOCKED with NUM, BAN, BAN and a fallback text (called directly; the endpoint itself is 403, see below).
+- Manifest `sha256:fa4a6cae…5aa34f`, 5,029 files; its `git_sha` `c5acaa7` is a real commit on `main`.
+- UI: untouched by the merge; 26 of 26 UI tests pass in fixtures mode.
+
+**Broken**
+- **Auth regressed.** `api/deps.py::get_principal()` returns a fixed CUSTOMER and never reads the token; tokens are plain strings again (`token_None`). Result: opportunities return 200 with no token, a bad token, or another customer's ID; eval, portfolio, scenario and claimcheck return 403 for every role including evaluator. Live mode therefore only shows the Hub cards. The working auth is on branch `g2-an/backend-fixes` (`9029cf1`), not merged.
+- `make data` fails (`greendash.generator` has no `__main__`). `python -m greendash.generator.run` works but changes tracked `products.csv` and `transactions.csv`, so the data is not deterministic.
+- From a clean checkout: 45 tests fail (35 scenario, 8 invariance, 2 canary) because `data/raw/*.parquet` is not in git. After running the generator: 448 pass, 2 fail (`test_judge_fails_closed_on_bad_canary`, `test_evaluate_explanation_overrides_model_verdict_for_canary`).
+- `python -m greendash.cache` fails on a clean checkout for the same missing-parquet reason.
+- `make all` is still `fetch test` + manifest; it does not run the pipeline.
+- Manifest does not reproduce: regenerating on a clean checkout gives `sha256:02407040…` with 5,026 files.
+- `out/eval_summary.json` is not committed, so `/api/eval/summary` falls back to the placeholder `fixtures/eval.json`. Measured numbers exist only in `docs/EVALUATION.md`.
+- `data/splits/splits.json` is still 0 bytes, so the held-out split behind the measured numbers cannot be checked.
+- Measured AUC (from `docs/EVALUATION.md`): LightGBM 0.715 / 0.757 / 0.676 / 0.867; logistic regression baseline is higher on all four (0.772 / 0.770 / 0.742 / 0.894). LLM figures (100% fidelity, 0% fallback, 130 packs) not re-run: needs an LLM key.
+- Receipts keeps its "illustrative" label: it shows `fixtures/eval_summary.json`, which still holds placeholders.
+
 ## 🔎 BACKEND RE-TEST at 07:15 — branch `g2-an/backend-fixes` at `9029cf1` (clean checkout, fresh venv) — NOT merged to `main`
 
 Branch is 3 commits ahead of `main` and 28 behind (it predates the UI redesign). Supersedes the 04:00 backend state below where they differ.
