@@ -114,3 +114,31 @@ def test_eval_summary_has_measured_and_terciles():
     # Monotonic falling Brier score: Low conf > Mid conf > High conf
     briers = [t["brier"] for t in terciles]
     assert briers[0] > briers[1] > briers[2]
+
+def test_register_user_endpoint():
+    import secrets
+    unique_email = f"tester_{secrets.token_hex(4)}@greenproof.bank"
+    resp = client.post("/api/auth/register", json={
+        "display_name": "New Test Customer",
+        "email": unique_email,
+        "password": "password123",
+        "role": "CUSTOMER"
+    })
+    assert resp.status_code == 200
+    data = resp.json()
+    assert "access_token" in data
+    assert data["user"]["email"] == unique_email
+    assert data["user"]["display_name"] == "New Test Customer"
+    assert data["user"]["role"] == "CUSTOMER"
+    assert data["user"]["customer_id"].startswith("CUST-")
+
+def test_register_duplicate_email_fails():
+    resp = client.post("/api/auth/register", json={
+        "display_name": "Duplicate Priya",
+        "email": "priya@greenproof.bank",
+        "password": "password123",
+        "role": "CUSTOMER"
+    })
+    assert resp.status_code == 400
+    assert "already exists" in resp.json()["detail"]
+

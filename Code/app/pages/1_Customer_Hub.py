@@ -19,9 +19,14 @@ sel_key = f"pathway::{persona['customer_id']}"
 if sel_key not in st.session_state:
     st.session_state[sel_key] = sorted(opps.values(), key=lambda o: ORDER[o["status"]])[0]["opportunity_id"]
 
+user = client.current_user()
+if not user:
+    T.banner(f"Previewing sample profile: {doc['display_name']} ({persona['customer_id']}). Sign In or Sign Up in the sidebar to access your verified account.", "info")
+
 st.markdown(f"## Hi {T.esc(doc['display_name'])}")
 T.render(f'<div class="gd-row"><span class="gd-chip">Data as of 30 Jun 2026</span><span class="gd-chip">{T.esc(doc["region"])}</span>'
          + "".join(f'<span class="gd-chip">{T.esc(t)}</span>' for t in doc.get("tags", [])) + "</div>")
+
 
 if all(o["status"] == "RULED_OUT" for o in opps.values()):
     T.banner("You're all set. Every pathway is ruled out for a plain reason: open any tile to see why.", "ok")

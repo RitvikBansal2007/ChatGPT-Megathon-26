@@ -1,4 +1,5 @@
 import json
+import secrets
 import sqlite3
 from contextlib import contextmanager
 from datetime import datetime, timezone
@@ -121,6 +122,54 @@ def list_users() -> list[dict]:
     with connect() as c:
         rows = c.execute("SELECT user_key, role, email, display_name, created_at FROM users ORDER BY rowid").fetchall()
         return [dict(r) for r in rows]
+
+def register_user(email: str, password: str, display_name: str, role: str = "CUSTOMER") -> dict:
+    ensure_seeded_users()
+    clean_email = email.strip().lower()
+    clean_name = display_name.strip()
+    if not clean_email or "@" not in clean_email:
+        raise ValueError("A valid email address is required")
+    if not clean_name:
+        raise ValueError("Full name is required")
+    if len(password) < 6:
+        raise ValueError("Password must be at least 6 characters")
+
+    with connect(read_only=False) as c:
+        existing = c.execute("SELECT user_key FROM users WHERE lower(email) = ?", (clean_email,)).fetchone()
+        if existing:
+            raise ValueError(f"An account with email {clean_email} already exists")
+
+        if role == "CUSTOMER":
+            # Assign next available CUST-000X
+            last_cust = c.execute("SELECT user_key FROM users WHERE user_key LIKE 'CUST-%' ORDER BY user_key DESC LIMIT 1").fetchone()
+            if last_cust:
+                try:
+                    num = int(last_cust["user_key"].split("-")[1]) + 1
+                    user_key = f"CUST-{num:04d}"
+                except Exception:
+                    user_key = f"CUST-{secrets.token_hex(2).upper()}"
+            else:
+                user_key = "CUST-0009"
+        else:
+            base_key = clean_email.split("@")[0].replace(".", "_")
+            user_key = f"{base_key}_{role.lower()}"
+
+        pw_hash = hash_password(password)
+        now_str = _now()
+        c.execute(
+            "INSERT INTO users (user_key, role, email, display_name, password_hash, created_at) "
+            "VALUES (?, ?, ?, ?, ?, ?)",
+            (user_key, role, clean_email, clean_name, pw_hash, now_str),
+        )
+        return {
+            "user_key": user_key,
+            "role": role,
+            "email": clean_email,
+            "display_name": clean_name,
+            "created_at": now_str,
+            "customer_id": user_key if role == "CUSTOMER" else None,
+        }
+
 
 # ------------------------------------------------------------------ customer memory
 INITIAL_MEMORIES = [

@@ -14,10 +14,45 @@ class LoginIn(BaseModel):
     username: str = Field(min_length=1, max_length=100)
     password: str = Field(min_length=1, max_length=100)
 
+class RegisterIn(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    email: str = Field(min_length=3, max_length=150)
+    password: str = Field(min_length=6, max_length=100)
+    display_name: str = Field(min_length=1, max_length=100)
+    role: Literal["CUSTOMER", "RELATIONSHIP_MANAGER", "PORTFOLIO_ANALYST"] = "CUSTOMER"
+
 class DemoTokenIn(BaseModel):
     model_config = ConfigDict(extra="forbid")
     role: Literal["CUSTOMER", "RELATIONSHIP_MANAGER", "PORTFOLIO_ANALYST", "AUDITOR", "EVALUATOR"]
     customer_id: str | None = None
+
+@router.post("/register")
+def register(body: RegisterIn):
+    try:
+        user = repo.register_user(
+            email=body.email,
+            password=body.password,
+            display_name=body.display_name,
+            role=body.role,
+        )
+    except ValueError as err:
+        raise HTTPException(status_code=400, detail=str(err))
+
+    cid = user.get("customer_id")
+    token = issue_token(
+        role=user["role"],
+        customer_id=cid,
+        sub=user["user_key"],
+        display_name=user.get("display_name"),
+        expires_minutes=120,
+    )
+    return {
+        "access_token": token,
+        "token_type": "bearer",
+        "expires_in": 7200,
+        "user": user,
+    }
+
 
 @router.post("/login")
 def login(body: LoginIn):

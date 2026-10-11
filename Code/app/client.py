@@ -109,6 +109,32 @@ def login(username: str, password: str) -> dict:
     return user
 
 
+def register(display_name: str, email: str, password: str, role: str = "CUSTOMER") -> dict:
+    """Register a new user account against FastAPI backend and store session."""
+    data = _http("POST", "/api/auth/register", {
+        "display_name": display_name,
+        "email": email,
+        "password": password,
+        "role": role,
+    })
+    user = data["user"]
+    token = data["access_token"]
+    st.session_state["_auth_user"] = {
+        "user_key": user["user_key"],
+        "display_name": user.get("display_name", display_name),
+        "role": user["role"],
+        "email": user.get("email", email),
+        "customer_id": user.get("customer_id"),
+        "token": token,
+        "expiry": time.time() + float(data.get("expires_in", 7200)),
+    }
+    st.session_state["role"] = user["role"]
+    if user.get("customer_id"):
+        st.session_state["persona_id"] = user["customer_id"]
+    return user
+
+
+
 def logout() -> None:
     """Clear authenticated session from Streamlit state."""
     st.session_state.pop("_auth_user", None)
@@ -177,17 +203,40 @@ def _complete(doc: dict, customer_id: str) -> dict:
     return doc
 
 
-# ------------------------------------------------------------------ endpoints
-@st.cache_data(show_spinner=False)
 def personas() -> list[dict]:
-    return _fixture("personas.json")
+    res = list(_fixture("personas.json"))
+    user = current_user()
+    if user and user.get("customer_id"):
+        cid = user["customer_id"]
+        if not any(p["customer_id"] == cid for p in res):
+            res.insert(0, {
+                "customer_id": cid,
+                "display_name": user.get("display_name", cid),
+                "region": "National",
+                "tags": ["Verified Account", "Personal"],
+            })
+    return res
+
+
+def _fallback_opps(customer_id: str) -> dict:
+    fpath = FIXTURES / f"opportunities_{customer_id}.json"
+    if fpath.exists():
+        with open(fpath, encoding="utf-8") as fh:
+            return json.load(fh)
+    data = dict(_fixture("opportunities_CUST-0001.json"))
+    user = current_user()
+    dname = (user.get("display_name") if user else None) or customer_id
+    data["customer_id"] = customer_id
+    data["display_name"] = dname
+    return data
 
 
 @st.cache_data(show_spinner=False, ttl=60)
 def opportunities(customer_id: str, _role: str = "") -> dict:
     """GET /api/customers/{id}/opportunities -> Evidence Packs for all four products."""
     return _complete(_call(lambda: _api("GET", f"/api/customers/{customer_id}/opportunities"),
-                           lambda: _fixture(f"opportunities_{customer_id}.json")), customer_id)
+                           lambda: _fallback_opps(customer_id)), customer_id)
+
 
 
 def scenario(customer_id: str, mutations: list[str]) -> dict:
