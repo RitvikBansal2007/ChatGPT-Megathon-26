@@ -21,6 +21,8 @@ T.render('<p class="gd-muted" style="font-size:17px;max-width:760px">One evidenc
          'Relationship teams get a ranked pipeline they can defend. Every number has a source, every refusal is explained, '
          'and every AI-written sentence is checked before anyone sees it.</p>')
 T.banner(T.CORE_RULE, "ok")
+if user and user.get("role") == "CUSTOMER":
+    T.banner("Welcome! Your Customer Hub is ready. You can inspect your verified green evidence or adjust your living situation anytime using the Green Living Quiz.", "info")
 
 st.subheader("Where to go")
 c1, c2, c3 = st.columns(3)

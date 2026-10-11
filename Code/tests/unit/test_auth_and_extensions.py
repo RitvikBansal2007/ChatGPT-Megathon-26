@@ -176,3 +176,41 @@ def test_authenticated_user_enters_home(monkeypatch):
     assert "Green, with receipts." in text
     assert "Signed in as Priya Sharma" in text
 
+def test_compute_custom_pack_recalculates_verdicts():
+    import sys
+    from pathlib import Path
+    app_dir = Path(__file__).resolve().parents[2] / "app"
+    if str(app_dir) not in sys.path:
+        sys.path.insert(0, str(app_dir))
+    import client
+
+    # Renter with high diesel mileage -> Solar/Home RULED_OUT, EV RECOMMEND
+    renter_answers = {
+        "home_owner": False,
+        "fuel_type": "diesel",
+        "vehicle_fuel_type": "DIESEL",
+        "annual_mileage": 14000.0,
+    }
+    pack = client.compute_custom_pack("CUST-9999", "Custom Renter", renter_answers)
+    opps = {o["opportunity_id"]: o for o in pack["opportunities"]}
+    assert opps["GP02"]["status"] == "RULED_OUT"
+    assert opps["GP03"]["status"] == "RULED_OUT"
+    assert opps["GP01"]["status"] == "RECOMMEND"
+
+    # EV owner with good roof -> EV RULED_OUT, Solar & Home RECOMMEND
+    ev_answers = {
+        "home_owner": True,
+        "fuel_type": "bev",
+        "vehicle_fuel_type": "BEV",
+        "has_ev": True,
+        "roof_suitability": "suitable",
+    }
+    pack_ev = client.compute_custom_pack("CUST-9999", "Custom EV", ev_answers)
+    opps_ev = {o["opportunity_id"]: o for o in pack_ev["opportunities"]}
+    assert opps_ev["GP01"]["status"] == "RULED_OUT"
+    assert opps_ev["GP03"]["status"] == "RECOMMEND"
+    assert opps_ev["GP02"]["status"] in ("RECOMMEND", "SOFT_SURFACE")
+    
+    # Test reset
+    client.reset_custom_pack("CUST-9999")
+

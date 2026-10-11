@@ -245,11 +245,85 @@ def _fallback_opps(customer_id: str) -> dict:
     return data
 
 
+def compute_custom_pack(customer_id: str, display_name: str, answers: dict) -> dict:
+    """Compute an on-the-fly Evidence Pack using pure domain engines based on custom quiz inputs."""
+    from datetime import date
+    import pandas as pd
+    from greendash.carbon.engine import load_factors
+    from greendash.packs import evaluate_customer
+
+    feats_file = Path("data/features/features.parquet")
+    if feats_file.exists():
+        df = pd.read_parquet(feats_file)
+        row_match = df[df["customer_id"] == customer_id]
+        if not row_match.empty:
+            template = dict(row_match.iloc[0].to_dict())
+        else:
+            template = dict(df.iloc[0].to_dict())
+    else:
+        template = {
+            "customer_id": customer_id,
+            "customer_key": customer_id,
+            "home_owner": True,
+            "fuel_type": "petrol",
+            "vehicle_fuel_type": "PETROL",
+            "annual_mileage": 10000.0,
+            "avg_monthly_fuel_gbp": 140.0,
+            "gas_kwh": 12000.0,
+            "gas_kwh_12m": 12000.0,
+            "roof_suitability": "suitable",
+            "paper_statements_12m": 12,
+            "digital_adoption": 0.75,
+            "days_to_car_finance_end": 45,
+            "days_since_mortgage_start": 180,
+            "accessibility_paper_need": False,
+            "existing_solar": False,
+            "has_ev": False,
+        }
+
+    template.update(answers)
+    template["customer_id"] = customer_id
+    try:
+        ckey_num = int("".join(c for c in str(customer_id) if c.isdigit()) or "9999")
+    except Exception:
+        ckey_num = 9999
+    template["customer_key"] = ckey_num
+
+    factors = load_factors()
+    cutoff = date(2026, 6, 30)
+    packs = evaluate_customer(template, factors, cutoff)
+    opps_list = [json.loads(o.model_dump_json(by_alias=True)) for _, o in sorted(packs.items())]
+
+    doc = {
+        "customer_id": customer_id,
+        "display_name": display_name,
+        "opportunities": opps_list,
+        "region": "National",
+        "cutoff_date": "2026-06-30",
+        "outcome_window_days": 90,
+    }
+    completed = _complete(doc, customer_id)
+    st.session_state[f"_custom_pack_{customer_id}"] = completed
+    return completed
+
+
+def reset_custom_pack(customer_id: str) -> None:
+    """Clear custom quiz inputs and revert customer to verified bank baseline."""
+    st.session_state.pop(f"_custom_pack_{customer_id}", None)
+
+
 @st.cache_data(show_spinner=False, ttl=60)
-def opportunities(customer_id: str, _role: str = "") -> dict:
-    """GET /api/customers/{id}/opportunities -> Evidence Packs for all four products."""
+def _cached_opportunities(customer_id: str, _role: str = "") -> dict:
     return _complete(_call(lambda: _api("GET", f"/api/customers/{customer_id}/opportunities"),
                            lambda: _fallback_opps(customer_id)), customer_id)
+
+
+def opportunities(customer_id: str, _role: str = "") -> dict:
+    """GET /api/customers/{id}/opportunities -> Evidence Packs for all four products."""
+    custom = st.session_state.get(f"_custom_pack_{customer_id}")
+    if custom:
+        return _complete(custom, customer_id)
+    return _cached_opportunities(customer_id, _role)
 
 
 

@@ -4,7 +4,7 @@ import streamlit as st
 import importlib
 import client
 import theme as T
-from components import proof_card, shell
+from components import proof_card, shell, profile_quiz
 from components.scenario_lab import redteam, scenario_lab
 importlib.reload(shell)
 
@@ -30,6 +30,12 @@ if not user:
 st.markdown(f"## Hi {T.esc(doc['display_name'])}")
 T.render(f'<div class="gd-row"><span class="gd-chip">Data as of 30 Jun 2026</span><span class="gd-chip">{T.esc(doc["region"])}</span>'
          + "".join(f'<span class="gd-chip">{T.esc(t)}</span>' for t in doc.get("tags", [])) + "</div>")
+
+profile_quiz.render_profile_quiz(
+    persona["customer_id"],
+    doc["display_name"],
+    default_expanded=st.session_state.pop("show_profile_quiz", False),
+)
 
 
 if all(o["status"] == "RULED_OUT" for o in opps.values()):

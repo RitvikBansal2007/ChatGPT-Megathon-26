@@ -120,6 +120,7 @@ def auth_gate(page_name: str = "Welcome to GreenProof") -> None:
                     else:
                         try:
                             u = client.register(su_name, su_email, su_pwd, su_role)
+                            st.session_state["show_profile_quiz"] = True
                             st.success(f"Account created! Welcome, {u.get('display_name')}.")
                             try:
                                 st.switch_page("Home.py")
