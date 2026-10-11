@@ -151,7 +151,7 @@ def test_unauthenticated_landing_shows_auth_gate(monkeypatch):
     at.run()
     text = " ".join(str(e.value) for kind in ("markdown", "caption", "title", "subheader", "header") for e in getattr(at, kind))
     assert "Sign In" in text
-    assert "GreenProof" in text
+    assert "greendash" in text
     # Should be stopped by auth gate before showing main site title
     assert "Green, with receipts." not in text
 

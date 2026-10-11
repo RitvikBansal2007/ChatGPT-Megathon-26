@@ -22,7 +22,7 @@ def can(area: str) -> bool:
     return client.role() in ACCESS[area]
 
 
-def auth_gate(page_name: str = "Welcome to GreenProof") -> None:
+def auth_gate(page_name: str = "Welcome to greendash") -> None:
     """Block access to the app until the user logs in or registers."""
     if client.current_user():
         return
@@ -40,7 +40,7 @@ def auth_gate(page_name: str = "Welcome to GreenProof") -> None:
     st.markdown('<div style="text-align:center;padding:24px 0 12px 0">'
                 '<div style="display:inline-flex;align-items:center;gap:10px;margin-bottom:6px">'
                 '<span style="font-size:32px">🌱</span>'
-                '<span style="font-family:var(--font-display);font-size:32px;font-weight:700;color:var(--ink)">GreenProof</span>'
+                '<span style="font-family:var(--font-display);font-size:32px;font-weight:700;color:var(--ink)">greendash</span>'
                 '</div>'
                 '<p class="gd-muted" style="font-size:16px;max-width:540px;margin:0 auto">'
                 'Please sign in with your credentials or create a new account to enter the platform.'
