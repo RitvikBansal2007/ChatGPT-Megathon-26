@@ -1,177 +1,131 @@
-"""Proof Card — aligned to greenproof/contracts.py (frozen by Akshit, G1-A).
+"""Proof Card: the recommendation that carries its own receipt.
 
-Opportunity field names (real contract):
-  opportunity_id, opportunity_name, status, propensity, likelihood_band
-  eligibility.result / rules_fired / plain_reasons
-  reason_codes[].code / .phrase / .display / .observed_at / .source
-  why_now.display
-  impact.status / .metric_family / .low / .central / .high / .display
-         .formula / .baseline / .horizon / .factor_refs / .quality / .missing_inputs
-  digital_adoption.paper_statements_12m / .digital_share
-  explanation.sentences / .source / .claimcheck_status
-  next_action.label / .secondary / .disclaimer
+Block order (brand guidelines 10.2): status row, headline, why-now, impact, three verdicts,
+Confidence Ladder, evidence, Claim-Check stamp, actions, disclaimer, feedback.
+Designed states: RECOMMEND, SOFT_SURFACE, ABSTAIN, REVIEW, RULED_OUT.
 """
+from __future__ import annotations
 
-import html
 import streamlit as st
 
-import theme
-from components import badges, claim_stamp, states
-
-_PATHWAY_META = {
-    "GP01": {"name": "EV Finance",        "icon": "🚗"},
-    "GP02": {"name": "Green Home Loan",   "icon": "🏠"},
-    "GP03": {"name": "Solar Finance",     "icon": "☀️"},
-    "GP04": {"name": "Paperless Banking", "icon": "📄"},
-}
+import client
+import theme as T
 
 
-def render(opp: dict) -> None:
-    status = opp.get("status", "SOFT_SURFACE")
-    dispatch = {
-        "RECOMMEND":    _render_recommend,
-        "SOFT_SURFACE": states.render_soft_surface,
-        "ABSTAIN":      states.render_abstain,
-        "REVIEW":       states.render_review,
-        "RULED_OUT":    states.render_ruled_out,
-    }
-    dispatch.get(status, states.render_soft_surface)(opp)
+def _confidence_html(c: dict) -> str:
+    rows = [("Data completeness", c["completeness"]), ("Data recency", c["recency"]),
+            ("Model stability", c["stability"]), ("In-distribution", c["in_distribution"]), ("How sure we are", c["overall"])]
+    out = ""
+    for label, v in rows:
+        bold = "font-weight:700;" if label == "How sure we are" else ""
+        colour = T.C["ink_soft"] if label == "How sure we are" else T.C["aqua"]
+        out += (f'<div style="display:grid;grid-template-columns:150px 1fr 44px;gap:12px;align-items:center;margin:6px 0;{bold}font-size:13px">'
+                f'<span>{label}</span><span style="height:8px;border-radius:999px;background:rgba(11,31,24,.12);overflow:hidden">'
+                f'<i style="display:block;height:100%;width:{v * 100:.0f}%;background:{colour};border-radius:999px"></i></span>'
+                f'<span style="text-align:right;font-feature-settings:\'tnum\' 1">{v:.2f}</span></div>')
+    return out
 
 
-def _render_recommend(opp: dict) -> None:
-    pid          = opp.get("opportunity_id", "")
-    product      = html.escape(opp.get("opportunity_name", pid))
-    headline     = html.escape(opp.get("headline") or "")
-    # headline may not be in the contract — fall back to first reason_code phrase
-    if not headline:
-        rcs = opp.get("reason_codes") or []
-        headline = html.escape(rcs[0].get("phrase", "Worth exploring.")) if rcs else "Worth exploring."
-    why_now      = (opp.get("why_now") or {}).get("display", "")
-    reason_codes = opp.get("reason_codes") or []
-    impact       = opp.get("impact") or {}
-    explanation  = opp.get("explanation") or {}
-    next_action  = opp.get("next_action") or {}
-    data_as_of   = opp.get("data_as_of", "")
-
-    s = theme.STATUS["RECOMMEND"]
-
-    # ── Card open ────────────────────────────────────────────────────────────
-    st.markdown('<div class="gd-card gd-status--recommend">', unsafe_allow_html=True)
-
-    # Status pill + product tag + date
-    st.markdown(
-        f'<div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:10px;">'
-        f'<span class="gd-pill gd-status--recommend" role="status">'
-        f'{html.escape(s["glyph"])} {html.escape(s["label"])}</span>'
-        f'<span style="font-size:11px;font-family:monospace;background:#E3EFE9;'
-        f'padding:2px 8px;border-radius:4px;">{product}</span>'
-        + (f'<span style="font-size:11px;color:#8AA79A;margin-left:auto;">AS OF {html.escape(str(data_as_of))}</span>'
-           if data_as_of else "")
-        + f'</div>'
-        f'<h3 style="margin:0 0 8px;font-size:17px;line-height:1.4;">{headline}</h3>',
-        unsafe_allow_html=True,
-    )
-
-    # Why-now chip
-    if why_now:
-        st.markdown(
-            f'<div style="background:#E8F8FF;border:1px solid #22B8CF;border-radius:20px;'
-            f'padding:6px 14px;font-size:12px;display:inline-flex;align-items:center;'
-            f'gap:6px;margin-bottom:12px;">⏰ Why now: {html.escape(why_now)}</div>',
-            unsafe_allow_html=True,
-        )
-
-    # Evidence chips (reason_codes)
-    if reason_codes:
-        st.markdown(
-            '<p style="font-size:11px;font-weight:600;text-transform:uppercase;'
-            'letter-spacing:.05em;color:#8AA79A;margin:0 0 6px;">Why you\'re seeing this</p>',
-            unsafe_allow_html=True,
-        )
-        chips_html = ""
-        for rc in reason_codes:
-            src = rc.get("source", "")
-            is_declared = "declared" in src
-            icon = "👤" if is_declared else "🧾"
-            src_label = "You told us" if is_declared else "From your transactions"
-            display = html.escape(rc.get("display") or rc.get("phrase", ""))
-            date = html.escape(str(rc.get("observed_at", "")))
-            code = html.escape(rc.get("code", ""))
-            chips_html += (
-                f'<div style="background:#F1F8F4;border:1px solid #C8E6D4;border-radius:10px;'
-                f'padding:8px 12px;margin-bottom:6px;display:flex;gap:10px;align-items:flex-start;">'
-                f'<span>{icon}</span>'
-                f'<div style="min-width:0;">'
-                f'<div style="font-size:13px;">{display}</div>'
-                f'<div style="display:flex;gap:6px;margin-top:4px;">'
-                f'<span style="font-size:10px;font-family:monospace;background:#E3EFE9;'
-                f'padding:1px 5px;border-radius:3px;">{code}</span>'
-                f'<span style="font-size:10px;color:#8AA79A;">{src_label} · {date}</span>'
-                f'</div></div></div>'
-            )
-        st.markdown(chips_html, unsafe_allow_html=True)
-
-    # Three verdict badges
-    badges.render_badges(opp)
-
-    # Impact expander
-    imp_status = impact.get("status", "ESTIMATED")
-    if imp_status not in ("INSUFFICIENT_DATA", "NOT_APPLICABLE", "HIDDEN"):
-        family = (impact.get("metric_family") or "").lower()
-        with st.expander("Impact estimate", expanded=False):
-            if family == "paper":
-                # Paperless — show paper sheets and digital adoption separately, NEVER CO₂e
-                dig = opp.get("digital_adoption") or {}
-                col1, col2 = st.columns(2)
-                with col1:
-                    st.metric(
-                        "Paper sheets/year",
-                        int(impact.get("central") or impact.get("high") or 0),
-                        help=impact.get("display", ""),
-                    )
-                with col2:
-                    share = dig.get("digital_share", 0)
-                    st.metric("Digital adoption", f"{share:.0%}", help="Statements already digital")
+def _ladder(opp: dict, key: str) -> None:
+    lad = opp.get("ladder")
+    if not lad:
+        return
+    inp = lad["input"]
+    if inp["type"] == "number":
+        miles = st.number_input("Yearly mileage (miles a year)", min_value=0, max_value=100_000, step=100, value=None,
+                                placeholder=inp.get("placeholder", ""), key=f"{key}-miles",
+                                help="Your MOT certificate shows recent mileage.")
+        if st.button("Update my estimate", key=f"{key}-miles-go", type="primary" if opp["status"] == "ABSTAIN" else "secondary"):
+            if not miles:
+                st.error("Enter a yearly mileage between 1 and 100,000 miles.")
             else:
-                lo  = impact.get("low")
-                hi  = impact.get("high")
-                disp = impact.get("display", "")
-                st.markdown(
-                    f'<div style="background:#DDF8EA;border-radius:10px;padding:14px 16px;margin-bottom:8px;">'
-                    f'<div style="font-size:10px;font-family:monospace;color:#8AA79A;margin-bottom:4px;">ESTIMATE</div>'
-                    f'<div style="font-size:26px;font-weight:800;color:#0F7A55;line-height:1.2;">'
-                    f'{html.escape(disp)}</div>'
-                    f'</div>',
-                    unsafe_allow_html=True,
-                )
-            st.caption(f"**Formula:** {impact.get('formula','—')}")
-            st.caption(f"**Baseline:** {impact.get('baseline','—')} · **Horizon:** {impact.get('horizon','—')}")
-            refs = impact.get("factor_refs") or []
-            if refs:
-                st.caption(f"**Factor refs:** {', '.join(refs)}")
-            st.info("Estimate, not a guarantee.", icon=":material/info:")
+                r = client.ladder_mileage(int(miles))
+                T.render(f'<div class="gd-impact" style="background:#fff"><div class="gd-impact__l"><span>Your updated estimate</span><span class="gd-tag">Estimate</span></div>'
+                         f'<p class="gd-impact__kpi">{T.num(r["low"])} to {T.num(r["high"])} <small>kg CO₂e a year</small></p>'
+                         f'<p class="gd-muted" style="margin:0">{T.esc(r["bills"])}</p>{T.range_bar(r["low"], r["central"], r["high"], T.C["verdant"])}'
+                         f'<p class="gd-small gd-muted" style="margin:8px 0 0">Impact quality is now high. Estimate, not a guarantee.</p></div>')
+                st.caption("Indicative figure. The carbon engine confirms it once your mileage is saved.")
+    elif inp["type"] == "choice":
+        choice = st.radio(lad.get("question") or lad["prompt"], inp["options"], index=None, key=f"{key}-choice")
+        if choice is not None:
+            unsure = choice == inp["options"][-1] or "north" in choice.lower()
+            res = opp.get("ladder_result")
+            if unsure or not res:
+                T.banner('We\'ll keep this as "Need one thing" for now. A recent bill or a quick installer check would let us estimate it.', "warn")
+            else:
+                T.render(f'<div class="gd-impact" style="background:#fff"><div class="gd-impact__l"><span>Your estimate</span><span class="gd-tag">Estimate</span></div>'
+                         f'<p class="gd-impact__kpi">{T.num(res["low"])} to {T.num(res["high"])} <small>kg CO₂e a year</small></p>'
+                         f'<p class="gd-muted" style="margin:0">{T.esc(res["bills"])}</p>{T.range_bar(res["low"], res["central"], res["high"], T.C["verdant"])}'
+                         f'<p class="gd-small gd-muted" style="margin:8px 0 0">Impact quality is now {T.esc(res["quality"].lower())}.</p></div>')
+    else:
+        st.file_uploader("Upload a recent bill (PDF or photo)", type=["pdf", "png", "jpg"], key=f"{key}-upload",
+                         help="We read the yearly kWh only. The file is encrypted and never sent to the AI.")
 
-    # Claim-Check stamp
-    claim_stamp.render(explanation)
 
-    st.markdown("</div>", unsafe_allow_html=True)
+def render(doc: dict, opp: dict, key: str = "card") -> None:
+    status = opp["status"]
+    with st.container(key=f"gd-proof-{key}"):
+        T.render(f'<div class="gd-accent" style="background:{T.accent_for(status)}"></div>{T.card_header(opp)}')
 
-    # ── Action buttons (outside card) ────────────────────────────────────────
-    primary   = next_action.get("label")
-    secondary = next_action.get("secondary")
-    disclaimer = next_action.get("disclaimer", "Not a credit decision. Estimate, not a guarantee.")
+        if status == "RULED_OUT":
+            T.render(T.why_not(opp) + T.verdicts(opp))
+            st.caption("No action on this card. Products your data rules out are never recommended.")
+        else:
+            T.render(T.impact_block(opp))
+            if status == "REVIEW" and opp.get("review"):
+                rv = opp["review"]
+                T.render(f'<p style="margin:4px 0">{T.esc(rv["message"])}</p>')
+                ans = st.radio(rv["question"], rv["options"], index=None, key=f"{key}-review")
+                c1, c2 = st.columns(2)
+                if c1.button("Confirm", key=f"{key}-review-go", type="primary", disabled=ans is None):
+                    st.toast("Thanks. We'll re-run this card with your answer.")
+                if c2.button("Skip for now", key=f"{key}-review-skip"):
+                    st.toast("Skipped. The impact estimate stays hidden for now.")
+            T.render(T.verdicts(opp))
+            if opp.get("ladder"):
+                if status == "ABSTAIN":
+                    T.render(f'<div class="gd-ladder">{T.icon("gauge", 18)}<span>{T.esc(opp["ladder"]["prompt"])}</span></div>')
+                    _ladder(opp, key)
+                else:
+                    with st.expander(opp["ladder"]["prompt"]):
+                        _ladder(opp, key)
 
-    if primary:
-        if st.button(primary, key=f"cta_p_{pid}", type="primary", use_container_width=True):
-            st.info(f"'{primary}' — this would open the product flow in the full app.",
-                    icon=":material/open_in_new:")
-    if secondary:
-        if st.button(secondary, key=f"cta_s_{pid}", use_container_width=True):
-            st.info(f"'{secondary}' tapped.", icon=":material/open_in_new:")
+            T.render(T.claim_stamp(opp))
+            im = opp["impact"]
+            with st.expander("See the receipt"):
+                labels = ["Why you're seeing this"] + (["How we worked this out"] if im["status"] == "ESTIMATED" else []) + ["How sure we are", "What backs each sentence"]
+                parts = dict(zip(labels, st.tabs(labels)))
+                with parts["Why you're seeing this"]:
+                    T.render(T.evidence(opp))
+                if "How we worked this out" in parts:
+                    with parts["How we worked this out"]:
+                        rows = [("Formula", im.get("formula")), ("Baseline", im.get("baseline")), ("Time horizon", im.get("horizon")),
+                                ("Factor source", ", ".join(im.get("factor_refs") or []))]
+                        T.render("".join(f'<p style="margin:4px 0"><span class="gd-muted">{k}:</span> <b>{T.esc(v)}</b></p>' for k, v in rows if v))
+                        st.caption("Estimate, not a guarantee. Calculated by the carbon engine, never by the AI.")
+                with parts["How sure we are"]:
+                    T.render(_confidence_html(opp["confidence"]))
+                    st.caption("Likelihood is not creditworthiness, and it is not a credit decision.")
+                with parts["What backs each sentence"]:
+                    for sent in opp["explanation"]["sentences"]:
+                        tags = " ".join(f'<span class="gd-tag gd-tag--code">{T.esc(f)}</span>' for f in sent["fields"])
+                        T.render(f'<div style="padding:8px 0;border-top:1px solid var(--divider)">✓ {T.esc(sent["text"])}<div style="margin-top:4px">{tags}</div></div>')
 
-    st.markdown(
-        '<div style="text-align:center;margin-top:8px;">'
-        '<a href="#" style="color:#0F7A55;font-size:12px;">Talk to a person</a></div>',
-        unsafe_allow_html=True,
-    )
-    st.caption(disclaimer)
+            na = opp["next_action"]
+            if status in ("RECOMMEND",) and na.get("label"):
+                if st.button(na["label"], key=f"{key}-primary", type="primary", width="stretch"):
+                    st.toast("Opening the next step. Nothing is submitted without your confirmation.")
+                if na.get("secondary") and st.button(na["secondary"], key=f"{key}-secondary", width="stretch"):
+                    st.toast("Suitability check started: 3 to 5 questions.")
+            elif status == "SOFT_SURFACE":
+                st.button("Learn more", key=f"{key}-learn", width="stretch")
+        T.render('<p class="gd-disc" style="margin:8px 0 4px">Not a credit decision · Likelihood is not creditworthiness</p>')
+        c_help, c_fb = st.columns(2)
+        if c_help.button("Talk to a person", key=f"{key}-human", type="tertiary", icon=":material/chat:"):
+            st.toast("A person will call you back. Pick a time on the Help page.")
+        if status != "RULED_OUT":
+            with c_fb.popover("Not quite right?", width="stretch"):
+                st.caption("This changes when we show the card, never its numbers.")
+                for label, k in (("Not relevant", "nr"), ("This is wrong", "wr"), ("Remind me later", "rm")):
+                    if st.button(label, key=f"{key}-fb-{k}", width="stretch"):
+                        st.toast("Thanks. We've noted that.")

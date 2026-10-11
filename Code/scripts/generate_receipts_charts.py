@@ -51,7 +51,7 @@ def generate_confusion_matrix(out_dir):
     print("Generated confusion_matrix.png")
 
 if __name__ == "__main__":
-    out_dir = "/Users/aniketgoel/Desktop/hackathon/Code/out"
+    out_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "out")
     os.makedirs(out_dir, exist_ok=True)
     
     generate_tercile_brier_bars(out_dir)

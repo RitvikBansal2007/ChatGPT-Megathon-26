@@ -1,0 +1,6142 @@
+{
+  "mutations": [
+    {
+      "id": "SET_VEHICLE_BEV",
+      "label": "Set vehicle to EV",
+      "hint": "Vehicle record becomes battery electric; fuel spend stops."
+    },
+    {
+      "id": "REMOVE_MILEAGE",
+      "label": "Remove annual mileage",
+      "hint": "Yearly mileage becomes unknown."
+    },
+    {
+      "id": "REMOVE_ENERGY",
+      "label": "Remove energy data",
+      "hint": "Electricity and gas usage become unknown."
+    },
+    {
+      "id": "ADD_CONFLICT_FUEL",
+      "label": "Add conflicting signal",
+      "hint": "EV on record plus 3 months of fuel spend."
+    },
+    {
+      "id": "MAKE_STALE",
+      "label": "Make data stale",
+      "hint": "Shift every data timestamp back 200 days."
+    },
+    {
+      "id": "SET_RENTER",
+      "label": "Mark as renter",
+      "hint": "Home ownership becomes renting."
+    },
+    {
+      "id": "SELL_CAR",
+      "label": "Sell the car",
+      "hint": "No vehicle on record; fuel spend drops to zero."
+    }
+  ],
+  "results": {
+    "CUST-0001": {
+      "SET_VEHICLE_BEV": {
+        "mutations": [
+          "SET_VEHICLE_BEV"
+        ],
+        "before": {
+          "GP01": {
+            "status": "RECOMMEND",
+            "propensity": 0.82,
+            "eligibility": "NEEDS_VERIFICATION",
+            "rule": "GP01-V1",
+            "impact_status": "ESTIMATED",
+            "confidence": 0.85
+          },
+          "GP02": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.38,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "ESTIMATED",
+            "confidence": 0.85
+          },
+          "GP03": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.34,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "ESTIMATED",
+            "confidence": 0.85
+          },
+          "GP04": {
+            "status": "RECOMMEND",
+            "propensity": 0.71,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "PAPER",
+            "confidence": 0.85
+          }
+        },
+        "after": {
+          "GP01": {
+            "status": "RULED_OUT",
+            "propensity": 0.31,
+            "eligibility": "NOT_ELIGIBLE",
+            "rule": "GP01-R1",
+            "impact_status": "NOT_APPLICABLE",
+            "confidence": 0.85
+          },
+          "GP02": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.38,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "ESTIMATED",
+            "confidence": 0.85
+          },
+          "GP03": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.34,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "ESTIMATED",
+            "confidence": 0.85
+          },
+          "GP04": {
+            "status": "RECOMMEND",
+            "propensity": 0.71,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "PAPER",
+            "confidence": 0.85
+          }
+        },
+        "diff": [
+          {
+            "product": "GP01",
+            "field": "Status",
+            "from": "RECOMMEND",
+            "to": "RULED_OUT",
+            "cause": "Rule GP01-R1 fired: You already have an electric vehicle and no replacement need on record."
+          },
+          {
+            "product": "GP01",
+            "field": "Likelihood",
+            "from": "HIGH (0.82)",
+            "to": "LOW (0.31)",
+            "cause": "Rule GP01-R1 fired: You already have an electric vehicle and no replacement need on record."
+          },
+          {
+            "product": "GP01",
+            "field": "Eligibility",
+            "from": "NEEDS_VERIFICATION · GP01-V1",
+            "to": "NOT_ELIGIBLE · GP01-R1",
+            "cause": "Rule GP01-R1 fired: You already have an electric vehicle and no replacement need on record."
+          },
+          {
+            "product": "GP01",
+            "field": "Impact",
+            "from": "ESTIMATED",
+            "to": "NOT_APPLICABLE",
+            "cause": "Rule GP01-R1 fired: You already have an electric vehicle and no replacement need on record."
+          }
+        ],
+        "invariance_ok": true,
+        "elapsed_ms": 4.29
+      },
+      "REMOVE_MILEAGE": {
+        "mutations": [
+          "REMOVE_MILEAGE"
+        ],
+        "before": {
+          "GP01": {
+            "status": "RECOMMEND",
+            "propensity": 0.82,
+            "eligibility": "NEEDS_VERIFICATION",
+            "rule": "GP01-V1",
+            "impact_status": "ESTIMATED",
+            "confidence": 0.85
+          },
+          "GP02": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.38,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "ESTIMATED",
+            "confidence": 0.85
+          },
+          "GP03": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.34,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "ESTIMATED",
+            "confidence": 0.85
+          },
+          "GP04": {
+            "status": "RECOMMEND",
+            "propensity": 0.71,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "PAPER",
+            "confidence": 0.85
+          }
+        },
+        "after": {
+          "GP01": {
+            "status": "ABSTAIN",
+            "propensity": 0.82,
+            "eligibility": "NEEDS_VERIFICATION",
+            "rule": "GP01-V1",
+            "impact_status": "INSUFFICIENT_DATA",
+            "confidence": 0.73
+          },
+          "GP02": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.38,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "ESTIMATED",
+            "confidence": 0.85
+          },
+          "GP03": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.34,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "ESTIMATED",
+            "confidence": 0.85
+          },
+          "GP04": {
+            "status": "RECOMMEND",
+            "propensity": 0.71,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "PAPER",
+            "confidence": 0.85
+          }
+        },
+        "diff": [
+          {
+            "product": "GP01",
+            "field": "Status",
+            "from": "RECOMMEND",
+            "to": "ABSTAIN",
+            "cause": "Critical input missing: annual_mileage"
+          },
+          {
+            "product": "GP01",
+            "field": "Impact",
+            "from": "ESTIMATED",
+            "to": "INSUFFICIENT_DATA",
+            "cause": "Critical input missing: annual_mileage"
+          },
+          {
+            "product": "GP01",
+            "field": "Confidence",
+            "from": "0.85",
+            "to": "0.73",
+            "cause": "Critical input missing: annual_mileage"
+          }
+        ],
+        "invariance_ok": true,
+        "elapsed_ms": 0.29
+      },
+      "REMOVE_ENERGY": {
+        "mutations": [
+          "REMOVE_ENERGY"
+        ],
+        "before": {
+          "GP01": {
+            "status": "RECOMMEND",
+            "propensity": 0.82,
+            "eligibility": "NEEDS_VERIFICATION",
+            "rule": "GP01-V1",
+            "impact_status": "ESTIMATED",
+            "confidence": 0.85
+          },
+          "GP02": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.38,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "ESTIMATED",
+            "confidence": 0.85
+          },
+          "GP03": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.34,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "ESTIMATED",
+            "confidence": 0.85
+          },
+          "GP04": {
+            "status": "RECOMMEND",
+            "propensity": 0.71,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "PAPER",
+            "confidence": 0.85
+          }
+        },
+        "after": {
+          "GP01": {
+            "status": "RECOMMEND",
+            "propensity": 0.82,
+            "eligibility": "NEEDS_VERIFICATION",
+            "rule": "GP01-V1",
+            "impact_status": "ESTIMATED",
+            "confidence": 0.85
+          },
+          "GP02": {
+            "status": "ABSTAIN",
+            "propensity": 0.38,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "INSUFFICIENT_DATA",
+            "confidence": 0.73
+          },
+          "GP03": {
+            "status": "ABSTAIN",
+            "propensity": 0.34,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "INSUFFICIENT_DATA",
+            "confidence": 0.73
+          },
+          "GP04": {
+            "status": "RECOMMEND",
+            "propensity": 0.71,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "PAPER",
+            "confidence": 0.85
+          }
+        },
+        "diff": [
+          {
+            "product": "GP02",
+            "field": "Status",
+            "from": "SOFT_SURFACE",
+            "to": "ABSTAIN",
+            "cause": "Critical input missing: gas_kwh"
+          },
+          {
+            "product": "GP02",
+            "field": "Impact",
+            "from": "ESTIMATED",
+            "to": "INSUFFICIENT_DATA",
+            "cause": "Critical input missing: gas_kwh"
+          },
+          {
+            "product": "GP02",
+            "field": "Confidence",
+            "from": "0.85",
+            "to": "0.73",
+            "cause": "Critical input missing: gas_kwh"
+          },
+          {
+            "product": "GP03",
+            "field": "Status",
+            "from": "SOFT_SURFACE",
+            "to": "ABSTAIN",
+            "cause": "Critical input missing: electricity_kwh"
+          },
+          {
+            "product": "GP03",
+            "field": "Impact",
+            "from": "ESTIMATED",
+            "to": "INSUFFICIENT_DATA",
+            "cause": "Critical input missing: electricity_kwh"
+          },
+          {
+            "product": "GP03",
+            "field": "Confidence",
+            "from": "0.85",
+            "to": "0.73",
+            "cause": "Critical input missing: electricity_kwh"
+          }
+        ],
+        "invariance_ok": true,
+        "elapsed_ms": 0.3
+      },
+      "ADD_CONFLICT_FUEL": {
+        "mutations": [
+          "ADD_CONFLICT_FUEL"
+        ],
+        "before": {
+          "GP01": {
+            "status": "RECOMMEND",
+            "propensity": 0.82,
+            "eligibility": "NEEDS_VERIFICATION",
+            "rule": "GP01-V1",
+            "impact_status": "ESTIMATED",
+            "confidence": 0.85
+          },
+          "GP02": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.38,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "ESTIMATED",
+            "confidence": 0.85
+          },
+          "GP03": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.34,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "ESTIMATED",
+            "confidence": 0.85
+          },
+          "GP04": {
+            "status": "RECOMMEND",
+            "propensity": 0.71,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "PAPER",
+            "confidence": 0.85
+          }
+        },
+        "after": {
+          "GP01": {
+            "status": "REVIEW",
+            "propensity": 0.31,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "HIDDEN",
+            "confidence": 0.76
+          },
+          "GP02": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.38,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "ESTIMATED",
+            "confidence": 0.85
+          },
+          "GP03": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.34,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "ESTIMATED",
+            "confidence": 0.85
+          },
+          "GP04": {
+            "status": "RECOMMEND",
+            "propensity": 0.71,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "PAPER",
+            "confidence": 0.85
+          }
+        },
+        "diff": [
+          {
+            "product": "GP01",
+            "field": "Status",
+            "from": "RECOMMEND",
+            "to": "REVIEW",
+            "cause": "Conflict flag set: vehicle record says electric while fuel spend continues"
+          },
+          {
+            "product": "GP01",
+            "field": "Likelihood",
+            "from": "HIGH (0.82)",
+            "to": "LOW (0.31)",
+            "cause": "Conflict flag set: vehicle record says electric while fuel spend continues"
+          },
+          {
+            "product": "GP01",
+            "field": "Eligibility",
+            "from": "NEEDS_VERIFICATION · GP01-V1",
+            "to": "PASSED",
+            "cause": "Conflict flag set: vehicle record says electric while fuel spend continues"
+          },
+          {
+            "product": "GP01",
+            "field": "Impact",
+            "from": "ESTIMATED",
+            "to": "HIDDEN",
+            "cause": "Conflict flag set: vehicle record says electric while fuel spend continues"
+          },
+          {
+            "product": "GP01",
+            "field": "Confidence",
+            "from": "0.85",
+            "to": "0.76",
+            "cause": "Conflict flag set: vehicle record says electric while fuel spend continues"
+          }
+        ],
+        "invariance_ok": true,
+        "elapsed_ms": 0.17
+      },
+      "MAKE_STALE": {
+        "mutations": [
+          "MAKE_STALE"
+        ],
+        "before": {
+          "GP01": {
+            "status": "RECOMMEND",
+            "propensity": 0.82,
+            "eligibility": "NEEDS_VERIFICATION",
+            "rule": "GP01-V1",
+            "impact_status": "ESTIMATED",
+            "confidence": 0.85
+          },
+          "GP02": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.38,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "ESTIMATED",
+            "confidence": 0.85
+          },
+          "GP03": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.34,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "ESTIMATED",
+            "confidence": 0.85
+          },
+          "GP04": {
+            "status": "RECOMMEND",
+            "propensity": 0.71,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "PAPER",
+            "confidence": 0.85
+          }
+        },
+        "after": {
+          "GP01": {
+            "status": "ABSTAIN",
+            "propensity": 0.82,
+            "eligibility": "NEEDS_VERIFICATION",
+            "rule": "GP01-V1",
+            "impact_status": "INSUFFICIENT_DATA",
+            "confidence": 0.68
+          },
+          "GP02": {
+            "status": "ABSTAIN",
+            "propensity": 0.38,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "INSUFFICIENT_DATA",
+            "confidence": 0.68
+          },
+          "GP03": {
+            "status": "ABSTAIN",
+            "propensity": 0.34,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "INSUFFICIENT_DATA",
+            "confidence": 0.68
+          },
+          "GP04": {
+            "status": "ABSTAIN",
+            "propensity": 0.71,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "INSUFFICIENT_DATA",
+            "confidence": 0.68
+          }
+        },
+        "diff": [
+          {
+            "product": "GP01",
+            "field": "Status",
+            "from": "RECOMMEND",
+            "to": "ABSTAIN",
+            "cause": "Data older than 180 days: impact hidden until confirmed"
+          },
+          {
+            "product": "GP01",
+            "field": "Impact",
+            "from": "ESTIMATED",
+            "to": "INSUFFICIENT_DATA",
+            "cause": "Data older than 180 days: impact hidden until confirmed"
+          },
+          {
+            "product": "GP01",
+            "field": "Confidence",
+            "from": "0.85",
+            "to": "0.68",
+            "cause": "Data older than 180 days: impact hidden until confirmed"
+          },
+          {
+            "product": "GP02",
+            "field": "Status",
+            "from": "SOFT_SURFACE",
+            "to": "ABSTAIN",
+            "cause": "Data older than 180 days: impact hidden until confirmed"
+          },
+          {
+            "product": "GP02",
+            "field": "Impact",
+            "from": "ESTIMATED",
+            "to": "INSUFFICIENT_DATA",
+            "cause": "Data older than 180 days: impact hidden until confirmed"
+          },
+          {
+            "product": "GP02",
+            "field": "Confidence",
+            "from": "0.85",
+            "to": "0.68",
+            "cause": "Data older than 180 days: impact hidden until confirmed"
+          },
+          {
+            "product": "GP03",
+            "field": "Status",
+            "from": "SOFT_SURFACE",
+            "to": "ABSTAIN",
+            "cause": "Data older than 180 days: impact hidden until confirmed"
+          },
+          {
+            "product": "GP03",
+            "field": "Impact",
+            "from": "ESTIMATED",
+            "to": "INSUFFICIENT_DATA",
+            "cause": "Data older than 180 days: impact hidden until confirmed"
+          },
+          {
+            "product": "GP03",
+            "field": "Confidence",
+            "from": "0.85",
+            "to": "0.68",
+            "cause": "Data older than 180 days: impact hidden until confirmed"
+          },
+          {
+            "product": "GP04",
+            "field": "Status",
+            "from": "RECOMMEND",
+            "to": "ABSTAIN",
+            "cause": "Data older than 180 days: impact hidden until confirmed"
+          },
+          {
+            "product": "GP04",
+            "field": "Impact",
+            "from": "PAPER",
+            "to": "INSUFFICIENT_DATA",
+            "cause": "Data older than 180 days: impact hidden until confirmed"
+          },
+          {
+            "product": "GP04",
+            "field": "Confidence",
+            "from": "0.85",
+            "to": "0.68",
+            "cause": "Data older than 180 days: impact hidden until confirmed"
+          }
+        ],
+        "invariance_ok": true,
+        "elapsed_ms": 0.39
+      },
+      "SET_RENTER": {
+        "mutations": [
+          "SET_RENTER"
+        ],
+        "before": {
+          "GP01": {
+            "status": "RECOMMEND",
+            "propensity": 0.82,
+            "eligibility": "NEEDS_VERIFICATION",
+            "rule": "GP01-V1",
+            "impact_status": "ESTIMATED",
+            "confidence": 0.85
+          },
+          "GP02": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.38,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "ESTIMATED",
+            "confidence": 0.85
+          },
+          "GP03": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.34,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "ESTIMATED",
+            "confidence": 0.85
+          },
+          "GP04": {
+            "status": "RECOMMEND",
+            "propensity": 0.71,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "PAPER",
+            "confidence": 0.85
+          }
+        },
+        "after": {
+          "GP01": {
+            "status": "RECOMMEND",
+            "propensity": 0.82,
+            "eligibility": "NEEDS_VERIFICATION",
+            "rule": "GP01-V1",
+            "impact_status": "ESTIMATED",
+            "confidence": 0.85
+          },
+          "GP02": {
+            "status": "RULED_OUT",
+            "propensity": 0.15,
+            "eligibility": "NOT_ELIGIBLE",
+            "rule": "GP02-R1",
+            "impact_status": "NOT_APPLICABLE",
+            "confidence": 0.85
+          },
+          "GP03": {
+            "status": "RULED_OUT",
+            "propensity": 0.14,
+            "eligibility": "NOT_ELIGIBLE",
+            "rule": "GP03-R1",
+            "impact_status": "NOT_APPLICABLE",
+            "confidence": 0.85
+          },
+          "GP04": {
+            "status": "RECOMMEND",
+            "propensity": 0.71,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "PAPER",
+            "confidence": 0.85
+          }
+        },
+        "diff": [
+          {
+            "product": "GP02",
+            "field": "Status",
+            "from": "SOFT_SURFACE",
+            "to": "RULED_OUT",
+            "cause": "Rule GP02-R1 fired: Green Home Loan is for homeowners, and our records show you rent."
+          },
+          {
+            "product": "GP02",
+            "field": "Likelihood",
+            "from": "LOW (0.38)",
+            "to": "LOW (0.15)",
+            "cause": "Rule GP02-R1 fired: Green Home Loan is for homeowners, and our records show you rent."
+          },
+          {
+            "product": "GP02",
+            "field": "Eligibility",
+            "from": "PASSED",
+            "to": "NOT_ELIGIBLE · GP02-R1",
+            "cause": "Rule GP02-R1 fired: Green Home Loan is for homeowners, and our records show you rent."
+          },
+          {
+            "product": "GP02",
+            "field": "Impact",
+            "from": "ESTIMATED",
+            "to": "NOT_APPLICABLE",
+            "cause": "Rule GP02-R1 fired: Green Home Loan is for homeowners, and our records show you rent."
+          },
+          {
+            "product": "GP03",
+            "field": "Status",
+            "from": "SOFT_SURFACE",
+            "to": "RULED_OUT",
+            "cause": "Rule GP03-R1 fired: Solar Finance is for homeowners, and our records show you rent."
+          },
+          {
+            "product": "GP03",
+            "field": "Likelihood",
+            "from": "LOW (0.34)",
+            "to": "LOW (0.14)",
+            "cause": "Rule GP03-R1 fired: Solar Finance is for homeowners, and our records show you rent."
+          },
+          {
+            "product": "GP03",
+            "field": "Eligibility",
+            "from": "PASSED",
+            "to": "NOT_ELIGIBLE · GP03-R1",
+            "cause": "Rule GP03-R1 fired: Solar Finance is for homeowners, and our records show you rent."
+          },
+          {
+            "product": "GP03",
+            "field": "Impact",
+            "from": "ESTIMATED",
+            "to": "NOT_APPLICABLE",
+            "cause": "Rule GP03-R1 fired: Solar Finance is for homeowners, and our records show you rent."
+          }
+        ],
+        "invariance_ok": true,
+        "elapsed_ms": 0.92
+      },
+      "SELL_CAR": {
+        "mutations": [
+          "SELL_CAR"
+        ],
+        "before": {
+          "GP01": {
+            "status": "RECOMMEND",
+            "propensity": 0.82,
+            "eligibility": "NEEDS_VERIFICATION",
+            "rule": "GP01-V1",
+            "impact_status": "ESTIMATED",
+            "confidence": 0.85
+          },
+          "GP02": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.38,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "ESTIMATED",
+            "confidence": 0.85
+          },
+          "GP03": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.34,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "ESTIMATED",
+            "confidence": 0.85
+          },
+          "GP04": {
+            "status": "RECOMMEND",
+            "propensity": 0.71,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "PAPER",
+            "confidence": 0.85
+          }
+        },
+        "after": {
+          "GP01": {
+            "status": "RULED_OUT",
+            "propensity": 0.05,
+            "eligibility": "NOT_ELIGIBLE",
+            "rule": "GP01-R2",
+            "impact_status": "NOT_APPLICABLE",
+            "confidence": 0.85
+          },
+          "GP02": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.38,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "ESTIMATED",
+            "confidence": 0.85
+          },
+          "GP03": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.34,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "ESTIMATED",
+            "confidence": 0.85
+          },
+          "GP04": {
+            "status": "RECOMMEND",
+            "propensity": 0.71,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "PAPER",
+            "confidence": 0.85
+          }
+        },
+        "diff": [
+          {
+            "product": "GP01",
+            "field": "Status",
+            "from": "RECOMMEND",
+            "to": "RULED_OUT",
+            "cause": "Rule GP01-R2 fired: There's no vehicle on record for you right now."
+          },
+          {
+            "product": "GP01",
+            "field": "Likelihood",
+            "from": "HIGH (0.82)",
+            "to": "LOW (0.05)",
+            "cause": "Rule GP01-R2 fired: There's no vehicle on record for you right now."
+          },
+          {
+            "product": "GP01",
+            "field": "Eligibility",
+            "from": "NEEDS_VERIFICATION · GP01-V1",
+            "to": "NOT_ELIGIBLE · GP01-R2",
+            "cause": "Rule GP01-R2 fired: There's no vehicle on record for you right now."
+          },
+          {
+            "product": "GP01",
+            "field": "Impact",
+            "from": "ESTIMATED",
+            "to": "NOT_APPLICABLE",
+            "cause": "Rule GP01-R2 fired: There's no vehicle on record for you right now."
+          }
+        ],
+        "invariance_ok": true,
+        "elapsed_ms": 0.14
+      }
+    },
+    "CUST-0002": {
+      "SET_VEHICLE_BEV": {
+        "mutations": [
+          "SET_VEHICLE_BEV"
+        ],
+        "before": {
+          "GP01": {
+            "status": "REVIEW",
+            "propensity": 0.58,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "HIDDEN",
+            "confidence": 0.68
+          },
+          "GP02": {
+            "status": "ABSTAIN",
+            "propensity": 0.55,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "INSUFFICIENT_DATA",
+            "confidence": 0.65
+          },
+          "GP03": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.32,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "ESTIMATED",
+            "confidence": 0.78
+          },
+          "GP04": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.44,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "PAPER",
+            "confidence": 0.78
+          }
+        },
+        "after": {
+          "GP01": {
+            "status": "RULED_OUT",
+            "propensity": 0.58,
+            "eligibility": "NOT_ELIGIBLE",
+            "rule": "GP01-R1",
+            "impact_status": "NOT_APPLICABLE",
+            "confidence": 0.78
+          },
+          "GP02": {
+            "status": "ABSTAIN",
+            "propensity": 0.55,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "INSUFFICIENT_DATA",
+            "confidence": 0.65
+          },
+          "GP03": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.32,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "ESTIMATED",
+            "confidence": 0.78
+          },
+          "GP04": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.44,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "PAPER",
+            "confidence": 0.78
+          }
+        },
+        "diff": [
+          {
+            "product": "GP01",
+            "field": "Status",
+            "from": "REVIEW",
+            "to": "RULED_OUT",
+            "cause": "Rule GP01-R1 fired: You already have an electric vehicle and no replacement need on record."
+          },
+          {
+            "product": "GP01",
+            "field": "Eligibility",
+            "from": "PASSED",
+            "to": "NOT_ELIGIBLE · GP01-R1",
+            "cause": "Rule GP01-R1 fired: You already have an electric vehicle and no replacement need on record."
+          },
+          {
+            "product": "GP01",
+            "field": "Impact",
+            "from": "HIDDEN",
+            "to": "NOT_APPLICABLE",
+            "cause": "Rule GP01-R1 fired: You already have an electric vehicle and no replacement need on record."
+          },
+          {
+            "product": "GP01",
+            "field": "Confidence",
+            "from": "0.68",
+            "to": "0.78",
+            "cause": "Rule GP01-R1 fired: You already have an electric vehicle and no replacement need on record."
+          }
+        ],
+        "invariance_ok": true,
+        "elapsed_ms": 0.12
+      },
+      "REMOVE_MILEAGE": {
+        "mutations": [
+          "REMOVE_MILEAGE"
+        ],
+        "before": {
+          "GP01": {
+            "status": "REVIEW",
+            "propensity": 0.58,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "HIDDEN",
+            "confidence": 0.68
+          },
+          "GP02": {
+            "status": "ABSTAIN",
+            "propensity": 0.55,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "INSUFFICIENT_DATA",
+            "confidence": 0.65
+          },
+          "GP03": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.32,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "ESTIMATED",
+            "confidence": 0.78
+          },
+          "GP04": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.44,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "PAPER",
+            "confidence": 0.78
+          }
+        },
+        "after": {
+          "GP01": {
+            "status": "REVIEW",
+            "propensity": 0.58,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "HIDDEN",
+            "confidence": 0.49
+          },
+          "GP02": {
+            "status": "ABSTAIN",
+            "propensity": 0.55,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "INSUFFICIENT_DATA",
+            "confidence": 0.65
+          },
+          "GP03": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.32,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "ESTIMATED",
+            "confidence": 0.78
+          },
+          "GP04": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.44,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "PAPER",
+            "confidence": 0.78
+          }
+        },
+        "diff": [
+          {
+            "product": "GP01",
+            "field": "Confidence",
+            "from": "0.68",
+            "to": "0.49",
+            "cause": "Critical input missing: annual_mileage"
+          }
+        ],
+        "invariance_ok": true,
+        "elapsed_ms": 0.08
+      },
+      "REMOVE_ENERGY": {
+        "mutations": [
+          "REMOVE_ENERGY"
+        ],
+        "before": {
+          "GP01": {
+            "status": "REVIEW",
+            "propensity": 0.58,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "HIDDEN",
+            "confidence": 0.68
+          },
+          "GP02": {
+            "status": "ABSTAIN",
+            "propensity": 0.55,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "INSUFFICIENT_DATA",
+            "confidence": 0.65
+          },
+          "GP03": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.32,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "ESTIMATED",
+            "confidence": 0.78
+          },
+          "GP04": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.44,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "PAPER",
+            "confidence": 0.78
+          }
+        },
+        "after": {
+          "GP01": {
+            "status": "REVIEW",
+            "propensity": 0.58,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "HIDDEN",
+            "confidence": 0.68
+          },
+          "GP02": {
+            "status": "ABSTAIN",
+            "propensity": 0.55,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "INSUFFICIENT_DATA",
+            "confidence": 0.65
+          },
+          "GP03": {
+            "status": "ABSTAIN",
+            "propensity": 0.32,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "INSUFFICIENT_DATA",
+            "confidence": 0.65
+          },
+          "GP04": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.44,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "PAPER",
+            "confidence": 0.78
+          }
+        },
+        "diff": [
+          {
+            "product": "GP03",
+            "field": "Status",
+            "from": "SOFT_SURFACE",
+            "to": "ABSTAIN",
+            "cause": "Critical input missing: electricity_kwh"
+          },
+          {
+            "product": "GP03",
+            "field": "Impact",
+            "from": "ESTIMATED",
+            "to": "INSUFFICIENT_DATA",
+            "cause": "Critical input missing: electricity_kwh"
+          },
+          {
+            "product": "GP03",
+            "field": "Confidence",
+            "from": "0.78",
+            "to": "0.65",
+            "cause": "Critical input missing: electricity_kwh"
+          }
+        ],
+        "invariance_ok": true,
+        "elapsed_ms": 0.09
+      },
+      "ADD_CONFLICT_FUEL": {
+        "mutations": [
+          "ADD_CONFLICT_FUEL"
+        ],
+        "before": {
+          "GP01": {
+            "status": "REVIEW",
+            "propensity": 0.58,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "HIDDEN",
+            "confidence": 0.68
+          },
+          "GP02": {
+            "status": "ABSTAIN",
+            "propensity": 0.55,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "INSUFFICIENT_DATA",
+            "confidence": 0.65
+          },
+          "GP03": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.32,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "ESTIMATED",
+            "confidence": 0.78
+          },
+          "GP04": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.44,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "PAPER",
+            "confidence": 0.78
+          }
+        },
+        "after": {
+          "GP01": {
+            "status": "REVIEW",
+            "propensity": 0.58,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "HIDDEN",
+            "confidence": 0.68
+          },
+          "GP02": {
+            "status": "ABSTAIN",
+            "propensity": 0.55,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "INSUFFICIENT_DATA",
+            "confidence": 0.65
+          },
+          "GP03": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.32,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "ESTIMATED",
+            "confidence": 0.78
+          },
+          "GP04": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.44,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "PAPER",
+            "confidence": 0.78
+          }
+        },
+        "diff": [],
+        "invariance_ok": true,
+        "elapsed_ms": 0.08
+      },
+      "MAKE_STALE": {
+        "mutations": [
+          "MAKE_STALE"
+        ],
+        "before": {
+          "GP01": {
+            "status": "REVIEW",
+            "propensity": 0.58,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "HIDDEN",
+            "confidence": 0.68
+          },
+          "GP02": {
+            "status": "ABSTAIN",
+            "propensity": 0.55,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "INSUFFICIENT_DATA",
+            "confidence": 0.65
+          },
+          "GP03": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.32,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "ESTIMATED",
+            "confidence": 0.78
+          },
+          "GP04": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.44,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "PAPER",
+            "confidence": 0.78
+          }
+        },
+        "after": {
+          "GP01": {
+            "status": "REVIEW",
+            "propensity": 0.58,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "HIDDEN",
+            "confidence": 0.54
+          },
+          "GP02": {
+            "status": "ABSTAIN",
+            "propensity": 0.55,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "INSUFFICIENT_DATA",
+            "confidence": 0.52
+          },
+          "GP03": {
+            "status": "ABSTAIN",
+            "propensity": 0.32,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "INSUFFICIENT_DATA",
+            "confidence": 0.63
+          },
+          "GP04": {
+            "status": "ABSTAIN",
+            "propensity": 0.44,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "INSUFFICIENT_DATA",
+            "confidence": 0.63
+          }
+        },
+        "diff": [
+          {
+            "product": "GP01",
+            "field": "Confidence",
+            "from": "0.68",
+            "to": "0.54",
+            "cause": "Data older than 180 days: impact hidden until confirmed"
+          },
+          {
+            "product": "GP02",
+            "field": "Confidence",
+            "from": "0.65",
+            "to": "0.52",
+            "cause": "Data older than 180 days: impact hidden until confirmed"
+          },
+          {
+            "product": "GP03",
+            "field": "Status",
+            "from": "SOFT_SURFACE",
+            "to": "ABSTAIN",
+            "cause": "Data older than 180 days: impact hidden until confirmed"
+          },
+          {
+            "product": "GP03",
+            "field": "Impact",
+            "from": "ESTIMATED",
+            "to": "INSUFFICIENT_DATA",
+            "cause": "Data older than 180 days: impact hidden until confirmed"
+          },
+          {
+            "product": "GP03",
+            "field": "Confidence",
+            "from": "0.78",
+            "to": "0.63",
+            "cause": "Data older than 180 days: impact hidden until confirmed"
+          },
+          {
+            "product": "GP04",
+            "field": "Status",
+            "from": "SOFT_SURFACE",
+            "to": "ABSTAIN",
+            "cause": "Data older than 180 days: impact hidden until confirmed"
+          },
+          {
+            "product": "GP04",
+            "field": "Impact",
+            "from": "PAPER",
+            "to": "INSUFFICIENT_DATA",
+            "cause": "Data older than 180 days: impact hidden until confirmed"
+          },
+          {
+            "product": "GP04",
+            "field": "Confidence",
+            "from": "0.78",
+            "to": "0.63",
+            "cause": "Data older than 180 days: impact hidden until confirmed"
+          }
+        ],
+        "invariance_ok": true,
+        "elapsed_ms": 0.08
+      },
+      "SET_RENTER": {
+        "mutations": [
+          "SET_RENTER"
+        ],
+        "before": {
+          "GP01": {
+            "status": "REVIEW",
+            "propensity": 0.58,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "HIDDEN",
+            "confidence": 0.68
+          },
+          "GP02": {
+            "status": "ABSTAIN",
+            "propensity": 0.55,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "INSUFFICIENT_DATA",
+            "confidence": 0.65
+          },
+          "GP03": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.32,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "ESTIMATED",
+            "confidence": 0.78
+          },
+          "GP04": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.44,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "PAPER",
+            "confidence": 0.78
+          }
+        },
+        "after": {
+          "GP01": {
+            "status": "REVIEW",
+            "propensity": 0.58,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "HIDDEN",
+            "confidence": 0.68
+          },
+          "GP02": {
+            "status": "RULED_OUT",
+            "propensity": 0.22,
+            "eligibility": "NOT_ELIGIBLE",
+            "rule": "GP02-R1",
+            "impact_status": "NOT_APPLICABLE",
+            "confidence": 0.65
+          },
+          "GP03": {
+            "status": "RULED_OUT",
+            "propensity": 0.13,
+            "eligibility": "NOT_ELIGIBLE",
+            "rule": "GP03-R1",
+            "impact_status": "NOT_APPLICABLE",
+            "confidence": 0.78
+          },
+          "GP04": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.44,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "PAPER",
+            "confidence": 0.78
+          }
+        },
+        "diff": [
+          {
+            "product": "GP02",
+            "field": "Status",
+            "from": "ABSTAIN",
+            "to": "RULED_OUT",
+            "cause": "Rule GP02-R1 fired: Green Home Loan is for homeowners, and our records show you rent."
+          },
+          {
+            "product": "GP02",
+            "field": "Likelihood",
+            "from": "MEDIUM (0.55)",
+            "to": "LOW (0.22)",
+            "cause": "Rule GP02-R1 fired: Green Home Loan is for homeowners, and our records show you rent."
+          },
+          {
+            "product": "GP02",
+            "field": "Eligibility",
+            "from": "PASSED",
+            "to": "NOT_ELIGIBLE · GP02-R1",
+            "cause": "Rule GP02-R1 fired: Green Home Loan is for homeowners, and our records show you rent."
+          },
+          {
+            "product": "GP02",
+            "field": "Impact",
+            "from": "INSUFFICIENT_DATA",
+            "to": "NOT_APPLICABLE",
+            "cause": "Rule GP02-R1 fired: Green Home Loan is for homeowners, and our records show you rent."
+          },
+          {
+            "product": "GP03",
+            "field": "Status",
+            "from": "SOFT_SURFACE",
+            "to": "RULED_OUT",
+            "cause": "Rule GP03-R1 fired: Solar Finance is for homeowners, and our records show you rent."
+          },
+          {
+            "product": "GP03",
+            "field": "Likelihood",
+            "from": "LOW (0.32)",
+            "to": "LOW (0.13)",
+            "cause": "Rule GP03-R1 fired: Solar Finance is for homeowners, and our records show you rent."
+          },
+          {
+            "product": "GP03",
+            "field": "Eligibility",
+            "from": "PASSED",
+            "to": "NOT_ELIGIBLE · GP03-R1",
+            "cause": "Rule GP03-R1 fired: Solar Finance is for homeowners, and our records show you rent."
+          },
+          {
+            "product": "GP03",
+            "field": "Impact",
+            "from": "ESTIMATED",
+            "to": "NOT_APPLICABLE",
+            "cause": "Rule GP03-R1 fired: Solar Finance is for homeowners, and our records show you rent."
+          }
+        ],
+        "invariance_ok": true,
+        "elapsed_ms": 0.11
+      },
+      "SELL_CAR": {
+        "mutations": [
+          "SELL_CAR"
+        ],
+        "before": {
+          "GP01": {
+            "status": "REVIEW",
+            "propensity": 0.58,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "HIDDEN",
+            "confidence": 0.68
+          },
+          "GP02": {
+            "status": "ABSTAIN",
+            "propensity": 0.55,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "INSUFFICIENT_DATA",
+            "confidence": 0.65
+          },
+          "GP03": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.32,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "ESTIMATED",
+            "confidence": 0.78
+          },
+          "GP04": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.44,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "PAPER",
+            "confidence": 0.78
+          }
+        },
+        "after": {
+          "GP01": {
+            "status": "RULED_OUT",
+            "propensity": 0.05,
+            "eligibility": "NOT_ELIGIBLE",
+            "rule": "GP01-R2",
+            "impact_status": "NOT_APPLICABLE",
+            "confidence": 0.78
+          },
+          "GP02": {
+            "status": "ABSTAIN",
+            "propensity": 0.55,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "INSUFFICIENT_DATA",
+            "confidence": 0.65
+          },
+          "GP03": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.32,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "ESTIMATED",
+            "confidence": 0.78
+          },
+          "GP04": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.44,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "PAPER",
+            "confidence": 0.78
+          }
+        },
+        "diff": [
+          {
+            "product": "GP01",
+            "field": "Status",
+            "from": "REVIEW",
+            "to": "RULED_OUT",
+            "cause": "Rule GP01-R2 fired: There's no vehicle on record for you right now."
+          },
+          {
+            "product": "GP01",
+            "field": "Likelihood",
+            "from": "MEDIUM (0.58)",
+            "to": "LOW (0.05)",
+            "cause": "Rule GP01-R2 fired: There's no vehicle on record for you right now."
+          },
+          {
+            "product": "GP01",
+            "field": "Eligibility",
+            "from": "PASSED",
+            "to": "NOT_ELIGIBLE · GP01-R2",
+            "cause": "Rule GP01-R2 fired: There's no vehicle on record for you right now."
+          },
+          {
+            "product": "GP01",
+            "field": "Impact",
+            "from": "HIDDEN",
+            "to": "NOT_APPLICABLE",
+            "cause": "Rule GP01-R2 fired: There's no vehicle on record for you right now."
+          },
+          {
+            "product": "GP01",
+            "field": "Confidence",
+            "from": "0.68",
+            "to": "0.78",
+            "cause": "Rule GP01-R2 fired: There's no vehicle on record for you right now."
+          }
+        ],
+        "invariance_ok": true,
+        "elapsed_ms": 0.08
+      }
+    },
+    "CUST-0003": {
+      "SET_VEHICLE_BEV": {
+        "mutations": [
+          "SET_VEHICLE_BEV"
+        ],
+        "before": {
+          "GP01": {
+            "status": "RULED_OUT",
+            "propensity": 0.12,
+            "eligibility": "NOT_ELIGIBLE",
+            "rule": "GP01-R1",
+            "impact_status": "NOT_APPLICABLE",
+            "confidence": 0.91
+          },
+          "GP02": {
+            "status": "RULED_OUT",
+            "propensity": 0.2,
+            "eligibility": "NOT_ELIGIBLE",
+            "rule": "GP02-R2",
+            "impact_status": "NOT_APPLICABLE",
+            "confidence": 0.91
+          },
+          "GP03": {
+            "status": "RULED_OUT",
+            "propensity": 0.08,
+            "eligibility": "NOT_ELIGIBLE",
+            "rule": "GP03-R2",
+            "impact_status": "NOT_APPLICABLE",
+            "confidence": 0.91
+          },
+          "GP04": {
+            "status": "RULED_OUT",
+            "propensity": 0.05,
+            "eligibility": "NOT_ELIGIBLE",
+            "rule": "GP04-R1",
+            "impact_status": "NOT_APPLICABLE",
+            "confidence": 0.91
+          }
+        },
+        "after": {
+          "GP01": {
+            "status": "RULED_OUT",
+            "propensity": 0.12,
+            "eligibility": "NOT_ELIGIBLE",
+            "rule": "GP01-R1",
+            "impact_status": "NOT_APPLICABLE",
+            "confidence": 0.91
+          },
+          "GP02": {
+            "status": "RULED_OUT",
+            "propensity": 0.2,
+            "eligibility": "NOT_ELIGIBLE",
+            "rule": "GP02-R2",
+            "impact_status": "NOT_APPLICABLE",
+            "confidence": 0.91
+          },
+          "GP03": {
+            "status": "RULED_OUT",
+            "propensity": 0.08,
+            "eligibility": "NOT_ELIGIBLE",
+            "rule": "GP03-R2",
+            "impact_status": "NOT_APPLICABLE",
+            "confidence": 0.91
+          },
+          "GP04": {
+            "status": "RULED_OUT",
+            "propensity": 0.05,
+            "eligibility": "NOT_ELIGIBLE",
+            "rule": "GP04-R1",
+            "impact_status": "NOT_APPLICABLE",
+            "confidence": 0.91
+          }
+        },
+        "diff": [],
+        "invariance_ok": true,
+        "elapsed_ms": 0.08
+      },
+      "REMOVE_MILEAGE": {
+        "mutations": [
+          "REMOVE_MILEAGE"
+        ],
+        "before": {
+          "GP01": {
+            "status": "RULED_OUT",
+            "propensity": 0.12,
+            "eligibility": "NOT_ELIGIBLE",
+            "rule": "GP01-R1",
+            "impact_status": "NOT_APPLICABLE",
+            "confidence": 0.91
+          },
+          "GP02": {
+            "status": "RULED_OUT",
+            "propensity": 0.2,
+            "eligibility": "NOT_ELIGIBLE",
+            "rule": "GP02-R2",
+            "impact_status": "NOT_APPLICABLE",
+            "confidence": 0.91
+          },
+          "GP03": {
+            "status": "RULED_OUT",
+            "propensity": 0.08,
+            "eligibility": "NOT_ELIGIBLE",
+            "rule": "GP03-R2",
+            "impact_status": "NOT_APPLICABLE",
+            "confidence": 0.91
+          },
+          "GP04": {
+            "status": "RULED_OUT",
+            "propensity": 0.05,
+            "eligibility": "NOT_ELIGIBLE",
+            "rule": "GP04-R1",
+            "impact_status": "NOT_APPLICABLE",
+            "confidence": 0.91
+          }
+        },
+        "after": {
+          "GP01": {
+            "status": "RULED_OUT",
+            "propensity": 0.12,
+            "eligibility": "NOT_ELIGIBLE",
+            "rule": "GP01-R1",
+            "impact_status": "NOT_APPLICABLE",
+            "confidence": 0.79
+          },
+          "GP02": {
+            "status": "RULED_OUT",
+            "propensity": 0.2,
+            "eligibility": "NOT_ELIGIBLE",
+            "rule": "GP02-R2",
+            "impact_status": "NOT_APPLICABLE",
+            "confidence": 0.91
+          },
+          "GP03": {
+            "status": "RULED_OUT",
+            "propensity": 0.08,
+            "eligibility": "NOT_ELIGIBLE",
+            "rule": "GP03-R2",
+            "impact_status": "NOT_APPLICABLE",
+            "confidence": 0.91
+          },
+          "GP04": {
+            "status": "RULED_OUT",
+            "propensity": 0.05,
+            "eligibility": "NOT_ELIGIBLE",
+            "rule": "GP04-R1",
+            "impact_status": "NOT_APPLICABLE",
+            "confidence": 0.91
+          }
+        },
+        "diff": [
+          {
+            "product": "GP01",
+            "field": "Confidence",
+            "from": "0.91",
+            "to": "0.79",
+            "cause": "Critical input missing: annual_mileage"
+          }
+        ],
+        "invariance_ok": true,
+        "elapsed_ms": 0.12
+      },
+      "REMOVE_ENERGY": {
+        "mutations": [
+          "REMOVE_ENERGY"
+        ],
+        "before": {
+          "GP01": {
+            "status": "RULED_OUT",
+            "propensity": 0.12,
+            "eligibility": "NOT_ELIGIBLE",
+            "rule": "GP01-R1",
+            "impact_status": "NOT_APPLICABLE",
+            "confidence": 0.91
+          },
+          "GP02": {
+            "status": "RULED_OUT",
+            "propensity": 0.2,
+            "eligibility": "NOT_ELIGIBLE",
+            "rule": "GP02-R2",
+            "impact_status": "NOT_APPLICABLE",
+            "confidence": 0.91
+          },
+          "GP03": {
+            "status": "RULED_OUT",
+            "propensity": 0.08,
+            "eligibility": "NOT_ELIGIBLE",
+            "rule": "GP03-R2",
+            "impact_status": "NOT_APPLICABLE",
+            "confidence": 0.91
+          },
+          "GP04": {
+            "status": "RULED_OUT",
+            "propensity": 0.05,
+            "eligibility": "NOT_ELIGIBLE",
+            "rule": "GP04-R1",
+            "impact_status": "NOT_APPLICABLE",
+            "confidence": 0.91
+          }
+        },
+        "after": {
+          "GP01": {
+            "status": "RULED_OUT",
+            "propensity": 0.12,
+            "eligibility": "NOT_ELIGIBLE",
+            "rule": "GP01-R1",
+            "impact_status": "NOT_APPLICABLE",
+            "confidence": 0.91
+          },
+          "GP02": {
+            "status": "RULED_OUT",
+            "propensity": 0.2,
+            "eligibility": "NOT_ELIGIBLE",
+            "rule": "GP02-R2",
+            "impact_status": "NOT_APPLICABLE",
+            "confidence": 0.79
+          },
+          "GP03": {
+            "status": "RULED_OUT",
+            "propensity": 0.08,
+            "eligibility": "NOT_ELIGIBLE",
+            "rule": "GP03-R2",
+            "impact_status": "NOT_APPLICABLE",
+            "confidence": 0.79
+          },
+          "GP04": {
+            "status": "RULED_OUT",
+            "propensity": 0.05,
+            "eligibility": "NOT_ELIGIBLE",
+            "rule": "GP04-R1",
+            "impact_status": "NOT_APPLICABLE",
+            "confidence": 0.91
+          }
+        },
+        "diff": [
+          {
+            "product": "GP02",
+            "field": "Confidence",
+            "from": "0.91",
+            "to": "0.79",
+            "cause": "Critical input missing: gas_kwh"
+          },
+          {
+            "product": "GP03",
+            "field": "Confidence",
+            "from": "0.91",
+            "to": "0.79",
+            "cause": "Critical input missing: electricity_kwh"
+          }
+        ],
+        "invariance_ok": true,
+        "elapsed_ms": 0.07
+      },
+      "ADD_CONFLICT_FUEL": {
+        "mutations": [
+          "ADD_CONFLICT_FUEL"
+        ],
+        "before": {
+          "GP01": {
+            "status": "RULED_OUT",
+            "propensity": 0.12,
+            "eligibility": "NOT_ELIGIBLE",
+            "rule": "GP01-R1",
+            "impact_status": "NOT_APPLICABLE",
+            "confidence": 0.91
+          },
+          "GP02": {
+            "status": "RULED_OUT",
+            "propensity": 0.2,
+            "eligibility": "NOT_ELIGIBLE",
+            "rule": "GP02-R2",
+            "impact_status": "NOT_APPLICABLE",
+            "confidence": 0.91
+          },
+          "GP03": {
+            "status": "RULED_OUT",
+            "propensity": 0.08,
+            "eligibility": "NOT_ELIGIBLE",
+            "rule": "GP03-R2",
+            "impact_status": "NOT_APPLICABLE",
+            "confidence": 0.91
+          },
+          "GP04": {
+            "status": "RULED_OUT",
+            "propensity": 0.05,
+            "eligibility": "NOT_ELIGIBLE",
+            "rule": "GP04-R1",
+            "impact_status": "NOT_APPLICABLE",
+            "confidence": 0.91
+          }
+        },
+        "after": {
+          "GP01": {
+            "status": "REVIEW",
+            "propensity": 0.12,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "HIDDEN",
+            "confidence": 0.82
+          },
+          "GP02": {
+            "status": "RULED_OUT",
+            "propensity": 0.2,
+            "eligibility": "NOT_ELIGIBLE",
+            "rule": "GP02-R2",
+            "impact_status": "NOT_APPLICABLE",
+            "confidence": 0.91
+          },
+          "GP03": {
+            "status": "RULED_OUT",
+            "propensity": 0.08,
+            "eligibility": "NOT_ELIGIBLE",
+            "rule": "GP03-R2",
+            "impact_status": "NOT_APPLICABLE",
+            "confidence": 0.91
+          },
+          "GP04": {
+            "status": "RULED_OUT",
+            "propensity": 0.05,
+            "eligibility": "NOT_ELIGIBLE",
+            "rule": "GP04-R1",
+            "impact_status": "NOT_APPLICABLE",
+            "confidence": 0.91
+          }
+        },
+        "diff": [
+          {
+            "product": "GP01",
+            "field": "Status",
+            "from": "RULED_OUT",
+            "to": "REVIEW",
+            "cause": "Conflict flag set: vehicle record says electric while fuel spend continues"
+          },
+          {
+            "product": "GP01",
+            "field": "Eligibility",
+            "from": "NOT_ELIGIBLE · GP01-R1",
+            "to": "PASSED",
+            "cause": "Conflict flag set: vehicle record says electric while fuel spend continues"
+          },
+          {
+            "product": "GP01",
+            "field": "Impact",
+            "from": "NOT_APPLICABLE",
+            "to": "HIDDEN",
+            "cause": "Conflict flag set: vehicle record says electric while fuel spend continues"
+          },
+          {
+            "product": "GP01",
+            "field": "Confidence",
+            "from": "0.91",
+            "to": "0.82",
+            "cause": "Conflict flag set: vehicle record says electric while fuel spend continues"
+          }
+        ],
+        "invariance_ok": true,
+        "elapsed_ms": 0.07
+      },
+      "MAKE_STALE": {
+        "mutations": [
+          "MAKE_STALE"
+        ],
+        "before": {
+          "GP01": {
+            "status": "RULED_OUT",
+            "propensity": 0.12,
+            "eligibility": "NOT_ELIGIBLE",
+            "rule": "GP01-R1",
+            "impact_status": "NOT_APPLICABLE",
+            "confidence": 0.91
+          },
+          "GP02": {
+            "status": "RULED_OUT",
+            "propensity": 0.2,
+            "eligibility": "NOT_ELIGIBLE",
+            "rule": "GP02-R2",
+            "impact_status": "NOT_APPLICABLE",
+            "confidence": 0.91
+          },
+          "GP03": {
+            "status": "RULED_OUT",
+            "propensity": 0.08,
+            "eligibility": "NOT_ELIGIBLE",
+            "rule": "GP03-R2",
+            "impact_status": "NOT_APPLICABLE",
+            "confidence": 0.91
+          },
+          "GP04": {
+            "status": "RULED_OUT",
+            "propensity": 0.05,
+            "eligibility": "NOT_ELIGIBLE",
+            "rule": "GP04-R1",
+            "impact_status": "NOT_APPLICABLE",
+            "confidence": 0.91
+          }
+        },
+        "after": {
+          "GP01": {
+            "status": "RULED_OUT",
+            "propensity": 0.12,
+            "eligibility": "NOT_ELIGIBLE",
+            "rule": "GP01-R1",
+            "impact_status": "NOT_APPLICABLE",
+            "confidence": 0.72
+          },
+          "GP02": {
+            "status": "RULED_OUT",
+            "propensity": 0.2,
+            "eligibility": "NOT_ELIGIBLE",
+            "rule": "GP02-R2",
+            "impact_status": "NOT_APPLICABLE",
+            "confidence": 0.72
+          },
+          "GP03": {
+            "status": "RULED_OUT",
+            "propensity": 0.08,
+            "eligibility": "NOT_ELIGIBLE",
+            "rule": "GP03-R2",
+            "impact_status": "NOT_APPLICABLE",
+            "confidence": 0.72
+          },
+          "GP04": {
+            "status": "RULED_OUT",
+            "propensity": 0.05,
+            "eligibility": "NOT_ELIGIBLE",
+            "rule": "GP04-R1",
+            "impact_status": "NOT_APPLICABLE",
+            "confidence": 0.72
+          }
+        },
+        "diff": [
+          {
+            "product": "GP01",
+            "field": "Confidence",
+            "from": "0.91",
+            "to": "0.72",
+            "cause": "Data older than 180 days: impact hidden until confirmed"
+          },
+          {
+            "product": "GP02",
+            "field": "Confidence",
+            "from": "0.91",
+            "to": "0.72",
+            "cause": "Data older than 180 days: impact hidden until confirmed"
+          },
+          {
+            "product": "GP03",
+            "field": "Confidence",
+            "from": "0.91",
+            "to": "0.72",
+            "cause": "Data older than 180 days: impact hidden until confirmed"
+          },
+          {
+            "product": "GP04",
+            "field": "Confidence",
+            "from": "0.91",
+            "to": "0.72",
+            "cause": "Data older than 180 days: impact hidden until confirmed"
+          }
+        ],
+        "invariance_ok": true,
+        "elapsed_ms": 0.07
+      },
+      "SET_RENTER": {
+        "mutations": [
+          "SET_RENTER"
+        ],
+        "before": {
+          "GP01": {
+            "status": "RULED_OUT",
+            "propensity": 0.12,
+            "eligibility": "NOT_ELIGIBLE",
+            "rule": "GP01-R1",
+            "impact_status": "NOT_APPLICABLE",
+            "confidence": 0.91
+          },
+          "GP02": {
+            "status": "RULED_OUT",
+            "propensity": 0.2,
+            "eligibility": "NOT_ELIGIBLE",
+            "rule": "GP02-R2",
+            "impact_status": "NOT_APPLICABLE",
+            "confidence": 0.91
+          },
+          "GP03": {
+            "status": "RULED_OUT",
+            "propensity": 0.08,
+            "eligibility": "NOT_ELIGIBLE",
+            "rule": "GP03-R2",
+            "impact_status": "NOT_APPLICABLE",
+            "confidence": 0.91
+          },
+          "GP04": {
+            "status": "RULED_OUT",
+            "propensity": 0.05,
+            "eligibility": "NOT_ELIGIBLE",
+            "rule": "GP04-R1",
+            "impact_status": "NOT_APPLICABLE",
+            "confidence": 0.91
+          }
+        },
+        "after": {
+          "GP01": {
+            "status": "RULED_OUT",
+            "propensity": 0.12,
+            "eligibility": "NOT_ELIGIBLE",
+            "rule": "GP01-R1",
+            "impact_status": "NOT_APPLICABLE",
+            "confidence": 0.91
+          },
+          "GP02": {
+            "status": "RULED_OUT",
+            "propensity": 0.08,
+            "eligibility": "NOT_ELIGIBLE",
+            "rule": "GP02-R1",
+            "impact_status": "NOT_APPLICABLE",
+            "confidence": 0.91
+          },
+          "GP03": {
+            "status": "RULED_OUT",
+            "propensity": 0.03,
+            "eligibility": "NOT_ELIGIBLE",
+            "rule": "GP03-R1",
+            "impact_status": "NOT_APPLICABLE",
+            "confidence": 0.91
+          },
+          "GP04": {
+            "status": "RULED_OUT",
+            "propensity": 0.05,
+            "eligibility": "NOT_ELIGIBLE",
+            "rule": "GP04-R1",
+            "impact_status": "NOT_APPLICABLE",
+            "confidence": 0.91
+          }
+        },
+        "diff": [
+          {
+            "product": "GP02",
+            "field": "Likelihood",
+            "from": "LOW (0.20)",
+            "to": "LOW (0.08)",
+            "cause": "Rule GP02-R1 fired: Green Home Loan is for homeowners, and our records show you rent."
+          },
+          {
+            "product": "GP02",
+            "field": "Eligibility",
+            "from": "NOT_ELIGIBLE · GP02-R2",
+            "to": "NOT_ELIGIBLE · GP02-R1",
+            "cause": "Rule GP02-R1 fired: Green Home Loan is for homeowners, and our records show you rent."
+          },
+          {
+            "product": "GP03",
+            "field": "Likelihood",
+            "from": "LOW (0.08)",
+            "to": "LOW (0.03)",
+            "cause": "Rule GP03-R1 fired: Solar Finance is for homeowners, and our records show you rent."
+          },
+          {
+            "product": "GP03",
+            "field": "Eligibility",
+            "from": "NOT_ELIGIBLE · GP03-R2",
+            "to": "NOT_ELIGIBLE · GP03-R1",
+            "cause": "Rule GP03-R1 fired: Solar Finance is for homeowners, and our records show you rent."
+          }
+        ],
+        "invariance_ok": true,
+        "elapsed_ms": 0.09
+      },
+      "SELL_CAR": {
+        "mutations": [
+          "SELL_CAR"
+        ],
+        "before": {
+          "GP01": {
+            "status": "RULED_OUT",
+            "propensity": 0.12,
+            "eligibility": "NOT_ELIGIBLE",
+            "rule": "GP01-R1",
+            "impact_status": "NOT_APPLICABLE",
+            "confidence": 0.91
+          },
+          "GP02": {
+            "status": "RULED_OUT",
+            "propensity": 0.2,
+            "eligibility": "NOT_ELIGIBLE",
+            "rule": "GP02-R2",
+            "impact_status": "NOT_APPLICABLE",
+            "confidence": 0.91
+          },
+          "GP03": {
+            "status": "RULED_OUT",
+            "propensity": 0.08,
+            "eligibility": "NOT_ELIGIBLE",
+            "rule": "GP03-R2",
+            "impact_status": "NOT_APPLICABLE",
+            "confidence": 0.91
+          },
+          "GP04": {
+            "status": "RULED_OUT",
+            "propensity": 0.05,
+            "eligibility": "NOT_ELIGIBLE",
+            "rule": "GP04-R1",
+            "impact_status": "NOT_APPLICABLE",
+            "confidence": 0.91
+          }
+        },
+        "after": {
+          "GP01": {
+            "status": "RULED_OUT",
+            "propensity": 0.05,
+            "eligibility": "NOT_ELIGIBLE",
+            "rule": "GP01-R2",
+            "impact_status": "NOT_APPLICABLE",
+            "confidence": 0.91
+          },
+          "GP02": {
+            "status": "RULED_OUT",
+            "propensity": 0.2,
+            "eligibility": "NOT_ELIGIBLE",
+            "rule": "GP02-R2",
+            "impact_status": "NOT_APPLICABLE",
+            "confidence": 0.91
+          },
+          "GP03": {
+            "status": "RULED_OUT",
+            "propensity": 0.08,
+            "eligibility": "NOT_ELIGIBLE",
+            "rule": "GP03-R2",
+            "impact_status": "NOT_APPLICABLE",
+            "confidence": 0.91
+          },
+          "GP04": {
+            "status": "RULED_OUT",
+            "propensity": 0.05,
+            "eligibility": "NOT_ELIGIBLE",
+            "rule": "GP04-R1",
+            "impact_status": "NOT_APPLICABLE",
+            "confidence": 0.91
+          }
+        },
+        "diff": [
+          {
+            "product": "GP01",
+            "field": "Likelihood",
+            "from": "LOW (0.12)",
+            "to": "LOW (0.05)",
+            "cause": "Rule GP01-R2 fired: There's no vehicle on record for you right now."
+          },
+          {
+            "product": "GP01",
+            "field": "Eligibility",
+            "from": "NOT_ELIGIBLE · GP01-R1",
+            "to": "NOT_ELIGIBLE · GP01-R2",
+            "cause": "Rule GP01-R2 fired: There's no vehicle on record for you right now."
+          }
+        ],
+        "invariance_ok": true,
+        "elapsed_ms": 0.07
+      }
+    },
+    "CUST-0004": {
+      "SET_VEHICLE_BEV": {
+        "mutations": [
+          "SET_VEHICLE_BEV"
+        ],
+        "before": {
+          "GP01": {
+            "status": "ABSTAIN",
+            "propensity": 0.47,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "INSUFFICIENT_DATA",
+            "confidence": 0.34
+          },
+          "GP02": {
+            "status": "ABSTAIN",
+            "propensity": 0.41,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "INSUFFICIENT_DATA",
+            "confidence": 0.34
+          },
+          "GP03": {
+            "status": "ABSTAIN",
+            "propensity": 0.33,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "INSUFFICIENT_DATA",
+            "confidence": 0.34
+          },
+          "GP04": {
+            "status": "RECOMMEND",
+            "propensity": 0.76,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "PAPER",
+            "confidence": 0.79
+          }
+        },
+        "after": {
+          "GP01": {
+            "status": "RULED_OUT",
+            "propensity": 0.18,
+            "eligibility": "NOT_ELIGIBLE",
+            "rule": "GP01-R1",
+            "impact_status": "NOT_APPLICABLE",
+            "confidence": 0.34
+          },
+          "GP02": {
+            "status": "ABSTAIN",
+            "propensity": 0.41,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "INSUFFICIENT_DATA",
+            "confidence": 0.34
+          },
+          "GP03": {
+            "status": "ABSTAIN",
+            "propensity": 0.33,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "INSUFFICIENT_DATA",
+            "confidence": 0.34
+          },
+          "GP04": {
+            "status": "RECOMMEND",
+            "propensity": 0.76,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "PAPER",
+            "confidence": 0.79
+          }
+        },
+        "diff": [
+          {
+            "product": "GP01",
+            "field": "Status",
+            "from": "ABSTAIN",
+            "to": "RULED_OUT",
+            "cause": "Rule GP01-R1 fired: You already have an electric vehicle and no replacement need on record."
+          },
+          {
+            "product": "GP01",
+            "field": "Likelihood",
+            "from": "MEDIUM (0.47)",
+            "to": "LOW (0.18)",
+            "cause": "Rule GP01-R1 fired: You already have an electric vehicle and no replacement need on record."
+          },
+          {
+            "product": "GP01",
+            "field": "Eligibility",
+            "from": "PASSED",
+            "to": "NOT_ELIGIBLE · GP01-R1",
+            "cause": "Rule GP01-R1 fired: You already have an electric vehicle and no replacement need on record."
+          },
+          {
+            "product": "GP01",
+            "field": "Impact",
+            "from": "INSUFFICIENT_DATA",
+            "to": "NOT_APPLICABLE",
+            "cause": "Rule GP01-R1 fired: You already have an electric vehicle and no replacement need on record."
+          }
+        ],
+        "invariance_ok": true,
+        "elapsed_ms": 0.13
+      },
+      "REMOVE_MILEAGE": {
+        "mutations": [
+          "REMOVE_MILEAGE"
+        ],
+        "before": {
+          "GP01": {
+            "status": "ABSTAIN",
+            "propensity": 0.47,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "INSUFFICIENT_DATA",
+            "confidence": 0.34
+          },
+          "GP02": {
+            "status": "ABSTAIN",
+            "propensity": 0.41,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "INSUFFICIENT_DATA",
+            "confidence": 0.34
+          },
+          "GP03": {
+            "status": "ABSTAIN",
+            "propensity": 0.33,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "INSUFFICIENT_DATA",
+            "confidence": 0.34
+          },
+          "GP04": {
+            "status": "RECOMMEND",
+            "propensity": 0.76,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "PAPER",
+            "confidence": 0.79
+          }
+        },
+        "after": {
+          "GP01": {
+            "status": "ABSTAIN",
+            "propensity": 0.47,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "INSUFFICIENT_DATA",
+            "confidence": 0.34
+          },
+          "GP02": {
+            "status": "ABSTAIN",
+            "propensity": 0.41,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "INSUFFICIENT_DATA",
+            "confidence": 0.34
+          },
+          "GP03": {
+            "status": "ABSTAIN",
+            "propensity": 0.33,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "INSUFFICIENT_DATA",
+            "confidence": 0.34
+          },
+          "GP04": {
+            "status": "RECOMMEND",
+            "propensity": 0.76,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "PAPER",
+            "confidence": 0.79
+          }
+        },
+        "diff": [],
+        "invariance_ok": true,
+        "elapsed_ms": 0.64
+      },
+      "REMOVE_ENERGY": {
+        "mutations": [
+          "REMOVE_ENERGY"
+        ],
+        "before": {
+          "GP01": {
+            "status": "ABSTAIN",
+            "propensity": 0.47,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "INSUFFICIENT_DATA",
+            "confidence": 0.34
+          },
+          "GP02": {
+            "status": "ABSTAIN",
+            "propensity": 0.41,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "INSUFFICIENT_DATA",
+            "confidence": 0.34
+          },
+          "GP03": {
+            "status": "ABSTAIN",
+            "propensity": 0.33,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "INSUFFICIENT_DATA",
+            "confidence": 0.34
+          },
+          "GP04": {
+            "status": "RECOMMEND",
+            "propensity": 0.76,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "PAPER",
+            "confidence": 0.79
+          }
+        },
+        "after": {
+          "GP01": {
+            "status": "ABSTAIN",
+            "propensity": 0.47,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "INSUFFICIENT_DATA",
+            "confidence": 0.34
+          },
+          "GP02": {
+            "status": "ABSTAIN",
+            "propensity": 0.41,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "INSUFFICIENT_DATA",
+            "confidence": 0.34
+          },
+          "GP03": {
+            "status": "ABSTAIN",
+            "propensity": 0.33,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "INSUFFICIENT_DATA",
+            "confidence": 0.34
+          },
+          "GP04": {
+            "status": "RECOMMEND",
+            "propensity": 0.76,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "PAPER",
+            "confidence": 0.79
+          }
+        },
+        "diff": [],
+        "invariance_ok": true,
+        "elapsed_ms": 0.1
+      },
+      "ADD_CONFLICT_FUEL": {
+        "mutations": [
+          "ADD_CONFLICT_FUEL"
+        ],
+        "before": {
+          "GP01": {
+            "status": "ABSTAIN",
+            "propensity": 0.47,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "INSUFFICIENT_DATA",
+            "confidence": 0.34
+          },
+          "GP02": {
+            "status": "ABSTAIN",
+            "propensity": 0.41,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "INSUFFICIENT_DATA",
+            "confidence": 0.34
+          },
+          "GP03": {
+            "status": "ABSTAIN",
+            "propensity": 0.33,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "INSUFFICIENT_DATA",
+            "confidence": 0.34
+          },
+          "GP04": {
+            "status": "RECOMMEND",
+            "propensity": 0.76,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "PAPER",
+            "confidence": 0.79
+          }
+        },
+        "after": {
+          "GP01": {
+            "status": "REVIEW",
+            "propensity": 0.18,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "HIDDEN",
+            "confidence": 0.34
+          },
+          "GP02": {
+            "status": "ABSTAIN",
+            "propensity": 0.41,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "INSUFFICIENT_DATA",
+            "confidence": 0.34
+          },
+          "GP03": {
+            "status": "ABSTAIN",
+            "propensity": 0.33,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "INSUFFICIENT_DATA",
+            "confidence": 0.34
+          },
+          "GP04": {
+            "status": "RECOMMEND",
+            "propensity": 0.76,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "PAPER",
+            "confidence": 0.79
+          }
+        },
+        "diff": [
+          {
+            "product": "GP01",
+            "field": "Status",
+            "from": "ABSTAIN",
+            "to": "REVIEW",
+            "cause": "Conflict flag set: vehicle record says electric while fuel spend continues"
+          },
+          {
+            "product": "GP01",
+            "field": "Likelihood",
+            "from": "MEDIUM (0.47)",
+            "to": "LOW (0.18)",
+            "cause": "Conflict flag set: vehicle record says electric while fuel spend continues"
+          },
+          {
+            "product": "GP01",
+            "field": "Impact",
+            "from": "INSUFFICIENT_DATA",
+            "to": "HIDDEN",
+            "cause": "Conflict flag set: vehicle record says electric while fuel spend continues"
+          }
+        ],
+        "invariance_ok": true,
+        "elapsed_ms": 0.08
+      },
+      "MAKE_STALE": {
+        "mutations": [
+          "MAKE_STALE"
+        ],
+        "before": {
+          "GP01": {
+            "status": "ABSTAIN",
+            "propensity": 0.47,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "INSUFFICIENT_DATA",
+            "confidence": 0.34
+          },
+          "GP02": {
+            "status": "ABSTAIN",
+            "propensity": 0.41,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "INSUFFICIENT_DATA",
+            "confidence": 0.34
+          },
+          "GP03": {
+            "status": "ABSTAIN",
+            "propensity": 0.33,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "INSUFFICIENT_DATA",
+            "confidence": 0.34
+          },
+          "GP04": {
+            "status": "RECOMMEND",
+            "propensity": 0.76,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "PAPER",
+            "confidence": 0.79
+          }
+        },
+        "after": {
+          "GP01": {
+            "status": "ABSTAIN",
+            "propensity": 0.47,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "INSUFFICIENT_DATA",
+            "confidence": 0.26
+          },
+          "GP02": {
+            "status": "ABSTAIN",
+            "propensity": 0.41,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "INSUFFICIENT_DATA",
+            "confidence": 0.26
+          },
+          "GP03": {
+            "status": "ABSTAIN",
+            "propensity": 0.33,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "INSUFFICIENT_DATA",
+            "confidence": 0.26
+          },
+          "GP04": {
+            "status": "ABSTAIN",
+            "propensity": 0.76,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "INSUFFICIENT_DATA",
+            "confidence": 0.63
+          }
+        },
+        "diff": [
+          {
+            "product": "GP01",
+            "field": "Confidence",
+            "from": "0.34",
+            "to": "0.26",
+            "cause": "Data older than 180 days: impact hidden until confirmed"
+          },
+          {
+            "product": "GP02",
+            "field": "Confidence",
+            "from": "0.34",
+            "to": "0.26",
+            "cause": "Data older than 180 days: impact hidden until confirmed"
+          },
+          {
+            "product": "GP03",
+            "field": "Confidence",
+            "from": "0.34",
+            "to": "0.26",
+            "cause": "Data older than 180 days: impact hidden until confirmed"
+          },
+          {
+            "product": "GP04",
+            "field": "Status",
+            "from": "RECOMMEND",
+            "to": "ABSTAIN",
+            "cause": "Data older than 180 days: impact hidden until confirmed"
+          },
+          {
+            "product": "GP04",
+            "field": "Impact",
+            "from": "PAPER",
+            "to": "INSUFFICIENT_DATA",
+            "cause": "Data older than 180 days: impact hidden until confirmed"
+          },
+          {
+            "product": "GP04",
+            "field": "Confidence",
+            "from": "0.79",
+            "to": "0.63",
+            "cause": "Data older than 180 days: impact hidden until confirmed"
+          }
+        ],
+        "invariance_ok": true,
+        "elapsed_ms": 0.08
+      },
+      "SET_RENTER": {
+        "mutations": [
+          "SET_RENTER"
+        ],
+        "before": {
+          "GP01": {
+            "status": "ABSTAIN",
+            "propensity": 0.47,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "INSUFFICIENT_DATA",
+            "confidence": 0.34
+          },
+          "GP02": {
+            "status": "ABSTAIN",
+            "propensity": 0.41,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "INSUFFICIENT_DATA",
+            "confidence": 0.34
+          },
+          "GP03": {
+            "status": "ABSTAIN",
+            "propensity": 0.33,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "INSUFFICIENT_DATA",
+            "confidence": 0.34
+          },
+          "GP04": {
+            "status": "RECOMMEND",
+            "propensity": 0.76,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "PAPER",
+            "confidence": 0.79
+          }
+        },
+        "after": {
+          "GP01": {
+            "status": "ABSTAIN",
+            "propensity": 0.47,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "INSUFFICIENT_DATA",
+            "confidence": 0.34
+          },
+          "GP02": {
+            "status": "RULED_OUT",
+            "propensity": 0.16,
+            "eligibility": "NOT_ELIGIBLE",
+            "rule": "GP02-R1",
+            "impact_status": "NOT_APPLICABLE",
+            "confidence": 0.34
+          },
+          "GP03": {
+            "status": "RULED_OUT",
+            "propensity": 0.13,
+            "eligibility": "NOT_ELIGIBLE",
+            "rule": "GP03-R1",
+            "impact_status": "NOT_APPLICABLE",
+            "confidence": 0.34
+          },
+          "GP04": {
+            "status": "RECOMMEND",
+            "propensity": 0.76,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "PAPER",
+            "confidence": 0.79
+          }
+        },
+        "diff": [
+          {
+            "product": "GP02",
+            "field": "Status",
+            "from": "ABSTAIN",
+            "to": "RULED_OUT",
+            "cause": "Rule GP02-R1 fired: Green Home Loan is for homeowners, and our records show you rent."
+          },
+          {
+            "product": "GP02",
+            "field": "Likelihood",
+            "from": "MEDIUM (0.41)",
+            "to": "LOW (0.16)",
+            "cause": "Rule GP02-R1 fired: Green Home Loan is for homeowners, and our records show you rent."
+          },
+          {
+            "product": "GP02",
+            "field": "Eligibility",
+            "from": "PASSED",
+            "to": "NOT_ELIGIBLE · GP02-R1",
+            "cause": "Rule GP02-R1 fired: Green Home Loan is for homeowners, and our records show you rent."
+          },
+          {
+            "product": "GP02",
+            "field": "Impact",
+            "from": "INSUFFICIENT_DATA",
+            "to": "NOT_APPLICABLE",
+            "cause": "Rule GP02-R1 fired: Green Home Loan is for homeowners, and our records show you rent."
+          },
+          {
+            "product": "GP03",
+            "field": "Status",
+            "from": "ABSTAIN",
+            "to": "RULED_OUT",
+            "cause": "Rule GP03-R1 fired: Solar Finance is for homeowners, and our records show you rent."
+          },
+          {
+            "product": "GP03",
+            "field": "Likelihood",
+            "from": "LOW (0.33)",
+            "to": "LOW (0.13)",
+            "cause": "Rule GP03-R1 fired: Solar Finance is for homeowners, and our records show you rent."
+          },
+          {
+            "product": "GP03",
+            "field": "Eligibility",
+            "from": "PASSED",
+            "to": "NOT_ELIGIBLE · GP03-R1",
+            "cause": "Rule GP03-R1 fired: Solar Finance is for homeowners, and our records show you rent."
+          },
+          {
+            "product": "GP03",
+            "field": "Impact",
+            "from": "INSUFFICIENT_DATA",
+            "to": "NOT_APPLICABLE",
+            "cause": "Rule GP03-R1 fired: Solar Finance is for homeowners, and our records show you rent."
+          }
+        ],
+        "invariance_ok": true,
+        "elapsed_ms": 0.08
+      },
+      "SELL_CAR": {
+        "mutations": [
+          "SELL_CAR"
+        ],
+        "before": {
+          "GP01": {
+            "status": "ABSTAIN",
+            "propensity": 0.47,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "INSUFFICIENT_DATA",
+            "confidence": 0.34
+          },
+          "GP02": {
+            "status": "ABSTAIN",
+            "propensity": 0.41,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "INSUFFICIENT_DATA",
+            "confidence": 0.34
+          },
+          "GP03": {
+            "status": "ABSTAIN",
+            "propensity": 0.33,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "INSUFFICIENT_DATA",
+            "confidence": 0.34
+          },
+          "GP04": {
+            "status": "RECOMMEND",
+            "propensity": 0.76,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "PAPER",
+            "confidence": 0.79
+          }
+        },
+        "after": {
+          "GP01": {
+            "status": "RULED_OUT",
+            "propensity": 0.05,
+            "eligibility": "NOT_ELIGIBLE",
+            "rule": "GP01-R2",
+            "impact_status": "NOT_APPLICABLE",
+            "confidence": 0.56
+          },
+          "GP02": {
+            "status": "ABSTAIN",
+            "propensity": 0.41,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "INSUFFICIENT_DATA",
+            "confidence": 0.34
+          },
+          "GP03": {
+            "status": "ABSTAIN",
+            "propensity": 0.33,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "INSUFFICIENT_DATA",
+            "confidence": 0.34
+          },
+          "GP04": {
+            "status": "RECOMMEND",
+            "propensity": 0.76,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "PAPER",
+            "confidence": 0.79
+          }
+        },
+        "diff": [
+          {
+            "product": "GP01",
+            "field": "Status",
+            "from": "ABSTAIN",
+            "to": "RULED_OUT",
+            "cause": "Rule GP01-R2 fired: There's no vehicle on record for you right now."
+          },
+          {
+            "product": "GP01",
+            "field": "Likelihood",
+            "from": "MEDIUM (0.47)",
+            "to": "LOW (0.05)",
+            "cause": "Rule GP01-R2 fired: There's no vehicle on record for you right now."
+          },
+          {
+            "product": "GP01",
+            "field": "Eligibility",
+            "from": "PASSED",
+            "to": "NOT_ELIGIBLE · GP01-R2",
+            "cause": "Rule GP01-R2 fired: There's no vehicle on record for you right now."
+          },
+          {
+            "product": "GP01",
+            "field": "Impact",
+            "from": "INSUFFICIENT_DATA",
+            "to": "NOT_APPLICABLE",
+            "cause": "Rule GP01-R2 fired: There's no vehicle on record for you right now."
+          },
+          {
+            "product": "GP01",
+            "field": "Confidence",
+            "from": "0.34",
+            "to": "0.56",
+            "cause": "Rule GP01-R2 fired: There's no vehicle on record for you right now."
+          }
+        ],
+        "invariance_ok": true,
+        "elapsed_ms": 0.08
+      }
+    },
+    "CUST-0005": {
+      "SET_VEHICLE_BEV": {
+        "mutations": [
+          "SET_VEHICLE_BEV"
+        ],
+        "before": {
+          "GP01": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.32,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "ESTIMATED",
+            "confidence": 0.86
+          },
+          "GP02": {
+            "status": "RECOMMEND",
+            "propensity": 0.79,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "ESTIMATED",
+            "confidence": 0.86
+          },
+          "GP03": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.41,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "ESTIMATED",
+            "confidence": 0.86
+          },
+          "GP04": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.28,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "PAPER",
+            "confidence": 0.86
+          }
+        },
+        "after": {
+          "GP01": {
+            "status": "RULED_OUT",
+            "propensity": 0.12,
+            "eligibility": "NOT_ELIGIBLE",
+            "rule": "GP01-R1",
+            "impact_status": "NOT_APPLICABLE",
+            "confidence": 0.86
+          },
+          "GP02": {
+            "status": "RECOMMEND",
+            "propensity": 0.79,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "ESTIMATED",
+            "confidence": 0.86
+          },
+          "GP03": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.41,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "ESTIMATED",
+            "confidence": 0.86
+          },
+          "GP04": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.28,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "PAPER",
+            "confidence": 0.86
+          }
+        },
+        "diff": [
+          {
+            "product": "GP01",
+            "field": "Status",
+            "from": "SOFT_SURFACE",
+            "to": "RULED_OUT",
+            "cause": "Rule GP01-R1 fired: You already have an electric vehicle and no replacement need on record."
+          },
+          {
+            "product": "GP01",
+            "field": "Likelihood",
+            "from": "LOW (0.32)",
+            "to": "LOW (0.12)",
+            "cause": "Rule GP01-R1 fired: You already have an electric vehicle and no replacement need on record."
+          },
+          {
+            "product": "GP01",
+            "field": "Eligibility",
+            "from": "PASSED",
+            "to": "NOT_ELIGIBLE · GP01-R1",
+            "cause": "Rule GP01-R1 fired: You already have an electric vehicle and no replacement need on record."
+          },
+          {
+            "product": "GP01",
+            "field": "Impact",
+            "from": "ESTIMATED",
+            "to": "NOT_APPLICABLE",
+            "cause": "Rule GP01-R1 fired: You already have an electric vehicle and no replacement need on record."
+          }
+        ],
+        "invariance_ok": true,
+        "elapsed_ms": 0.14
+      },
+      "REMOVE_MILEAGE": {
+        "mutations": [
+          "REMOVE_MILEAGE"
+        ],
+        "before": {
+          "GP01": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.32,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "ESTIMATED",
+            "confidence": 0.86
+          },
+          "GP02": {
+            "status": "RECOMMEND",
+            "propensity": 0.79,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "ESTIMATED",
+            "confidence": 0.86
+          },
+          "GP03": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.41,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "ESTIMATED",
+            "confidence": 0.86
+          },
+          "GP04": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.28,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "PAPER",
+            "confidence": 0.86
+          }
+        },
+        "after": {
+          "GP01": {
+            "status": "ABSTAIN",
+            "propensity": 0.32,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "INSUFFICIENT_DATA",
+            "confidence": 0.74
+          },
+          "GP02": {
+            "status": "RECOMMEND",
+            "propensity": 0.79,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "ESTIMATED",
+            "confidence": 0.86
+          },
+          "GP03": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.41,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "ESTIMATED",
+            "confidence": 0.86
+          },
+          "GP04": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.28,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "PAPER",
+            "confidence": 0.86
+          }
+        },
+        "diff": [
+          {
+            "product": "GP01",
+            "field": "Status",
+            "from": "SOFT_SURFACE",
+            "to": "ABSTAIN",
+            "cause": "Critical input missing: annual_mileage"
+          },
+          {
+            "product": "GP01",
+            "field": "Impact",
+            "from": "ESTIMATED",
+            "to": "INSUFFICIENT_DATA",
+            "cause": "Critical input missing: annual_mileage"
+          },
+          {
+            "product": "GP01",
+            "field": "Confidence",
+            "from": "0.86",
+            "to": "0.74",
+            "cause": "Critical input missing: annual_mileage"
+          }
+        ],
+        "invariance_ok": true,
+        "elapsed_ms": 0.09
+      },
+      "REMOVE_ENERGY": {
+        "mutations": [
+          "REMOVE_ENERGY"
+        ],
+        "before": {
+          "GP01": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.32,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "ESTIMATED",
+            "confidence": 0.86
+          },
+          "GP02": {
+            "status": "RECOMMEND",
+            "propensity": 0.79,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "ESTIMATED",
+            "confidence": 0.86
+          },
+          "GP03": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.41,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "ESTIMATED",
+            "confidence": 0.86
+          },
+          "GP04": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.28,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "PAPER",
+            "confidence": 0.86
+          }
+        },
+        "after": {
+          "GP01": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.32,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "ESTIMATED",
+            "confidence": 0.86
+          },
+          "GP02": {
+            "status": "ABSTAIN",
+            "propensity": 0.79,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "INSUFFICIENT_DATA",
+            "confidence": 0.74
+          },
+          "GP03": {
+            "status": "ABSTAIN",
+            "propensity": 0.41,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "INSUFFICIENT_DATA",
+            "confidence": 0.74
+          },
+          "GP04": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.28,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "PAPER",
+            "confidence": 0.86
+          }
+        },
+        "diff": [
+          {
+            "product": "GP02",
+            "field": "Status",
+            "from": "RECOMMEND",
+            "to": "ABSTAIN",
+            "cause": "Critical input missing: gas_kwh"
+          },
+          {
+            "product": "GP02",
+            "field": "Impact",
+            "from": "ESTIMATED",
+            "to": "INSUFFICIENT_DATA",
+            "cause": "Critical input missing: gas_kwh"
+          },
+          {
+            "product": "GP02",
+            "field": "Confidence",
+            "from": "0.86",
+            "to": "0.74",
+            "cause": "Critical input missing: gas_kwh"
+          },
+          {
+            "product": "GP03",
+            "field": "Status",
+            "from": "SOFT_SURFACE",
+            "to": "ABSTAIN",
+            "cause": "Critical input missing: electricity_kwh"
+          },
+          {
+            "product": "GP03",
+            "field": "Impact",
+            "from": "ESTIMATED",
+            "to": "INSUFFICIENT_DATA",
+            "cause": "Critical input missing: electricity_kwh"
+          },
+          {
+            "product": "GP03",
+            "field": "Confidence",
+            "from": "0.86",
+            "to": "0.74",
+            "cause": "Critical input missing: electricity_kwh"
+          }
+        ],
+        "invariance_ok": true,
+        "elapsed_ms": 0.08
+      },
+      "ADD_CONFLICT_FUEL": {
+        "mutations": [
+          "ADD_CONFLICT_FUEL"
+        ],
+        "before": {
+          "GP01": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.32,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "ESTIMATED",
+            "confidence": 0.86
+          },
+          "GP02": {
+            "status": "RECOMMEND",
+            "propensity": 0.79,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "ESTIMATED",
+            "confidence": 0.86
+          },
+          "GP03": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.41,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "ESTIMATED",
+            "confidence": 0.86
+          },
+          "GP04": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.28,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "PAPER",
+            "confidence": 0.86
+          }
+        },
+        "after": {
+          "GP01": {
+            "status": "REVIEW",
+            "propensity": 0.12,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "HIDDEN",
+            "confidence": 0.76
+          },
+          "GP02": {
+            "status": "RECOMMEND",
+            "propensity": 0.79,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "ESTIMATED",
+            "confidence": 0.86
+          },
+          "GP03": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.41,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "ESTIMATED",
+            "confidence": 0.86
+          },
+          "GP04": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.28,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "PAPER",
+            "confidence": 0.86
+          }
+        },
+        "diff": [
+          {
+            "product": "GP01",
+            "field": "Status",
+            "from": "SOFT_SURFACE",
+            "to": "REVIEW",
+            "cause": "Conflict flag set: vehicle record says electric while fuel spend continues"
+          },
+          {
+            "product": "GP01",
+            "field": "Likelihood",
+            "from": "LOW (0.32)",
+            "to": "LOW (0.12)",
+            "cause": "Conflict flag set: vehicle record says electric while fuel spend continues"
+          },
+          {
+            "product": "GP01",
+            "field": "Impact",
+            "from": "ESTIMATED",
+            "to": "HIDDEN",
+            "cause": "Conflict flag set: vehicle record says electric while fuel spend continues"
+          },
+          {
+            "product": "GP01",
+            "field": "Confidence",
+            "from": "0.86",
+            "to": "0.76",
+            "cause": "Conflict flag set: vehicle record says electric while fuel spend continues"
+          }
+        ],
+        "invariance_ok": true,
+        "elapsed_ms": 0.08
+      },
+      "MAKE_STALE": {
+        "mutations": [
+          "MAKE_STALE"
+        ],
+        "before": {
+          "GP01": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.32,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "ESTIMATED",
+            "confidence": 0.86
+          },
+          "GP02": {
+            "status": "RECOMMEND",
+            "propensity": 0.79,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "ESTIMATED",
+            "confidence": 0.86
+          },
+          "GP03": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.41,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "ESTIMATED",
+            "confidence": 0.86
+          },
+          "GP04": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.28,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "PAPER",
+            "confidence": 0.86
+          }
+        },
+        "after": {
+          "GP01": {
+            "status": "ABSTAIN",
+            "propensity": 0.32,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "INSUFFICIENT_DATA",
+            "confidence": 0.68
+          },
+          "GP02": {
+            "status": "ABSTAIN",
+            "propensity": 0.79,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "INSUFFICIENT_DATA",
+            "confidence": 0.68
+          },
+          "GP03": {
+            "status": "ABSTAIN",
+            "propensity": 0.41,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "INSUFFICIENT_DATA",
+            "confidence": 0.68
+          },
+          "GP04": {
+            "status": "ABSTAIN",
+            "propensity": 0.28,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "INSUFFICIENT_DATA",
+            "confidence": 0.68
+          }
+        },
+        "diff": [
+          {
+            "product": "GP01",
+            "field": "Status",
+            "from": "SOFT_SURFACE",
+            "to": "ABSTAIN",
+            "cause": "Data older than 180 days: impact hidden until confirmed"
+          },
+          {
+            "product": "GP01",
+            "field": "Impact",
+            "from": "ESTIMATED",
+            "to": "INSUFFICIENT_DATA",
+            "cause": "Data older than 180 days: impact hidden until confirmed"
+          },
+          {
+            "product": "GP01",
+            "field": "Confidence",
+            "from": "0.86",
+            "to": "0.68",
+            "cause": "Data older than 180 days: impact hidden until confirmed"
+          },
+          {
+            "product": "GP02",
+            "field": "Status",
+            "from": "RECOMMEND",
+            "to": "ABSTAIN",
+            "cause": "Data older than 180 days: impact hidden until confirmed"
+          },
+          {
+            "product": "GP02",
+            "field": "Impact",
+            "from": "ESTIMATED",
+            "to": "INSUFFICIENT_DATA",
+            "cause": "Data older than 180 days: impact hidden until confirmed"
+          },
+          {
+            "product": "GP02",
+            "field": "Confidence",
+            "from": "0.86",
+            "to": "0.68",
+            "cause": "Data older than 180 days: impact hidden until confirmed"
+          },
+          {
+            "product": "GP03",
+            "field": "Status",
+            "from": "SOFT_SURFACE",
+            "to": "ABSTAIN",
+            "cause": "Data older than 180 days: impact hidden until confirmed"
+          },
+          {
+            "product": "GP03",
+            "field": "Impact",
+            "from": "ESTIMATED",
+            "to": "INSUFFICIENT_DATA",
+            "cause": "Data older than 180 days: impact hidden until confirmed"
+          },
+          {
+            "product": "GP03",
+            "field": "Confidence",
+            "from": "0.86",
+            "to": "0.68",
+            "cause": "Data older than 180 days: impact hidden until confirmed"
+          },
+          {
+            "product": "GP04",
+            "field": "Status",
+            "from": "SOFT_SURFACE",
+            "to": "ABSTAIN",
+            "cause": "Data older than 180 days: impact hidden until confirmed"
+          },
+          {
+            "product": "GP04",
+            "field": "Impact",
+            "from": "PAPER",
+            "to": "INSUFFICIENT_DATA",
+            "cause": "Data older than 180 days: impact hidden until confirmed"
+          },
+          {
+            "product": "GP04",
+            "field": "Confidence",
+            "from": "0.86",
+            "to": "0.68",
+            "cause": "Data older than 180 days: impact hidden until confirmed"
+          }
+        ],
+        "invariance_ok": true,
+        "elapsed_ms": 0.07
+      },
+      "SET_RENTER": {
+        "mutations": [
+          "SET_RENTER"
+        ],
+        "before": {
+          "GP01": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.32,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "ESTIMATED",
+            "confidence": 0.86
+          },
+          "GP02": {
+            "status": "RECOMMEND",
+            "propensity": 0.79,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "ESTIMATED",
+            "confidence": 0.86
+          },
+          "GP03": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.41,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "ESTIMATED",
+            "confidence": 0.86
+          },
+          "GP04": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.28,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "PAPER",
+            "confidence": 0.86
+          }
+        },
+        "after": {
+          "GP01": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.32,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "ESTIMATED",
+            "confidence": 0.86
+          },
+          "GP02": {
+            "status": "RULED_OUT",
+            "propensity": 0.32,
+            "eligibility": "NOT_ELIGIBLE",
+            "rule": "GP02-R1",
+            "impact_status": "NOT_APPLICABLE",
+            "confidence": 0.86
+          },
+          "GP03": {
+            "status": "RULED_OUT",
+            "propensity": 0.16,
+            "eligibility": "NOT_ELIGIBLE",
+            "rule": "GP03-R1",
+            "impact_status": "NOT_APPLICABLE",
+            "confidence": 0.86
+          },
+          "GP04": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.28,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "PAPER",
+            "confidence": 0.86
+          }
+        },
+        "diff": [
+          {
+            "product": "GP02",
+            "field": "Status",
+            "from": "RECOMMEND",
+            "to": "RULED_OUT",
+            "cause": "Rule GP02-R1 fired: Green Home Loan is for homeowners, and our records show you rent."
+          },
+          {
+            "product": "GP02",
+            "field": "Likelihood",
+            "from": "HIGH (0.79)",
+            "to": "LOW (0.32)",
+            "cause": "Rule GP02-R1 fired: Green Home Loan is for homeowners, and our records show you rent."
+          },
+          {
+            "product": "GP02",
+            "field": "Eligibility",
+            "from": "PASSED",
+            "to": "NOT_ELIGIBLE · GP02-R1",
+            "cause": "Rule GP02-R1 fired: Green Home Loan is for homeowners, and our records show you rent."
+          },
+          {
+            "product": "GP02",
+            "field": "Impact",
+            "from": "ESTIMATED",
+            "to": "NOT_APPLICABLE",
+            "cause": "Rule GP02-R1 fired: Green Home Loan is for homeowners, and our records show you rent."
+          },
+          {
+            "product": "GP03",
+            "field": "Status",
+            "from": "SOFT_SURFACE",
+            "to": "RULED_OUT",
+            "cause": "Rule GP03-R1 fired: Solar Finance is for homeowners, and our records show you rent."
+          },
+          {
+            "product": "GP03",
+            "field": "Likelihood",
+            "from": "MEDIUM (0.41)",
+            "to": "LOW (0.16)",
+            "cause": "Rule GP03-R1 fired: Solar Finance is for homeowners, and our records show you rent."
+          },
+          {
+            "product": "GP03",
+            "field": "Eligibility",
+            "from": "PASSED",
+            "to": "NOT_ELIGIBLE · GP03-R1",
+            "cause": "Rule GP03-R1 fired: Solar Finance is for homeowners, and our records show you rent."
+          },
+          {
+            "product": "GP03",
+            "field": "Impact",
+            "from": "ESTIMATED",
+            "to": "NOT_APPLICABLE",
+            "cause": "Rule GP03-R1 fired: Solar Finance is for homeowners, and our records show you rent."
+          }
+        ],
+        "invariance_ok": true,
+        "elapsed_ms": 0.08
+      },
+      "SELL_CAR": {
+        "mutations": [
+          "SELL_CAR"
+        ],
+        "before": {
+          "GP01": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.32,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "ESTIMATED",
+            "confidence": 0.86
+          },
+          "GP02": {
+            "status": "RECOMMEND",
+            "propensity": 0.79,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "ESTIMATED",
+            "confidence": 0.86
+          },
+          "GP03": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.41,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "ESTIMATED",
+            "confidence": 0.86
+          },
+          "GP04": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.28,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "PAPER",
+            "confidence": 0.86
+          }
+        },
+        "after": {
+          "GP01": {
+            "status": "RULED_OUT",
+            "propensity": 0.05,
+            "eligibility": "NOT_ELIGIBLE",
+            "rule": "GP01-R2",
+            "impact_status": "NOT_APPLICABLE",
+            "confidence": 0.86
+          },
+          "GP02": {
+            "status": "RECOMMEND",
+            "propensity": 0.79,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "ESTIMATED",
+            "confidence": 0.86
+          },
+          "GP03": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.41,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "ESTIMATED",
+            "confidence": 0.86
+          },
+          "GP04": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.28,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "PAPER",
+            "confidence": 0.86
+          }
+        },
+        "diff": [
+          {
+            "product": "GP01",
+            "field": "Status",
+            "from": "SOFT_SURFACE",
+            "to": "RULED_OUT",
+            "cause": "Rule GP01-R2 fired: There's no vehicle on record for you right now."
+          },
+          {
+            "product": "GP01",
+            "field": "Likelihood",
+            "from": "LOW (0.32)",
+            "to": "LOW (0.05)",
+            "cause": "Rule GP01-R2 fired: There's no vehicle on record for you right now."
+          },
+          {
+            "product": "GP01",
+            "field": "Eligibility",
+            "from": "PASSED",
+            "to": "NOT_ELIGIBLE · GP01-R2",
+            "cause": "Rule GP01-R2 fired: There's no vehicle on record for you right now."
+          },
+          {
+            "product": "GP01",
+            "field": "Impact",
+            "from": "ESTIMATED",
+            "to": "NOT_APPLICABLE",
+            "cause": "Rule GP01-R2 fired: There's no vehicle on record for you right now."
+          }
+        ],
+        "invariance_ok": true,
+        "elapsed_ms": 0.08
+      }
+    },
+    "CUST-0006": {
+      "SET_VEHICLE_BEV": {
+        "mutations": [
+          "SET_VEHICLE_BEV"
+        ],
+        "before": {
+          "GP01": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.36,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "ESTIMATED",
+            "confidence": 0.82
+          },
+          "GP02": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.44,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "ESTIMATED",
+            "confidence": 0.82
+          },
+          "GP03": {
+            "status": "ABSTAIN",
+            "propensity": 0.61,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "INSUFFICIENT_DATA",
+            "confidence": 0.69
+          },
+          "GP04": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.4,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "PAPER",
+            "confidence": 0.82
+          }
+        },
+        "after": {
+          "GP01": {
+            "status": "RULED_OUT",
+            "propensity": 0.14,
+            "eligibility": "NOT_ELIGIBLE",
+            "rule": "GP01-R1",
+            "impact_status": "NOT_APPLICABLE",
+            "confidence": 0.82
+          },
+          "GP02": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.44,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "ESTIMATED",
+            "confidence": 0.82
+          },
+          "GP03": {
+            "status": "ABSTAIN",
+            "propensity": 0.61,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "INSUFFICIENT_DATA",
+            "confidence": 0.69
+          },
+          "GP04": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.4,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "PAPER",
+            "confidence": 0.82
+          }
+        },
+        "diff": [
+          {
+            "product": "GP01",
+            "field": "Status",
+            "from": "SOFT_SURFACE",
+            "to": "RULED_OUT",
+            "cause": "Rule GP01-R1 fired: You already have an electric vehicle and no replacement need on record."
+          },
+          {
+            "product": "GP01",
+            "field": "Likelihood",
+            "from": "LOW (0.36)",
+            "to": "LOW (0.14)",
+            "cause": "Rule GP01-R1 fired: You already have an electric vehicle and no replacement need on record."
+          },
+          {
+            "product": "GP01",
+            "field": "Eligibility",
+            "from": "PASSED",
+            "to": "NOT_ELIGIBLE · GP01-R1",
+            "cause": "Rule GP01-R1 fired: You already have an electric vehicle and no replacement need on record."
+          },
+          {
+            "product": "GP01",
+            "field": "Impact",
+            "from": "ESTIMATED",
+            "to": "NOT_APPLICABLE",
+            "cause": "Rule GP01-R1 fired: You already have an electric vehicle and no replacement need on record."
+          }
+        ],
+        "invariance_ok": true,
+        "elapsed_ms": 0.08
+      },
+      "REMOVE_MILEAGE": {
+        "mutations": [
+          "REMOVE_MILEAGE"
+        ],
+        "before": {
+          "GP01": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.36,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "ESTIMATED",
+            "confidence": 0.82
+          },
+          "GP02": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.44,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "ESTIMATED",
+            "confidence": 0.82
+          },
+          "GP03": {
+            "status": "ABSTAIN",
+            "propensity": 0.61,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "INSUFFICIENT_DATA",
+            "confidence": 0.69
+          },
+          "GP04": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.4,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "PAPER",
+            "confidence": 0.82
+          }
+        },
+        "after": {
+          "GP01": {
+            "status": "ABSTAIN",
+            "propensity": 0.36,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "INSUFFICIENT_DATA",
+            "confidence": 0.69
+          },
+          "GP02": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.44,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "ESTIMATED",
+            "confidence": 0.82
+          },
+          "GP03": {
+            "status": "ABSTAIN",
+            "propensity": 0.61,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "INSUFFICIENT_DATA",
+            "confidence": 0.69
+          },
+          "GP04": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.4,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "PAPER",
+            "confidence": 0.82
+          }
+        },
+        "diff": [
+          {
+            "product": "GP01",
+            "field": "Status",
+            "from": "SOFT_SURFACE",
+            "to": "ABSTAIN",
+            "cause": "Critical input missing: annual_mileage"
+          },
+          {
+            "product": "GP01",
+            "field": "Impact",
+            "from": "ESTIMATED",
+            "to": "INSUFFICIENT_DATA",
+            "cause": "Critical input missing: annual_mileage"
+          },
+          {
+            "product": "GP01",
+            "field": "Confidence",
+            "from": "0.82",
+            "to": "0.69",
+            "cause": "Critical input missing: annual_mileage"
+          }
+        ],
+        "invariance_ok": true,
+        "elapsed_ms": 0.06
+      },
+      "REMOVE_ENERGY": {
+        "mutations": [
+          "REMOVE_ENERGY"
+        ],
+        "before": {
+          "GP01": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.36,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "ESTIMATED",
+            "confidence": 0.82
+          },
+          "GP02": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.44,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "ESTIMATED",
+            "confidence": 0.82
+          },
+          "GP03": {
+            "status": "ABSTAIN",
+            "propensity": 0.61,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "INSUFFICIENT_DATA",
+            "confidence": 0.69
+          },
+          "GP04": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.4,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "PAPER",
+            "confidence": 0.82
+          }
+        },
+        "after": {
+          "GP01": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.36,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "ESTIMATED",
+            "confidence": 0.82
+          },
+          "GP02": {
+            "status": "ABSTAIN",
+            "propensity": 0.44,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "INSUFFICIENT_DATA",
+            "confidence": 0.69
+          },
+          "GP03": {
+            "status": "ABSTAIN",
+            "propensity": 0.61,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "INSUFFICIENT_DATA",
+            "confidence": 0.69
+          },
+          "GP04": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.4,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "PAPER",
+            "confidence": 0.82
+          }
+        },
+        "diff": [
+          {
+            "product": "GP02",
+            "field": "Status",
+            "from": "SOFT_SURFACE",
+            "to": "ABSTAIN",
+            "cause": "Critical input missing: gas_kwh"
+          },
+          {
+            "product": "GP02",
+            "field": "Impact",
+            "from": "ESTIMATED",
+            "to": "INSUFFICIENT_DATA",
+            "cause": "Critical input missing: gas_kwh"
+          },
+          {
+            "product": "GP02",
+            "field": "Confidence",
+            "from": "0.82",
+            "to": "0.69",
+            "cause": "Critical input missing: gas_kwh"
+          }
+        ],
+        "invariance_ok": true,
+        "elapsed_ms": 0.1
+      },
+      "ADD_CONFLICT_FUEL": {
+        "mutations": [
+          "ADD_CONFLICT_FUEL"
+        ],
+        "before": {
+          "GP01": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.36,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "ESTIMATED",
+            "confidence": 0.82
+          },
+          "GP02": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.44,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "ESTIMATED",
+            "confidence": 0.82
+          },
+          "GP03": {
+            "status": "ABSTAIN",
+            "propensity": 0.61,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "INSUFFICIENT_DATA",
+            "confidence": 0.69
+          },
+          "GP04": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.4,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "PAPER",
+            "confidence": 0.82
+          }
+        },
+        "after": {
+          "GP01": {
+            "status": "REVIEW",
+            "propensity": 0.14,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "HIDDEN",
+            "confidence": 0.72
+          },
+          "GP02": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.44,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "ESTIMATED",
+            "confidence": 0.82
+          },
+          "GP03": {
+            "status": "ABSTAIN",
+            "propensity": 0.61,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "INSUFFICIENT_DATA",
+            "confidence": 0.69
+          },
+          "GP04": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.4,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "PAPER",
+            "confidence": 0.82
+          }
+        },
+        "diff": [
+          {
+            "product": "GP01",
+            "field": "Status",
+            "from": "SOFT_SURFACE",
+            "to": "REVIEW",
+            "cause": "Conflict flag set: vehicle record says electric while fuel spend continues"
+          },
+          {
+            "product": "GP01",
+            "field": "Likelihood",
+            "from": "LOW (0.36)",
+            "to": "LOW (0.14)",
+            "cause": "Conflict flag set: vehicle record says electric while fuel spend continues"
+          },
+          {
+            "product": "GP01",
+            "field": "Impact",
+            "from": "ESTIMATED",
+            "to": "HIDDEN",
+            "cause": "Conflict flag set: vehicle record says electric while fuel spend continues"
+          },
+          {
+            "product": "GP01",
+            "field": "Confidence",
+            "from": "0.82",
+            "to": "0.72",
+            "cause": "Conflict flag set: vehicle record says electric while fuel spend continues"
+          }
+        ],
+        "invariance_ok": true,
+        "elapsed_ms": 0.07
+      },
+      "MAKE_STALE": {
+        "mutations": [
+          "MAKE_STALE"
+        ],
+        "before": {
+          "GP01": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.36,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "ESTIMATED",
+            "confidence": 0.82
+          },
+          "GP02": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.44,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "ESTIMATED",
+            "confidence": 0.82
+          },
+          "GP03": {
+            "status": "ABSTAIN",
+            "propensity": 0.61,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "INSUFFICIENT_DATA",
+            "confidence": 0.69
+          },
+          "GP04": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.4,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "PAPER",
+            "confidence": 0.82
+          }
+        },
+        "after": {
+          "GP01": {
+            "status": "ABSTAIN",
+            "propensity": 0.36,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "INSUFFICIENT_DATA",
+            "confidence": 0.65
+          },
+          "GP02": {
+            "status": "ABSTAIN",
+            "propensity": 0.44,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "INSUFFICIENT_DATA",
+            "confidence": 0.65
+          },
+          "GP03": {
+            "status": "ABSTAIN",
+            "propensity": 0.61,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "INSUFFICIENT_DATA",
+            "confidence": 0.55
+          },
+          "GP04": {
+            "status": "ABSTAIN",
+            "propensity": 0.4,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "INSUFFICIENT_DATA",
+            "confidence": 0.65
+          }
+        },
+        "diff": [
+          {
+            "product": "GP01",
+            "field": "Status",
+            "from": "SOFT_SURFACE",
+            "to": "ABSTAIN",
+            "cause": "Data older than 180 days: impact hidden until confirmed"
+          },
+          {
+            "product": "GP01",
+            "field": "Impact",
+            "from": "ESTIMATED",
+            "to": "INSUFFICIENT_DATA",
+            "cause": "Data older than 180 days: impact hidden until confirmed"
+          },
+          {
+            "product": "GP01",
+            "field": "Confidence",
+            "from": "0.82",
+            "to": "0.65",
+            "cause": "Data older than 180 days: impact hidden until confirmed"
+          },
+          {
+            "product": "GP02",
+            "field": "Status",
+            "from": "SOFT_SURFACE",
+            "to": "ABSTAIN",
+            "cause": "Data older than 180 days: impact hidden until confirmed"
+          },
+          {
+            "product": "GP02",
+            "field": "Impact",
+            "from": "ESTIMATED",
+            "to": "INSUFFICIENT_DATA",
+            "cause": "Data older than 180 days: impact hidden until confirmed"
+          },
+          {
+            "product": "GP02",
+            "field": "Confidence",
+            "from": "0.82",
+            "to": "0.65",
+            "cause": "Data older than 180 days: impact hidden until confirmed"
+          },
+          {
+            "product": "GP03",
+            "field": "Confidence",
+            "from": "0.69",
+            "to": "0.55",
+            "cause": "Data older than 180 days: impact hidden until confirmed"
+          },
+          {
+            "product": "GP04",
+            "field": "Status",
+            "from": "SOFT_SURFACE",
+            "to": "ABSTAIN",
+            "cause": "Data older than 180 days: impact hidden until confirmed"
+          },
+          {
+            "product": "GP04",
+            "field": "Impact",
+            "from": "PAPER",
+            "to": "INSUFFICIENT_DATA",
+            "cause": "Data older than 180 days: impact hidden until confirmed"
+          },
+          {
+            "product": "GP04",
+            "field": "Confidence",
+            "from": "0.82",
+            "to": "0.65",
+            "cause": "Data older than 180 days: impact hidden until confirmed"
+          }
+        ],
+        "invariance_ok": true,
+        "elapsed_ms": 0.13
+      },
+      "SET_RENTER": {
+        "mutations": [
+          "SET_RENTER"
+        ],
+        "before": {
+          "GP01": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.36,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "ESTIMATED",
+            "confidence": 0.82
+          },
+          "GP02": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.44,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "ESTIMATED",
+            "confidence": 0.82
+          },
+          "GP03": {
+            "status": "ABSTAIN",
+            "propensity": 0.61,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "INSUFFICIENT_DATA",
+            "confidence": 0.69
+          },
+          "GP04": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.4,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "PAPER",
+            "confidence": 0.82
+          }
+        },
+        "after": {
+          "GP01": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.36,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "ESTIMATED",
+            "confidence": 0.82
+          },
+          "GP02": {
+            "status": "RULED_OUT",
+            "propensity": 0.18,
+            "eligibility": "NOT_ELIGIBLE",
+            "rule": "GP02-R1",
+            "impact_status": "NOT_APPLICABLE",
+            "confidence": 0.82
+          },
+          "GP03": {
+            "status": "RULED_OUT",
+            "propensity": 0.24,
+            "eligibility": "NOT_ELIGIBLE",
+            "rule": "GP03-R1",
+            "impact_status": "NOT_APPLICABLE",
+            "confidence": 0.69
+          },
+          "GP04": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.4,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "PAPER",
+            "confidence": 0.82
+          }
+        },
+        "diff": [
+          {
+            "product": "GP02",
+            "field": "Status",
+            "from": "SOFT_SURFACE",
+            "to": "RULED_OUT",
+            "cause": "Rule GP02-R1 fired: Green Home Loan is for homeowners, and our records show you rent."
+          },
+          {
+            "product": "GP02",
+            "field": "Likelihood",
+            "from": "MEDIUM (0.44)",
+            "to": "LOW (0.18)",
+            "cause": "Rule GP02-R1 fired: Green Home Loan is for homeowners, and our records show you rent."
+          },
+          {
+            "product": "GP02",
+            "field": "Eligibility",
+            "from": "PASSED",
+            "to": "NOT_ELIGIBLE · GP02-R1",
+            "cause": "Rule GP02-R1 fired: Green Home Loan is for homeowners, and our records show you rent."
+          },
+          {
+            "product": "GP02",
+            "field": "Impact",
+            "from": "ESTIMATED",
+            "to": "NOT_APPLICABLE",
+            "cause": "Rule GP02-R1 fired: Green Home Loan is for homeowners, and our records show you rent."
+          },
+          {
+            "product": "GP03",
+            "field": "Status",
+            "from": "ABSTAIN",
+            "to": "RULED_OUT",
+            "cause": "Rule GP03-R1 fired: Solar Finance is for homeowners, and our records show you rent."
+          },
+          {
+            "product": "GP03",
+            "field": "Likelihood",
+            "from": "MEDIUM (0.61)",
+            "to": "LOW (0.24)",
+            "cause": "Rule GP03-R1 fired: Solar Finance is for homeowners, and our records show you rent."
+          },
+          {
+            "product": "GP03",
+            "field": "Eligibility",
+            "from": "PASSED",
+            "to": "NOT_ELIGIBLE · GP03-R1",
+            "cause": "Rule GP03-R1 fired: Solar Finance is for homeowners, and our records show you rent."
+          },
+          {
+            "product": "GP03",
+            "field": "Impact",
+            "from": "INSUFFICIENT_DATA",
+            "to": "NOT_APPLICABLE",
+            "cause": "Rule GP03-R1 fired: Solar Finance is for homeowners, and our records show you rent."
+          }
+        ],
+        "invariance_ok": true,
+        "elapsed_ms": 0.08
+      },
+      "SELL_CAR": {
+        "mutations": [
+          "SELL_CAR"
+        ],
+        "before": {
+          "GP01": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.36,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "ESTIMATED",
+            "confidence": 0.82
+          },
+          "GP02": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.44,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "ESTIMATED",
+            "confidence": 0.82
+          },
+          "GP03": {
+            "status": "ABSTAIN",
+            "propensity": 0.61,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "INSUFFICIENT_DATA",
+            "confidence": 0.69
+          },
+          "GP04": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.4,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "PAPER",
+            "confidence": 0.82
+          }
+        },
+        "after": {
+          "GP01": {
+            "status": "RULED_OUT",
+            "propensity": 0.05,
+            "eligibility": "NOT_ELIGIBLE",
+            "rule": "GP01-R2",
+            "impact_status": "NOT_APPLICABLE",
+            "confidence": 0.82
+          },
+          "GP02": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.44,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "ESTIMATED",
+            "confidence": 0.82
+          },
+          "GP03": {
+            "status": "ABSTAIN",
+            "propensity": 0.61,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "INSUFFICIENT_DATA",
+            "confidence": 0.69
+          },
+          "GP04": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.4,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "PAPER",
+            "confidence": 0.82
+          }
+        },
+        "diff": [
+          {
+            "product": "GP01",
+            "field": "Status",
+            "from": "SOFT_SURFACE",
+            "to": "RULED_OUT",
+            "cause": "Rule GP01-R2 fired: There's no vehicle on record for you right now."
+          },
+          {
+            "product": "GP01",
+            "field": "Likelihood",
+            "from": "LOW (0.36)",
+            "to": "LOW (0.05)",
+            "cause": "Rule GP01-R2 fired: There's no vehicle on record for you right now."
+          },
+          {
+            "product": "GP01",
+            "field": "Eligibility",
+            "from": "PASSED",
+            "to": "NOT_ELIGIBLE · GP01-R2",
+            "cause": "Rule GP01-R2 fired: There's no vehicle on record for you right now."
+          },
+          {
+            "product": "GP01",
+            "field": "Impact",
+            "from": "ESTIMATED",
+            "to": "NOT_APPLICABLE",
+            "cause": "Rule GP01-R2 fired: There's no vehicle on record for you right now."
+          }
+        ],
+        "invariance_ok": true,
+        "elapsed_ms": 0.07
+      }
+    },
+    "CUST-0007": {
+      "SET_VEHICLE_BEV": {
+        "mutations": [
+          "SET_VEHICLE_BEV"
+        ],
+        "before": {
+          "GP01": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.22,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "ESTIMATED",
+            "confidence": 0.84
+          },
+          "GP02": {
+            "status": "RULED_OUT",
+            "propensity": 0.3,
+            "eligibility": "NOT_ELIGIBLE",
+            "rule": "GP02-R1",
+            "impact_status": "NOT_APPLICABLE",
+            "confidence": 0.84
+          },
+          "GP03": {
+            "status": "RULED_OUT",
+            "propensity": 0.18,
+            "eligibility": "NOT_ELIGIBLE",
+            "rule": "GP03-R1",
+            "impact_status": "NOT_APPLICABLE",
+            "confidence": 0.72
+          },
+          "GP04": {
+            "status": "RECOMMEND",
+            "propensity": 0.74,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "PAPER",
+            "confidence": 0.84
+          }
+        },
+        "after": {
+          "GP01": {
+            "status": "RULED_OUT",
+            "propensity": 0.08,
+            "eligibility": "NOT_ELIGIBLE",
+            "rule": "GP01-R1",
+            "impact_status": "NOT_APPLICABLE",
+            "confidence": 0.84
+          },
+          "GP02": {
+            "status": "RULED_OUT",
+            "propensity": 0.3,
+            "eligibility": "NOT_ELIGIBLE",
+            "rule": "GP02-R1",
+            "impact_status": "NOT_APPLICABLE",
+            "confidence": 0.84
+          },
+          "GP03": {
+            "status": "RULED_OUT",
+            "propensity": 0.18,
+            "eligibility": "NOT_ELIGIBLE",
+            "rule": "GP03-R1",
+            "impact_status": "NOT_APPLICABLE",
+            "confidence": 0.72
+          },
+          "GP04": {
+            "status": "RECOMMEND",
+            "propensity": 0.74,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "PAPER",
+            "confidence": 0.84
+          }
+        },
+        "diff": [
+          {
+            "product": "GP01",
+            "field": "Status",
+            "from": "SOFT_SURFACE",
+            "to": "RULED_OUT",
+            "cause": "Rule GP01-R1 fired: You already have an electric vehicle and no replacement need on record."
+          },
+          {
+            "product": "GP01",
+            "field": "Likelihood",
+            "from": "LOW (0.22)",
+            "to": "LOW (0.08)",
+            "cause": "Rule GP01-R1 fired: You already have an electric vehicle and no replacement need on record."
+          },
+          {
+            "product": "GP01",
+            "field": "Eligibility",
+            "from": "PASSED",
+            "to": "NOT_ELIGIBLE · GP01-R1",
+            "cause": "Rule GP01-R1 fired: You already have an electric vehicle and no replacement need on record."
+          },
+          {
+            "product": "GP01",
+            "field": "Impact",
+            "from": "ESTIMATED",
+            "to": "NOT_APPLICABLE",
+            "cause": "Rule GP01-R1 fired: You already have an electric vehicle and no replacement need on record."
+          }
+        ],
+        "invariance_ok": true,
+        "elapsed_ms": 0.08
+      },
+      "REMOVE_MILEAGE": {
+        "mutations": [
+          "REMOVE_MILEAGE"
+        ],
+        "before": {
+          "GP01": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.22,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "ESTIMATED",
+            "confidence": 0.84
+          },
+          "GP02": {
+            "status": "RULED_OUT",
+            "propensity": 0.3,
+            "eligibility": "NOT_ELIGIBLE",
+            "rule": "GP02-R1",
+            "impact_status": "NOT_APPLICABLE",
+            "confidence": 0.84
+          },
+          "GP03": {
+            "status": "RULED_OUT",
+            "propensity": 0.18,
+            "eligibility": "NOT_ELIGIBLE",
+            "rule": "GP03-R1",
+            "impact_status": "NOT_APPLICABLE",
+            "confidence": 0.72
+          },
+          "GP04": {
+            "status": "RECOMMEND",
+            "propensity": 0.74,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "PAPER",
+            "confidence": 0.84
+          }
+        },
+        "after": {
+          "GP01": {
+            "status": "ABSTAIN",
+            "propensity": 0.22,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "INSUFFICIENT_DATA",
+            "confidence": 0.72
+          },
+          "GP02": {
+            "status": "RULED_OUT",
+            "propensity": 0.3,
+            "eligibility": "NOT_ELIGIBLE",
+            "rule": "GP02-R1",
+            "impact_status": "NOT_APPLICABLE",
+            "confidence": 0.84
+          },
+          "GP03": {
+            "status": "RULED_OUT",
+            "propensity": 0.18,
+            "eligibility": "NOT_ELIGIBLE",
+            "rule": "GP03-R1",
+            "impact_status": "NOT_APPLICABLE",
+            "confidence": 0.72
+          },
+          "GP04": {
+            "status": "RECOMMEND",
+            "propensity": 0.74,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "PAPER",
+            "confidence": 0.84
+          }
+        },
+        "diff": [
+          {
+            "product": "GP01",
+            "field": "Status",
+            "from": "SOFT_SURFACE",
+            "to": "ABSTAIN",
+            "cause": "Critical input missing: annual_mileage"
+          },
+          {
+            "product": "GP01",
+            "field": "Impact",
+            "from": "ESTIMATED",
+            "to": "INSUFFICIENT_DATA",
+            "cause": "Critical input missing: annual_mileage"
+          },
+          {
+            "product": "GP01",
+            "field": "Confidence",
+            "from": "0.84",
+            "to": "0.72",
+            "cause": "Critical input missing: annual_mileage"
+          }
+        ],
+        "invariance_ok": true,
+        "elapsed_ms": 0.07
+      },
+      "REMOVE_ENERGY": {
+        "mutations": [
+          "REMOVE_ENERGY"
+        ],
+        "before": {
+          "GP01": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.22,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "ESTIMATED",
+            "confidence": 0.84
+          },
+          "GP02": {
+            "status": "RULED_OUT",
+            "propensity": 0.3,
+            "eligibility": "NOT_ELIGIBLE",
+            "rule": "GP02-R1",
+            "impact_status": "NOT_APPLICABLE",
+            "confidence": 0.84
+          },
+          "GP03": {
+            "status": "RULED_OUT",
+            "propensity": 0.18,
+            "eligibility": "NOT_ELIGIBLE",
+            "rule": "GP03-R1",
+            "impact_status": "NOT_APPLICABLE",
+            "confidence": 0.72
+          },
+          "GP04": {
+            "status": "RECOMMEND",
+            "propensity": 0.74,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "PAPER",
+            "confidence": 0.84
+          }
+        },
+        "after": {
+          "GP01": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.22,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "ESTIMATED",
+            "confidence": 0.84
+          },
+          "GP02": {
+            "status": "RULED_OUT",
+            "propensity": 0.3,
+            "eligibility": "NOT_ELIGIBLE",
+            "rule": "GP02-R1",
+            "impact_status": "NOT_APPLICABLE",
+            "confidence": 0.72
+          },
+          "GP03": {
+            "status": "RULED_OUT",
+            "propensity": 0.18,
+            "eligibility": "NOT_ELIGIBLE",
+            "rule": "GP03-R1",
+            "impact_status": "NOT_APPLICABLE",
+            "confidence": 0.72
+          },
+          "GP04": {
+            "status": "RECOMMEND",
+            "propensity": 0.74,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "PAPER",
+            "confidence": 0.84
+          }
+        },
+        "diff": [
+          {
+            "product": "GP02",
+            "field": "Confidence",
+            "from": "0.84",
+            "to": "0.72",
+            "cause": "Critical input missing: gas_kwh"
+          }
+        ],
+        "invariance_ok": true,
+        "elapsed_ms": 0.08
+      },
+      "ADD_CONFLICT_FUEL": {
+        "mutations": [
+          "ADD_CONFLICT_FUEL"
+        ],
+        "before": {
+          "GP01": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.22,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "ESTIMATED",
+            "confidence": 0.84
+          },
+          "GP02": {
+            "status": "RULED_OUT",
+            "propensity": 0.3,
+            "eligibility": "NOT_ELIGIBLE",
+            "rule": "GP02-R1",
+            "impact_status": "NOT_APPLICABLE",
+            "confidence": 0.84
+          },
+          "GP03": {
+            "status": "RULED_OUT",
+            "propensity": 0.18,
+            "eligibility": "NOT_ELIGIBLE",
+            "rule": "GP03-R1",
+            "impact_status": "NOT_APPLICABLE",
+            "confidence": 0.72
+          },
+          "GP04": {
+            "status": "RECOMMEND",
+            "propensity": 0.74,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "PAPER",
+            "confidence": 0.84
+          }
+        },
+        "after": {
+          "GP01": {
+            "status": "REVIEW",
+            "propensity": 0.08,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "HIDDEN",
+            "confidence": 0.74
+          },
+          "GP02": {
+            "status": "RULED_OUT",
+            "propensity": 0.3,
+            "eligibility": "NOT_ELIGIBLE",
+            "rule": "GP02-R1",
+            "impact_status": "NOT_APPLICABLE",
+            "confidence": 0.84
+          },
+          "GP03": {
+            "status": "RULED_OUT",
+            "propensity": 0.18,
+            "eligibility": "NOT_ELIGIBLE",
+            "rule": "GP03-R1",
+            "impact_status": "NOT_APPLICABLE",
+            "confidence": 0.72
+          },
+          "GP04": {
+            "status": "RECOMMEND",
+            "propensity": 0.74,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "PAPER",
+            "confidence": 0.84
+          }
+        },
+        "diff": [
+          {
+            "product": "GP01",
+            "field": "Status",
+            "from": "SOFT_SURFACE",
+            "to": "REVIEW",
+            "cause": "Conflict flag set: vehicle record says electric while fuel spend continues"
+          },
+          {
+            "product": "GP01",
+            "field": "Likelihood",
+            "from": "LOW (0.22)",
+            "to": "LOW (0.08)",
+            "cause": "Conflict flag set: vehicle record says electric while fuel spend continues"
+          },
+          {
+            "product": "GP01",
+            "field": "Impact",
+            "from": "ESTIMATED",
+            "to": "HIDDEN",
+            "cause": "Conflict flag set: vehicle record says electric while fuel spend continues"
+          },
+          {
+            "product": "GP01",
+            "field": "Confidence",
+            "from": "0.84",
+            "to": "0.74",
+            "cause": "Conflict flag set: vehicle record says electric while fuel spend continues"
+          }
+        ],
+        "invariance_ok": true,
+        "elapsed_ms": 0.07
+      },
+      "MAKE_STALE": {
+        "mutations": [
+          "MAKE_STALE"
+        ],
+        "before": {
+          "GP01": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.22,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "ESTIMATED",
+            "confidence": 0.84
+          },
+          "GP02": {
+            "status": "RULED_OUT",
+            "propensity": 0.3,
+            "eligibility": "NOT_ELIGIBLE",
+            "rule": "GP02-R1",
+            "impact_status": "NOT_APPLICABLE",
+            "confidence": 0.84
+          },
+          "GP03": {
+            "status": "RULED_OUT",
+            "propensity": 0.18,
+            "eligibility": "NOT_ELIGIBLE",
+            "rule": "GP03-R1",
+            "impact_status": "NOT_APPLICABLE",
+            "confidence": 0.72
+          },
+          "GP04": {
+            "status": "RECOMMEND",
+            "propensity": 0.74,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "PAPER",
+            "confidence": 0.84
+          }
+        },
+        "after": {
+          "GP01": {
+            "status": "ABSTAIN",
+            "propensity": 0.22,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "INSUFFICIENT_DATA",
+            "confidence": 0.67
+          },
+          "GP02": {
+            "status": "RULED_OUT",
+            "propensity": 0.3,
+            "eligibility": "NOT_ELIGIBLE",
+            "rule": "GP02-R1",
+            "impact_status": "NOT_APPLICABLE",
+            "confidence": 0.67
+          },
+          "GP03": {
+            "status": "RULED_OUT",
+            "propensity": 0.18,
+            "eligibility": "NOT_ELIGIBLE",
+            "rule": "GP03-R1",
+            "impact_status": "NOT_APPLICABLE",
+            "confidence": 0.57
+          },
+          "GP04": {
+            "status": "ABSTAIN",
+            "propensity": 0.74,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "INSUFFICIENT_DATA",
+            "confidence": 0.67
+          }
+        },
+        "diff": [
+          {
+            "product": "GP01",
+            "field": "Status",
+            "from": "SOFT_SURFACE",
+            "to": "ABSTAIN",
+            "cause": "Data older than 180 days: impact hidden until confirmed"
+          },
+          {
+            "product": "GP01",
+            "field": "Impact",
+            "from": "ESTIMATED",
+            "to": "INSUFFICIENT_DATA",
+            "cause": "Data older than 180 days: impact hidden until confirmed"
+          },
+          {
+            "product": "GP01",
+            "field": "Confidence",
+            "from": "0.84",
+            "to": "0.67",
+            "cause": "Data older than 180 days: impact hidden until confirmed"
+          },
+          {
+            "product": "GP02",
+            "field": "Confidence",
+            "from": "0.84",
+            "to": "0.67",
+            "cause": "Data older than 180 days: impact hidden until confirmed"
+          },
+          {
+            "product": "GP03",
+            "field": "Confidence",
+            "from": "0.72",
+            "to": "0.57",
+            "cause": "Data older than 180 days: impact hidden until confirmed"
+          },
+          {
+            "product": "GP04",
+            "field": "Status",
+            "from": "RECOMMEND",
+            "to": "ABSTAIN",
+            "cause": "Data older than 180 days: impact hidden until confirmed"
+          },
+          {
+            "product": "GP04",
+            "field": "Impact",
+            "from": "PAPER",
+            "to": "INSUFFICIENT_DATA",
+            "cause": "Data older than 180 days: impact hidden until confirmed"
+          },
+          {
+            "product": "GP04",
+            "field": "Confidence",
+            "from": "0.84",
+            "to": "0.67",
+            "cause": "Data older than 180 days: impact hidden until confirmed"
+          }
+        ],
+        "invariance_ok": true,
+        "elapsed_ms": 0.07
+      },
+      "SET_RENTER": {
+        "mutations": [
+          "SET_RENTER"
+        ],
+        "before": {
+          "GP01": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.22,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "ESTIMATED",
+            "confidence": 0.84
+          },
+          "GP02": {
+            "status": "RULED_OUT",
+            "propensity": 0.3,
+            "eligibility": "NOT_ELIGIBLE",
+            "rule": "GP02-R1",
+            "impact_status": "NOT_APPLICABLE",
+            "confidence": 0.84
+          },
+          "GP03": {
+            "status": "RULED_OUT",
+            "propensity": 0.18,
+            "eligibility": "NOT_ELIGIBLE",
+            "rule": "GP03-R1",
+            "impact_status": "NOT_APPLICABLE",
+            "confidence": 0.72
+          },
+          "GP04": {
+            "status": "RECOMMEND",
+            "propensity": 0.74,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "PAPER",
+            "confidence": 0.84
+          }
+        },
+        "after": {
+          "GP01": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.22,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "ESTIMATED",
+            "confidence": 0.84
+          },
+          "GP02": {
+            "status": "RULED_OUT",
+            "propensity": 0.3,
+            "eligibility": "NOT_ELIGIBLE",
+            "rule": "GP02-R1",
+            "impact_status": "NOT_APPLICABLE",
+            "confidence": 0.84
+          },
+          "GP03": {
+            "status": "RULED_OUT",
+            "propensity": 0.18,
+            "eligibility": "NOT_ELIGIBLE",
+            "rule": "GP03-R1",
+            "impact_status": "NOT_APPLICABLE",
+            "confidence": 0.72
+          },
+          "GP04": {
+            "status": "RECOMMEND",
+            "propensity": 0.74,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "PAPER",
+            "confidence": 0.84
+          }
+        },
+        "diff": [],
+        "invariance_ok": true,
+        "elapsed_ms": 0.09
+      },
+      "SELL_CAR": {
+        "mutations": [
+          "SELL_CAR"
+        ],
+        "before": {
+          "GP01": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.22,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "ESTIMATED",
+            "confidence": 0.84
+          },
+          "GP02": {
+            "status": "RULED_OUT",
+            "propensity": 0.3,
+            "eligibility": "NOT_ELIGIBLE",
+            "rule": "GP02-R1",
+            "impact_status": "NOT_APPLICABLE",
+            "confidence": 0.84
+          },
+          "GP03": {
+            "status": "RULED_OUT",
+            "propensity": 0.18,
+            "eligibility": "NOT_ELIGIBLE",
+            "rule": "GP03-R1",
+            "impact_status": "NOT_APPLICABLE",
+            "confidence": 0.72
+          },
+          "GP04": {
+            "status": "RECOMMEND",
+            "propensity": 0.74,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "PAPER",
+            "confidence": 0.84
+          }
+        },
+        "after": {
+          "GP01": {
+            "status": "RULED_OUT",
+            "propensity": 0.05,
+            "eligibility": "NOT_ELIGIBLE",
+            "rule": "GP01-R2",
+            "impact_status": "NOT_APPLICABLE",
+            "confidence": 0.84
+          },
+          "GP02": {
+            "status": "RULED_OUT",
+            "propensity": 0.3,
+            "eligibility": "NOT_ELIGIBLE",
+            "rule": "GP02-R1",
+            "impact_status": "NOT_APPLICABLE",
+            "confidence": 0.84
+          },
+          "GP03": {
+            "status": "RULED_OUT",
+            "propensity": 0.18,
+            "eligibility": "NOT_ELIGIBLE",
+            "rule": "GP03-R1",
+            "impact_status": "NOT_APPLICABLE",
+            "confidence": 0.72
+          },
+          "GP04": {
+            "status": "RECOMMEND",
+            "propensity": 0.74,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "PAPER",
+            "confidence": 0.84
+          }
+        },
+        "diff": [
+          {
+            "product": "GP01",
+            "field": "Status",
+            "from": "SOFT_SURFACE",
+            "to": "RULED_OUT",
+            "cause": "Rule GP01-R2 fired: There's no vehicle on record for you right now."
+          },
+          {
+            "product": "GP01",
+            "field": "Likelihood",
+            "from": "LOW (0.22)",
+            "to": "LOW (0.05)",
+            "cause": "Rule GP01-R2 fired: There's no vehicle on record for you right now."
+          },
+          {
+            "product": "GP01",
+            "field": "Eligibility",
+            "from": "PASSED",
+            "to": "NOT_ELIGIBLE · GP01-R2",
+            "cause": "Rule GP01-R2 fired: There's no vehicle on record for you right now."
+          },
+          {
+            "product": "GP01",
+            "field": "Impact",
+            "from": "ESTIMATED",
+            "to": "NOT_APPLICABLE",
+            "cause": "Rule GP01-R2 fired: There's no vehicle on record for you right now."
+          }
+        ],
+        "invariance_ok": true,
+        "elapsed_ms": 0.11
+      }
+    },
+    "CUST-0008": {
+      "SET_VEHICLE_BEV": {
+        "mutations": [
+          "SET_VEHICLE_BEV"
+        ],
+        "before": {
+          "GP01": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.18,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "ESTIMATED",
+            "confidence": 0.84
+          },
+          "GP02": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.35,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "ESTIMATED",
+            "confidence": 0.84
+          },
+          "GP03": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.3,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "ESTIMATED",
+            "confidence": 0.84
+          },
+          "GP04": {
+            "status": "RULED_OUT",
+            "propensity": 0.6,
+            "eligibility": "NOT_ELIGIBLE",
+            "rule": "GP04-R2",
+            "impact_status": "NOT_APPLICABLE",
+            "confidence": 0.84
+          }
+        },
+        "after": {
+          "GP01": {
+            "status": "RULED_OUT",
+            "propensity": 0.07,
+            "eligibility": "NOT_ELIGIBLE",
+            "rule": "GP01-R1",
+            "impact_status": "NOT_APPLICABLE",
+            "confidence": 0.84
+          },
+          "GP02": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.35,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "ESTIMATED",
+            "confidence": 0.84
+          },
+          "GP03": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.3,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "ESTIMATED",
+            "confidence": 0.84
+          },
+          "GP04": {
+            "status": "RULED_OUT",
+            "propensity": 0.6,
+            "eligibility": "NOT_ELIGIBLE",
+            "rule": "GP04-R2",
+            "impact_status": "NOT_APPLICABLE",
+            "confidence": 0.84
+          }
+        },
+        "diff": [
+          {
+            "product": "GP01",
+            "field": "Status",
+            "from": "SOFT_SURFACE",
+            "to": "RULED_OUT",
+            "cause": "Rule GP01-R1 fired: You already have an electric vehicle and no replacement need on record."
+          },
+          {
+            "product": "GP01",
+            "field": "Likelihood",
+            "from": "LOW (0.18)",
+            "to": "LOW (0.07)",
+            "cause": "Rule GP01-R1 fired: You already have an electric vehicle and no replacement need on record."
+          },
+          {
+            "product": "GP01",
+            "field": "Eligibility",
+            "from": "PASSED",
+            "to": "NOT_ELIGIBLE · GP01-R1",
+            "cause": "Rule GP01-R1 fired: You already have an electric vehicle and no replacement need on record."
+          },
+          {
+            "product": "GP01",
+            "field": "Impact",
+            "from": "ESTIMATED",
+            "to": "NOT_APPLICABLE",
+            "cause": "Rule GP01-R1 fired: You already have an electric vehicle and no replacement need on record."
+          }
+        ],
+        "invariance_ok": true,
+        "elapsed_ms": 0.07
+      },
+      "REMOVE_MILEAGE": {
+        "mutations": [
+          "REMOVE_MILEAGE"
+        ],
+        "before": {
+          "GP01": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.18,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "ESTIMATED",
+            "confidence": 0.84
+          },
+          "GP02": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.35,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "ESTIMATED",
+            "confidence": 0.84
+          },
+          "GP03": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.3,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "ESTIMATED",
+            "confidence": 0.84
+          },
+          "GP04": {
+            "status": "RULED_OUT",
+            "propensity": 0.6,
+            "eligibility": "NOT_ELIGIBLE",
+            "rule": "GP04-R2",
+            "impact_status": "NOT_APPLICABLE",
+            "confidence": 0.84
+          }
+        },
+        "after": {
+          "GP01": {
+            "status": "ABSTAIN",
+            "propensity": 0.18,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "INSUFFICIENT_DATA",
+            "confidence": 0.72
+          },
+          "GP02": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.35,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "ESTIMATED",
+            "confidence": 0.84
+          },
+          "GP03": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.3,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "ESTIMATED",
+            "confidence": 0.84
+          },
+          "GP04": {
+            "status": "RULED_OUT",
+            "propensity": 0.6,
+            "eligibility": "NOT_ELIGIBLE",
+            "rule": "GP04-R2",
+            "impact_status": "NOT_APPLICABLE",
+            "confidence": 0.84
+          }
+        },
+        "diff": [
+          {
+            "product": "GP01",
+            "field": "Status",
+            "from": "SOFT_SURFACE",
+            "to": "ABSTAIN",
+            "cause": "Critical input missing: annual_mileage"
+          },
+          {
+            "product": "GP01",
+            "field": "Impact",
+            "from": "ESTIMATED",
+            "to": "INSUFFICIENT_DATA",
+            "cause": "Critical input missing: annual_mileage"
+          },
+          {
+            "product": "GP01",
+            "field": "Confidence",
+            "from": "0.84",
+            "to": "0.72",
+            "cause": "Critical input missing: annual_mileage"
+          }
+        ],
+        "invariance_ok": true,
+        "elapsed_ms": 0.06
+      },
+      "REMOVE_ENERGY": {
+        "mutations": [
+          "REMOVE_ENERGY"
+        ],
+        "before": {
+          "GP01": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.18,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "ESTIMATED",
+            "confidence": 0.84
+          },
+          "GP02": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.35,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "ESTIMATED",
+            "confidence": 0.84
+          },
+          "GP03": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.3,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "ESTIMATED",
+            "confidence": 0.84
+          },
+          "GP04": {
+            "status": "RULED_OUT",
+            "propensity": 0.6,
+            "eligibility": "NOT_ELIGIBLE",
+            "rule": "GP04-R2",
+            "impact_status": "NOT_APPLICABLE",
+            "confidence": 0.84
+          }
+        },
+        "after": {
+          "GP01": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.18,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "ESTIMATED",
+            "confidence": 0.84
+          },
+          "GP02": {
+            "status": "ABSTAIN",
+            "propensity": 0.35,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "INSUFFICIENT_DATA",
+            "confidence": 0.72
+          },
+          "GP03": {
+            "status": "ABSTAIN",
+            "propensity": 0.3,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "INSUFFICIENT_DATA",
+            "confidence": 0.72
+          },
+          "GP04": {
+            "status": "RULED_OUT",
+            "propensity": 0.6,
+            "eligibility": "NOT_ELIGIBLE",
+            "rule": "GP04-R2",
+            "impact_status": "NOT_APPLICABLE",
+            "confidence": 0.84
+          }
+        },
+        "diff": [
+          {
+            "product": "GP02",
+            "field": "Status",
+            "from": "SOFT_SURFACE",
+            "to": "ABSTAIN",
+            "cause": "Critical input missing: gas_kwh"
+          },
+          {
+            "product": "GP02",
+            "field": "Impact",
+            "from": "ESTIMATED",
+            "to": "INSUFFICIENT_DATA",
+            "cause": "Critical input missing: gas_kwh"
+          },
+          {
+            "product": "GP02",
+            "field": "Confidence",
+            "from": "0.84",
+            "to": "0.72",
+            "cause": "Critical input missing: gas_kwh"
+          },
+          {
+            "product": "GP03",
+            "field": "Status",
+            "from": "SOFT_SURFACE",
+            "to": "ABSTAIN",
+            "cause": "Critical input missing: electricity_kwh"
+          },
+          {
+            "product": "GP03",
+            "field": "Impact",
+            "from": "ESTIMATED",
+            "to": "INSUFFICIENT_DATA",
+            "cause": "Critical input missing: electricity_kwh"
+          },
+          {
+            "product": "GP03",
+            "field": "Confidence",
+            "from": "0.84",
+            "to": "0.72",
+            "cause": "Critical input missing: electricity_kwh"
+          }
+        ],
+        "invariance_ok": true,
+        "elapsed_ms": 0.07
+      },
+      "ADD_CONFLICT_FUEL": {
+        "mutations": [
+          "ADD_CONFLICT_FUEL"
+        ],
+        "before": {
+          "GP01": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.18,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "ESTIMATED",
+            "confidence": 0.84
+          },
+          "GP02": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.35,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "ESTIMATED",
+            "confidence": 0.84
+          },
+          "GP03": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.3,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "ESTIMATED",
+            "confidence": 0.84
+          },
+          "GP04": {
+            "status": "RULED_OUT",
+            "propensity": 0.6,
+            "eligibility": "NOT_ELIGIBLE",
+            "rule": "GP04-R2",
+            "impact_status": "NOT_APPLICABLE",
+            "confidence": 0.84
+          }
+        },
+        "after": {
+          "GP01": {
+            "status": "REVIEW",
+            "propensity": 0.07,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "HIDDEN",
+            "confidence": 0.75
+          },
+          "GP02": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.35,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "ESTIMATED",
+            "confidence": 0.84
+          },
+          "GP03": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.3,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "ESTIMATED",
+            "confidence": 0.84
+          },
+          "GP04": {
+            "status": "RULED_OUT",
+            "propensity": 0.6,
+            "eligibility": "NOT_ELIGIBLE",
+            "rule": "GP04-R2",
+            "impact_status": "NOT_APPLICABLE",
+            "confidence": 0.84
+          }
+        },
+        "diff": [
+          {
+            "product": "GP01",
+            "field": "Status",
+            "from": "SOFT_SURFACE",
+            "to": "REVIEW",
+            "cause": "Conflict flag set: vehicle record says electric while fuel spend continues"
+          },
+          {
+            "product": "GP01",
+            "field": "Likelihood",
+            "from": "LOW (0.18)",
+            "to": "LOW (0.07)",
+            "cause": "Conflict flag set: vehicle record says electric while fuel spend continues"
+          },
+          {
+            "product": "GP01",
+            "field": "Impact",
+            "from": "ESTIMATED",
+            "to": "HIDDEN",
+            "cause": "Conflict flag set: vehicle record says electric while fuel spend continues"
+          },
+          {
+            "product": "GP01",
+            "field": "Confidence",
+            "from": "0.84",
+            "to": "0.75",
+            "cause": "Conflict flag set: vehicle record says electric while fuel spend continues"
+          }
+        ],
+        "invariance_ok": true,
+        "elapsed_ms": 0.06
+      },
+      "MAKE_STALE": {
+        "mutations": [
+          "MAKE_STALE"
+        ],
+        "before": {
+          "GP01": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.18,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "ESTIMATED",
+            "confidence": 0.84
+          },
+          "GP02": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.35,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "ESTIMATED",
+            "confidence": 0.84
+          },
+          "GP03": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.3,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "ESTIMATED",
+            "confidence": 0.84
+          },
+          "GP04": {
+            "status": "RULED_OUT",
+            "propensity": 0.6,
+            "eligibility": "NOT_ELIGIBLE",
+            "rule": "GP04-R2",
+            "impact_status": "NOT_APPLICABLE",
+            "confidence": 0.84
+          }
+        },
+        "after": {
+          "GP01": {
+            "status": "ABSTAIN",
+            "propensity": 0.18,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "INSUFFICIENT_DATA",
+            "confidence": 0.67
+          },
+          "GP02": {
+            "status": "ABSTAIN",
+            "propensity": 0.35,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "INSUFFICIENT_DATA",
+            "confidence": 0.67
+          },
+          "GP03": {
+            "status": "ABSTAIN",
+            "propensity": 0.3,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "INSUFFICIENT_DATA",
+            "confidence": 0.67
+          },
+          "GP04": {
+            "status": "RULED_OUT",
+            "propensity": 0.6,
+            "eligibility": "NOT_ELIGIBLE",
+            "rule": "GP04-R2",
+            "impact_status": "NOT_APPLICABLE",
+            "confidence": 0.67
+          }
+        },
+        "diff": [
+          {
+            "product": "GP01",
+            "field": "Status",
+            "from": "SOFT_SURFACE",
+            "to": "ABSTAIN",
+            "cause": "Data older than 180 days: impact hidden until confirmed"
+          },
+          {
+            "product": "GP01",
+            "field": "Impact",
+            "from": "ESTIMATED",
+            "to": "INSUFFICIENT_DATA",
+            "cause": "Data older than 180 days: impact hidden until confirmed"
+          },
+          {
+            "product": "GP01",
+            "field": "Confidence",
+            "from": "0.84",
+            "to": "0.67",
+            "cause": "Data older than 180 days: impact hidden until confirmed"
+          },
+          {
+            "product": "GP02",
+            "field": "Status",
+            "from": "SOFT_SURFACE",
+            "to": "ABSTAIN",
+            "cause": "Data older than 180 days: impact hidden until confirmed"
+          },
+          {
+            "product": "GP02",
+            "field": "Impact",
+            "from": "ESTIMATED",
+            "to": "INSUFFICIENT_DATA",
+            "cause": "Data older than 180 days: impact hidden until confirmed"
+          },
+          {
+            "product": "GP02",
+            "field": "Confidence",
+            "from": "0.84",
+            "to": "0.67",
+            "cause": "Data older than 180 days: impact hidden until confirmed"
+          },
+          {
+            "product": "GP03",
+            "field": "Status",
+            "from": "SOFT_SURFACE",
+            "to": "ABSTAIN",
+            "cause": "Data older than 180 days: impact hidden until confirmed"
+          },
+          {
+            "product": "GP03",
+            "field": "Impact",
+            "from": "ESTIMATED",
+            "to": "INSUFFICIENT_DATA",
+            "cause": "Data older than 180 days: impact hidden until confirmed"
+          },
+          {
+            "product": "GP03",
+            "field": "Confidence",
+            "from": "0.84",
+            "to": "0.67",
+            "cause": "Data older than 180 days: impact hidden until confirmed"
+          },
+          {
+            "product": "GP04",
+            "field": "Confidence",
+            "from": "0.84",
+            "to": "0.67",
+            "cause": "Data older than 180 days: impact hidden until confirmed"
+          }
+        ],
+        "invariance_ok": true,
+        "elapsed_ms": 0.06
+      },
+      "SET_RENTER": {
+        "mutations": [
+          "SET_RENTER"
+        ],
+        "before": {
+          "GP01": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.18,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "ESTIMATED",
+            "confidence": 0.84
+          },
+          "GP02": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.35,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "ESTIMATED",
+            "confidence": 0.84
+          },
+          "GP03": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.3,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "ESTIMATED",
+            "confidence": 0.84
+          },
+          "GP04": {
+            "status": "RULED_OUT",
+            "propensity": 0.6,
+            "eligibility": "NOT_ELIGIBLE",
+            "rule": "GP04-R2",
+            "impact_status": "NOT_APPLICABLE",
+            "confidence": 0.84
+          }
+        },
+        "after": {
+          "GP01": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.18,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "ESTIMATED",
+            "confidence": 0.84
+          },
+          "GP02": {
+            "status": "RULED_OUT",
+            "propensity": 0.14,
+            "eligibility": "NOT_ELIGIBLE",
+            "rule": "GP02-R1",
+            "impact_status": "NOT_APPLICABLE",
+            "confidence": 0.84
+          },
+          "GP03": {
+            "status": "RULED_OUT",
+            "propensity": 0.12,
+            "eligibility": "NOT_ELIGIBLE",
+            "rule": "GP03-R1",
+            "impact_status": "NOT_APPLICABLE",
+            "confidence": 0.84
+          },
+          "GP04": {
+            "status": "RULED_OUT",
+            "propensity": 0.6,
+            "eligibility": "NOT_ELIGIBLE",
+            "rule": "GP04-R2",
+            "impact_status": "NOT_APPLICABLE",
+            "confidence": 0.84
+          }
+        },
+        "diff": [
+          {
+            "product": "GP02",
+            "field": "Status",
+            "from": "SOFT_SURFACE",
+            "to": "RULED_OUT",
+            "cause": "Rule GP02-R1 fired: Green Home Loan is for homeowners, and our records show you rent."
+          },
+          {
+            "product": "GP02",
+            "field": "Likelihood",
+            "from": "LOW (0.35)",
+            "to": "LOW (0.14)",
+            "cause": "Rule GP02-R1 fired: Green Home Loan is for homeowners, and our records show you rent."
+          },
+          {
+            "product": "GP02",
+            "field": "Eligibility",
+            "from": "PASSED",
+            "to": "NOT_ELIGIBLE · GP02-R1",
+            "cause": "Rule GP02-R1 fired: Green Home Loan is for homeowners, and our records show you rent."
+          },
+          {
+            "product": "GP02",
+            "field": "Impact",
+            "from": "ESTIMATED",
+            "to": "NOT_APPLICABLE",
+            "cause": "Rule GP02-R1 fired: Green Home Loan is for homeowners, and our records show you rent."
+          },
+          {
+            "product": "GP03",
+            "field": "Status",
+            "from": "SOFT_SURFACE",
+            "to": "RULED_OUT",
+            "cause": "Rule GP03-R1 fired: Solar Finance is for homeowners, and our records show you rent."
+          },
+          {
+            "product": "GP03",
+            "field": "Likelihood",
+            "from": "LOW (0.30)",
+            "to": "LOW (0.12)",
+            "cause": "Rule GP03-R1 fired: Solar Finance is for homeowners, and our records show you rent."
+          },
+          {
+            "product": "GP03",
+            "field": "Eligibility",
+            "from": "PASSED",
+            "to": "NOT_ELIGIBLE · GP03-R1",
+            "cause": "Rule GP03-R1 fired: Solar Finance is for homeowners, and our records show you rent."
+          },
+          {
+            "product": "GP03",
+            "field": "Impact",
+            "from": "ESTIMATED",
+            "to": "NOT_APPLICABLE",
+            "cause": "Rule GP03-R1 fired: Solar Finance is for homeowners, and our records show you rent."
+          }
+        ],
+        "invariance_ok": true,
+        "elapsed_ms": 0.08
+      },
+      "SELL_CAR": {
+        "mutations": [
+          "SELL_CAR"
+        ],
+        "before": {
+          "GP01": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.18,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "ESTIMATED",
+            "confidence": 0.84
+          },
+          "GP02": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.35,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "ESTIMATED",
+            "confidence": 0.84
+          },
+          "GP03": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.3,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "ESTIMATED",
+            "confidence": 0.84
+          },
+          "GP04": {
+            "status": "RULED_OUT",
+            "propensity": 0.6,
+            "eligibility": "NOT_ELIGIBLE",
+            "rule": "GP04-R2",
+            "impact_status": "NOT_APPLICABLE",
+            "confidence": 0.84
+          }
+        },
+        "after": {
+          "GP01": {
+            "status": "RULED_OUT",
+            "propensity": 0.05,
+            "eligibility": "NOT_ELIGIBLE",
+            "rule": "GP01-R2",
+            "impact_status": "NOT_APPLICABLE",
+            "confidence": 0.84
+          },
+          "GP02": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.35,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "ESTIMATED",
+            "confidence": 0.84
+          },
+          "GP03": {
+            "status": "SOFT_SURFACE",
+            "propensity": 0.3,
+            "eligibility": "ELIGIBLE",
+            "rule": null,
+            "impact_status": "ESTIMATED",
+            "confidence": 0.84
+          },
+          "GP04": {
+            "status": "RULED_OUT",
+            "propensity": 0.6,
+            "eligibility": "NOT_ELIGIBLE",
+            "rule": "GP04-R2",
+            "impact_status": "NOT_APPLICABLE",
+            "confidence": 0.84
+          }
+        },
+        "diff": [
+          {
+            "product": "GP01",
+            "field": "Status",
+            "from": "SOFT_SURFACE",
+            "to": "RULED_OUT",
+            "cause": "Rule GP01-R2 fired: There's no vehicle on record for you right now."
+          },
+          {
+            "product": "GP01",
+            "field": "Likelihood",
+            "from": "LOW (0.18)",
+            "to": "LOW (0.05)",
+            "cause": "Rule GP01-R2 fired: There's no vehicle on record for you right now."
+          },
+          {
+            "product": "GP01",
+            "field": "Eligibility",
+            "from": "PASSED",
+            "to": "NOT_ELIGIBLE · GP01-R2",
+            "cause": "Rule GP01-R2 fired: There's no vehicle on record for you right now."
+          },
+          {
+            "product": "GP01",
+            "field": "Impact",
+            "from": "ESTIMATED",
+            "to": "NOT_APPLICABLE",
+            "cause": "Rule GP01-R2 fired: There's no vehicle on record for you right now."
+          }
+        ],
+        "invariance_ok": true,
+        "elapsed_ms": 0.07
+      }
+    }
+  }
+}

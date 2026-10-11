@@ -15,7 +15,7 @@ def replace_in_file(file_path):
         print(f"Updated {file_path}")
 
 def main():
-    root = "/Users/aniketgoel/Desktop/hackathon/Code"
+    root = os.path.dirname(os.path.abspath(__file__))
     exts = {".py", ".md", ".txt", ".yaml", ".yml", ".json", ".toml", ".sql", ".csv", ".html", ".js", ".css"}
     
     for dirpath, dirnames, filenames in os.walk(root):

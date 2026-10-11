@@ -1,0 +1,445 @@
+{
+  "customer_id": "CUST-0001",
+  "customer_key": "cust_7f3a9c",
+  "persona": "Priya — Commuter and homeowner. Eight-year-old petrol car, car finance ending soon.",
+  "display_name": "Priya",
+  "region": "South East",
+  "tags": [
+    "Commuter",
+    "Homeowner",
+    "Complete data"
+  ],
+  "cutoff_date": "2026-06-30",
+  "outcome_window_days": 90,
+  "run_manifest": "sha256:fixture-draft",
+  "data_freshness": [
+    {
+      "source": "Transactions",
+      "asOf": "30 Jun 2026",
+      "kind": "inferred"
+    },
+    {
+      "source": "Vehicle record",
+      "asOf": "14 May 2026",
+      "kind": "declared"
+    },
+    {
+      "source": "Energy usage",
+      "asOf": "31 May 2026",
+      "kind": "inferred"
+    },
+    {
+      "source": "Digital usage",
+      "asOf": "30 Jun 2026",
+      "kind": "inferred"
+    }
+  ],
+  "products_held": [
+    {
+      "name": "Current account",
+      "since": "Apr 2014",
+      "status": "Active"
+    },
+    {
+      "name": "Mortgage",
+      "since": "Mar 2019",
+      "status": "Active"
+    },
+    {
+      "name": "Car finance",
+      "since": "Sep 2022",
+      "status": "Ends 28 Sep 2026"
+    }
+  ],
+  "opportunities": [
+    {
+      "opportunity_id": "GP01",
+      "opportunity_name": "EV Finance",
+      "product": "GP01 EV Finance",
+      "status": "RECOMMEND",
+      "headline": "Your fuel spend has run above your usual level for 4 months. An EV could be worth exploring.",
+      "propensity": 0.82,
+      "likelihood_band": "HIGH",
+      "confidence": {
+        "overall": 0.85,
+        "completeness": 0.86,
+        "recency": 0.92,
+        "stability": 0.84,
+        "in_distribution": 0.81
+      },
+      "eligibility": {
+        "result": "NEEDS_VERIFICATION",
+        "rules_fired": [
+          "GP01-V1"
+        ],
+        "rule_text": "Your current car finance needs to be settled or transferred first. We'll check this with you.",
+        "rules_version": "rules-1.0"
+      },
+      "reason_codes": [
+        {
+          "code": "HIGH_FUEL_SPEND",
+          "display": "Fuel spend: £142 a month on average, last 12 months",
+          "observed_at": "30 Jun 2026",
+          "source": "inferred_transactions"
+        },
+        {
+          "code": "FUEL_SPEND_RISING",
+          "display": "Above your usual level for 4 months in a row",
+          "observed_at": "30 Jun 2026",
+          "source": "inferred_transactions"
+        },
+        {
+          "code": "EXISTING_VEHICLE",
+          "display": "Petrol car, 8 years old",
+          "observed_at": "14 May 2026",
+          "source": "customer_declared"
+        },
+        {
+          "code": "CAR_FINANCE_ENDING",
+          "display": "Car finance ends on 28 Sep 2026",
+          "observed_at": "30 Jun 2026",
+          "source": "inferred_transactions"
+        }
+      ],
+      "why_now": {
+        "trigger": "CAR_FINANCE_ENDING",
+        "display": "Your car finance ends in 90 days.",
+        "observed_at": "30 Jun 2026"
+      },
+      "impact": {
+        "status": "ESTIMATED",
+        "metric_family": "emissions",
+        "unit": "kg CO₂e a year",
+        "low": 1150,
+        "central": 1450,
+        "high": 1750,
+        "bills": "About £620 a year less on fuel and servicing, central estimate.",
+        "formula": "Yearly miles × (petrol car factor − EV energy per mile × grid electricity factor)",
+        "baseline": "Your current petrol car, same yearly mileage (about 9,200 miles, estimated from your fuel spend)",
+        "horizon": "12 months",
+        "factor_refs": [
+          "DESNZ 2025 · conversion factors (illustrative)"
+        ],
+        "quality": "MEDIUM",
+        "missing_inputs": [],
+        "first_step": null,
+        "secondary": null,
+        "paper": null,
+        "digital_adoption": null
+      },
+      "ladder": {
+        "field": "annual_mileage",
+        "prompt": "Add your yearly mileage to sharpen this estimate.",
+        "cta": "Add mileage",
+        "question": null,
+        "input": {
+          "type": "number",
+          "unit": "miles a year",
+          "min": 0,
+          "max": 100000,
+          "step": 100,
+          "placeholder": "e.g. 9,200"
+        }
+      },
+      "ladder_result": null,
+      "review": null,
+      "why_not": null,
+      "explanation": {
+        "source": "llm",
+        "claimcheck_status": "PASS",
+        "sentences": [
+          {
+            "text": "Your fuel spend has run above your usual level for 4 months.",
+            "fields": [
+              "evidence.HIGH_FUEL_SPEND",
+              "evidence.FUEL_SPEND_RISING"
+            ],
+            "check": "PASS"
+          },
+          {
+            "text": "Switching to an EV could cut an estimated 1,150 to 1,750 kg CO₂e a year compared with your current petrol car.",
+            "fields": [
+              "impact.low",
+              "impact.high",
+              "impact.baseline"
+            ],
+            "check": "PASS"
+          },
+          {
+            "text": "Your car finance ends in 90 days, so this could be a good moment to compare options.",
+            "fields": [
+              "why_now.CAR_FINANCE_ENDING"
+            ],
+            "check": "PASS"
+          }
+        ]
+      },
+      "next_action": {
+        "label": "Explore EV options",
+        "secondary": "Start with a 2-minute suitability check",
+        "disclaimer": "Not a credit decision. Estimate, not a guarantee."
+      }
+    },
+    {
+      "opportunity_id": "GP02",
+      "opportunity_name": "Green Home",
+      "product": "GP02 Green Home Loan",
+      "status": "SOFT_SURFACE",
+      "headline": "Homes like yours often start with a loft insulation top-up. Here's what to know.",
+      "propensity": 0.38,
+      "likelihood_band": "LOW",
+      "confidence": {
+        "overall": 0.85,
+        "completeness": 0.86,
+        "recency": 0.92,
+        "stability": 0.84,
+        "in_distribution": 0.81
+      },
+      "eligibility": {
+        "result": "ELIGIBLE",
+        "rules_fired": [],
+        "rule_text": null,
+        "rules_version": "rules-1.0"
+      },
+      "reason_codes": [
+        {
+          "code": "GAS_SPEND_TYPICAL",
+          "display": "Gas use: about 11,800 kWh a year, typical for your home",
+          "observed_at": "31 May 2026",
+          "source": "inferred_transactions"
+        }
+      ],
+      "why_now": null,
+      "impact": {
+        "status": "ESTIMATED",
+        "metric_family": "emissions",
+        "unit": "kg CO₂e a year",
+        "low": 280,
+        "central": 370,
+        "high": 460,
+        "bills": "About £140 a year less on heating, central estimate.",
+        "formula": "Yearly gas kWh × expected saving share of the first step × gas factor",
+        "baseline": "Your home as it is today, same heating habits",
+        "horizon": "12 months",
+        "factor_refs": [
+          "DESNZ 2025 · conversion factors (illustrative)"
+        ],
+        "quality": "MEDIUM",
+        "missing_inputs": [],
+        "first_step": null,
+        "secondary": {
+          "metric_family": "energy",
+          "unit": "kWh a year",
+          "low": 1500,
+          "central": 2000,
+          "high": 2500
+        },
+        "paper": null,
+        "digital_adoption": null
+      },
+      "ladder": null,
+      "ladder_result": null,
+      "review": null,
+      "why_not": null,
+      "explanation": {
+        "source": "template",
+        "claimcheck_status": "PASS",
+        "sentences": [
+          {
+            "text": "Homes like yours often start with a loft insulation top-up. Here's what to know.",
+            "fields": [
+              "catalogue.education"
+            ],
+            "check": "PASS"
+          }
+        ]
+      },
+      "next_action": {
+        "label": "Learn more",
+        "secondary": null,
+        "disclaimer": "Not a credit decision. Estimate, not a guarantee."
+      }
+    },
+    {
+      "opportunity_id": "GP03",
+      "opportunity_name": "Solar Finance",
+      "product": "GP03 Solar Finance",
+      "status": "SOFT_SURFACE",
+      "headline": "Your electricity use is around average. Solar may still be worth a look later.",
+      "propensity": 0.34,
+      "likelihood_band": "LOW",
+      "confidence": {
+        "overall": 0.85,
+        "completeness": 0.86,
+        "recency": 0.92,
+        "stability": 0.84,
+        "in_distribution": 0.81
+      },
+      "eligibility": {
+        "result": "ELIGIBLE",
+        "rules_fired": [],
+        "rule_text": null,
+        "rules_version": "rules-1.0"
+      },
+      "reason_codes": [
+        {
+          "code": "ELEC_USE_TYPICAL",
+          "display": "Electricity use: about 3,100 kWh a year",
+          "observed_at": "31 May 2026",
+          "source": "inferred_transactions"
+        }
+      ],
+      "why_now": null,
+      "impact": {
+        "status": "ESTIMATED",
+        "metric_family": "emissions",
+        "unit": "kg CO₂e a year",
+        "low": 360,
+        "central": 440,
+        "high": 520,
+        "bills": "About £330 a year less on electricity, central estimate.",
+        "formula": "Expected solar kWh used at home × grid electricity factor",
+        "baseline": "All your electricity bought from the grid",
+        "horizon": "12 months",
+        "factor_refs": [
+          "DESNZ 2025 · conversion factors (illustrative)"
+        ],
+        "quality": "MEDIUM",
+        "missing_inputs": [],
+        "first_step": null,
+        "secondary": {
+          "metric_family": "energy",
+          "unit": "kWh a year generated",
+          "low": 1800,
+          "central": 2200,
+          "high": 2600
+        },
+        "paper": null,
+        "digital_adoption": null
+      },
+      "ladder": null,
+      "ladder_result": null,
+      "review": null,
+      "why_not": null,
+      "explanation": {
+        "source": "template",
+        "claimcheck_status": "PASS",
+        "sentences": [
+          {
+            "text": "Your electricity use is around average. Solar may still be worth a look later.",
+            "fields": [
+              "catalogue.education"
+            ],
+            "check": "PASS"
+          }
+        ]
+      },
+      "next_action": {
+        "label": "Learn more",
+        "secondary": null,
+        "disclaimer": "Not a credit decision. Estimate, not a guarantee."
+      }
+    },
+    {
+      "opportunity_id": "GP04",
+      "opportunity_name": "Paperless",
+      "product": "GP04 Paperless Banking",
+      "status": "RECOMMEND",
+      "headline": "3 of your 12 statements a year still arrive on paper. Going paperless takes about a minute.",
+      "propensity": 0.71,
+      "likelihood_band": "HIGH",
+      "confidence": {
+        "overall": 0.85,
+        "completeness": 0.86,
+        "recency": 0.92,
+        "stability": 0.84,
+        "in_distribution": 0.81
+      },
+      "eligibility": {
+        "result": "ELIGIBLE",
+        "rules_fired": [],
+        "rule_text": null,
+        "rules_version": "rules-1.0"
+      },
+      "reason_codes": [
+        {
+          "code": "PAPER_STATEMENTS",
+          "display": "Paper statements: 3 of 12 in the last year",
+          "observed_at": "30 Jun 2026",
+          "source": "inferred_transactions"
+        },
+        {
+          "code": "HIGH_DIGITAL_ACTIVITY",
+          "display": "You use the app every week",
+          "observed_at": "30 Jun 2026",
+          "source": "inferred_transactions"
+        }
+      ],
+      "why_now": null,
+      "impact": {
+        "status": "ESTIMATED",
+        "metric_family": "paper",
+        "unit": null,
+        "low": null,
+        "central": null,
+        "high": null,
+        "bills": null,
+        "formula": "Paper statements a year × sheets per statement",
+        "baseline": "Your current statement settings",
+        "horizon": "12 months",
+        "factor_refs": [
+          "Statement page counts (internal, illustrative)"
+        ],
+        "quality": "HIGH",
+        "missing_inputs": [],
+        "first_step": null,
+        "secondary": null,
+        "paper": {
+          "sheets_per_year": 12,
+          "note": "About 4 sheets per statement"
+        },
+        "digital_adoption": {
+          "display": "75%",
+          "unit": "of your statements are digital",
+          "note": "9 of 12 statements"
+        }
+      },
+      "ladder": null,
+      "ladder_result": null,
+      "review": null,
+      "why_not": null,
+      "explanation": {
+        "source": "llm",
+        "claimcheck_status": "PASS",
+        "sentences": [
+          {
+            "text": "3 of your 12 statements a year still arrive on paper.",
+            "fields": [
+              "evidence.PAPER_STATEMENTS"
+            ],
+            "check": "PASS"
+          },
+          {
+            "text": "Switching them would avoid about 12 sheets of paper a year.",
+            "fields": [
+              "impact.paper"
+            ],
+            "check": "PASS"
+          },
+          {
+            "text": "Your digital adoption is reported on its own, next to paper sheets.",
+            "fields": [
+              "impact.digital"
+            ],
+            "check": "PASS"
+          }
+        ]
+      },
+      "next_action": {
+        "label": "Go paperless",
+        "secondary": "Choose which statements go digital",
+        "disclaimer": "Not a credit decision. Estimate, not a guarantee."
+      }
+    }
+  ]
+}

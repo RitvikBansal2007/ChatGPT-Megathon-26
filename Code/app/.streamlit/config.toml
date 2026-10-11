@@ -1,6 +1,6 @@
 # greendash — Streamlit configuration
 # Light theme = customer default (brand guidelines §4.3). Cockpit dark mode is
-# handled in app/theme.py via css(), not here.
+# handled in app/theme.py (dark scope in CSS), not here.
 
 [theme]
 base = "light"
@@ -35,6 +35,10 @@ weight = "200 800"
 family = "JetBrains Mono"
 url = "app/static/fonts/JetBrainsMono-Variable.woff2"
 weight = "100 800"
+
+[client]
+toolbarMode = "minimal"
+showErrorDetails = false
 
 [server]
 enableXsrfProtection = true

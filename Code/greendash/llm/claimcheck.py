@@ -163,15 +163,54 @@ def check_sentence(
     )
 
 def check(pack, sentences):
-    results = []
-    has_violation = False
-    # For now, just a stub wrapper that passes everything to unblock the API
-    # Real implementation would extract allowed_numbers and fields from pack
-    for s in sentences:
-        results.append({"text": s["text"], "check": "PASS", "violations": []})
-    
-    return {
-        "verdict": "FALLBACK" if has_violation else "PASS",
-        "sentences": results
-    }
+    """Claim-Check a list of sentences against one evidence pack.
 
+    The shape api/routers/claimcheck.py calls and fixtures/claimcheck_response.json
+    documents:
+        pack      contracts.Opportunity (or its dict), checked after minimisation
+        sentences [{"text": str, "fields": [str]}]
+        returns   {"verdict": PASS | BLOCKED | PII_BLOCK, "sentences": [{"text",
+                   "status", "violations": [{"rule","span","detail"}]}],
+                   "fallback_text": str | None}
+    The verdict vocabulary is the one db.audit accepts. Never raises for bad input:
+    a pack that cannot be minimised blocks every sentence.
+    """
+    from greendash.llm.gateway import _collect_facts      # lazy: gateway imports this module
+    from greendash.llm.guard import INPUT_PII, GuardRejection, guard_pre
+    from greendash.llm.minimise import minimise
+    from greendash.llm.explain import _template_text
+
+    plain = pack.model_dump(mode="json") if hasattr(pack, "model_dump") else pack
+    items = [s if isinstance(s, dict) else {"text": str(s), "fields": []} for s in sentences]
+    try:
+        payload = minimise(plain)
+        guard_pre(payload)
+    except GuardRejection as err:
+        verdict = "PII_BLOCK" if err.code == INPUT_PII else "BLOCKED"
+        return {"verdict": verdict,
+                "sentences": [{"text": str(i.get("text", "")), "status": "BLOCKED", "violations": []}
+                              for i in items],
+                "fallback_text": _template_text(plain)}
+    except Exception:
+        return {"verdict": "BLOCKED",
+                "sentences": [{"text": str(i.get("text", "")), "status": "BLOCKED", "violations": []}
+                              for i in items],
+                "fallback_text": _template_text(plain)}
+
+    numbers, fields = set(), set()
+    _collect_facts(payload, "", numbers, fields)
+    out, blocked = [], False
+    for item in items:
+        text = str(item.get("text", ""))
+        cited = tuple(f for f in item.get("fields", []) if isinstance(f, str))
+        try:
+            found = check_sentence(text, allowed_numbers=numbers, allowed_fields=fields,
+                                   cited_fields=cited)
+            violations = [{"rule": v.rule, "span": v.text, "detail": v.detail} for v in found]
+        except Exception:
+            violations = [{"rule": "ERROR", "span": "", "detail": "claim check could not run"}]
+        blocked = blocked or bool(violations)
+        out.append({"text": text, "status": "BLOCKED" if violations else "PASS",
+                    "violations": violations})
+    return {"verdict": "BLOCKED" if blocked else "PASS", "sentences": out,
+            "fallback_text": _template_text(plain) if blocked else None}
